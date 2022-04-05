@@ -1,4 +1,13 @@
-
+/**
+ * This interface describes purchasable classes
+ * 
+ * @author Angelo  Gasmin
+ * @version 1.0
+ */
 public interface Purchasable {
-	public static final int cost = 0;;
+	
+	void getDescription(String descr);
+	void getPrice(int cost);
+	void sellPrice(int sell);
+
 }
