@@ -26,24 +26,24 @@ public class Monster {
 	 */
 	private double myDamage;
 	/**
-	 * The current level / teir of the Monster
+	 * The current level / tier of the Monster
 	 */
-	private int myTeir;
+	private int myTier;
 	/**
 	 * The basic constructor for the Monster class
 	 * @param name			The name of the Monster
 	 * @param maxHealth		The maxHealth of the Monster
 	 * @param healAmount	The healAmount of the Monster
 	 * @param damage		The amount of damage the Monster does
-	 * @param teir			The level of the Monster
+	 * @param tier			The level of the Monster
 	 */
-	public Monster(String name, double maxHealth, double healAmount, double damage, int teir) {
+	public Monster(String name, double maxHealth, double healAmount, double damage, int tier) {
 		myName = name;
 		myMaxHealth = maxHealth;
 		myCurrentHealth = myMaxHealth;
 		myHealAmount = healAmount;
 		myDamage = damage;
-		myTeir = teir;
+		myTier = tier;
 	}
 	/**
 	 * Gets the name of the Monster
@@ -52,17 +52,17 @@ public class Monster {
 		return myName;
 	}
 	/**
-	 * Gets the teir / level of the Monster
+	 * Gets the tier / level of the Monster
 	 */
-	public int getTeir() {
-		return myTeir;
+	public int getTier() {
+		return myTier;
 	}
 	/**
-	 * increments the teir / level of the Monster
-	 * @param teirGained		The amount the teir increases by
+	 * increments the tier / level of the Monster
+	 * @param tierGained		The amount the tier increases by
 	 */
-	public void gainTeir(int teirGained) {
-		myTeir += teirGained;
+	public void gainTier(int tierGained) {
+		myTier += tierGained;
 	}
 	/**
 	 * Gets the maxHealth of the Monster
@@ -124,6 +124,6 @@ public class Monster {
 	public String toString() {
 		return "Name: " + getName() + "\nCurrent health: " + getHealth() +
 				" / " + getMaxHealth() + "\nDamage: " + getDamage() +
-				"\nCan heal: " + getHealAmount() + "\nTeir: " + getTeir();
+				"\nCan heal: " + getHealAmount() + "\nTier: " + getTier();
 	}
 }
