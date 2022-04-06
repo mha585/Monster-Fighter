@@ -46,12 +46,24 @@ public class Monster {
 		myTeir = teir;
 	}
 	
+	public String getName() {
+		return myName;
+	}
+	
 	public int getTeir() {
 		return myTeir;
 	}
 	
-	public void setTeir(int teirGained) {
+	public void gainTeir(int teirGained) {
 		myTeir += teirGained;
+	}
+	
+	public double getMaxHealth() {
+		return myMaxHealth;
+	}
+	
+	public void gainMaxHealth(double healthGained) {
+		myMaxHealth += healthGained;
 	}
 	
 	/**
@@ -59,25 +71,26 @@ public class Monster {
 	 * if statement to ensure that the current health does not exceed the max health
 	 * @param healthChange	The amount the health of the monster changes by
 	 */
-	public void setHealth(double healthChange) {
+	public void gainHealth(double healthChange) {
 		if ((myCurrentHealth + healthChange) <= myMaxHealth) {
 			myCurrentHealth += healthChange;
+			if (myCurrentHealth <= 0) {
+				System.out.println("This is dead so do something");
+			}
 		} else {
 			myCurrentHealth = myMaxHealth;
 		}
-//		probably do an if statement here to see if the monseter isDead?
 	}
 	
 	public String toString() {
-		return "my name is " + myName + " and my current health is " + myCurrentHealth +
-				" currently I am teir " + myTeir;
+		return "name: " + getName() + "\ncurrent health: " + myCurrentHealth +
+				" / " + myMaxHealth + "\nteir: " + myTeir;
 	}
 	
 	public static void main(String[] args) {
 		Monster test = new Monster("Test", 100, 5, 5, 2);
 		System.out.println(test);
-		test.setHealth(-42);
+		test.gainHealth(-42);
 		System.out.println(test);
 	}
-
 }

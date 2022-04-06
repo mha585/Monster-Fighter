@@ -38,20 +38,29 @@ public class PartyMonsters extends Monster {
 	 */
 	public void gainExperience(double experience) {
 		myExperience += experience;
-		if (myExperience >= 100) {
-			super.setTeir((int) (myExperience / 100));
-			myExperience = (myExperience % 100);
+		while (myExperience >= 100) {
+			levelUp();
+			myExperience -= 100;
 		}
 	}
 	
+	public void levelUp() {
+		super.gainTeir(1);
+		double amountToAdd = (super.getTeir() * 2);
+		super.gainMaxHealth(amountToAdd);
+	}
+	
 	public String toString() {
-		return "my teir is " + super.getTeir() + " my experience is " + getMyExperience();
+		return super.toString() + "\nexp: " +
+				getMyExperience() + " / 100";
 	}
 	
 	public static void main(String[] args) {
 		PartyMonsters test = new PartyMonsters("Test", 100, 5, 5, 2);
 		System.out.println(test);
-		test.gainExperience(1020);
+		test.gainExperience(29);
+		System.out.println(test);
+		test.gainExperience(1090);
 		System.out.println(test);
 	}
 }
