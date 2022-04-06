@@ -26,7 +26,9 @@ public class PartyMonsters extends Monster {
 		super(name, maxHealth, healAmount, damage, teir);
 		myExperience = 0;
 	}
-	
+	/**
+	 * Gets the current amount of experience of the PartyMonsters
+	 */
 	public double getMyExperience() {
 		return myExperience;
 	}
@@ -44,23 +46,22 @@ public class PartyMonsters extends Monster {
 		}
 	}
 	
+	/**
+	 * Levels up the PartyMonster
+	 * increases the teir by one and increases the maxHealth and damage by the new teir
+	 */
 	public void levelUp() {
 		super.gainTeir(1);
 		double amountToAdd = (super.getTeir() * 2);
 		super.gainMaxHealth(amountToAdd);
+		super.gainDamage(amountToAdd / 5);
 	}
-	
+	/**
+	 * Generates a string representation of the PartyMonsters
+	 * Same as the Monster toString but also lists experience
+	 */
 	public String toString() {
 		return super.toString() + "\nexp: " +
 				getMyExperience() + " / 100";
-	}
-	
-	public static void main(String[] args) {
-		PartyMonsters test = new PartyMonsters("Test", 100, 5, 5, 2);
-		System.out.println(test);
-		test.gainExperience(29);
-		System.out.println(test);
-		test.gainExperience(1090);
-		System.out.println(test);
 	}
 }
