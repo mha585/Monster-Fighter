@@ -6,12 +6,13 @@
  * @version 1.1, Apr 2022.
  */
 public class Battles {
-	
-//	private Team myParty;
-//	private Enemy enemy;
-//	should I do propper oop stuff here?
-	
-	public Team fight(Team friends, Enemy badGuy) {
+	/**
+	 * Battles your team of Monsters with an enemy Monster
+	 * the battle continues until either the player is out of Monsters or the enemy is dead
+	 * @param friends		The current team of Monsters the Player has
+	 * @param badGuy		The enemy the player is fighting
+	 */
+	public Team fight(Team friends, Monster badGuy) {
 		while ((badGuy.getHealth() > 0) && friends.getSize() > 0) {
 			badGuy.gainHealth(-10);
 		}
