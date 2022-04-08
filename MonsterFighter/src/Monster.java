@@ -81,7 +81,7 @@ public class Monster {
 		myMaxHealth = number.randNumInRange(0, 100);
 		myCurrentHealth = myMaxHealth;
 		myHealAmount = number.randNumInRange(0, 5);
-		myDamage = number.randNumInRange(1, 20);
+		myDamage = number.randNumInRange(1, 70);
 		mySpeed = number.randNumInRange(1, 15);
 		myExperience = 0;
 		myReward = number.randNumInRange(0, 100);
@@ -165,9 +165,9 @@ public class Monster {
 	public void gainHealth(double healthChange) {
 		if ((getHealth() + healthChange) <= getMaxHealth()) {
 			myCurrentHealth += healthChange;
-			if (getHealth() <= 0) {
-				System.out.println("This is dead so do something");
-			}
+//			if (getHealth() <= 0) {
+//				System.out.println(getName() + " died\n");
+//			} can add code here to do something when the Monster dies?
 		} else {
 			myCurrentHealth = getMaxHealth();
 		}

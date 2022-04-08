@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
 public class Team extends Monster{
-	
-//	private ArrayList<Monster> myTeam = new ArrayList<Monster>();
-	
+		
 	private ArrayList<Object> myTeam = new ArrayList <>();
 	
 	public ArrayList<Object> getTeam() {
@@ -24,6 +22,16 @@ public class Team extends Monster{
 			  return true;
 		  } else {
 			  System.out.println("team size is > 4 so do something");
+			  return false;
+		  }
+	}
+	
+	public boolean removeFriend(Monster friend) {
+		  if (myTeam.size() > 0) {
+			  myTeam.remove(friend);
+			  return true;
+		  } else {
+			  System.out.println("could not remove");
 			  return false;
 		  }
 	}

@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /**
  * This class implements a Battle
@@ -12,16 +13,40 @@ public class Battles {
 	 * @param friends		The current team of Monsters the Player has
 	 * @param badGuy		The enemy the player is fighting
 	 */
-	public Team fight(Team friends, Monster badGuy) {
+	public boolean fight(Team friends, Monster badGuy) {
+		int fighterIndex = 0;
 		while ((badGuy.getHealth() > 0) && friends.getSize() > 0) {
-			badGuy.gainHealth(-10);
+			Scanner action = new Scanner(System.in);
+			System.out.println("The enemies current stats:\n");
+			System.out.println(badGuy + "\n\n-------------------------------------\n");
+			System.out.println("Your teams current stats:\n");
+			System.out.println(friends);
+			System.out.println("Please select a action. \nType either Fight, Switch, Heal or Items.");
+			String givenAction = action.nextLine();
+			if(givenAction.toLowerCase().trim().equals("fight")) {
+				badGuy.gainHealth(-1 * friends.getFriend(fighterIndex).getDamage());
+				friends.getFriend(fighterIndex).gainHealth(-1 * badGuy.getDamage());
+			}
+//			if (givenAction.toLowerCase().trim().equals("switch")) {
+//				
+//			}
+//			if (givenAction.toLowerCase().trim().equals("item")) {
+//				
+//			}
+			if (friends.getFriend(fighterIndex).getHealth() <= 0) {
+				System.out.println("\nYour friend " + friends.getFriend(fighterIndex).getName() +
+						" just died r.i.p\n");
+				friends.removeFriend(friends.getFriend(fighterIndex));
+			}
 		}
-		System.out.println("Congrats you killed " + badGuy.getName() +
-				"\n-------------------------------------\n");
-		friends.getFriend(0).gainHealth(-5);
-		friends.getFriend(0).gainExperience(badGuy.getReward());
-		System.out.println("Team stats after the battle:\n");
-		System.out.println(friends);
-		return friends;
+		if ((badGuy.getHealth() <= 0) && friends.getSize() > 0) {
+			friends.getFriend(fighterIndex).gainExperience(badGuy.getReward());
+			System.out.println("Congrats you killed " + badGuy.getName() +
+					"\n\n-------------------------------------\n");
+			System.out.println("Team stats after the battle:\n");
+			System.out.println(friends);
+			return true;
+		} 
+		return false;
 	}
 }

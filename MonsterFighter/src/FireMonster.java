@@ -8,6 +8,7 @@ public class FireMonster extends Monster{
 	public FireMonster() {
 		super();
 		super.setType("Fire");
+		super.gainHealth((-1 * (super.getHealth())) + 1 );
 	}
 	
 	public String toString() {
