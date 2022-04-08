@@ -38,7 +38,8 @@ public class Monster {
 	/**
 	 * List containing all possible names for a Monster
 	 */
-	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart");
+	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart", "Blurple", "Blargle",
+			"Chog", "Post Malone", "Ratman", "Goopy");
 	/**
 	 * The basic constructor for the Monster class
 	 * @param name			The name of the Monster
