@@ -1,22 +1,26 @@
+
 /**
  * This class implements a Battle
  *
  * @author Matthew Harper
- * @version 1.1, Feb 2022.
+ * @version 1.1, Apr 2022.
  */
 public class Battles {
-	/**
-	 * Says Hello.
-	 */
 	
+//	private Team myParty;
+//	private Enemy enemy;
+//	should I do propper oop stuff here?
 	
-	public void sayHello() {
-		System.out.println("Hi");
-		System.out.println("Battles happen here");
-	}
-	
-	public static void main(String[] args) {
-		Battles test = new Battles();
-		test.sayHello();
+	public Team fight(Team friends, Enemy badGuy) {
+		while ((badGuy.getHealth() > 0) && friends.getSize() > 0) {
+			badGuy.gainHealth(-10);
+		}
+		System.out.println("Congrats you killed " + badGuy.getName() +
+				"\n-------------------------------------\n");
+		friends.getFriend(0).gainHealth(-5);
+		friends.getFriend(0).gainExperience(badGuy.getReward());
+		System.out.println("Team stats after the battle:\n");
+		System.out.println(friends);
+		return friends;
 	}
 }

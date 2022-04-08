@@ -2,16 +2,21 @@
 //this is just a class to test fights between monsters delete later!!!!
 public class testFight {
 	public static void main(String[] args) {
-//		System.out.println(Battle());
-//		Battles();
-//		Battles battle = new Battles(Monster goodGuy, Monster badGuy);
-//		how do i call a fight between two monsters or a monster and a team???
 		
-		randomGen number = new randomGen();
-		System.out.println(number.randNumInRange(0, 100));
+		PartyMonster friend = new PartyMonster();
+		PartyMonster friend2 = new PartyMonster();
+		Enemy badGuy = new Enemy();
 		
-		Monster badGuy2 = new Monster();
-		System.out.println(badGuy2);
+		
+		
+		Team myTeam = new Team();
+		myTeam.addFriend(friend);
+		myTeam.addFriend(friend2);
+		System.out.println("Team stats before battle:\n");
+		System.out.println(myTeam);
+		
+		Battles firstBattle = new Battles();
+		firstBattle.fight(myTeam, badGuy);
 
 //		PartyMonster goodGuy = new PartyMonster("friend", 100, 5, 9, 25, 2);
 //		Monster badGuy = new Monster("enemy", 18, 5, 80, 10, 2);

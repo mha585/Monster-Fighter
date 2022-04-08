@@ -38,7 +38,7 @@ public class Monster {
 	/**
 	 * List containing all possible names for a Monster
 	 */
-	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "La baño");
+	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart");
 	/**
 	 * The basic constructor for the Monster class
 	 * @param name			The name of the Monster
@@ -64,12 +64,12 @@ public class Monster {
 	public Monster() {
 		randomGen number = new randomGen();
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
-		myMaxHealth = number.randNumInRange(0, 5);
+		myMaxHealth = number.randNumInRange(0, 100);
 		myCurrentHealth = myMaxHealth;
 		myHealAmount = number.randNumInRange(0, 5);
-		myDamage = number.randNumInRange(0, 5);
-		mySpeed = number.randNumInRange(0, 5);
-		myTier = number.randNumInRange(0, 5);
+		myDamage = number.randNumInRange(1, 20);
+		mySpeed = number.randNumInRange(1, 15);
+		myTier = number.randNumInRange(1, 3);
 	}
 	/**
 	 * Gets the name of the Monster
