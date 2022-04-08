@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 /**
  * This class describes the Monster superclass
  * 
@@ -34,6 +36,10 @@ public class Monster {
 	 */
 	private int myTier;
 	/**
+	 * List containing all possible names for a Monster
+	 */
+	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "La baño");
+	/**
 	 * The basic constructor for the Monster class
 	 * @param name			The name of the Monster
 	 * @param maxHealth		The maxHealth of the Monster
@@ -55,14 +61,16 @@ public class Monster {
 	 * The constructor for the Monster class
 	 * this gets called when no params are entered.
 	 */
-//	public Monster() {
-//		myName = name;
-//		myMaxHealth = maxHealth;
-//		myCurrentHealth = myMaxHealth;
-//		myHealAmount = healAmount;
-//		myDamage = damage;
-//		myTier = tier;
-//	}
+	public Monster() {
+		randomGen number = new randomGen();
+		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
+		myMaxHealth = number.randNumInRange(0, 5);
+		myCurrentHealth = myMaxHealth;
+		myHealAmount = number.randNumInRange(0, 5);
+		myDamage = number.randNumInRange(0, 5);
+		mySpeed = number.randNumInRange(0, 5);
+		myTier = number.randNumInRange(0, 5);
+	}
 	/**
 	 * Gets the name of the Monster
 	 */

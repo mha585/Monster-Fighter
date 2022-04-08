@@ -7,7 +7,7 @@
  * @author Matthew Harper
  * @version 1.0
  */
-public class PartyMonsters extends Monster {
+public class PartyMonster extends Monster {
 	/**
 	 * The amount of experience of the PartyMonster
 	 */
@@ -23,7 +23,7 @@ public class PartyMonsters extends Monster {
 	 * @param speed			The speed of the Monster
 	 * @param Tier			The level of the Monster
 	 */
-	public PartyMonsters(String name, double maxHealth, double healAmount, double damage, double speed, int Tier) {
+	public PartyMonster(String name, double maxHealth, double healAmount, double damage, double speed, int Tier) {
 		super(name, maxHealth, healAmount, damage, speed, Tier);
 		myExperience = 0;
 	}
