@@ -1,21 +1,25 @@
 /**
  * This interface describes purchasable classes
- * 
- * @author Angelo Gasmin
+ * Each class with the "Purchasable" attribute has 3 Attributes
+ * They are: giveDescription, givePrice and give Sellpricee
+ * @author Angelo  Gasmin
  * @version 1.0
  */
 public interface Purchasable {
 	/**
-	 * Gets the description of the current item.
+	 * Returns description of an item
+	 * @return
 	 */
-	void getDescription(String descr);
+	String getDescription();
 	/**
-	 * Gets the price to purchase the current item.
+	 * Returns the price of an item
+	 * @return		
 	 */
-	void getPrice(int cost);
+	int getPrice();
 	/**
-	 * Gets the price to sell the current item.
+	 * Returns the selling price of an item
+	 * @return
 	 */
-	void sellPrice(int sell);
+	int sellPrice();
 
 }
