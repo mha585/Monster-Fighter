@@ -10,6 +10,8 @@ public class Battles {
 	/**
 	 * Battles your team of Monsters with an enemy Monster
 	 * the battle continues until either the player is out of Monsters or the enemy is dead
+	 * gets user input to allow the user to switch which monster is fighting,
+	 * heal itself, use items or fight.
 	 * @param friends		The current team of Monsters the Player has
 	 * @param badGuy		The enemy the player is fighting
 	 */
