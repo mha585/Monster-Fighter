@@ -28,6 +28,14 @@ public class PartyMonster extends Monster {
 		myExperience = 0;
 	}
 	/**
+	 * The constructor for the Monster class
+	 * this gets called when no params are entered.
+	 */
+	public PartyMonster() {
+		super();
+		myExperience = 0;
+	}
+	/**
 	 * Gets the current amount of experience of the PartyMonsters
 	 */
 	public double getMyExperience() {

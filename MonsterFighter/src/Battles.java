@@ -18,6 +18,5 @@ public class Battles {
 	public static void main(String[] args) {
 		Battles test = new Battles();
 		test.sayHello();
-		
 	}
 }

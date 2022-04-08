@@ -2,8 +2,6 @@
 //this is just a class to test fights between monsters delete later!!!!
 public class testFight {
 	public static void main(String[] args) {
-		PartyMonster goodGuy = new PartyMonster("friend", 100, 5, 9, 25, 2);
-		Monster badGuy = new Monster("enemy", 18, 5, 80, 10, 2);
 //		System.out.println(Battle());
 //		Battles();
 //		Battles battle = new Battles(Monster goodGuy, Monster badGuy);
@@ -15,9 +13,8 @@ public class testFight {
 		Monster badGuy2 = new Monster();
 		System.out.println(badGuy2);
 
-		
-//		System.out.println(RandNum());
-		
+//		PartyMonster goodGuy = new PartyMonster("friend", 100, 5, 9, 25, 2);
+//		Monster badGuy = new Monster("enemy", 18, 5, 80, 10, 2);
 //		System.out.println("Initial goodGuy stats: ");
 //		System.out.println("------------------------------------------------------------");
 //		System.out.println(goodGuy);
