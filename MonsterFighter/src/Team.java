@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
-public class Team extends PartyMonster{
+public class Team extends Monster{
 	
-	private ArrayList<PartyMonster> myTeam = new ArrayList<PartyMonster>();
+//	private ArrayList<Monster> myTeam = new ArrayList<Monster>();
 	
-	public ArrayList<PartyMonster> getTeam() {
+	private ArrayList<Object> myTeam = new ArrayList <>();
+	
+	public ArrayList<Object> getTeam() {
 		return myTeam;
 	}
 	
@@ -12,11 +14,11 @@ public class Team extends PartyMonster{
 		return myTeam.size();
 	}
 	
-	public PartyMonster getFriend(int index) {
-		return myTeam.get(index);
+	public Monster getFriend(int index) {
+		return (Monster) myTeam.get(index);
 	}
 	
-	public boolean addFriend(PartyMonster friend) {
+	public boolean addFriend(Monster friend) {
 		  if (myTeam.size() < 4) {
 			  myTeam.add(friend);
 			  return true;
