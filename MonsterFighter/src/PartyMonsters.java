@@ -20,10 +20,11 @@ public class PartyMonsters extends Monster {
 	 * @param maxHealth		The maxHealth of the Monster
 	 * @param healAmount	The healAmount of the Monster
 	 * @param damage		The amount of damage the Monster does
+	 * @param speed			The speed of the Monster
 	 * @param Tier			The level of the Monster
 	 */
-	public PartyMonsters(String name, double maxHealth, double healAmount, double damage, int Tier) {
-		super(name, maxHealth, healAmount, damage, Tier);
+	public PartyMonsters(String name, double maxHealth, double healAmount, double damage, double speed, int Tier) {
+		super(name, maxHealth, healAmount, damage, speed, Tier);
 		myExperience = 0;
 	}
 	/**
@@ -55,6 +56,7 @@ public class PartyMonsters extends Monster {
 		double amountToAdd = (super.getTier() * 2);
 		super.gainMaxHealth(amountToAdd);
 		super.gainDamage(amountToAdd / 5);
+		super.gainSpeed(amountToAdd / 8);
 	}
 	/**
 	 * Generates a string representation of the PartyMonsters
@@ -62,6 +64,6 @@ public class PartyMonsters extends Monster {
 	 */
 	public String toString() {
 		return super.toString() + "\nexp: " +
-				getMyExperience() + " / 100";
+				(int) getMyExperience() + " / 100";
 	}
 }

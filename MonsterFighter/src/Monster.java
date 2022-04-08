@@ -26,6 +26,10 @@ public class Monster {
 	 */
 	private double myDamage;
 	/**
+	 * The speed of the Monster, should determine who attacks first
+	 */
+	private double mySpeed;
+	/**
 	 * The current level / tier of the Monster
 	 */
 	private int myTier;
@@ -35,16 +39,30 @@ public class Monster {
 	 * @param maxHealth		The maxHealth of the Monster
 	 * @param healAmount	The healAmount of the Monster
 	 * @param damage		The amount of damage the Monster does
+	 * @param speed			The speed of the Monster
 	 * @param tier			The level of the Monster
 	 */
-	public Monster(String name, double maxHealth, double healAmount, double damage, int tier) {
+	public Monster(String name, double maxHealth, double healAmount, double damage, double speed, int tier) {
 		myName = name;
 		myMaxHealth = maxHealth;
 		myCurrentHealth = myMaxHealth;
 		myHealAmount = healAmount;
 		myDamage = damage;
+		mySpeed = speed;
 		myTier = tier;
 	}
+	/**
+	 * The constructor for the Monster class
+	 * this gets called when no params are entered.
+	 */
+//	public Monster() {
+//		myName = name;
+//		myMaxHealth = maxHealth;
+//		myCurrentHealth = myMaxHealth;
+//		myHealAmount = healAmount;
+//		myDamage = damage;
+//		myTier = tier;
+//	}
 	/**
 	 * Gets the name of the Monster
 	 */
@@ -102,6 +120,19 @@ public class Monster {
 	public double getHealth() {
 		return myCurrentHealth;
 	}
+	/**
+	 * Gets the current speed of the Monster
+	 */
+	public double getSpeed() {
+		return mySpeed;
+	}
+	/**
+	 * increments the speed of the Monster
+	 * @param speedGained		The amount speed increases by
+	 */
+	public void gainSpeed(double speedGained) {
+		mySpeed += speedGained;
+	}
 	
 	/**
 	 * Adds or subtracts health from the Monster
@@ -123,7 +154,7 @@ public class Monster {
 	 */
 	public String toString() {
 		return "Name: " + getName() + "\nCurrent health: " + getHealth() +
-				" / " + getMaxHealth() + "\nDamage: " + getDamage() +
-				"\nCan heal: " + getHealAmount() + "\nTier: " + getTier();
+				" / " + getMaxHealth() + "\nDamage: " + (int) getDamage() +
+				"\nCan heal: " + getHealAmount() + "\nSpeed: " + getSpeed() + "\nTier: " + getTier();
 	}
 }
