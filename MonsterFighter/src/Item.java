@@ -21,6 +21,10 @@ public class Item implements Purchasable{
 	 * The description of the item
 	 */
 	String itemDescription;
+	/***
+	 * The total frequency of an item in the player's bag
+	 */
+	int totalFrequency;
 	/**
 	 * Basic Item constructor
 	 * @param name				Name of the item
@@ -40,6 +44,9 @@ public class Item implements Purchasable{
 	public String getDescription() {
 		return itemDescription;
 	}
+	public String getName() {
+		return itemName;
+	}
 	/**
 	 * Returns the price of an item
 	 */
@@ -56,16 +63,29 @@ public class Item implements Purchasable{
 	 * Adds an item to the trainers bag
 	 * Deducts money from the trainer based on the price of the item
 	 */
-	public void buyItem() {
-		//add item to bag
-		//-money
+	public void buyItem(int amount, Object item, Inventory bag) {
+		
 	}
 	/**
 	 * Removes an item from the trainers bag
 	 * Gives money to the trainer based on the selling price of the item
 	 */
-	public void sellItem() {
+	public void sellItem(int amount, Object item, Inventory bag) {
 		//remove item from bag
 		//+money
+	}
+	public int getFrequency() {
+		return totalFrequency;
+	}
+	public void addFreq(Object item, int freq) {
+		((Item)item).totalFrequency += freq;
+	}
+
+	public void useItem(Object item) {
+		
+	}
+	public String toString() {
+		return getFrequency() + "x " + getName();
+		
 	}
 }

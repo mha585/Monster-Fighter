@@ -37,6 +37,9 @@ public class HPrestore extends Item{
 	 * @param myMonster		  The monster HP Restore will be used on
 	 */
 	public void useHpRestore(Monster myMonster) {
-		myMonster.myCurrentHealth = myMaxHealth;
+		double current = myMonster.getHealth();
+		double maximum = myMonster.getMaxHealth();
+		double difference = maximum - current;
+		myMonster.gainHealth(difference);
 	}
 }

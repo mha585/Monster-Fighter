@@ -29,7 +29,7 @@ public class AtkBoost extends Item{
 	 * @param name				The name of attack boost
 	 * @param price 			The price of attack boost
 	 * @param sell				The selling price of attack boost
-	 * @param description 		The description of attack booost
+	 * @param description 		The description of attack boost
 	 */
 	AtkBoost() {
 		super(name, price, sell ,description);
@@ -39,9 +39,8 @@ public class AtkBoost extends Item{
 	 * Use attack boost on a chosen monster
 	 * @param myMonster			The monster attack boost will be used on
 	 */
-	public void useAtkBoost(Monster myMonster) {
-		myMonster.gainDamage(incAttack);
-	}
+
 	
+
 
 }
