@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Team extends Monster{
 	
-//	private ArrayList<Monster> myTeam = new ArrayList<Monster>();
+	//private ArrayList<Monster> myTeam = new ArrayList<Monster>();
 	
 	private ArrayList<Object> myTeam = new ArrayList <>();
 	

@@ -12,7 +12,7 @@ public class Player {
 	/**
 	 * Stores the current day
 	 */
-	private int currentDay = 0;
+	private int currentDay = 1;
 	/**
 	 * Stores the player's name
 	 */
@@ -22,9 +22,15 @@ public class Player {
 	 */
 	private String playerDifficulty;
 	/**
-	 * Stores the player's monsters
+	 * Stores the player's current money
 	 */
-	public ArrayList<Monster> playerParty;
+	private int currentMoney = 250;
+
+	public ArrayList<Object> playerTeam;
+	
+	public Inventory playerBag;
+	
+	
 	/**
 	 * Basic constructor for player 
 	 * @param name				The name of the player
@@ -35,8 +41,17 @@ public class Player {
 		playerName = name;
 		playerDays = day;
 		playerDifficulty = difficulty;
-		ArrayList<Monster> party = new ArrayList<Monster>();
-		playerParty = party;
+		Team newTeam = new Team();
+		playerTeam = newTeam.getTeam();
+		Inventory bag = new Inventory();
+		playerBag = bag;
+		
+	/**
+	 * @returns the current day
+	 */
+	}
+	public int today() {
+		return currentDay;
 	}
 	/**
 	 * @return the days remaining before the game finishes	
@@ -44,21 +59,56 @@ public class Player {
 	public int daysLeft() {
 		return playerDays - currentDay;
 	}
+	public void addDay() {
+		currentDay++;
+	}
+	/**
+	 * @return the current amount of money the player has
+	 */
+	public int getMoney() {
+		return currentMoney;
+	}
+	/**
+	 * @param moneyEarned		Money to be added to the player's current money
+	 * @return					New current money
+	 */
+	public int addMoney(int moneyEarned) {
+		return currentMoney += moneyEarned;
+	}
+	/**
+	 * @param moneyLost			Money to be deducted to the player's current money
+	 * @return					New current money
+	 */
+	public int deductMoney(int moneyLost) {
+		return currentMoney -= moneyLost;
+	}
 	/** 
 	 * @return each monster in the ArrayList "playerParty" in String form
 	 */
-	public String listToString() {
-		for (int i = 0; i < playerParty.size();i++) {
-			Monster monster = playerParty.get(i);
-			System.out.println("\n Name: " + monster.getName() + "\n Current health: " + monster.getHealth() +" / " + monster.getMaxHealth() + "\n Damage: " + monster.getDamage() +"\n Can heal: " + monster.getHealAmount() + "\n Tier: " + monster.getTier() +"\n");
+	public String partyToString() {
+		for (int i = 0; i < playerTeam.size();i++) {
+			Object monster = playerTeam.get(i);
+			System.out.println(monster.toString());
 		}
 		return"";
+	}
+	public String bagToString() {
+		for (int i = 0; i < playerBag.getSize(); i++ ) {
+			Object item = playerBag.getGet(i);
+			System.out.println(item.toString());
+		}
+		return "";
+	}
+	public Inventory getInventory() {
+		return playerBag;
 	}
 	/**
 	 * @return Player in String form
 	 */
 	public String toString() {
-		System.out.println( "\nName: " + playerName + "\nDays: " + daysLeft() + "\nDifficulty: " + playerDifficulty + "\nParty");
-		return listToString();
+		System.out.println("\nCurrent Day: " + today() + "\nDays Left: " + daysLeft() + "\nMoney: $" + getMoney() + "\n\nParty:");
+		System.out.println(partyToString() + "\n\nBag:");
+		System.out.println(bagToString());
+		return "";
 	}
 }
