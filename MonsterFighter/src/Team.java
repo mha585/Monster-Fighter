@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Team extends Monster{
-		
+	
 	private ArrayList<Object> myTeam = new ArrayList <>();
 	
 	public ArrayList<Object> getTeam() {
@@ -49,7 +49,7 @@ public class Team extends Monster{
 		  }
 		  return friendString;
 	  }
-	
+	  
 	public String toString() {		
 		return printFriends();
 	}

@@ -26,9 +26,11 @@ public class Player {
 	 */
 	private int currentMoney = 250;
 
-	public ArrayList<Object> playerTeam;
+	public Team playerTeam;
 	
 	public Inventory playerBag;
+	
+	private ArrayList<String> myTeamNames = new ArrayList<>();
 	
 	
 	/**
@@ -42,7 +44,7 @@ public class Player {
 		playerDays = day;
 		playerDifficulty = difficulty;
 		Team newTeam = new Team();
-		playerTeam = newTeam.getTeam();
+		playerTeam = newTeam;
 		Inventory bag = new Inventory();
 		playerBag = bag;
 		
@@ -85,30 +87,32 @@ public class Player {
 	/** 
 	 * @return each monster in the ArrayList "playerParty" in String form
 	 */
-	public String partyToString() {
-		for (int i = 0; i < playerTeam.size();i++) {
-			Object monster = playerTeam.get(i);
-			System.out.println(monster.toString());
-		}
-		return"";
+	public String partyToString(Team currentTeam) {
+		return currentTeam.toString();
 	}
-	public String bagToString() {
-		for (int i = 0; i < playerBag.getSize(); i++ ) {
-			Object item = playerBag.getGet(i);
-			System.out.println(item.toString());
-		}
-		return "";
+	
+	public String bagToString(Inventory currentBag) {
+		return currentBag.toString();
 	}
 	public Inventory getInventory() {
 		return playerBag;
+	}
+	public Team getTeam() {
+		return playerTeam;
+	}
+	public ArrayList<String> getTeamNames() {
+		for(int i = 0; i < playerTeam.getSize(); i++){
+			myTeamNames.add(((Team) playerTeam).getFriend(i).getName());
+		}
+		return myTeamNames;
 	}
 	/**
 	 * @return Player in String form
 	 */
 	public String toString() {
 		System.out.println("\nCurrent Day: " + today() + "\nDays Left: " + daysLeft() + "\nMoney: $" + getMoney() + "\n\nParty:");
-		System.out.println(partyToString() + "\n\nBag:");
-		System.out.println(bagToString());
+		System.out.println(partyToString(playerTeam) + "\n\nBag:");
+		System.out.println(bagToString(playerBag));
 		return "";
 	}
 }
