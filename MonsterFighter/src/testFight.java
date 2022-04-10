@@ -11,7 +11,7 @@ public class testFight {
 		myTeam.addFriend(new RandomMonster());
 		myTeam.addFriend(new RandomMonster());
 		
-		if (battle.fight(myTeam, new RandomMonster()) == true) {
+		if (battle.fight(myTeam, new WaterMonster()) == true) {
 //			continue the game
 			System.out.println("The game continues");
 		} else {
