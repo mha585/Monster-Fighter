@@ -15,6 +15,7 @@ public class Battles {
 	 * @param friends		The current team of Monsters the Player has
 	 * @param badGuy		The enemy the player is fighting
 	 */
+	
 	public boolean fight(Team friends, Monster badGuy) {
 		int fighterIndex = 0;
 		while ((badGuy.getHealth() > 0) && friends.getSize() > 0) {
@@ -26,8 +27,7 @@ public class Battles {
 			System.out.println("Please select a action. \nType either Fight, Switch, Heal or Items.");
 			String givenAction = action.nextLine();
 			if(givenAction.toLowerCase().trim().equals("fight")) {
-				badGuy.gainHealth(-1 * friends.getFriend(fighterIndex).getDamage());
-				friends.getFriend(fighterIndex).gainHealth(-1 * badGuy.getDamage());
+				attack(friends.getFriend(fighterIndex), badGuy, friends);
 			}
 //			if (givenAction.toLowerCase().trim().equals("switch")) {
 //				
@@ -42,13 +42,32 @@ public class Battles {
 			}
 		}
 		if ((badGuy.getHealth() <= 0) && friends.getSize() > 0) {
-			friends.getFriend(fighterIndex).gainExperience(badGuy.getReward());
-			System.out.println("Congrats you killed " + badGuy.getName() +
-					"\n\n-------------------------------------\n");
-			System.out.println("Team stats after the battle:\n");
-			System.out.println(friends);
 			return true;
 		} 
+		return false;
+	}
+	
+	public boolean attack(Monster friend, Monster badGuy, Team friends) {
+		if (friend.getSpeed() > badGuy.getSpeed()) {
+			badGuy.gainHealth(-1 * friend.getDamage());
+			if (badGuy.getHealth() <= 0) {
+				friend.gainExperience(badGuy.getReward());
+				System.out.println("Congrats you killed " + badGuy.getName() +
+						"\n\n-------------------------------------\n");
+				System.out.println("Team stats after the battle:\n");
+				System.out.println(friends);
+				return true;
+			}
+			friend.gainHealth(-1 * badGuy.getDamage());
+		} else {
+			friend.gainHealth(-1 * badGuy.getDamage());
+			if (friend.getHealth() <= 0) {
+				System.out.println("\nYour friend " + friend.getName() +
+						" just died r.i.p\n");
+				friends.removeFriend(friend);
+			}
+			badGuy.gainHealth(-1 * friend.getDamage());
+		}
 		return false;
 	}
 }
