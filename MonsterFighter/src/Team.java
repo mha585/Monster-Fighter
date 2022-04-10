@@ -43,7 +43,7 @@ public class Team extends Monster{
 		  if (myTeam.size() == 0) {
 			  return "No monsters in current team";
 		  }
-		  for (int i = 0; i < myTeam.size(); i++) {
+		  for (int i = 0; i< myTeam.size(); i++) {
 			  friendString += "Team member " + (i + 1) +
 					  ":\n\n"+myTeam.get(i).toString() + "\n\n" +
 					  "-------------------------------------\n";
