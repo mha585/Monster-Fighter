@@ -78,7 +78,7 @@ public class Monster {
 	public Monster() {
 		randomGen number = new randomGen();
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
-		myMaxHealth = number.randNumInRange(0, 100);
+		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;
 		myHealAmount = number.randNumInRange(0, 5);
 		myDamage = number.randNumInRange(1, 70);
@@ -111,6 +111,13 @@ public class Monster {
 	 */
 	public double getMaxHealth() {
 		return myMaxHealth;
+	}
+	/**
+	 * increments the amount the Monster can heal per turn
+	 * @param healGained		The amount healAmount increases by
+	 */
+	public void gainHealAmount(double healGained) {
+		myHealAmount += healGained;
 	}
 	/**
 	 * increments the max health of the Monster

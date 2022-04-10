@@ -42,7 +42,7 @@ public class RandomMonster extends Monster{
 	 * this gets called when no params are entered.
 	 * uses values from  a random Monster in possibleTypes to construct.
 	 * 
-	 * As there is no set methods only gain we need to set each stat to 0 then
+	 * As there is no set methods (only gain methods in Monster) we need to set each stat to 0 then
 	 * add the randomly generated Monsters stat in order to ensure that the stats
 	 * are appropriate to each monster type.
 	 */
@@ -52,6 +52,7 @@ public class RandomMonster extends Monster{
 		super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
 		super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
 		super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
+		super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
 		super.setType(random.getType());
 	}
 	/**

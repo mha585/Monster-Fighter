@@ -22,8 +22,6 @@ public class WaterMonster extends Monster{
 	public WaterMonster() {
 		super();
 		super.setType("Water");
-		super.gainMaxHealth((-1 * (super.getMaxHealth())) + 1 );
-		super.gainHealth((-1 * (super.getHealth())) + 1);
 	}
 	/**
 	 * Generates a string representation of the WaterMonster
