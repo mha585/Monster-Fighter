@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Team extends Monster{
 		
@@ -36,19 +37,23 @@ public class Team extends Monster{
 		  }
 	}
 	
-	  public String printFriends() {
-		  String friendString = "";
+	public String printFriends() {
+			String friendString = "";
 		  
 		  if (myTeam.size() == 0) {
 			  return "No monsters in current team";
 		  }
-		  for (int i = 0; i< myTeam.size(); i++) {
+		  for (int i = 0; i < myTeam.size(); i++) {
 			  friendString += "Team member " + (i + 1) +
 					  ":\n\n"+myTeam.get(i).toString() + "\n\n" +
 					  "-------------------------------------\n";
 		  }
 		  return friendString;
-	  }
+	}
+	
+	public void swap(int index1, int index2) {
+		Collections.swap(myTeam, index1, index2);
+	}
 	
 	public String toString() {		
 		return printFriends();
