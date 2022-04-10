@@ -31,12 +31,15 @@ public class RandomMonster extends Monster{
 	 * @param damage		The amount of damage the RandomMonster does
 	 * @param speed			The speed of the RandomMonster
 	 * @param tier			The level of the RandomMonster
+	 * @param sell			Selling price of the RandomMonster
+	 * @param cost			Price of the RandomMonster
+	 * @param description	Description of the RandomMonster
 	 */
-	public RandomMonster(String name, double maxHealth, double healAmount, double damage, double speed, int Tier) {
-		super(name, maxHealth, healAmount, damage, speed, Tier);
+	public RandomMonster(String name, double maxHealth, double healAmount, double damage, double speed, int Tier, 
+			int sell, int cost, String description) {
+		super(name, maxHealth, healAmount, damage, speed, Tier, sell, cost, description);
 		super.setType(random.getType());
 	}
-	
 	/**
 	 * The constructor for the RandomMonster class
 	 * this gets called when no params are entered.
@@ -54,6 +57,9 @@ public class RandomMonster extends Monster{
 		super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
 		super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
 		super.setType(random.getType());
+		super.setDescription(random.getDescription());
+		super.setPrice(random.getPrice());
+		super.setSellPrice(random.sellPrice());
 	}
 	/**
 	 * Generates a string representation of the RandomMonster
