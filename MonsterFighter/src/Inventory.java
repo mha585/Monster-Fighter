@@ -12,7 +12,7 @@ public class Inventory {
 		return bag.size();
 	}
 	
-	public Object getGet(int i) {
+	public Object getItem(int i) {
 		return bag.get(i);
 	}
 	
@@ -38,7 +38,7 @@ public class Inventory {
 	
 	public String toString() {
 		if (bag.size() == 0) {
-			return "Your bag is empty";
+			return "Your bag is empty\n";
 		} else {
 			System.out.println("Inventory: ");
 			for (int i = 0; i < bag.size();i++) {

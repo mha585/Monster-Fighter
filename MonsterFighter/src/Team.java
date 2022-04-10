@@ -2,21 +2,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Team extends Monster{
-		
+
 	private ArrayList<Object> myTeam = new ArrayList <>();
-	
+
 	public ArrayList<Object> getTeam() {
 		return myTeam;
 	}
-	
+
 	public int getSize() {
 		return myTeam.size();
 	}
-	
+
 	public Monster getFriend(int index) {
 		return (Monster) myTeam.get(index);
 	}
-	
+
 	public boolean addFriend(Monster friend) {
 		  if (myTeam.size() < 4) {
 			  myTeam.add(friend);
@@ -26,7 +26,7 @@ public class Team extends Monster{
 			  return false;
 		  }
 	}
-	
+
 	public boolean removeFriend(Monster friend) {
 		  if (myTeam.size() > 0) {
 			  myTeam.remove(friend);
@@ -36,10 +36,10 @@ public class Team extends Monster{
 			  return false;
 		  }
 	}
-	
+
 	public String printFriends() {
 			String friendString = "";
-		  
+
 		  if (myTeam.size() == 0) {
 			  return "No monsters in current team";
 		  }
@@ -54,8 +54,8 @@ public class Team extends Monster{
 	public void swap(int index1, int index2) {
 		Collections.swap(myTeam, index1, index2);
 	}
-	
-	public String toString() {		
+
+	public String toString() {
 		return printFriends();
 	}
 }
