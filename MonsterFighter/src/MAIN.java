@@ -1,5 +1,7 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -30,11 +32,11 @@ public class MAIN {
 	 */
 
 	
-	public static void setPlayerName(Scanner inputName) {
+	public static void setPlayerName(Scanner scanner) {
 		boolean isProper = false;
 		while(isProper == false) {
 			System.out.println("Please enter a name: \nMust be between 3 and 15 characters. \nMust not contain numbers or special characters. ");
-			String givenName = inputName.nextLine();
+			String givenName = scanner.nextLine();
 			if(givenName.trim().length() < 3 || givenName.trim().length() > 15) {
 				System.out.println("Name length out of bounds.");
 			}
@@ -51,11 +53,11 @@ public class MAIN {
 	 * Asks for how many days the player wants
 	 * @param inputDay			Scanner to check input
 	 */
-	public static void setDays(Scanner inputDay) {
+	public static void setDays(Scanner scanner) {
 		boolean isDay = false;
 		while(isDay == false) {
 			System.out.println("How many days will your adventure last for? \nEnter a number between 5 and 15.");
-			String givenDay = inputDay.nextLine();
+			String givenDay = scanner.nextLine();
 			if (givenDay.trim().matches("[0-9]+") == true) {
 				if(Integer.parseInt(givenDay.trim()) >=5 && Integer.parseInt(givenDay.trim())<= 15) {
 					playerDays = Integer.parseInt(givenDay);
@@ -78,11 +80,11 @@ public class MAIN {
 	 * Prompts player to set their difficulty
 	 * @param inputDiff			Scanner to check input
 	 */
-	public static void setDifficulty(Scanner inputDiff) {
+	public static void setDifficulty(Scanner scanner) {
 		boolean isDiff = false;
 		while(isDiff == false) {
 			System.out.println("Please select a difficulty. \nType either Easy, Normal or Hard.");
-			String givenDiff = inputDiff.nextLine();
+			String givenDiff = scanner.nextLine();
 			if(givenDiff.equalsIgnoreCase("easy")|| givenDiff.equalsIgnoreCase("normal")|| givenDiff.equalsIgnoreCase("hard")){
 				playerDiff = givenDiff.toLowerCase();
 				isDiff = true;
@@ -99,34 +101,95 @@ public class MAIN {
 	 * @param inputMonster			Scanner to check input
 	 * @param forParty				Player to put monster into player's party
 	 */
-	public static void selectMonster(Scanner inputMonster, Player forParty) {
+	public static void selectMonster(Scanner scanner, Player player) {
 		final Monster one = new FireMonster("Fireguy", 50.0, 5.0, 20.0, 20.0, 1);
 		final Monster two = new GrassMonster("Grassdude", 70, 5.0, 10.0, 20.0, 1);
 		final Monster three = new WaterMonster("Waterman", 60, 5.0, 15.0, 20.0, 1);
 		
 		boolean isMonster = false;
 		while(isMonster == false) {
-			System.out.println("Select your first monster \nType 'one' for " + one.getName() + "\nType 'two' for " + two.getName() + "\nType 'three' for " + three.getName());
-			String givenMonster = inputMonster.nextLine();
-			if(givenMonster.toLowerCase().trim().equals("one")){
-				forParty.playerTeam.addFriend(one);
+			System.out.println("Select your first monster \nType '1' for " + one.getName() + "\nType '2' for " + two.getName() + "\nType '3' for " + three.getName());
+			String givenMonster = scanner.nextLine();
+			if(givenMonster.equalsIgnoreCase("1")){
+				player.playerTeam.addFriend(one);
 				isMonster = true;
 			}
-			else if(givenMonster.toLowerCase().trim().equals("two")) {
-				forParty.playerTeam.addFriend(two);
+			else if(givenMonster.equalsIgnoreCase("2")) {
+				player.playerTeam.addFriend(two);
 				isMonster = true;
 			}
-			else if(givenMonster.toLowerCase().trim().equals("three")) {
-				forParty.playerTeam.addFriend(three);
+			else if(givenMonster.equalsIgnoreCase("3")) {
+				player.playerTeam.addFriend(three);
 				isMonster = true;
 			}
 			else {
-				System.out.println(givenMonster + " is not a valid monster.");
+				System.out.println(givenMonster + " is not a valid input.");
 			}
 		}
 	}
 	
-	public static void shoppingTime(Scanner inputShop, Shop newShop, Player newPlayer) {
+	public static void dayPrep(Scanner scanner, Player player) {
+		boolean isDone = false;
+		while(isDone == false) {
+			Inventory bag = player.getInventory();
+			Team team = player.getTeam();
+			System.out.println("What would you like to do? (1)Look at Inventory\n                           (2)Look at Team\n                           (3)Move on");            
+			try {
+				String givenChoice = scanner.nextLine();
+				if (givenChoice.trim().equalsIgnoreCase("1")) {
+					System.out.println(bag);
+					if (bag.getSize()>0) {
+						System.out.println("Would you like to use an item? Enter the number of the item you would like to use. Enter 'Q' if you would like to exit.");
+						String useItem = scanner.nextLine();
+						int indexItem = Integer.parseInt(useItem);
+						if (useItem.trim().matches("[0-9]+") == true) {
+							Item item = (Item) bag.getItem(indexItem - 1);
+							System.out.println(item.whenToUse());
+							System.out.println(item.whenToUse().getClass());
+							if (item.whenToUse().trim()=="out"|| item.whenToUse().trim()=="both") {
+								System.out.println(team);
+								System.out.println("Which monster do you want to use it on?");
+								String chosenMonster = scanner.nextLine();
+								Monster monster = team.getFriend(Integer.parseInt(chosenMonster)-1);
+								item.useItem(monster);	
+								bag.removeBag(indexItem - 1, 1);
+							}
+						}
+						else {
+							System.out.println("Invalid input");
+						}
+					}
+				}
+				else if(givenChoice.trim().equalsIgnoreCase("2")) {
+					System.out.println(team);
+					System.out.println("Do you want to switch your monster's positions or leave?\n(1)Switch monster positions\n(2)Leave");
+					String switchPosition = scanner.nextLine();
+					if (switchPosition.equalsIgnoreCase("1")) {
+						System.out.println("Select the first monster you want to switch");
+						String first = scanner.nextLine();
+						int indexOne = Integer.parseInt(first) - 1;
+						System.out.println("Select the second monster you want to switch");
+						String second = scanner.nextLine();
+						int indexTwo = Integer.parseInt(second) - 1;
+						team.swapFriends(indexOne, indexTwo);
+						System.out.println(team);
+						
+					}
+				}
+				else if(givenChoice.trim().equalsIgnoreCase("3")) {
+					isDone = true;
+				}
+			} catch(Exception e) {
+				
+			}
+		}
+	}
+	
+	public static void displayBattles(Scanner scanner, Player player) {
+		
+	}
+	
+	public static void shoppingTime(Scanner scanner, Shop shop, Player player) {
 		AtkBoost AB = new AtkBoost();
 		AtkPlus AP = new AtkPlus();
 		BasicHeal BH = new BasicHeal();
@@ -138,26 +201,26 @@ public class MAIN {
 		System.out.println("Welcome to the Shop!");
 		boolean isDone = false;
 		while(isDone == false) {
-			int funds = newPlayer.getMoney();
+			int funds = player.getMoney();
 			System.out.println("Money: $"+funds);
 			System.out.println("Would you like to (1)Buy Items \n                  (2)Buy Monsters\n                  (3)Sell Items\n                  (4)Sell Monsters\n                  (5)Quit Shopping\nPlease enter a number (1-4) that corresponds to one of the options above");
-			String givenOption = inputShop.nextLine();
+			String givenOption = scanner.nextLine();
 			if(givenOption.trim().equals("1")){
 				try {
-				System.out.println(newShop.toString());
+				System.out.println(shop.toString());
 				System.out.println("Enter the number of an item you would like to buy. Enter 9 if you would like to exit.");
-				String givenItem = inputShop.nextLine();
+				String givenItem = scanner.nextLine();
 				int number = Integer.parseInt(givenItem);
 				switch(number) {
 					case 1:
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq1 = inputShop.nextLine();
+						String givenFreq1 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq1); 
 							int totalCost = AB.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(AB, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(AB, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -171,13 +234,13 @@ public class MAIN {
 						
 					case 2:
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq2 = inputShop.nextLine();
+						String givenFreq2 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq2); 
 							int totalCost = AP.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(AP, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(AP, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -192,13 +255,13 @@ public class MAIN {
 						
 					case 3:
 						System.out.println("How many Attack Boost's would you like.?");
-						String givenFreq3 = inputShop.nextLine();
+						String givenFreq3 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq3); 
 							int totalCost = BH.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(BH, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(BH, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -212,13 +275,13 @@ public class MAIN {
 						
 					case 4:
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq4 = inputShop.nextLine();
+						String givenFreq4 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq4); 
 							int totalCost = HR.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(HR, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(HR, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -232,13 +295,13 @@ public class MAIN {
 						
 					case 5: 
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq5 = inputShop.nextLine();
+						String givenFreq5 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq5); 
 							int totalCost = MH.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(MH, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(MH, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -252,13 +315,13 @@ public class MAIN {
 						
 					case 6:
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq6 = inputShop.nextLine();
+						String givenFreq6 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq6); 
 							int totalCost = SB.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(SB, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(SB, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -272,13 +335,13 @@ public class MAIN {
 						
 					case 7:
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq7 = inputShop.nextLine();
+						String givenFreq7 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq7); 
 							int totalCost = SP.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(SP, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(SP, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -292,13 +355,13 @@ public class MAIN {
 						
 					case 8:
 						System.out.println("How many Attack Boost's would you like?");
-						String givenFreq8 = inputShop.nextLine();
+						String givenFreq8 = scanner.nextLine();
 						try {
 							int x = Integer.parseInt(givenFreq8); 
 							int totalCost = TP.itemCost * x;
 							if(totalCost <= funds) {
-								newPlayer.playerBag.addtoBag(TP, x);
-								newPlayer.deductMoney(totalCost);
+								player.playerBag.addtoBag(TP, x);
+								player.deductMoney(totalCost);
 								System.out.println("Purchase Successful.");
 							}
 							else {
@@ -321,19 +384,19 @@ public class MAIN {
 			else if(givenOption.trim().equals("2")){
 				try {
 					System.out.println("Enter the number of the monster that you want to buy.\nEnter 5 if you want to exit.\n");
-					if(newPlayer.getTeamNames().contains(shopMonster1.getName())==false){
+					if(player.getTeamNames().contains(shopMonster1.getName())==false){
 						System.out.println("(1)\n"+shopMonster1+"\n");
 					}
-					if(newPlayer.getTeamNames().contains(shopMonster2.getName())==false){
+					if(player.getTeamNames().contains(shopMonster2.getName())==false){
 						System.out.println("(2)\n"+shopMonster2+"\n");
 					}
-					if(newPlayer.getTeamNames().contains(shopMonster3.getName())==false){
+					if(player.getTeamNames().contains(shopMonster3.getName())==false){
 						System.out.println("(3)\n"+shopMonster3+"\n");
 					}
-					if(newPlayer.getTeamNames().contains(shopMonster4.getName())==false){
+					if(player.getTeamNames().contains(shopMonster4.getName())==false){
 						System.out.println("(4)\n"+shopMonster4+"\n");
 					}
-					String monsterToBuy = inputShop.nextLine();
+					String monsterToBuy = scanner.nextLine();
 					int monsterNumber = Integer.parseInt(monsterToBuy);
 					switch(monsterNumber) {
 						case 1:
@@ -343,8 +406,8 @@ public class MAIN {
 								System.out.println("Insufficient funds");
 							}
 							else {
-								newPlayer.playerTeam.addFriend(shopMonster1);
-								newPlayer.deductMoney(m1Price);
+								player.playerTeam.addFriend(shopMonster1);
+								player.deductMoney(m1Price);
 								System.out.println("Purchase Successful");
 							}
 							break;
@@ -355,8 +418,8 @@ public class MAIN {
 								System.out.println("Insufficient funds");
 							}
 							else {
-								newPlayer.playerTeam.addFriend(shopMonster2);
-								newPlayer.deductMoney(m2Price);
+								player.playerTeam.addFriend(shopMonster2);
+								player.deductMoney(m2Price);
 								System.out.println("Purchase Successful");
 							}
 							break;
@@ -367,8 +430,8 @@ public class MAIN {
 								System.out.println("Insufficient funds");
 							}
 							else {
-								newPlayer.playerTeam.addFriend(shopMonster3);
-								newPlayer.deductMoney(m3Price);
+								player.playerTeam.addFriend(shopMonster3);
+								player.deductMoney(m3Price);
 								System.out.println("Purchase Successful");
 							}
 							break;
@@ -379,8 +442,8 @@ public class MAIN {
 								System.out.println("Insufficient funds");
 							}
 							else {
-								newPlayer.playerTeam.addFriend(shopMonster4);
-								newPlayer.deductMoney(m4Price);
+								player.playerTeam.addFriend(shopMonster4);
+								player.deductMoney(m4Price);
 								System.out.println("Purchase Successful");
 							}
 							break;
@@ -396,7 +459,7 @@ public class MAIN {
 				}
 			}
 			else if(givenOption.trim().equals("3")){
-				Inventory currentInven = newPlayer.getInventory();
+				Inventory currentInven = player.getInventory();
 				if(currentInven.getSize() == 0) {
 					System.out.println("You have no items to sell.");
 				}
@@ -404,16 +467,16 @@ public class MAIN {
 					try {
 						System.out.println(currentInven);
 						System.out.println("Enter the number of the item you would like to sell.");
-						String toSell = inputShop.nextLine();
-						int indexItem = Integer.parseInt(toSell);
+						String toSell = scanner.nextLine();
+						int indexItem = Integer.parseInt(toSell) - 1;
 						Object item = currentInven.getItem(indexItem);
 						System.out.println("How many do you want to sell?\nEnter a number between 1 and "+((Item) item).getFrequency()+" (Inclusive).");
-						String itemFreq = inputShop.nextLine();
+						String itemFreq = scanner.nextLine();
 						int sellFreq = Integer.parseInt(itemFreq);
 						int addMoney = ((Item)item).sellPrice() * sellFreq;
 						currentInven.removeBag(indexItem, sellFreq);
-						newPlayer.addMoney(addMoney);
-						System.out.println("New balange: " + newPlayer.getMoney());
+						player.addMoney(addMoney);
+						System.out.println("New balange: " + player.getMoney());
 					}
 					catch(IndexOutOfBoundsException e) {
 						System.out.println("Index out of bounds.");
@@ -424,15 +487,15 @@ public class MAIN {
 				}
 			}
 			else if(givenOption.trim().equals("4")){
-				Team currentTeam = newPlayer.getTeam();
-				if(newPlayer.playerTeam.getSize() == 1) {
-					System.out.println(newPlayer.playerTeam.getFriend(0).getName()+" is worried about you, you cannot sell your last monster.");
+				Team currentTeam = player.getTeam();
+				if(player.playerTeam.getSize() == 1) {
+					System.out.println(player.playerTeam.getFriend(0).getName()+" is worried about you, you cannot sell your last monster.");
 				}
 				else {
 					try {
 						System.out.println(currentTeam);
-						System.out.println("Enter the Team slot for the monster you want to sell (1-"+newPlayer.playerTeam.getSize()+".\nEnter 5 if you want to quit.");
-						String indexTeam = inputShop.nextLine();
+						System.out.println("Enter the Team slot for the monster you want to sell (1-"+player.playerTeam.getSize()+".\nEnter 5 if you want to quit.");
+						String indexTeam = scanner.nextLine();
 						if(indexTeam.equalsIgnoreCase("5")) {
 							System.out.println("\n");
 						}
@@ -441,10 +504,10 @@ public class MAIN {
 							Object monster = currentTeam.getFriend(indexMonster);
 							int moneyIndex = ((Monster) monster).getTier();
 							System.out.println("Are you sure?\nEnter 'Y' for yes, 'N' for no.");
-							String confirmChoice = inputShop.nextLine();
+							String confirmChoice = scanner.nextLine();
 							if(confirmChoice.trim().equalsIgnoreCase("Y")) {
 								currentTeam.removeFriend(currentTeam.getFriend(indexMonster));
-								newPlayer.addMoney(sellMonsters.get(moneyIndex));
+								player.addMoney(sellMonsters.get(moneyIndex));
 								System.out.println("Bye-bye "+((Monster)monster).getName());
 							}
 							else if(confirmChoice.trim().equalsIgnoreCase("N")){
@@ -470,6 +533,11 @@ public class MAIN {
 			}
 		}
 	}
+	
+	public static void nightPhase(Scanner scanner, Player player) {
+		
+	}
+	
 	public static void timer(int ms) {
 	    try
 	    {
@@ -496,12 +564,14 @@ public class MAIN {
 		timer(3000);
 		while(newPlayer.daysLeft() > 0) {
 			newPlayer.toString();
+			dayPrep(scanner, newPlayer);
 			timer(1000);
 			shopMonster1 = new RandomMonster();
 			shopMonster2 = new RandomMonster();
 			shopMonster3 = new RandomMonster();
 			shopMonster4 = new RandomMonster();
 			shoppingTime(scanner, newShop, newPlayer);
+			nightPhase(scanner, newPlayer);
 			newPlayer.addDay();
 			
 		}

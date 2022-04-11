@@ -11,7 +11,7 @@ public class TierPlus extends Item{
 	/**
 	 * The description of Tier Plus
 	 */
-	private static String description = "Use out of battle to increase your monster's Tier by 1.";
+	private static String description = "Use on a monster out of battle to increase your monster's Tier by 1.";
 	/**
 	 * The price of Tier Plus
 	 */
@@ -20,7 +20,12 @@ public class TierPlus extends Item{
 	 * The selling price of Tier Plus
 	 */
 	private static int sell = 40;
-
+	
+	private static int itemEffect = 1;
+	
+	private static String statEffect = "t";
+	
+	private static String whenToUse = "out";
 	/**
 	 * The basic constructor for TierPLus
 	 * @param name				The name of Tier Plus
@@ -29,16 +34,13 @@ public class TierPlus extends Item{
 	 * @param description		The description of Tier Plus
 	 */
 	TierPlus() {
-		super(name, price, sell ,description);
+		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
 	/**
 	 * Uses Tier Plus on a chosen monster
 	 * @param myMonster			The monster whose tier will be increased
 	 */
-	public void useTierPlus(Monster myMonster) {
-		myMonster.gainTier(1);
-	}
-	
+
 
 }

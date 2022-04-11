@@ -43,7 +43,7 @@ public class Inventory {
 			System.out.println("Inventory: ");
 			for (int i = 0; i < bag.size();i++) {
 				Item item = (Item) bag.get(i);
-				System.out.println("("+i+")"+item.totalFrequency + "x " + item.getName());
+				System.out.println("("+(i+1)+")"+item.totalFrequency + "x " + item.getName()+" - - - "+item.getDescription());
 			}
 		}	
 		return "";
@@ -58,5 +58,6 @@ public class Inventory {
 		System.out.println(bag);
 		bag.removeBag(0, 2);
 		System.out.println(bag);
+		System.out.println(Mheal.getClass());
 	}
 }

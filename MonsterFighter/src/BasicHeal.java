@@ -11,7 +11,7 @@ public class BasicHeal extends Item {
 	/**
 	 * Description of Basic Heal
 	 */
-	private static String description = "Use in battle to heal your monster's HP by 20.";
+	private static String description = "Use on a monster to heal your monster's HP by 20.";
 	/**
 	 * Price of Basic Heal
 	 */
@@ -23,8 +23,11 @@ public class BasicHeal extends Item {
 	/**
 	 * How much HP Basic Heal increases
 	 */
-	private static int incHP = 20;
+	private static int itemEffect = 20;
 	
+	private static String statEffect = "hp";
+	
+	private static String whenToUse = "both";
 	/**
 	 * Basic Heal constructor
 	 * @param name			The name of BasicHeal
@@ -33,16 +36,11 @@ public class BasicHeal extends Item {
 	 * @param description	The description of Basic Heal
 	 */
 	BasicHeal() {
-		super(name, price, sell ,description);
+		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
 	/**
 	 * Uses Basic Heal on a chosen monster
 	 * @param myMonster		The monster Basic Heal is used on
 	 */
-	public void useBasicHeal(Monster myMonster) {
-		myMonster.gainHealth(incHP);
-	}
-	
-
 }
