@@ -102,9 +102,9 @@ public class MAIN {
 	 * @param forParty				Player to put monster into player's party
 	 */
 	public static void selectMonster(Scanner scanner, Player player) {
-		final Monster one = new FireMonster("Fireguy", 50.0, 5.0, 20.0, 20.0, 1);
-		final Monster two = new GrassMonster("Grassdude", 70, 5.0, 10.0, 20.0, 1);
-		final Monster three = new WaterMonster("Waterman", 60, 5.0, 15.0, 20.0, 1);
+		final Monster one = new FireMonster("Fireguy", 50.0, 5.0, 20.0, 20.0, 1, 150, 250, "A strong fire type Monster capable of burning down buildings.");
+		final Monster two = new GrassMonster("Grassdude", 70, 5.0, 10.0, 20.0, 1, 150, 250, "A strong grass type Monster. It is said that they dwell in the deapest parts of the jungle.");
+		final Monster three = new WaterMonster("Waterman", 60, 5.0, 15.0, 20.0, 1, 150, 250, "A strong water type Monster. These streamline monsters are known to have existed before humans.");
 		
 		boolean isMonster = false;
 		while(isMonster == false) {
@@ -171,7 +171,7 @@ public class MAIN {
 						System.out.println("Select the second monster you want to switch");
 						String second = scanner.nextLine();
 						int indexTwo = Integer.parseInt(second) - 1;
-						team.swapFriends(indexOne, indexTwo);
+						team.swap(indexOne, indexTwo);
 						System.out.println(team);
 						
 					}
