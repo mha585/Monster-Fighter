@@ -36,6 +36,14 @@ public class Team extends Monster{
 		  }
 	}
 	
+	public void swapFriends(int indexMonster1, int indexMonster2) {
+		Object firstMonster = myTeam.get(indexMonster1);
+		Object secondMonster = myTeam.get(indexMonster2);
+		myTeam.set(indexMonster1, secondMonster);
+		myTeam.set(indexMonster2, firstMonster);
+		
+	}
+	
 	  public String printFriends() {
 		  String friendString = "";
 		  
@@ -49,6 +57,7 @@ public class Team extends Monster{
 		  }
 		  return friendString;
 	  }
+	  
 	  
 	public String toString() {		
 		return printFriends();

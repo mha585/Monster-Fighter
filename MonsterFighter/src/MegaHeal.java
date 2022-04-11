@@ -11,7 +11,7 @@ public class MegaHeal extends Item {
 	/**
 	 * The description of mega heal
 	 */
-	private static String description = "Use in battle to heal your monster's HP by 50.";	
+	private static String description = "Use on a monster in battle to heal your monster's HP by 50.";	
 	/**
 	 * The price of mega heal
 	 */
@@ -23,7 +23,11 @@ public class MegaHeal extends Item {
 	/**
 	 * The amount a monster's HP will increase by
 	 */
-	private static int incHP = 50;
+	private static int itemEffect = 50;
+	
+	private static String statEffect = "hp";
+	
+	private static String whenToUse = "both";
 	/**
 	 * The basic mega heal constructor
 	 * @param				The name of mega heal
@@ -32,16 +36,11 @@ public class MegaHeal extends Item {
 	 * @param description	The description of mega heal
 	 */
 	MegaHeal() {
-		super(name, price, sell ,description);
+		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
 	/**
 	 * Use mega heal on a chosen monster
 	 * @param myMonster		The monster mega heal will be used on 
 	 */
-	public void useMegaHeal(Monster myMonster) {
-		myMonster.gainHealth(incHP);
-	}
-	
-
 }

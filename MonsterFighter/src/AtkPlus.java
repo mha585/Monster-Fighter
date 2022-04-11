@@ -11,7 +11,7 @@ public class AtkPlus extends Item{
 	/**
 	 * The description of attack plus
 	 */
-	private static String description = "Use out of battle to increase your monster's attack stat permanently.";
+	private static String description = "Use on a monster out of battle to increase your monster's attack stat permanently.";
 	/**
 	 * The price of attack plus
 	 */
@@ -23,7 +23,11 @@ public class AtkPlus extends Item{
 	/**
 	 * The amount a monsters attack will increase by
 	 */
-	private static int incAttack = 10;
+	private static int itemEffect = 10;
+	
+	private static String statEffect = "atk";
+	
+	private static String whenToUse = "out";
 	/**
 	 * Basic attack plus constructor
 	 * @param name				The name of attack plus
@@ -32,16 +36,12 @@ public class AtkPlus extends Item{
 	 * @param description		The description of attack plus
 	 */
 	AtkPlus() {
-		super(name, price, sell ,description);
+		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
 	/**
 	 * Use attack plus on a chosen monster
 	 * @param myMonster			The monster attack plus will be used on
 	 */
-	public void useAtkPlus(Monster myMonster) {
-		myMonster.gainDamage(incAttack);
-	}
-	
 
 }

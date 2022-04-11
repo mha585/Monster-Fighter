@@ -11,7 +11,7 @@ public class SpeedPlus extends Item{
 	/**
 	 * The description of Speed Plus
 	 */
-	private static String description = "Use out of battle to increase your monster's speed stat permanently.";	
+	private static String description = "Use on a monster out of battle to increase your monster's speed stat permanently.";	
 	/** 
 	 * The price of Speed Plus
 	 */
@@ -23,7 +23,11 @@ public class SpeedPlus extends Item{
 	/**
 	 * The amount of speed to be increased
 	 */
-	private static int incSpeed = 10;
+	private static int itemEffect = 10;
+	
+	private static String statEffect = "spd";
+	
+	private static String whenToUse = "out";
 	/**
 	 * Basic SpeedPlus Constructor
 	 * @param name				The name of speed plus
@@ -32,15 +36,10 @@ public class SpeedPlus extends Item{
 	 * @param description		The description of speed plus
 	 */
 	SpeedPlus() {
-		super(name, price, sell ,description);
+		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 	/**
 	 * Use speed plus on a chosen monster
 	 * @param myMonster				The monster speed plus will be used on
 	 */
-	public void useSpeedPlus(Monster myMonster) {
-		myMonster.gainSpeed(incSpeed);
-	}
-	
-
 }

@@ -11,7 +11,7 @@ public class AtkBoost extends Item{
 	/**
 	 * The description of attack boost
 	 */
-	private static String description = "Use in battle to increase your monster's attack stat.";		
+	private static String description = "Use on a monster in battle to increase your monster's attack stat.";		
 	/**
 	 * The price of attack boost
 	 */
@@ -23,7 +23,11 @@ public class AtkBoost extends Item{
 	/**
 	 * The amount a monster's attack will increase by
 	 */
-	private static int incAttack = 10;
+	private static int itemEffect = 10;
+	
+	private static String statEffect = "atk";
+	
+	private static String whenToUse = "in";
 	/**
 	 * Basic attack boost constructor
 	 * @param name				The name of attack boost
@@ -32,9 +36,10 @@ public class AtkBoost extends Item{
 	 * @param description 		The description of attack boost
 	 */
 	AtkBoost() {
-		super(name, price, sell ,description);
+		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
+	
 	/**
 	 * Use attack boost on a chosen monster
 	 * @param myMonster			The monster attack boost will be used on

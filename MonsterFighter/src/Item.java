@@ -25,6 +25,13 @@ public class Item implements Purchasable{
 	 * The total frequency of an item in the player's bag
 	 */
 	int totalFrequency;
+	
+	String itemUse;
+	
+	int itemEffect;
+	
+	String itemStat;
+	
 	/**
 	 * Basic Item constructor
 	 * @param name				Name of the item
@@ -32,11 +39,14 @@ public class Item implements Purchasable{
 	 * @param cost				Price of the item
 	 * @param description		Description of the item
 	 */
-	Item(String name, int sell, int cost, String description) {
+	Item(String name, int sell, int cost, String description, String use, int effect, String stat) {
 		itemName = name;
 		itemCost = cost;
 		itemSell = sell;
 		itemDescription = description;
+		itemUse = use;
+		itemEffect = effect;
+		itemStat = stat;
 	}
 	/**
 	 * Returns the description of an item
@@ -63,6 +73,11 @@ public class Item implements Purchasable{
 	 * Adds an item to the trainers bag
 	 * Deducts money from the trainer based on the price of the item
 	 */
+	public String whenToUse() {
+		return itemUse;
+	}
+	
+	
 	public void buyItem(int amount, Object item, Inventory bag) {
 		
 	}
@@ -74,18 +89,43 @@ public class Item implements Purchasable{
 		//remove item from bag
 		//+money
 	}
+	
 	public int getFrequency() {
 		return totalFrequency;
 	}
+	
 	public void addFreq(Object item, int freq) {
 		((Item)item).totalFrequency += freq;
 	}
-
-	public void useItem(Object item) {
-		
-	}
+	
 	public String toString() {
 		return getFrequency() + "x " + getName();
 		
 	}
+	
+	public void useItem(Monster monster) {
+		if(itemStat == "atk") {
+			monster.gainDamage(itemEffect);
+			System.out.println("Damage Increased: \n"+(monster.getDamage() - itemEffect)+" -----> "+monster.getDamage());
+			System.out.println(monster.getName() +" is flexing their muscles!");
+		}
+		else if(itemStat == "hp") {
+			monster.gainHealth(itemEffect);
+			System.out.println("HP Restored: \n"+(monster.getDamage() - itemEffect)+" -----> "+monster.getDamage());
+			System.out.println(monster.getName() +" is looking healthy!");
+		}
+		else if(itemStat == "spd") {
+			monster.gainSpeed(itemEffect);
+			System.out.println("Speed Increased: \n"+(monster.getDamage() - itemEffect)+" -----> "+monster.getDamage());
+			System.out.println(monster.getName() +" is energised!");
+		}
+		else if(itemStat == "t") {
+			monster.gainTier(itemEffect);
+			System.out.println("Tier Increased: \n"+(monster.getDamage() - itemEffect)+" -----> "+monster.getDamage());
+			System.out.println(monster.getName() +" looks a lot tougher!");
+		}
+		
+	}
+
+	
 }
