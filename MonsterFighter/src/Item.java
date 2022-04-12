@@ -111,7 +111,7 @@ public class Item implements Purchasable{
 		}
 		else if(itemStat == "t") {
 			int currentTier = monster.getTier();
-			monster.gainTier(itemEffect);
+			monster.levelUp();
 			System.out.println("Tier Increased: \n"+currentTier+" -----> "+monster.getTier());
 			System.out.println(monster.getName() +" looks a lot tougher!");
 		}

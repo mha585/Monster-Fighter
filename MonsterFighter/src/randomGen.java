@@ -8,10 +8,7 @@ public class randomGen {
 	 * @param max		The maximum value the number can be
 	 */
 	public int randNumInRange(int min, int max){
-	    int rand = Math.abs((min)+numGen.nextInt(max));
-	    while (rand > max) {
-	    	rand -= min;
-	    }
+	    int rand = (int)((Math.random() * (max - min)) + min);
 	    return Math.abs(rand);
 	}
 }

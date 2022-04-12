@@ -56,7 +56,7 @@ public class Monster implements Purchasable{
 	 */
 	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart", "Blurple", "Blargle",
 			"Chog", "Post Malone", "Ratman", "Goopy", "Dinky", "Donkey", "Carla", "Zingle", "Mr. Normal",
-			"Mc Murder", "Charlie Cleantooth", "Reese Witherspoon", "Lil-man");
+			"Mc Murder", "Charlie Cleantooth", "Reese Witherspoon", "Lil-man", "Blobagon");
 	/**
 	 * Matrix containing how effective each type of monster is against each other.
 	 */
@@ -294,9 +294,11 @@ public class Monster implements Purchasable{
 	public void levelUp() {
 		gainTier(1);
 		double amountToAdd = (getTier() * 2);
+		double initialMaxHealth = getMaxHealth();
 		gainMaxHealth(amountToAdd);
 		gainDamage(amountToAdd / 5);
 		gainSpeed(amountToAdd / 8);
+		gainHealth(getMaxHealth() - initialMaxHealth);
 	}
 	/**
 	 * Returns the reward for killing the Enemy

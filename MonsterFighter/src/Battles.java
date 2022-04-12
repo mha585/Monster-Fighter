@@ -17,7 +17,7 @@ public class Battles {
 	 * @param friends		The current team of Monsters the Player has
 	 * @param badGuy		The enemy the player is fighting
 	 */
-	public boolean fight(Team friends, Monster badGuy) {
+	public boolean fight(Team friends, Monster badGuy, Inventory playerInventory) {
 		int fighterIndex = 0;
 		Scanner action = new Scanner(System.in);
 		printEnemyAndTeamStats(badGuy, friends);
@@ -29,8 +29,8 @@ public class Battles {
 				swap(badGuy, friends);
 			} else if (givenAction.toLowerCase().trim().equals("heal")) {
 				heal(friends.getFriend(fighterIndex), badGuy, friends);
-			} else if (givenAction.toLowerCase().trim().equals("item")) {
-				System.out.println("not yet implemented");
+			} else if (givenAction.toLowerCase().trim().equals("items")) {
+				useItem(friends, badGuy, playerInventory);
 			} else {
 				System.out.println("\n-------------------------------------\n");
 				System.out.println("Sorry your command wasn't understood\n");
@@ -115,6 +115,44 @@ public class Battles {
 			printEnemyAndTeamStats(badGuy, friends);
 		} else {
 			System.out.println("Sorry that number wasnt recognised");
+		}
+	}
+	/**
+	 * Gets called when the user inputs "items".
+	 * Allows the use of any items currently in the players bag
+	 * This will use the players turn and cause a one sided attack by the enemy monster against the friend
+	 * Checks that both the item index and the Monster index is in a valid range else asks for a different input
+	 * @param friends			The current team of monsters the player has
+	 * @param badGuy			The enemy that attacks while the item is being used
+	 * @param playerInventory	The current inventory of the player
+	 */
+	public void useItem(Team friends, Monster badGuy, Inventory playerInventory) {
+		if (playerInventory.getSize() <= 0) {
+			printEnemyAndTeamStats(badGuy, friends);
+			System.out.println("You have no items left to use");
+		} else {
+			System.out.println(playerInventory);
+			System.out.println("Please type the position of the item you would like to use");
+			Scanner itemNumber = new Scanner(System.in);
+			int itemToUseIndex = itemNumber.nextInt();
+			if ((itemToUseIndex == (int) itemToUseIndex) && (itemToUseIndex <= playerInventory.getSize()) && 
+					(itemToUseIndex > 0) && playerInventory.getSize() > 0) {
+				System.out.println("Now please type the position of the monster you would like to use the item on");
+				int monsterToUseItemOnIndex = itemNumber.nextInt();
+				if ((monsterToUseItemOnIndex == (int) monsterToUseItemOnIndex) && (monsterToUseItemOnIndex <= friends.getSize())
+						&& (monsterToUseItemOnIndex > 0)) {
+					playerInventory.getItem(itemToUseIndex - 1).useItem(friends.getFriend(monsterToUseItemOnIndex - 1));
+					playerInventory.removeBag(itemToUseIndex - 1, 1);
+					attack(friends.getFriend(0), badGuy, friends, false);
+					printEnemyAndTeamStats(badGuy, friends);
+				} else {
+					printEnemyAndTeamStats(badGuy, friends);
+					System.out.println("Sorry that monster wasnt recognised");
+				}
+			} else {
+				printEnemyAndTeamStats(badGuy, friends);
+				System.out.println("Sorry that item wasnt recognised");
+			}
 		}
 	}
 	/**
