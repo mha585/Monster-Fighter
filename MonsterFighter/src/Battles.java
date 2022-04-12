@@ -4,7 +4,7 @@ import java.util.Scanner;
  * This class implements a Battle between a team of monsters and an enemy.
  *
  * @author Matthew Harper
- * @version 1.2, Apr 2022.
+ * @version 1.3, Apr 2022.
  */
 public class Battles {
 	/**
@@ -53,24 +53,12 @@ public class Battles {
 	 * @param evenFight		Used to check if the fight is one sided or not
 	 */
 	public void attack(Monster friend, Monster badGuy, Team friends, boolean evenFight) {
-		if (howEffective(friend, badGuy) == "super effective") {
-			if (evenFight == true) {
-				speedAttacks(friend, badGuy, friends, 2.0);
-			} else {
-				oneSidedAttack(friend, badGuy, friends, 2.0);
-			}
-		} else if (howEffective(friend, badGuy) == "not very effective") {
-			if (evenFight == true) {
-				speedAttacks(friend, badGuy, friends, 0.5);
-			} else {
-				oneSidedAttack(friend, badGuy, friends, 0.5);
-			}
+		double friendAttackMultiplier = howEffective(friend, badGuy);
+		double enemyAttackMultiplier = howEffective(badGuy, friend);
+		if (evenFight == true) {
+			speedAttacks(friend, badGuy, friends, friendAttackMultiplier, enemyAttackMultiplier);
 		} else {
-			if (evenFight == true) {
-				speedAttacks(friend, badGuy, friends, 1.0);
-			} else {
-				oneSidedAttack(friend, badGuy, friends, 1.0);
-			}
+			oneSidedAttack(friend, badGuy, friends, enemyAttackMultiplier);
 		}
 	}
 	/**
@@ -186,17 +174,18 @@ public class Battles {
 	 * @param friends			The current team of monsters the player has
 	 * @param attackMultiplier	The amount that the attack will be multiplied by.
 	 */
-	public void speedAttacks(Monster friend, Monster badGuy, Team friends, double attackMultiplier) {
+	public void speedAttacks(Monster friend, Monster badGuy, Team friends, double friendAttackMultiplier, 
+			double enemyAttackMultiplier) {
 		if (friend.getSpeed() > badGuy.getSpeed()) {
-			badGuy.gainHealth((-1 * friend.getDamage()) * attackMultiplier);
+			badGuy.gainHealth((-1 * friend.getDamage()) * friendAttackMultiplier);
 			if (checkEnemysHealth(badGuy, friend, friends) == true) {
-				friend.gainHealth((-1 * badGuy.getDamage()) * (1 / attackMultiplier));
+				friend.gainHealth((-1 * badGuy.getDamage()) * enemyAttackMultiplier);
 				checkFriendsHealth(friend, friends);
 			}
 		} else {
-			friend.gainHealth((-1 * badGuy.getDamage()) * (1 / attackMultiplier));
+			friend.gainHealth((-1 * badGuy.getDamage()) * enemyAttackMultiplier);
 			if (checkFriendsHealth(friend, friends) == true) {
-				badGuy.gainHealth((-1 * friend.getDamage()) * (attackMultiplier));
+				badGuy.gainHealth((-1 * friend.getDamage()) * friendAttackMultiplier);
 				checkEnemysHealth(badGuy, friend, friends);
 			}
 		}
@@ -213,31 +202,40 @@ public class Battles {
 	 * @param friends			The current team of monsters the player has
 	 * @param attackMultiplier	The amount that the attack will be multiplied by.
 	 */
-	public void oneSidedAttack(Monster friend, Monster badGuy, Team friends, double attackMultiplier) {
-		friend.gainHealth((-1 * badGuy.getDamage()) * (1 / attackMultiplier));
+	public void oneSidedAttack(Monster friend, Monster badGuy, Team friends, double enemyAttackMultiplier) {
+		friend.gainHealth((-1 * badGuy.getDamage()) * enemyAttackMultiplier);
 		checkFriendsHealth(friend, friends);
 	}
 	/**
-	 * Checks how effective a type of attack is.
-	 * e.g if a fire monster attacks a grass monster then the attack will be super effective.
+	 * Returns the respective index of the type of monster from the howEffective
+	 * array in class Monster.
+	 * Returns 0 for type Fire, 1 for type Water, 2 for type Grass,
+	 * 3 for type glass and 4 for type Medical
+	 * @param type		The type of the Monster.
+	 */
+	public int monsterTypeToIndex(String type) {
+		if (type == "Fire") {
+			return 0;
+		} else if (type == "Water") {
+			return 1;
+		} else if (type == "Grass") {
+			return 2;
+		} else if (type == "Glass") {
+			return 3;
+		} else if (type == "Medical") {
+			return 4;
+		}
+		return 0;
+	}
+	/**
+	 * Checks how effective a type of attack is using the matrix howEffective in class Monster.
+	 * e.g if a fire monster attacks a grass monster then the attack will be super effective so * 2.
 	 * @param attacker		The Monster that is doing the attack.
 	 * @param attacked		The Monster that is being attacked.
 	 */
-	public String howEffective(Monster attacker, Monster attacked) {
-		if ((attacker.getType() == "Fire") && (attacked.getType() == "Grass")) {
-			return "super effective";
-		} else if ((attacker.getType() == "Grass") && (attacked.getType() == "Water")) {
-			return "super effective";
-		} else if ((attacker.getType() == "Water") && (attacked.getType() == "Fire")) {
-			return "super effective";
-		} else if ((attacker.getType() == "Fire") && (attacked.getType() == "Water")) {
-			return "not very effective";
-		} else if ((attacker.getType() == "Grass") && (attacked.getType() == "Fire")) {
-			return "not very effective";
-		} else if ((attacker.getType() == "Water") && (attacked.getType() == "Grass")) {
-			return "not very effective";
-		} else {
-			return "no change";
-		}
+	public double howEffective(Monster attacker, Monster attacked) {
+		int attackerTypeIndex = monsterTypeToIndex(attacker.getType());
+		int attackedTypeIndex = monsterTypeToIndex(attacked.getType());
+		return attacker.getEffectiveness(attackerTypeIndex, attackedTypeIndex);
 	}
 }
