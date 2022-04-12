@@ -309,7 +309,7 @@ public class Monster implements Purchasable{
 	 */
 	public String toString() {
 		return "Name: " + getName() + "\nCurrent health: " + getHealth() +
-				" / " + getMaxHealth() + "\nDamage: " + (int) getDamage() +
+				" / " + getMaxHealth() + "\nDamage: " + getDamage() +
 				"\nCan heal: " + getHealAmount() + "\nSpeed: " + getSpeed() + "\nTier: " + 
 				getTier() + "\nexp: " + (int) getMyExperience() + " / 100";
 	}

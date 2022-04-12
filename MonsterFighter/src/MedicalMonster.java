@@ -45,7 +45,7 @@ public class MedicalMonster extends Monster{
 		super.gainDamage((-1 * (super.getDamage())) + (super.getDamage() / 4));
 		super.gainMaxHealth((-1 * (super.getMaxHealth())) + number.randNumInRange(100, 200));
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());
-		super.gainDamage((-1 * (super.getDamage())) + (super.getDamage() / 4));
+		super.gainDamage((int)((-1 * (super.getDamage())) + (super.getDamage() / 4)));
 		super.gainHealAmount((-1 * (super.getHealAmount())) + number.randNumInRange(10, 50));
 	}
 	/**
