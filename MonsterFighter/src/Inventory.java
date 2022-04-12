@@ -12,8 +12,8 @@ public class Inventory {
 		return bag.size();
 	}
 	
-	public Object getItem(int i) {
-		return bag.get(i);
+	public Item getItem(int i) {
+		return (Item) bag.get(i);
 	}
 	
 	public void addtoBag(Object item, int freq) {
