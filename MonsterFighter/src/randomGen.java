@@ -9,6 +9,9 @@ public class randomGen {
 	 */
 	public int randNumInRange(int min, int max){
 	    int rand = Math.abs((min)+numGen.nextInt(max));
-	    return rand;
+	    while (rand > max) {
+	    	rand -= min;
+	    }
+	    return Math.abs(rand);
 	}
 }
