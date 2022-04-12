@@ -33,12 +33,26 @@ public class RandomEvent {
 		}
 	}
 	
-	public boolean shouldLeave(Team team) {
+	public boolean shouldLeave(Team team, double faints) {
 		Set<Integer> num = new HashSet<Integer>();
-		if (team.getSize() > 1) {
-			while (num.size() < 5) {
-				int number = randNum.randNumInRange(0, 100);
-				num.add(number);
+		if (team.getSize() > 0) {
+			if(faints == 0) {
+				while (num.size() < 5) {
+					int number = randNum.randNumInRange(0, 100);
+					num.add(number);
+				}
+			}
+			else if (faints == 1) {
+				while(num.size() < 46) {
+					int number = randNum.randNumInRange(0, 100);
+					num.add(number);
+				}
+			}
+			else if (faints == 2) {
+				while(num.size() < 99) {
+					int number = randNum.randNumInRange(0, 100);
+					num.add(number);
+				}
 			}
 		}
 		else {
@@ -68,7 +82,7 @@ public class RandomEvent {
 			}
 		}
 		else if (team.getSize() == 1) {
-			while (num.size() < 20) {
+			while (num.size() < 15) {
 				int number = randNum.randNumInRange(0, 100);
 				num.add(number);
 			}

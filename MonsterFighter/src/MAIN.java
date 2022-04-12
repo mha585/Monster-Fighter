@@ -6,35 +6,20 @@ import java.util.List;
 
 
 public class MAIN {
-	/**
-	 * Stores the player's chosen name, will be used to construct Player
-	 */
-	private static String playerName;
-	/**
-	 * Stores the player's chosen amount days, will be used to construct Player
-	 */
-	private static int playerDays;
-	/**
-	 * Stores the player's chosen difficulty, will be used to construct Player
-	 */
-	private static int playerDiff;
-
-
 
 	/**
 	 * Asks for players name, sets playerName to input
 	 * @param inputName			Scanner to check input
 	 */
-
-	
-	public static void setPlayerName(Scanner scanner) {
+	public static void setPlayerName(Scanner scanner, Player player) {
 		boolean isProper = false;
 		while(isProper == false) {
 			System.out.println("Please enter a name: \nMust be between 3 and 15 characters. \nMust not contain numbers or special characters. ");
 			String givenName = scanner.nextLine();
 			if (givenName.trim().length() >= 3 && givenName.trim().length() <= 15 && givenName.trim().matches("[a-zA-Z]+")){
-				playerName = givenName;
+				player.setName(givenName);
 				isProper = true;
+				System.out.println("\n");
 			}
 			else {
 				System.out.println("Invalid input");
@@ -45,15 +30,16 @@ public class MAIN {
 	 * Asks for how many days the player wants
 	 * @param inputDay			Scanner to check input
 	 */
-	public static void setDays(Scanner scanner) {
+	public static void setDays(Scanner scanner, Player player) {
 		boolean isDay = false;
 		while(isDay == false) {
 			System.out.println("How many days will your adventure last for? \nEnter a number between 5 and 15.");
 			String input = scanner.nextLine();
 			int givenDay = Integer.parseInt(input);
 			if(givenDay >=5 && givenDay <= 15) {
-				playerDays = givenDay;
+				player.setDay(givenDay);
 				isDay = true;
+				System.out.println("\n");
 			}
 			else {
 				System.out.println("Invalid input");
@@ -64,15 +50,16 @@ public class MAIN {
 	 * Prompts player to set their difficulty
 	 * @param inputDiff			Scanner to check input
 	 */
-	public static void setDifficulty(Scanner scanner) {
+	public static void setDifficulty(Scanner scanner, Player player) {
 		boolean isDiff = false;
 		while(isDiff == false) {
 			System.out.println("Please select a difficulty level. \nEnter the number of the difficulty you want. (1) for Easy, (2) for Normal or (3) for Hard.");
 			String input = scanner.nextLine();
 			int givenDiff = Integer.parseInt(input);
 			if(givenDiff == 1|| givenDiff == 2|| givenDiff == 3){
-				givenDiff = playerDiff;
+				player.setDifficulty(givenDiff);
 				isDiff = true;
+				System.out.println("\n");
 			}
 			else {
 				System.out.println("Invalid input");
@@ -293,37 +280,37 @@ public class MAIN {
 	public static void nightPhase(Scanner scanner, Player player) {
 		System.out.println("Time to go to sleep. Goodnight!");
 		RandomEvent event = new RandomEvent();
-		Team team = player.getTeam();
-		Team updateTeam = player.getTeam();
+		Team notUpdatedTeam = player.getTeam();
+		Team updatedTeam = player.getTeam();
 		RandomMonster newMonster = null;
 		Monster lostMonster = null;
 		boolean newFriend = false;
 		boolean lostFriend = false;
 		int numMonsters = 0;
-		for (int i = 0; i < updateTeam.getSize(); i++) {
-			Monster monster = updateTeam.getFriend(i);
+		for (int i = 0; i < updatedTeam.getSize(); i++) {
+			Monster monster = updatedTeam.getFriend(i);
 			monster.gainHealth(monster.getMaxHealth() - monster.getHealth());
 		}
-		for (int j = 0; j <= updateTeam.getSize()-1; j ++) {
-			Monster monster = updateTeam.getFriend(j);
+		for (int j = 0; j <= updatedTeam.getSize()-1; j ++) {
+			Monster monster = updatedTeam.getFriend(j);
 			if (event.shouldLevelUp(monster) == true) {
 				monster.gainTier(1);
 				numMonsters += 1;
 			}
 		}
 		RandomMonster couldAdd = new RandomMonster();
-		if (event.shouldJoin(updateTeam) == true) {
+		if (event.shouldJoin(updatedTeam) == true) {
 			newMonster = couldAdd;
 			couldAdd.setPrice(0);
-			updateTeam.addFriend(couldAdd);
+			updatedTeam.addFriend(couldAdd);
 			newFriend = true;
 		}
-		for (int l = 0; l <= updateTeam.getSize()-1; l ++) {
-			Monster monster = updateTeam.getFriend(l);
-			if (event.shouldLeave(updateTeam) == true) {
+		for (int l = 0; l <= updatedTeam.getSize()-1; l ++) {
+			Monster monster = updatedTeam.getFriend(l);
+			if (event.shouldLeave(updatedTeam, monster.getDeaths()) == true) {
 				lostMonster = monster;
 				monster.setPrice(0);
-				updateTeam.removeFriend(monster);
+				updatedTeam.removeFriend(monster);
 				lostFriend = true;
 			}
 		}
@@ -335,16 +322,37 @@ public class MAIN {
 			System.out.println(newMonster);
 		}
 		if (numMonsters > 0) {
-			for (int n = 0; n < team.getSize(); n++) {
-				if (team.getFriend(n).getTier() < updateTeam.getFriend(n).getTier()) {
-					Monster friend = team.getFriend(n);
-					Monster nFriend = team.getFriend(n);
+			for (int n = 0; n < notUpdatedTeam.getSize(); n++) {
+				if (notUpdatedTeam.getFriend(n).getTier() < updatedTeam.getFriend(n).getTier()) {
+					Monster friend = notUpdatedTeam.getFriend(n);
+					Monster nFriend = notUpdatedTeam.getFriend(n);
 					System.out.println(friend.getName() + " Tier: " + friend.getTier() + " - - - > " + nFriend.getTier());
 				}
 			}
 		}
 	}
 
+	public static boolean checkAbruptEnd(Player player) {
+		if(player.getTeam().getSize() == 0 && player.getMoney() < 150) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static void endGame(Player player, int originalDays) {
+		if(player.getDayCompleted() < originalDays){
+			System.out.println("Y O U    L O S E");
+			System.out.println("   GAME OVER   ");
+			System.out.println("Game Stats: \nName: " + player.getPlayerName() + "\nDays Completed: " + player.getDayCompleted()+ " / " + originalDays + "\nMoney Earned: +player.getMoneyEarned() + \nPoints Gained: +player.getPoints()");
+		}
+		else {
+			System.out.println("Y O U    W I N");
+			System.out.println("   GOOD JOB   ");
+			System.out.println("Game Stats: \nName: " + player.getPlayerName() + "\nDays Completed: " + player.getDayCompleted()+ " / " + originalDays + "\nMoney Earned: +player.getMoneyEarned() + \nPoints Gained: +player.getPoints()");
+		}
+	}
 	
 	public static void timer(int ms) {
 	    try
@@ -359,25 +367,31 @@ public class MAIN {
 	
 	public static void main(String args[]) {
 		Scanner scanner = new Scanner(System.in);
-		setPlayerName(scanner);
-		System.out.println("");
-		setDays(scanner);
-		System.out.println("");
-		setDifficulty(scanner);
-		System.out.println("");
-		Player newPlayer = new Player(playerName, playerDays, playerDiff);
+		Player newPlayer = new Player();
 		Shop newShop = new Shop();
+		setPlayerName(scanner, newPlayer);
+		setDays(scanner, newPlayer);
+		setDifficulty(scanner, newPlayer);
 		selectMonster(scanner, newPlayer);
 		System.out.println("~||~||~||~||~||~||~||~||~||~||~||~||~\n~||~ Let's Begin The Adventure!! ~||~ \n~||~||~||~||~||~||~||~||~||~||~||~||~");
 		timer(3000);
-		while(newPlayer.daysLeft() > 0) {
+		int inputDays = newPlayer.daysLeft();
+		while(newPlayer.daysLeft() >= 0) {
 			newPlayer.toString();
 			dayPrep(scanner, newPlayer);
 			timer(1000);
 			shoppingTime(scanner, newShop, newPlayer);
 			nightPhase(scanner, newPlayer);
-			newPlayer.addDay();
+			boolean gameOver = checkAbruptEnd(newPlayer);
+			if(gameOver == false) {
+				newPlayer.addDay();
+			}
+			else {
+				newPlayer.abruptEnd();
+				
+			}
 		}
+		endGame(newPlayer, inputDays);
 	}
 }
 
