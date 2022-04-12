@@ -39,14 +39,25 @@ public class Player {
 	 * @param day				The days the player has chosen
 	 * @param difficulty		The difficulty the player has chosen
 	 */
-	Player(String name, int day, String difficulty) {
+	Player(String name, int day, int difficulty) {
 		playerName = name;
 		playerDays = day;
-		playerDifficulty = difficulty;
 		Team newTeam = new Team();
 		playerTeam = newTeam;
 		Inventory bag = new Inventory();
 		playerBag = bag;
+		switch(difficulty) {
+			case 1:
+				playerDifficulty = "easy";
+				break;
+			case 2:
+				playerDifficulty = "normal";
+				break;
+			case 3:
+				playerDifficulty = "hard";
+				break;
+				}
+		
 		
 	/**
 	 * @returns the current day

@@ -41,5 +41,4 @@ public class HPrestore extends Item{
 	 * Uses HP Restore on a monster
 	 * @param myMonster		  The monster HP Restore will be used on
 	 */
-
 }
