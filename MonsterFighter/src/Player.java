@@ -25,6 +25,10 @@ public class Player {
 	 * Stores the player's current money
 	 */
 	private int currentMoney = 250;
+	
+	private int moneyEarned = 0;
+	
+	private int playerPoints = 0;
 
 	public Team playerTeam;
 	
@@ -39,30 +43,50 @@ public class Player {
 	 * @param day				The days the player has chosen
 	 * @param difficulty		The difficulty the player has chosen
 	 */
-	Player(String name, int day, int difficulty) {
-		playerName = name;
-		playerDays = day;
+	
+	Player() {
 		Team newTeam = new Team();
 		playerTeam = newTeam;
 		Inventory bag = new Inventory();
 		playerBag = bag;
-		switch(difficulty) {
+	}
+	
+	public void setName(String name) {
+		playerName = name;
+	}
+	
+	public void setDay(int days) {
+		playerDays = days;
+	}
+	
+	public void setDifficulty(int diff) {
+		switch(diff) {
 			case 1:
 				playerDifficulty = "easy";
-				break;
 			case 2:
 				playerDifficulty = "normal";
-				break;
 			case 3:
 				playerDifficulty = "hard";
-				break;
-				}
+		}
+	}
+	
+	public String getPlayerName() {
+		return playerName;
+	}
+	public String getDifficulty() {
+		return playerDifficulty;
+	}
 	/**
 	 * @returns the current day
 	 */
-	}
-	public int today() {
+	public int getDayCompleted() {
 		return currentDay;
+	}
+	public int getMoneyEarned() {
+		return moneyEarned;
+	}
+	public int getPoints() {
+		return playerPoints;
 	}
 	/**
 	 * @return the days remaining before the game finishes	
@@ -73,6 +97,13 @@ public class Player {
 	public void addDay() {
 		currentDay++;
 	}
+	public Inventory getInventory() {
+		return playerBag;
+	}
+	public Team getTeam() {
+		return playerTeam;
+	}
+
 	/**
 	 * @return the current amount of money the player has
 	 */
@@ -103,23 +134,22 @@ public class Player {
 	public String bagToString(Inventory currentBag) {
 		return currentBag.toString();
 	}
-	public Inventory getInventory() {
-		return playerBag;
-	}
-	public Team getTeam() {
-		return playerTeam;
-	}
+
 	public ArrayList<String> getTeamNames() {
 		for(int i = 0; i < playerTeam.getSize(); i++){
 			myTeamNames.add(((Team) playerTeam).getFriend(i).getName());
 		}
 		return myTeamNames;
 	}
+	
+	public void abruptEnd() {
+		playerDays = currentDay;
+	}
 	/**
 	 * @return Player in String form
 	 */
 	public String toString() {
-		System.out.println("\nCurrent Day: " + today() + "\nDays Left: " + daysLeft() + "\nMoney: $" + getMoney() + "\n\nParty:");
+		System.out.println("\nCurrent Day: " + getDayCompleted() + "\nDays Left: " + daysLeft() + "\nMoney: $" + getMoney() + "\n\nParty:");
 		System.out.println(partyToString(playerTeam) + "\n\nBag:");
 		System.out.println(bagToString(playerBag));
 		return "";
