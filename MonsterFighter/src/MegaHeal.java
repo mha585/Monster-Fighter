@@ -15,7 +15,7 @@ public class MegaHeal extends Item {
 	/**
 	 * The price of mega heal
 	 */
-	private static int price = 50;
+	private static int price = 75;
 	/**
 	 * The selling price of mega heal
 	 */
@@ -34,6 +34,9 @@ public class MegaHeal extends Item {
 	 * @param price			The price of mega heal
 	 * @param sell			The selling price of mega heal
 	 * @param description	The description of mega heal
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	MegaHeal() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

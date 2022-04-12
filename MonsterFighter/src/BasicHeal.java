@@ -19,7 +19,7 @@ public class BasicHeal extends Item {
 	/**
 	 * Selling price of Basic Heal
 	 */
-	private static int sell = 40;
+	private static int sell = 30;
 	/**
 	 * How much HP Basic Heal increases
 	 */
@@ -34,6 +34,9 @@ public class BasicHeal extends Item {
 	 * @param price			The price of Basic Heal
 	 * @param sell 			The selling price of Basic Heal
 	 * @param description	The description of Basic Heal
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	BasicHeal() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

@@ -16,6 +16,30 @@ public class Inventory {
 		return bag.get(i);
 	}
 	
+	public void buyItem(int amount, Object item, Player player) {
+		int totalCost1 = ((Item) item).getPrice() * amount;
+		if(totalCost1 <= player.getMoney()) {
+			player.playerBag.addtoBag(item, amount);
+			player.deductMoney(totalCost1);
+			System.out.println("Purchase Successful.");
+		}
+		else {
+			System.out.println("Insufficient funds");
+		}
+	}
+	/**
+	 * Removes an item from the trainers bag
+	 * Gives money to the trainer based on the selling price of the item
+	 */
+	public void sellItem(int amount, int index, Player player, Inventory bag) {
+		Object item = bag.getItem(index);
+		int addMoney = ((Item)item).sellPrice() * amount;
+		bag.removeBag(index, amount);
+		player.addMoney(addMoney);
+		System.out.println("New balange: " + player.getMoney());
+	}
+	
+	
 	public void addtoBag(Object item, int freq) {
 		if (bag.contains(item) == true) {
 			((Item)item).addFreq(item, freq);
@@ -46,8 +70,9 @@ public class Inventory {
 				System.out.println("("+(i+1)+")"+item.totalFrequency + "x " + item.getName()+" - - - "+item.getDescription());
 			}
 		}	
-		return "";
+		return " ";
 	}
+	
 	public static void main(String args[]) {
 		Inventory bag = new Inventory();
 		AtkBoost attack = new AtkBoost();

@@ -3,31 +3,31 @@
  * @author Angelo  Gasmin
  * @version 1.0
  */
-public class AtkPlus extends Item{
+public class Revive extends Item{
 	/**
 	 * The name of attack plus
 	 */
-	private static String name = "Attack Plus";
+	private static String name = "Revive";
 	/**
 	 * The description of attack plus
 	 */
-	private static String description = "Use on a monster out of battle to increase your monster's attack stat permanently.";
+	private static String description = "Use on a fainted monster to revive them.";
 	/**
 	 * The price of attack plus
 	 */
-	private static int price = 75;
+	private static int price = 250;
 	/**
 	 * The selling price of attack plus
 	 */
-	private static int sell = 40;
+	private static int sell = 150;
 	/**
 	 * The amount a monsters attack will increase by
 	 */
-	private static int itemEffect = 10;
+	private static int itemEffect = 1000000;
 	
-	private static String statEffect = "atk";
+	private static String statEffect = "fainted";
 	
-	private static String whenToUse = "out";
+	private static String whenToUse = "both";
 	/**
 	 * Basic attack plus constructor
 	 * @param name				The name of attack plus
@@ -38,7 +38,7 @@ public class AtkPlus extends Item{
 	 * @param itemEffect
 	 * @param statEffect
 	 */
-	AtkPlus() {
+	Revive() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 

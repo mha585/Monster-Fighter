@@ -225,7 +225,7 @@ public class Monster implements Purchasable{
 	/**
 	 * Adds or subtracts health from the Monster
 	 * if statement to ensure that the current health does not exceed the max health
-	 * if statment to ensure health does not go below 0
+	 * if statement to ensure health does not go below 0
 	 * @param healthChange	The amount the health of the monster changes by
 	 */
 	public void gainHealth(double healthChange) {
@@ -359,20 +359,5 @@ public class Monster implements Purchasable{
 	 */
 	public void setSellPrice(int newCost) {
 		myShopCost = newCost;
-	}
-	/**
-	 * Adds a Monster to the trainers bag
-	 * Deducts money from the trainer based on the price of the Monster
-	 */
-	public void buyMonster(Monster friend, Team friends) {
-		
-	}
-	/**
-	 * Removes a Monster from the trainers team
-	 * Gives money to the trainer based on the selling price of the item
-	 */
-	public void sellMonster(Monster friend, Team friends) {
-		//remove item from bag
-		//+money (does the money go in the bag? if so add Inventory bag)
 	}
 }

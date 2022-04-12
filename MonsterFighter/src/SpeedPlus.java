@@ -15,7 +15,7 @@ public class SpeedPlus extends Item{
 	/** 
 	 * The price of Speed Plus
 	 */
-	private static int price = 50;
+	private static int price = 75;
 	/**
 	 * The selling price of Speed Plus
 	 */
@@ -34,6 +34,9 @@ public class SpeedPlus extends Item{
 	 * @param price				The price of speed plus
 	 * @param sell				The selling price of speed plus
 	 * @param description		The description of speed plus
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	SpeedPlus() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

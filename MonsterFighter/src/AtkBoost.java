@@ -19,7 +19,7 @@ public class AtkBoost extends Item{
 	/**
 	 * The selling price of attack boost
 	 */
-	private static int sell = 40;
+	private static int sell = 30;
 	/**
 	 * The amount a monster's attack will increase by
 	 */
@@ -39,7 +39,6 @@ public class AtkBoost extends Item{
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
-	
 	/**
 	 * Use attack boost on a chosen monster
 	 * @param myMonster			The monster attack boost will be used on
