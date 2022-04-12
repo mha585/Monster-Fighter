@@ -32,6 +32,9 @@ public class TierPlus extends Item{
 	 * @param price				The price of Tier Plus
 	 * @param sell				The selling price of Tier Plus
 	 * @param description		The description of Tier Plus
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	TierPlus() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

@@ -34,6 +34,9 @@ public class SpeedBoost extends Item {
 	 * @param price				The price of speed boost
 	 * @param sell				The selling price of speed boost
 	 * @param description		The description of speed boost
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	SpeedBoost() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

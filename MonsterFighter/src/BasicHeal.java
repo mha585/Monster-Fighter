@@ -34,6 +34,9 @@ public class BasicHeal extends Item {
 	 * @param price			The price of Basic Heal
 	 * @param sell 			The selling price of Basic Heal
 	 * @param description	The description of Basic Heal
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	BasicHeal() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

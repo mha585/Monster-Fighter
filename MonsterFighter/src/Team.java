@@ -46,7 +46,7 @@ public class Team extends Monster{
 		int m1Tier = randMon.getTier();
 		int m1Price = buy.get(m1Tier);
 		if (m1Price > funds){
-			System.out.println("Insufficient funds");
+			System.out.println("Insufficient funds for this monster");
 		}
 		else {
 			player.playerTeam.addFriend(randMonList.get(monsterNum));

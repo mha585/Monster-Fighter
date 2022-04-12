@@ -70,7 +70,7 @@ public class Inventory {
 				System.out.println("("+(i+1)+")"+item.totalFrequency + "x " + item.getName()+" - - - "+item.getDescription());
 			}
 		}	
-		return "";
+		return " ";
 	}
 	
 	public static void main(String args[]) {

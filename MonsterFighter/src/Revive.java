@@ -34,6 +34,9 @@ public class Revive extends Item{
 	 * @param price				The price of attack plus
 	 * @param sell				The selling price of attack plus
 	 * @param description		The description of attack plus
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	Revive() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);

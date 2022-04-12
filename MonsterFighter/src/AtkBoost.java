@@ -39,7 +39,6 @@ public class AtkBoost extends Item{
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 
-	
 	/**
 	 * Use attack boost on a chosen monster
 	 * @param myMonster			The monster attack boost will be used on

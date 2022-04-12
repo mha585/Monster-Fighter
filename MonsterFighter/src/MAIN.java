@@ -377,7 +377,6 @@ public class MAIN {
 			shoppingTime(scanner, newShop, newPlayer);
 			nightPhase(scanner, newPlayer);
 			newPlayer.addDay();
-			
 		}
 	}
 }

@@ -89,4 +89,5 @@ public class Shop {
 	public List<Item> getItems() {
 		return listItems;
 	}
+	
 }

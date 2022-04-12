@@ -121,8 +121,5 @@ public class Item implements Purchasable{
 			System.out.println("Tier Increased: \n"+currentHealth+" -----> "+monster.getTier());
 			System.out.println(monster.getName() +" looks a lot tougher!");
 		}
-		
 	}
-
-	
 }

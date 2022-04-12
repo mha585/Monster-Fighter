@@ -57,8 +57,6 @@ public class Player {
 				playerDifficulty = "hard";
 				break;
 				}
-		
-		
 	/**
 	 * @returns the current day
 	 */

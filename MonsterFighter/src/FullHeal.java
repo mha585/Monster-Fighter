@@ -21,7 +21,7 @@ public class FullHeal extends Item{
 	 */
 	private static int sell = 60;
 	
-	private static int itemEffect = 100000000;
+	private static int itemEffect = 10000000;
 	
 	private static String statEffect = "hp";
 	

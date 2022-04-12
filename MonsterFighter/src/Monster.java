@@ -220,7 +220,7 @@ public class Monster implements Purchasable{
 	/**
 	 * Adds or subtracts health from the Monster
 	 * if statement to ensure that the current health does not exceed the max health
-	 * if statment to ensure health does not go below 0
+	 * if statement to ensure health does not go below 0
 	 * @param healthChange	The amount the health of the monster changes by
 	 */
 	public void gainHealth(double healthChange) {
