@@ -21,7 +21,7 @@ public class Battles {
 		int fighterIndex = 0;
 		Scanner action = new Scanner(System.in);
 		printEnemyAndTeamStats(badGuy, friends);
-		while ((badGuy.getHealth() > 0) && friends.getSize() > 0) {
+		while ((badGuy.getHealth() > 0) && friends.sumTeamHealth() > 0) {
 			String givenAction = action.nextLine();
 			if(givenAction.toLowerCase().trim().equals("fight")) {
 				attack(friends.getFriend(fighterIndex), badGuy, friends, true);
@@ -77,6 +77,7 @@ public class Battles {
 	 * Gets called when the user inputs "switch".
 	 * Gets the user to input the position of the first and second monster they want to switch then switches their positions
 	 * Checks that the numbers are in a valid range else will ask the user to input another valid command
+	 * Also checks that the monster you are trying to swap is not currently dead
 	 * After the switch happens the Monster that is now at the front of the team will get attacked.
 	 * @param badGuy		The enemy that attacks while the switch is happening
 	 * @param friends		The current team of monsters the player has
@@ -88,20 +89,22 @@ public class Battles {
 		System.out.println("Please type the position of the monster you would like to move");
 		Scanner number = new Scanner(System.in);
 		int friendToSwapIndex = number.nextInt();
-		if ((friendToSwapIndex == (int) friendToSwapIndex) && (friendToSwapIndex <= friends.getSize()) && (friendToSwapIndex > 0)) {
+		if ((friendToSwapIndex == (int) friendToSwapIndex) && (friendToSwapIndex <= friends.getSize()) && 
+				(friendToSwapIndex > 0) && (friends.getFriend(friendToSwapIndex - 1).getHealth() > 0)) {
 			System.out.println("Now please type the postition of the monster you want to swap with");
 			int friendToSwapWithIndex = number.nextInt();
-			if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && (friendToSwapWithIndex > 0)) {
+			if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && 
+					(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0)) {
 				friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
 				attack(friends.getFriend(0), badGuy, friends, false);
 				printEnemyAndTeamStats(badGuy, friends);
 			} else {
 				printEnemyAndTeamStats(badGuy, friends);
-				System.out.println("Sorry that number wasnt recognised");
+				System.out.println("\nSorry that monster cant be swapped");
 			}
 		} else {
 			printEnemyAndTeamStats(badGuy, friends);
-			System.out.println("Sorry that number wasnt recognised");
+			System.out.println("\nSorry that monster cant be swapped");
 		}
 	}
 	/**
@@ -137,7 +140,8 @@ public class Battles {
 		if (friend.getHealth() <= 0) {
 			System.out.println("\nYour friend " + friend.getName() +
 					" just died r.i.p\n");
-			friends.removeFriend(friend);
+			friend.gainDeaths();
+			friends.pushFrontToBack();
 			return false;
 		} 
 		return true;
@@ -196,7 +200,7 @@ public class Battles {
 				checkEnemysHealth(badGuy, friend, friends);
 			}
 		}
-		if ((badGuy.getHealth() > 0) && friends.getSize() > 0) {
+		if ((badGuy.getHealth() > 0) && friends.sumTeamHealth() > 0) {
 			printEnemyAndTeamStats(badGuy, friends);
 		}
 	}

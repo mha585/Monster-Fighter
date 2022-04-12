@@ -48,6 +48,10 @@ public class Monster implements Purchasable{
 	 */
 	private String myType;
 	/**
+	 * The amount of times the Monster has died
+	 */
+	private int myDeaths;
+	/**
 	 * List containing all possible names for a Monster
 	 */
 	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart", "Blurple", "Blargle",
@@ -72,12 +76,14 @@ public class Monster implements Purchasable{
 	 * @param damage		The amount of damage the Monster does
 	 * @param speed			The speed of the Monster
 	 * @param tier			The level of the Monster
+	 * @param reward		The reward for killing the Monster
 	 * @param sell			Selling price of the Monster
 	 * @param cost			Price of the Monster
 	 * @param description	Description of the Monster
 	 */
 	public Monster(String name, double maxHealth, double healAmount, double damage, double speed, int tier, 
 			int sell, int cost, String description) {
+		randomGen number = new randomGen();
 		myName = name;
 		myMaxHealth = maxHealth;
 		myCurrentHealth = myMaxHealth;
@@ -86,6 +92,8 @@ public class Monster implements Purchasable{
 		mySpeed = speed;
 		myExperience = 0;
 		myTier = tier;
+		myReward = number.randNumInRange(0, 100);
+		myDeaths = 0;
 		
 		myShopCost = cost;
 		myShopSell = sell;
@@ -109,6 +117,7 @@ public class Monster implements Purchasable{
 		myExperience = 0;
 		myReward = number.randNumInRange(0, 100);
 		myTier = number.randNumInRange(1, 3);
+		myDeaths = 0;
 		
 		myShopCost = cost;
 		myShopSell = sell;
@@ -127,6 +136,7 @@ public class Monster implements Purchasable{
 		myDamage = number.randNumInRange(1, 70);
 		mySpeed = number.randNumInRange(1, 15);
 		myExperience = 0;
+		myDeaths = 0;
 		myReward = number.randNumInRange(0, 100);
 		myTier = number.randNumInRange(1, 3);
 	}
@@ -210,15 +220,15 @@ public class Monster implements Purchasable{
 	/**
 	 * Adds or subtracts health from the Monster
 	 * if statement to ensure that the current health does not exceed the max health
+	 * if statment to ensure health does not go below 0
 	 * @param healthChange	The amount the health of the monster changes by
 	 */
 	public void gainHealth(double healthChange) {
-		if ((getHealth() + healthChange) <= getMaxHealth()) {
+		if (((getHealth() + healthChange) <= getMaxHealth()) && ((getHealth() + healthChange) > 0) && (getHealth() > 0)) {
 			myCurrentHealth += healthChange;
-//			if (getHealth() <= 0) {
-//				System.out.println(getName() + " died\n");
-//			} can add code here to do something when the Monster dies?
-		} else {
+		} else if ((getHealth() + healthChange) <= 0) {
+			myCurrentHealth = 0;
+		} else if ((getHealth() + healthChange) >= getMaxHealth()) {
 			myCurrentHealth = getMaxHealth();
 		}
 	}
@@ -252,6 +262,18 @@ public class Monster implements Purchasable{
 			levelUp();
 			myExperience -= 100;
 		}
+	}
+	/**
+	 * Gets the amount of time the Monster has died
+	 */
+	public double getDeaths() {
+		return myDeaths;
+	}
+	/**
+	 * increments the speed of the Monster by 1
+	 */
+	public void gainDeaths() {
+		myDeaths += 1;
 	}
 	/**
 	 * Levels up the Monster

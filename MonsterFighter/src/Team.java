@@ -54,6 +54,20 @@ public class Team extends Monster{
 	public void swap(int index1, int index2) {
 		Collections.swap(myTeam, index1, index2);
 	}
+	
+	public void pushFrontToBack() {
+		for (int i = 0; i < (myTeam.size() - 1); i++) {
+			Collections.swap(myTeam, i, i + 1);
+		  }
+	}
+	
+	public double sumTeamHealth() {
+		double currentHealthSum = 0;
+		for (int i = 0; i < (myTeam.size()); i++) {
+			currentHealthSum += ((Monster) myTeam.get(i)).getHealth();
+		  }
+		return currentHealthSum;
+	}
 
 	public String toString() {
 		return printFriends();
