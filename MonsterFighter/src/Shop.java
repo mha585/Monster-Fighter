@@ -16,7 +16,7 @@ public class Shop {
 	private static RandomMonster shopMonster2;
 	private static RandomMonster shopMonster3;
 	private static RandomMonster shopMonster4;
-	private static List<Integer> buyMonsters =  Arrays.asList(0, 100, 200, 300);
+	private static List<Integer> buyMonsters =  Arrays.asList(0, 150, 200, 300);
 	private static List<Integer> sellMonsters = Arrays.asList(0, 50, 100, 150);
 	private static ArrayList<RandomMonster> listMonsters = new ArrayList<RandomMonster>();
 	private static List<Item> listItems = Arrays.asList(AB, AP, BH, FH, MH, RV, SB ,SP, TP);
