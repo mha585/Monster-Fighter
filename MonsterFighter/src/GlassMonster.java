@@ -42,7 +42,7 @@ public class GlassMonster extends Monster{
 	public GlassMonster() {
 		super(price, sell, description);
 		super.setType("Glass");
-		super.gainMaxHealth((-1 * (super.getMaxHealth())) + number.randNumInRange(0, (int) super.getMaxHealth() / 2));
+		super.gainMaxHealth((-1 * (super.getMaxHealth())) + number.randNumInRange(1, (int) super.getMaxHealth() / 2));
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());
 		super.gainDamage(super.getDamage() + 10);
 	}
