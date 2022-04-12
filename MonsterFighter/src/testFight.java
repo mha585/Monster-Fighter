@@ -7,13 +7,11 @@ public class testFight {
 		Battles battle = new Battles();
 //		I think these two above lines only need to be initialised once in main
 
-		myTeam.addFriend(new WaterMonster());
-		myTeam.addFriend(new FireMonster());
 		myTeam.addFriend(new RandomMonster());
-		
-		System.out.println(myTeam.sumTeamHealth());
-		
-		if (battle.fight(myTeam, new GrassMonster()) == true) {
+		myTeam.addFriend(new RandomMonster());
+		myTeam.addFriend(new RandomMonster());
+				
+		if (battle.fight(myTeam, new RandomMonster()) == true) {
 //			continue the game
 			System.out.println("The game continues");
 		} else {
