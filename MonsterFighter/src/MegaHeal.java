@@ -15,7 +15,7 @@ public class MegaHeal extends Item {
 	/**
 	 * The price of mega heal
 	 */
-	private static int price = 50;
+	private static int price = 75;
 	/**
 	 * The selling price of mega heal
 	 */

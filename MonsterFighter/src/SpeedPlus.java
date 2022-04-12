@@ -15,7 +15,7 @@ public class SpeedPlus extends Item{
 	/** 
 	 * The price of Speed Plus
 	 */
-	private static int price = 50;
+	private static int price = 75;
 	/**
 	 * The selling price of Speed Plus
 	 */

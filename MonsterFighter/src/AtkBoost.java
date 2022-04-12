@@ -19,7 +19,7 @@ public class AtkBoost extends Item{
 	/**
 	 * The selling price of attack boost
 	 */
-	private static int sell = 40;
+	private static int sell = 30;
 	/**
 	 * The amount a monster's attack will increase by
 	 */

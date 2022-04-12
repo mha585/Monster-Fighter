@@ -19,7 +19,7 @@ public class BasicHeal extends Item {
 	/**
 	 * Selling price of Basic Heal
 	 */
-	private static int sell = 40;
+	private static int sell = 30;
 	/**
 	 * How much HP Basic Heal increases
 	 */

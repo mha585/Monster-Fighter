@@ -19,7 +19,7 @@ public class SpeedBoost extends Item {
 	/**
 	 * The cost of speed boost
 	 */
-	private static int sell = 40;
+	private static int sell = 30;
 	/**
 	 * The amount a monster's speed will increase by
 	 */

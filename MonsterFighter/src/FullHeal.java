@@ -3,11 +3,11 @@
  * @author Angelo  Gasmin
  * @version 1.0
  */
-public class HPrestore extends Item{
+public class FullHeal extends Item{
 	/**
 	 * Name of item
 	 */
-	private static String name = "HP Restore";
+	private static String name = "Full Heal";
 	/**
 	 * Description of item
 	 */
@@ -15,11 +15,11 @@ public class HPrestore extends Item{
 	/**
 	 * Price of item
 	 */
-	private static int price = 50;
+	private static int price = 100;
 	/**
 	 * Selling price of item
 	 */
-	private static int sell = 40;
+	private static int sell = 60;
 	
 	private static int itemEffect = 100000000;
 	
@@ -33,7 +33,7 @@ public class HPrestore extends Item{
 	 * @param sell            The selling price of HP Restore
 	 * @param description	  The description of HP Restore
 	 */
-	HPrestore() {
+	FullHeal() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
 

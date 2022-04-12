@@ -347,19 +347,4 @@ public class Monster implements Purchasable{
 	public void setSellPrice(int newCost) {
 		myShopCost = newCost;
 	}
-	/**
-	 * Adds a Monster to the trainers bag
-	 * Deducts money from the trainer based on the price of the Monster
-	 */
-	public void buyMonster(Monster friend, Team friends) {
-		
-	}
-	/**
-	 * Removes a Monster from the trainers team
-	 * Gives money to the trainer based on the selling price of the item
-	 */
-	public void sellMonster(Monster friend, Team friends) {
-		//remove item from bag
-		//+money (does the money go in the bag? if so add Inventory bag)
-	}
 }
