@@ -233,6 +233,13 @@ public class Monster implements Purchasable{
 		}
 	}
 	/**
+	 * Used to revive a dead monster.
+	 * Sets the health of the dead monster to its max health
+	 */
+	public void revive() {
+		myCurrentHealth = myMaxHealth;
+	}
+	/**
 	 * Gets the type of the Monster
 	 */
 	public String getType() {
