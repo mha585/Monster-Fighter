@@ -55,7 +55,13 @@ public class Monster implements Purchasable{
 	 * List containing all possible names for a Monster
 	 */
 	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart", "Blurple", "Blargle",
-			"Chog", "Post Malone", "Ratman", "Goopy");
+			"Chog", "Post Malone", "Ratman", "Goopy", "Dinky", "Donkey", "Carla", "Zingle", "Mr. Normal",
+			"Mc Murder", "Charlie Cleantooth", "Reese Witherspoon", "Lil-man");
+	/**
+	 * Matrix containing how effective each type of monster is against each other.
+	 */
+	private double[][] howEffective = {{1,0.5,2,2,0.5},{2,1,0.5,2,0.5},{0.5,2,1,2,0.5},{2,2,2,1,2},{0.5,0.5,0.5,0.5,1}};
+
 	/**
 	 * The cost of the Monster
 	 */
@@ -118,7 +124,6 @@ public class Monster implements Purchasable{
 		myReward = number.randNumInRange(0, 100);
 		myTier = number.randNumInRange(1, 3);
 		myDeaths = 0;
-		
 		myShopCost = cost;
 		myShopSell = sell;
 		myShopDescription = description;
@@ -307,6 +312,14 @@ public class Monster implements Purchasable{
 				" / " + getMaxHealth() + "\nDamage: " + (int) getDamage() +
 				"\nCan heal: " + getHealAmount() + "\nSpeed: " + getSpeed() + "\nTier: " + 
 				getTier() + "\nexp: " + (int) getMyExperience() + " / 100";
+	}
+	/**
+	 * Checks how effective an attack is
+	 * @param attackerType		The type of attack e.g fire = 0, water = 1
+	 * @param victimType		The type of attack e.g grass = 2
+	 */
+	public double getEffectiveness(int attackerType, int victimType) {
+		return howEffective[attackerType][victimType];
 	}
 	/**
 	 * Returns the description of a Monster
