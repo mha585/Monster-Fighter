@@ -5,12 +5,15 @@ public class RandomMonster extends Monster{
 	/**
 	 * List containing all possible types of monsters
 	 */
-	private List<Monster> possibleTypes = Arrays.asList(new WaterMonster(), new FireMonster(), new GrassMonster());
+	private List<Monster> possibleTypes = Arrays.asList(new WaterMonster(), new FireMonster(), new GrassMonster(), 
+			new GlassMonster(), new MedicalMonster());
 	/**
 	 * generates a random number in a given range
 	 */
 	private randomGen number = new randomGen();
-	
+	/**
+	 * generates a random Monster from the list
+	 */
 	private Monster random = generateMonster();
 
 	
