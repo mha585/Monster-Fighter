@@ -1,5 +1,4 @@
 
-
 //this is just a class to test fights between monsters delete later!!!!
 public class testFight {
 	public static void main(String[] args) {
