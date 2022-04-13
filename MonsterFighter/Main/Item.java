@@ -39,7 +39,7 @@ public class Item implements Purchasable{
 	 * @param cost				Price of the item
 	 * @param description		Description of the item
 	 */
-	Item(String name, int sell, int cost, String description, String use, int effect, String stat) {
+	Item(String name, int cost, int sell, String description, String use, int effect, String stat) {
 		itemName = name;
 		itemCost = cost;
 		itemSell = sell;
@@ -75,19 +75,6 @@ public class Item implements Purchasable{
 	 */
 	public String whenToUse() {
 		return itemUse;
-	}
-	
-	
-	public void buyItem(int amount, Object item, Inventory bag) {
-		
-	}
-	/**
-	 * Removes an item from the trainers bag
-	 * Gives money to the trainer based on the selling price of the item
-	 */
-	public void sellItem(int amount, Object item, Inventory bag) {
-		//remove item from bag
-		//+money
 	}
 	
 	public int getFrequency() {
@@ -128,6 +115,11 @@ public class Item implements Purchasable{
 			System.out.println("Tier Increased: \n"+currentTier+" -----> "+monster.getTier());
 			System.out.println(monster.getName() +" looks a lot tougher!");
 		}
-		
-	}	
+		else if(itemStat == "fainted") {
+			double currentHealth = monster.getHealth();
+			monster.revive();
+			System.out.println("Tier Increased: \n"+currentHealth+" -----> "+monster.getTier());
+			System.out.println(monster.getName() +" looks a lot tougher!");
+		}
+	}
 }

@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class RandomEvent {
-
+	
 	private randomGen randNum = new randomGen();
-
+	
 	public RandomEvent() {
 	}
 	
@@ -12,7 +12,7 @@ public class RandomEvent {
 		if (monster.getTier() == 1) {
 			while (num.size() < 20 ) {
 				int number = randNum.randNumInRange(0, 100);
-				num.add(number);
+				num.add(number);	
 			}
 		}
 		else if (monster.getTier() == 2) {
@@ -32,7 +32,7 @@ public class RandomEvent {
 			return false;
 		}
 	}
-
+	
 	public boolean shouldLeave(Team team, double faints) {
 		Set<Integer> num = new HashSet<Integer>();
 		if (team.getSize() > 0) {
@@ -66,7 +66,7 @@ public class RandomEvent {
 			return false;
 		}
 	}
-
+	
 	public boolean shouldJoin(Team team) {
 		Set<Integer> num = new HashSet<Integer>();
 		if (team.getSize() == 3) {

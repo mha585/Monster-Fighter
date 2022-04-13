@@ -1,21 +1,21 @@
 import java.util.ArrayList;
 
 public class Inventory {
-
+	
 	private ArrayList<Object> bag = new ArrayList <>();
-
+	
 	public ArrayList<Object> getBag() {
 		return bag;
 	}
-
+	
 	public int getSize() {
 		return bag.size();
 	}
-
+	
 	public Item getItem(int i) {
 		return (Item) bag.get(i);
 	}
-
+	
 	public void buyItem(int amount, Object item, Player player) {
 		int totalCost1 = ((Item) item).getPrice() * amount;
 		if(totalCost1 <= player.getMoney()) {
@@ -36,10 +36,10 @@ public class Inventory {
 		int addMoney = ((Item)item).sellPrice() * amount;
 		bag.removeBag(index, amount);
 		player.addMoney(addMoney);
-		System.out.println("New balance: " + player.getMoney());
+		System.out.println("New balange: " + player.getMoney());
 	}
-
-
+	
+	
 	public void addtoBag(Object item, int freq) {
 		if (bag.contains(item) == true) {
 			((Item)item).addFreq(item, freq);
@@ -56,10 +56,10 @@ public class Inventory {
 		}else if(item.getFrequency() == freq) {
 			item.totalFrequency = 0;
 			bag.remove(index);
-
+			
 		}
 	}
-
+	
 	public String toString() {
 		if (bag.size() == 0) {
 			return "Your bag is empty\n";
@@ -69,10 +69,10 @@ public class Inventory {
 				Item item = (Item) bag.get(i);
 				System.out.println("("+(i+1)+")"+item.totalFrequency + "x " + item.getName()+" - - - "+item.getDescription());
 			}
-		}
+		}	
 		return " ";
 	}
-
+	
 	public static void main(String args[]) {
 		Inventory bag = new Inventory();
 		AtkBoost attack = new AtkBoost();

@@ -15,7 +15,10 @@ class BattlesTest {
 	public void init() {
 		testTeam = new Team();
 		testBattle = new Battles();
-		testPlayer = new Player("tester", 6, 1);
+		testPlayer = new Player();
+		testPlayer.setDay(6);
+		testPlayer.setDifficulty(1);
+		testPlayer.setName("tester");
 		testTeam.addFriend(new FireMonster("Fire test", 50.0, 5.0, 5.425, 20.0, 1, 150, 250, "fire"));
 		testTeam.addFriend(new GrassMonster("Grass test", 100.0, 5.0, 20.0, 25.0, 1, 150, 250, "grass"));
 		testTeam.addFriend(new WaterMonster("Water test", 50.0, 5.0, 20.0, 20.0, 1, 150, 250, "water"));
