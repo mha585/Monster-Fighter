@@ -366,6 +366,7 @@ public class MAIN {
 	}
 	
 	public static void main(String args[]) {
+		Battles battle = new Battles();
 		Scanner scanner = new Scanner(System.in);
 		Player newPlayer = new Player();
 		Shop newShop = new Shop();
