@@ -49,7 +49,7 @@ public class Team extends Monster{
 			System.out.println("Insufficient funds for this monster");
 		}
 		else {
-			player.playerTeam.addFriend(randMonList.get(monsterNum));
+			player.playerTeam.addFriend(randMonList.get(monsterNum - 1));
 			player.deductMoney(m1Price);
 			System.out.println("Purchase Successful");
 		}

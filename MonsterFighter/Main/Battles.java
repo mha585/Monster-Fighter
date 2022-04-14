@@ -24,7 +24,7 @@ public class Battles {
 		printEnemyAndTeamStats(badGuy, friends);
 		while ((badGuy.getHealth() > 0) && friends.sumTeamHealth() > 0) {
 			String givenAction = action.nextLine();
-			if(givenAction.toLowerCase().trim().equals("fight")) {
+			if (givenAction.toLowerCase().trim().equals("fight")) {
 				attack(friends.getFriend(fighterIndex), badGuy, friends, true);
 			} else if (givenAction.toLowerCase().trim().equals("switch")) {
 				swap(badGuy, friends);
