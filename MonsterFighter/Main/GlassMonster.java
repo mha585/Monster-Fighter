@@ -4,7 +4,7 @@ public class GlassMonster extends Monster{
 	/**
 	 * The description of GlassMonster
 	 */
-	private static String description = "A glass cannon, effective against all but easily slain";
+	private static String description = "A glass cannon, effective against all (except Holy and Demon) but easily slain";
 	/**
 	 * The price of GlassMonster
 	 */

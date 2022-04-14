@@ -60,7 +60,7 @@ public class Monster implements Purchasable{
 	/**
 	 * Matrix containing how effective each type of monster is against each other.
 	 */
-	private double[][] howEffective = {{1,0.5,2,2,0.5},{2,1,0.5,2,0.5},{0.5,2,1,2,0.5},{2,2,2,1,2},{0.5,0.5,0.5,0.5,1}};
+	private double[][] howEffective = {{1,0.5,2,2,0.5,0.5,0.5},{2,1,0.5,2,0.5,0.5,0.5},{0.5,2,1,2,0.5,0.5,0.5},{2,2,2,1,2,0.5,0.5},{0.5,0.5,0.5,0.5,1,0.5,0.5},{0.5,0.5,0.5,0.5,0.5,1,2},{0.5,0.5,0.5,0.5,0.5,2,1}};
 
 	/**
 	 * The cost of the Monster
