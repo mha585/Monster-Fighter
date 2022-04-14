@@ -63,15 +63,48 @@ public class Shop {
 		}
 	}
 	
-	public void generateNewMonsters() {
-		shopMonster1 = new RandomMonster();
-		shopMonster2 = new RandomMonster();
-		shopMonster3 = new RandomMonster();
-		shopMonster4 = new RandomMonster();
-		listMonsters.add(shopMonster1);
-		listMonsters.add(shopMonster2);
-		listMonsters.add(shopMonster3);
-		listMonsters.add(shopMonster4);
+	public void generateNewMonsters(Player player) {
+		if (player.daysLeft() <= 2) {
+			shopMonster1 = new RandomMonster();
+			shopMonster2 = new RandomMonster();
+			shopMonster3 = new RandomMonster();
+			shopMonster4 = new RandomMonster();
+			listMonsters.add(shopMonster1);
+			listMonsters.add(shopMonster2);
+			listMonsters.add(shopMonster3);
+			listMonsters.add(shopMonster4);
+		}
+		else {
+			boolean notHoly1 = false;
+			while (notHoly1 == false) {
+				shopMonster1 = new RandomMonster();
+				if (shopMonster1.getType().equalsIgnoreCase("holy")) {
+					listMonsters.add(shopMonster1);
+				}
+			}
+			boolean notHoly2 = false;
+			while (notHoly2 == false) {
+				shopMonster2 = new RandomMonster();
+				if (shopMonster2.getType().equalsIgnoreCase("holy")) {
+					listMonsters.add(shopMonster2);
+				}
+			}
+			boolean notHoly3 = false;
+			while (notHoly3 == false) {
+				shopMonster3 = new RandomMonster();
+				if (shopMonster3.getType().equalsIgnoreCase("holy")) {
+					listMonsters.add(shopMonster3);
+				}
+			}
+			boolean notHoly4 = false;
+			while (notHoly4 == false) {
+				shopMonster1 = new RandomMonster();
+				if (shopMonster4.getType().equalsIgnoreCase("holy")) {
+					listMonsters.add(shopMonster4);
+				}
+			}
+			
+		}
 	}
 	
 	public List<Integer> getBuy() {

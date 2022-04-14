@@ -195,12 +195,27 @@ public class MAIN {
 	}
 	
 	public static void displayBattles(Scanner scanner, Player player) {
-		
+		if (player.daysLeft() > 0) {
+			if (player.getDifficulty() == "easy") {
+				System.out.println("How many battles do you want to fight today");
+			}
+			else if (player.getDifficulty() == "normal") {
+				
+			}
+			else if (player.getDifficulty() == "hard") {
+				
+			}
+		}
+		else if (player.daysLeft() == 0) {
+			System.out.println("B O S S    l E V E L");
+			System.out.println("This is the final battle! Shinzo wo Sasageyo!");
+			System.out.println("Your Opponent: ");
+		}
 	}
 	
 	public static void shoppingTime(Scanner scanner, Shop shop, Player player) {
 		System.out.println("Welcome to the Shop!");
-		shop.generateNewMonsters();
+		shop.generateNewMonsters(player);
 		boolean isDone = false;
 		while (isDone == false) {
 			try {
