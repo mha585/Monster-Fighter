@@ -181,8 +181,8 @@ public class MAIN {
 					}
 				}
 				else if (givenChoice == 3) {
-					isDone = true;
 					System.out.println("\n");
+					isDone = true;
 				}
 				else {
 					throw new InvalidInputException();
@@ -320,6 +320,7 @@ public class MAIN {
 				}
 			}
 			catch(Exception e) {
+				System.out.println("aaaaaaaaaaaaaaaa");
 				System.out.println("Invalid input\n");
 			}
 		}
@@ -443,7 +444,7 @@ public class MAIN {
 		endGame(newPlayer, inputDays);
 	}
 
-	public static void main(String[]args) {
+	public static void main(String[] args) {
 		playGame();
 	}
 }

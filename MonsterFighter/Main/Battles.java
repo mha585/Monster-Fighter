@@ -263,8 +263,11 @@ public class Battles {
 			return 3;
 		} else if (type == "Medical") {
 			return 4;
+		} else if (type == "Holy") {
+			return 5;
+		} else {
+			return 6;
 		}
-		return 0;
 	}
 	/**
 	 * Checks how effective a type of attack is using the matrix howEffective in class Monster.

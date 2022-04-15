@@ -41,4 +41,6 @@ class BattlesTest {
 		assertEquals(testTeam.getFriend(0).getHealth(), 50.5);
 		assertEquals(testEnemy.getHealth(), 0);
 	}
+	
+	
 }
