@@ -83,10 +83,14 @@ public class Battles {
 			System.out.println("Now please type the postition of the monster you want to swap with");
 			int friendToSwapWithIndex = number.nextInt();
 			if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && 
-					(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0)) {
+					(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0) && 
+					(friendToSwapIndex != friendToSwapWithIndex)) {
 				friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
 				attack(friends.getFriend(0), badGuy, friends, false);
 				printEnemyAndTeamStats(badGuy, friends);
+			} else if (friendToSwapIndex == friendToSwapWithIndex) {
+				printEnemyAndTeamStats(badGuy, friends);
+				System.out.println("\nCant swap a mosnter with itseslf!");
 			} else {
 				printEnemyAndTeamStats(badGuy, friends);
 				System.out.println("\nSorry that monster cant be swapped");
