@@ -78,32 +78,35 @@ public class Shop {
 			boolean notHoly1 = false;
 			while (notHoly1 == false) {
 				shopMonster1 = new RandomMonster();
-				if (shopMonster1.getType().equalsIgnoreCase("holy")) {
+				if (shopMonster1.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster1);
+					notHoly1 = true;
 				}
 			}
 			boolean notHoly2 = false;
 			while (notHoly2 == false) {
 				shopMonster2 = new RandomMonster();
-				if (shopMonster2.getType().equalsIgnoreCase("holy")) {
+				if (shopMonster2.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster2);
+					notHoly2 = true;
 				}
 			}
 			boolean notHoly3 = false;
 			while (notHoly3 == false) {
 				shopMonster3 = new RandomMonster();
-				if (shopMonster3.getType().equalsIgnoreCase("holy")) {
+				if (shopMonster3.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster3);
+					notHoly3 = true;
 				}
 			}
 			boolean notHoly4 = false;
 			while (notHoly4 == false) {
-				shopMonster1 = new RandomMonster();
-				if (shopMonster4.getType().equalsIgnoreCase("holy")) {
+				shopMonster4 = new RandomMonster();
+				if (shopMonster4.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster4);
+					notHoly4 = true;
 				}
 			}
-			
 		}
 	}
 	
