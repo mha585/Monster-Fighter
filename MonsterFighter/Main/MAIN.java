@@ -194,22 +194,41 @@ public class MAIN {
 		}
 	}
 	
-	public static void displayBattles(Scanner scanner, Player player) {
+	public static void displayBattles(Scanner scanner, Player player, Battles battle) {
+		ArrayList<Trainers> trainerBattles;
 		if (player.daysLeft() > 0) {
 			if (player.getDifficulty() == "easy") {
-				System.out.println("How many battles do you want to fight today");
+				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
+				String inputBattles = scanner.nextLine();
+				int numBattles = Integer.parseInt(inputBattles);
+				trainerBattles = battle.getBattles(numBattles);
+				battle.printBattles(trainerBattles);
 			}
 			else if (player.getDifficulty() == "normal") {
+				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
+				String inputBattles = scanner.nextLine();
+				int numBattles = Integer.parseInt(inputBattles);
+				trainerBattles = battle.getBattles(numBattles);
+				battle.printBattles(trainerBattles);
 				
 			}
 			else if (player.getDifficulty() == "hard") {
+				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
+				String inputBattles = scanner.nextLine();
+				int numBattles = Integer.parseInt(inputBattles);
+				trainerBattles = battle.getBattles(numBattles);
+				battle.printBattles(trainerBattles);
 				
 			}
 		}
 		else if (player.daysLeft() == 0) {
+			List<Monster> bossMonsters;
+			Boss bossBattle = new Boss();
 			System.out.println("B O S S    l E V E L");
 			System.out.println("This is the final battle! Shinzo wo Sasageyo!");
 			System.out.println("Your Opponent: ");
+			bossBattle.printBossFight();
+			bossMonsters = bossBattle.getBossFight();
 		}
 	}
 	
@@ -430,6 +449,7 @@ public class MAIN {
 			newPlayer.toString();
 			dayPrep(scanner, newPlayer);
 			timer(1000);
+			displayBattles(scanner, newPlayer, battle);
 			shoppingTime(scanner, newShop, newPlayer);
 			nightPhase(newPlayer);
 			boolean gameOver = checkAbruptEnd(newPlayer);

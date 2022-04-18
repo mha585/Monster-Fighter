@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,6 +9,28 @@ import java.util.Scanner;
  * @version 1.3, Apr 2022.
  */
 public class Battles {
+	
+	public ArrayList<Trainers> getBattles (int numBattles) {
+		ArrayList<Trainers> trainerToBattle = new ArrayList<Trainers>();
+		int num = 1;
+		while (num <= numBattles) {
+			Trainers newTrainer = new Trainers();
+			trainerToBattle.add(newTrainer);
+			num++;
+		}
+		return trainerToBattle;
+	}
+	public void printBattles(ArrayList<Trainers> possibleBattles) {
+		int num = 1;
+		while (num <= possibleBattles.size()) {
+			System.out.println("Battle" + " "+num);
+			Trainers trainer = possibleBattles.get(num-1);
+			System.out.println("Trainer: " + trainer.getFullName());
+			System.out.println(trainer.printEnemyTeam());
+			System.out.println("--------------------------------------");
+			num++;
+		}
+	}
 	/**
 	 * Battles your team of Monsters with an enemy Monster
 	 * the battle continues until either the player is out of Monsters or the enemy is dead
