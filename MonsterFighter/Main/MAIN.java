@@ -194,8 +194,8 @@ public class MAIN {
 		}
 	}
 	
-	public static void displayBattles(Scanner scanner, Player player, Battles battle) {
-		ArrayList<Trainers> trainerBattles;
+	public static ArrayList<Trainers> displayBattles(Scanner scanner, Player player, Battles battle) {
+		ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 		if (player.daysLeft() > 0) {
 			if (player.getDifficulty() == "easy") {
 				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
@@ -209,26 +209,51 @@ public class MAIN {
 				String inputBattles = scanner.nextLine();
 				int numBattles = Integer.parseInt(inputBattles);
 				trainerBattles = battle.getBattles(numBattles);
-				battle.printBattles(trainerBattles);
-				
+				battle.printBattles(trainerBattles);	
 			}
 			else if (player.getDifficulty() == "hard") {
 				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
 				String inputBattles = scanner.nextLine();
 				int numBattles = Integer.parseInt(inputBattles);
 				trainerBattles = battle.getBattles(numBattles);
-				battle.printBattles(trainerBattles);
-				
+				battle.printBattles(trainerBattles);		
 			}
 		}
 		else if (player.daysLeft() == 0) {
-			List<Monster> bossMonsters;
 			Boss bossBattle = new Boss();
 			System.out.println("B O S S    l E V E L");
 			System.out.println("This is the final battle! Shinzo wo Sasageyo!");
 			System.out.println("Your Opponent: ");
 			bossBattle.printBossFight();
-			bossMonsters = bossBattle.getBossFight();
+			trainerBattles.add(bossBattle);
+		}
+		return trainerBattles;
+	}
+	
+	public static void battleTime(Battles battle, Player player, ArrayList<Trainers> allBattles) {
+		boolean keepFighting = true;
+		while (keepFighting == true) {
+			for (int trainers = 0; trainers <= allBattles.size(); trainers++) {
+				Trainers trainer = allBattles.get(trainers);
+				System.out.println("Battle NO. "+ trainers);
+				System.out.println(trainer.getFullName()+"\n");
+				for (int monsters = 0; monsters <= trainer.getSize(); monsters++) {
+					Monster enemyMonster = trainer.getEnemies().get(monsters);
+					System.out.println(trainer.getFullName() + " sends out " + enemyMonster.getName() + "\n" + enemyMonster.toString());
+					boolean win = battle.fight(player.getTeam(), enemyMonster, player.getInventory());
+					if (win == false) {
+						keepFighting = false;
+						monsters = trainer.getSize()+1;
+						trainers = allBattles.size()+1;
+						double tenPercent = player.getMoney() * 0.1;
+						System.out.println("You do not have any more monsters. As a result, you pay "+ Math.floor(tenPercent));
+						int lost = (int) (-1 * Math.floor(tenPercent));
+						player.deductMoney(lost);
+					}
+				}
+				System.out.println("You've Won!");
+			}
+			System.out.println("Good Job! You have won all your battles!");
 		}
 	}
 	
@@ -449,7 +474,7 @@ public class MAIN {
 			newPlayer.toString();
 			dayPrep(scanner, newPlayer);
 			timer(1000);
-			displayBattles(scanner, newPlayer, battle);
+			ArrayList<Trainers> dayTrainers = displayBattles(scanner, newPlayer, battle);
 			shoppingTime(scanner, newShop, newPlayer);
 			nightPhase(newPlayer);
 			boolean gameOver = checkAbruptEnd(newPlayer);

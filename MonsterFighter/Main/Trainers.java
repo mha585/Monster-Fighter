@@ -29,21 +29,25 @@ public class Trainers {
 		}
 	}
 	
+	public ArrayList<Monster> getEnemies() {
+		return enemyTeam;
+	}
+	
+	public int getSize() {
+		return enemyTeam.size();
+	}
+	
 	public String getFullName() {
 		return type +" "+ name;
 	}
 	
 	public String printEnemyTeam() {
-		String friendString = "";
-
-	  if (enemyTeam.size() == 0) {
-		  return "No monsters in current team";
-	  }
-	  for (int i = 0; i< enemyTeam.size(); i++) {
-		  friendString += "Team member " + (i + 1) +
+	    String friendString = "";
+	    for (int i = 0; i< enemyTeam.size(); i++) {
+		    friendString += "Team member " + (i + 1) +
 				  ":\n\n"+enemyTeam.get(i).toString() + "\n\n" +
 				  "-------------------------------------\n";
 	  }
 	  return friendString;
-} 
+	} 
 }
