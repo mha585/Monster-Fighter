@@ -131,7 +131,7 @@ class BattlesTest {
 		InputStream savedStandardInputStream = System.in;
 
 		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
-		testTeam.addFriend(new RandomMonster());
+		testTeam.addFriend(new RandomMonster(testPlayer));
 		testTeam.addFriend(new WaterMonster("Water test", 100.0, 5.0, 5, 20.0, 1, 150, 250, ""));
 		testTeam.addFriend(new GlassMonster());
 		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");

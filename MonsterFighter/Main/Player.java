@@ -26,15 +26,16 @@ public class Player {
 	 */
 	private int currentMoney = 250;
 	
-	private int moneyEarned = 0;
+	private int totalEarned = 250;
 	
-	private int playerPoints = 0;
+	private int playerPoints = 125;
 
 	public Team playerTeam;
 	
 	public Inventory playerBag;
 	
 	private ArrayList<String> myTeamNames = new ArrayList<>();
+
 	
 	
 	/**
@@ -83,7 +84,7 @@ public class Player {
 		return currentDay;
 	}
 	public int getMoneyEarned() {
-		return moneyEarned;
+		return totalEarned;
 	}
 	public int getPoints() {
 		return playerPoints;
@@ -114,15 +115,19 @@ public class Player {
 	 * @param moneyEarned		Money to be added to the player's current money
 	 * @return					New current money
 	 */
-	public int addMoney(int moneyEarned) {
-		return currentMoney += moneyEarned;
+	public void addMoney(int moneyEarned) {
+		currentMoney += moneyEarned;
+		totalEarned += moneyEarned; 
+	}
+	public void addPoints(int pointsEarned) {
+		playerPoints += pointsEarned;
 	}
 	/**
 	 * @param moneyLost			Money to be deducted to the player's current money
 	 * @return					New current money
 	 */
-	public int deductMoney(int moneyLost) {
-		return currentMoney -= moneyLost;
+	public void deductMoney(int moneyLost) {
+		currentMoney -= moneyLost;
 	}
 	/** 
 	 * @return each monster in the ArrayList "playerParty" in String form

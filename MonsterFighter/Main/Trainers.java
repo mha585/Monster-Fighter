@@ -16,14 +16,14 @@ public class Trainers {
 			"Jeanette", "Dre", "Franz", "Izumi", "Naomi", "Xiulan", "Hu Tao", "Miki", "Walter", "Doug", "Shelly", "Jasmine", "Ariel",
 			"Ben", "Ken", "Denzel", "Mary", "Peter", "Jeanette", "Lily", "Ysabel", "Rem", "Mandy", "Billie");
 	
-	public Trainers() {
+	public Trainers(Player player) {
 		randomGen randomNum = new randomGen();
 		name = trainerName.get(randomNum.randNumInRange(0, trainerName.size()));
 		type = trainerType.get(randomNum.randNumInRange(0, trainerType.size()));
 		int monsters = randomNum.randNumInRange(1, 4);
 		int i = 0;
 		while (i <= monsters) {
-			RandomMonster monster = new RandomMonster();
+			RandomMonster monster = new RandomMonster(player);
 			enemyTeam.add(monster);
 			i++;
 		}

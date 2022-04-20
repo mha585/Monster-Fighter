@@ -53,17 +53,43 @@ public class RandomMonster extends Monster{
 	 * add the randomly generated Monsters stat in order to ensure that the stats
 	 * are appropriate to each monster type.
 	 */
-	public RandomMonster() {
+	public RandomMonster(Player player) {
 		super();
-		super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
-		super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
-		super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
-		super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
-		super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
-		super.setType(random.getType());
-		super.setDescription(random.getDescription());
-		super.setPrice(random.getPrice());
-		super.setSellPrice(random.sellPrice());
+		if (player.getDayCompleted() <= 1) {
+			super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
+			super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
+			super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
+			super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
+			super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
+			super.setType(random.getType());
+			super.setDescription(random.getDescription());
+			super.setPrice(random.getPrice());
+			super.setSellPrice(random.sellPrice());
+			if (super.getMaxHealth() > 30) {
+				double toSet = -1 * (super.getMaxHealth() - 30);
+				super.gainMaxHealth((toSet));
+			}
+			if (super.getDamage() > 10) {
+				double toSet = -1 * (super.getDamage() - 10);
+				super.gainDamage((toSet));
+			}
+			if (super.getSpeed() > 25) {
+				double toSet = -1 * (super.getSpeed() - 30);
+				super.gainSpeed((toSet));
+			}
+		}
+		
+		else {
+			super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
+			super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
+			super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
+			super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
+			super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
+			super.setType(random.getType());
+			super.setDescription(random.getDescription());
+			super.setPrice(random.getPrice());
+			super.setSellPrice(random.sellPrice());
+		}
 	}
 	/**
 	 * Generates a string representation of the RandomMonster

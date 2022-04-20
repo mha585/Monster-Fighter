@@ -65,10 +65,10 @@ public class Shop {
 	
 	public void generateNewMonsters(Player player) {
 		if (player.daysLeft() <= 2) {
-			shopMonster1 = new RandomMonster();
-			shopMonster2 = new RandomMonster();
-			shopMonster3 = new RandomMonster();
-			shopMonster4 = new RandomMonster();
+			shopMonster1 = new RandomMonster(player);
+			shopMonster2 = new RandomMonster(player);
+			shopMonster3 = new RandomMonster(player);
+			shopMonster4 = new RandomMonster(player);
 			listMonsters.add(shopMonster1);
 			listMonsters.add(shopMonster2);
 			listMonsters.add(shopMonster3);
@@ -77,7 +77,7 @@ public class Shop {
 		else {
 			boolean notHoly1 = false;
 			while (notHoly1 == false) {
-				shopMonster1 = new RandomMonster();
+				shopMonster1 = new RandomMonster(player);
 				if (shopMonster1.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster1);
 					notHoly1 = true;
@@ -85,7 +85,7 @@ public class Shop {
 			}
 			boolean notHoly2 = false;
 			while (notHoly2 == false) {
-				shopMonster2 = new RandomMonster();
+				shopMonster2 = new RandomMonster(player);
 				if (shopMonster2.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster2);
 					notHoly2 = true;
@@ -93,7 +93,7 @@ public class Shop {
 			}
 			boolean notHoly3 = false;
 			while (notHoly3 == false) {
-				shopMonster3 = new RandomMonster();
+				shopMonster3 = new RandomMonster(player);
 				if (shopMonster3.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster3);
 					notHoly3 = true;
@@ -101,7 +101,7 @@ public class Shop {
 			}
 			boolean notHoly4 = false;
 			while (notHoly4 == false) {
-				shopMonster4 = new RandomMonster();
+				shopMonster4 = new RandomMonster(player);
 				if (shopMonster4.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster4);
 					notHoly4 = true;

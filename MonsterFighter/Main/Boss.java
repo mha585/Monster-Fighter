@@ -12,6 +12,9 @@ public class Boss extends Trainers{
 		return enemyTeam;
 	}
 	
+	public Boss(Player player) {
+		super(player);
+	}
 	
 	public int getSize() {
 		return enemyTeam.size();

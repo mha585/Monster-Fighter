@@ -10,11 +10,11 @@ import java.util.Scanner;
  */
 public class Battles {
 	
-	public ArrayList<Trainers> getBattles (int numBattles) {
+	public ArrayList<Trainers> getBattles (int numBattles, Player player) {
 		ArrayList<Trainers> trainerToBattle = new ArrayList<Trainers>();
 		int num = 1;
 		while (num <= numBattles) {
-			Trainers newTrainer = new Trainers();
+			Trainers newTrainer = new Trainers(player);
 			trainerToBattle.add(newTrainer);
 			num++;
 		}
