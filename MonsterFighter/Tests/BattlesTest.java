@@ -2,8 +2,11 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +16,11 @@ class BattlesTest {
 	private Player testPlayer;
 	private Monster testEnemy;
 	
+	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
+	private InputStream savedStandardInputStream = System.in;
+	private PrintStream savedStandardOut = System.out;
+
+	
 	@BeforeEach
 	public void init() {
 		testTeam = new Team();
@@ -21,7 +29,15 @@ class BattlesTest {
 		testPlayer.setDay(6);
 		testPlayer.setDifficulty(1);
 		testPlayer.setName("tester");
+		
+	    System.setOut(new PrintStream(outputStreamContent));
     }
+	
+	@AfterEach
+	public void tearDown() {
+	    System.setIn(savedStandardInputStream);
+	    System.setOut(savedStandardOut);
+	}
 	
 	@Test
 	public void attackTest() {
@@ -110,48 +126,149 @@ class BattlesTest {
 		System.setIn(new ByteArrayInputStream(simulatedUserInput2.getBytes()));
 	    testBattle.swap(testEnemy, testTeam);
 	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
-		
-//		test for switching invalid with 3
-		String simulatedUserInput3 = "-1" + System.getProperty("line.separator")
-		+ "1" + System.getProperty("line.separator");
+	    
+//		test for switching invalid with 1
+		String simulatedUserInput3 = "sdfsdf" + System.getProperty("line.separator")
+		+ "1" + System.getProperty("line.separator") + "1";
 		System.setIn(new ByteArrayInputStream(simulatedUserInput3.getBytes()));
-	    testBattle.swap(testEnemy, testTeam);
-	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
 		
-//		test for switching 3 with invalid
+//		inputs invalid first then swaps with itself to avoid being caught in a loop works if the monster dosent get swaped
+	    String finalLineToCheck = "Good job swapping a monster with itself!";
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
+		while ((outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck).contains(finalLineToCheck) != true)) {
+			testBattle.swap(testEnemy, testTeam);
+		}	    
+	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
+
+//		test for switching 1 with invalid
 		String simulatedUserInput4 = "1" + System.getProperty("line.separator")
-		+ "99" + System.getProperty("line.separator");
+		+ "-100" + System.getProperty("line.separator") + "1" + System.getProperty("line.separator") + "1";
 		System.setIn(new ByteArrayInputStream(simulatedUserInput4.getBytes()));
-	    testBattle.swap(testEnemy, testTeam);
+//		inputs invalid first then swaps with itself to avoid being caught in a loop works if the monster dosent get swapped
+		while ((outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck).contains(finalLineToCheck) != true)) {
+			testBattle.swap(testEnemy, testTeam);
+		}
 	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
 	}
 	
 	@Test
 	public void itemTest() {
-		InputStream savedStandardInputStream = System.in;
-
 		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testTeam.addFriend(new RandomMonster(testPlayer));
 		testTeam.addFriend(new WaterMonster("Water test", 100.0, 5.0, 5, 20.0, 1, 150, 250, ""));
 		testTeam.addFriend(new GlassMonster());
 		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
 		testPlayer.playerBag.addtoBag(new TierPlus(), 1);
-		testPlayer.playerBag.addtoBag(new BasicHeal(), 3);
+		testPlayer.playerBag.addtoBag(new BasicHeal(), 2);
 		
-//		test the healing up item
-		String simulatedUserInput1 = "2" + System.getProperty("line.separator")
+//		test the first item
+		String simulatedUserInput = "1" + System.getProperty("line.separator")
 		+ "1" + System.getProperty("line.separator");
-		System.setIn(new ByteArrayInputStream(simulatedUserInput1.getBytes()));
-		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
-	    assertEquals(testTeam.getFriend(0).getHealth(), (testTeam.getFriend(0).getMaxHealth() - 5));
-	    
-//		test the tier up item
-		String simulatedUserInput2 = "1" + System.getProperty("line.separator")
-		+ "1" + System.getProperty("line.separator");
-		System.setIn(new ByteArrayInputStream(simulatedUserInput2.getBytes()));
+		
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
 		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
 	    assertEquals(testTeam.getFriend(0).getTier(), 2);
 	    
-	    System.setIn(savedStandardInputStream);
+//		test the second item is now in the first slot
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
+	    if (testTeam.getFriend(0).getType() == "Medical") {
+	    	assertEquals(testTeam.getFriend(0).getHealth(), (testTeam.getFriend(0).getMaxHealth() - 10));
+	    } else {
+		    assertEquals(testTeam.getFriend(0).getHealth(), (testTeam.getFriend(0).getMaxHealth() - 5));
+	    }
+	}
+	
+	@Test
+	public void noItemsTest() {
+		String finalLineToCheck = "You have no items left to use";
+		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
+		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
+	}
+	
+	@Test
+	public void useInvalidItem() {
+		String finalLineToCheck = "Sorry that item wasnt recognised";
+		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
+		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
+		testPlayer.playerBag.addtoBag(new TierPlus(), 1);
+		testPlayer.playerBag.addtoBag(new BasicHeal(), 1);
+			    
+		String simulatedUserInput = "99" + System.getProperty("line.separator") + "3";
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
+		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
+	}
+	
+	@Test
+	public void useItemOnInvalidMonster() {
+		String finalLineToCheck = "Sorry that monster wasnt recognised";
+		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
+		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
+		testPlayer.playerBag.addtoBag(new TierPlus(), 1);
+		testPlayer.playerBag.addtoBag(new BasicHeal(), 1);
+			    
+		String simulatedUserInput = "1" + System.getProperty("line.separator") + "-7";
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
+		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
+	}
+	
+	@Test
+	public void inputFightInFightTest() {
+		testTeam.addFriend(new WaterMonster("water test", 50.0, 5.0, 40, 20.0, 1, 150, 250, ""));
+		testEnemy = new GlassMonster("glass test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
+
+		String simulatedUserInput = "fight" + System.getProperty("line.separator");
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+		
+		testBattle.fight(testTeam, testEnemy, testPlayer.playerBag);
+		assertEquals(testEnemy.getHealth(), 0);
+	}
+	
+	@Test
+	public void invalidInputInFightTest() {
+
+		String finalLineToCheck = "Sorry your command wasn't understood";
+		testTeam.addFriend(new WaterMonster("water test", 50.0, 5.0, 40, 20.0, 1, 150, 250, ""));
+		testEnemy = new GlassMonster("glass test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
+
+//		First tests invalid input then tests fight as fight is proven to work per the above test
+//		this is to avoid being caught in a loop
+		String simulatedUserInput = "sdfsd" + System.getProperty("line.separator") + "fight";
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+		
+		testBattle.fight(testTeam, testEnemy, testPlayer.playerBag);
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 349));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 349);    
+	    if ((outputStreamContent.toString().length()) == 882) {
+	    	assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck + 1, indexOfEndOfLineToCheck + 1));
+	    } else {
+	    	assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
+	    }	
+	}
+	
+	@Test
+	public void inputSwitchInFightTest() {
+//	    System.setOut(savedStandardOut);
+
+		testTeam.addFriend(new WaterMonster("water test1", 50.0, 5.0, 40, 20.0, 1, 150, 250, ""));
+		testTeam.addFriend(new WaterMonster("water test2", 50.0, 5.0, 40, 20.0, 1, 150, 250, ""));
+		testEnemy = new GlassMonster("glass test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
+
+		String simulatedUserInput = "switch" + "1" 
+		+ System.getProperty("line.separator") + "2\n"
+		+ "fight";
+		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+		System.out.print(simulatedUserInput);
+		testBattle.fight(testTeam, testEnemy, testPlayer.playerBag);
+		assertEquals(testEnemy.getHealth(), 0);
 	}
 }
