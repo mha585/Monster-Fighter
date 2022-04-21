@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -9,6 +10,9 @@ import java.util.Scanner;
  * @version 1.4, Apr 2022.
  */
 public class Battles {
+	
+//	private Scanner number = new Scanner(System.in);
+//	private Scanner in = new Scanner(System.in);
 	
 	public ArrayList<Trainers> getBattles (int numBattles, Player player) {
 		ArrayList<Trainers> trainerToBattle = new ArrayList<Trainers>();
@@ -99,92 +103,23 @@ public class Battles {
 		System.out.println("Look at the team memeber number to figure out who to swap with");
 		System.out.println("Be careful this will take your turn!\n");
 		System.out.println("Please type the position of the monster you would like to move");
-//		if (friendToSwapIndex.getClass() != int ) {
-//			
-//		}
-		boolean notSwitched = false;
-		while (notSwitched != true) {
-			try {
-				Scanner number = new Scanner(System.in);
-				int friendToSwapIndex = number.nextInt();
-				if ((friendToSwapIndex == (int) friendToSwapIndex) && (friendToSwapIndex <= friends.getSize()) && 
-						(friendToSwapIndex > 0) && (friends.getFriend(friendToSwapIndex - 1).getHealth() > 0)) {
-					System.out.println("Now please type the postition of the monster you want to swap with");
-					int friendToSwapWithIndex = number.nextInt();
-					if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && 
-							(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0) && 
-							(friendToSwapIndex != friendToSwapWithIndex)) {
-						friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
-						attack(friends.getFriend(0), badGuy, friends, false);
-						printEnemyAndTeamStats(badGuy, friends);
-						notSwitched = true;
-					} else if (friendToSwapIndex == friendToSwapWithIndex) {
-						friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
-						attack(friends.getFriend(0), badGuy, friends, false);
-						printEnemyAndTeamStats(badGuy, friends);
-						System.out.println("\nGood job swapping a monster with itself!");
-						notSwitched = true;
-
-					} else {
-						printEnemyAndTeamStats(badGuy, friends);
-						System.out.println("\nSorry that monster cant be swapped");
-					}
-				} else {
-					throw new InvalidInputException();
-				}
-			} catch(Exception e) {
-				System.out.println("Sorry that monster cant be swapped!\nPlease input another position");
-			}
-		}
-//		try {
-//			Scanner number = new Scanner(System.in);
-//			int friendToSwapIndex = number.nextInt();
-//			if ((friendToSwapIndex == (int) friendToSwapIndex) && (friendToSwapIndex <= friends.getSize()) && 
-//					(friendToSwapIndex > 0) && (friends.getFriend(friendToSwapIndex - 1).getHealth() > 0)) {
-//				System.out.println("Now please type the postition of the monster you want to swap with");
-//				int friendToSwapWithIndex = number.nextInt();
-//				if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && 
-//						(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0) && 
-//						(friendToSwapIndex != friendToSwapWithIndex)) {
-//					friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
-//					attack(friends.getFriend(0), badGuy, friends, false);
-//					printEnemyAndTeamStats(badGuy, friends);
-//				} else if (friendToSwapIndex == friendToSwapWithIndex) {
-//					printEnemyAndTeamStats(badGuy, friends);
-//					System.out.println("\nCant swap a mosnter with itseslf!");
-//				} else {
-//					printEnemyAndTeamStats(badGuy, friends);
-//					System.out.println("\nSorry that monster cant be swapped");
-//				}
-//			} else {
-//				printEnemyAndTeamStats(badGuy, friends);
-//				System.out.println("\nSorry that monster cant be swapped:(((");
-//				throw new InvalidInputException();
-//			}
-//		} catch(Exception e) {
-//			System.out.println("Sorry that monster cant be swapped!!");
-//		}
-//		if ((friendToSwapIndex == (int) friendToSwapIndex) && (friendToSwapIndex <= friends.getSize()) && 
-//				(friendToSwapIndex > 0) && (friends.getFriend(friendToSwapIndex - 1).getHealth() > 0)) {
-//			System.out.println("Now please type the postition of the monster you want to swap with");
-//			int friendToSwapWithIndex = number.nextInt();
-//			if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && 
-//					(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0) && 
-//					(friendToSwapIndex != friendToSwapWithIndex)) {
-//				friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
-//				attack(friends.getFriend(0), badGuy, friends, false);
-//				printEnemyAndTeamStats(badGuy, friends);
-//			} else if (friendToSwapIndex == friendToSwapWithIndex) {
-//				printEnemyAndTeamStats(badGuy, friends);
-//				System.out.println("\nCant swap a mosnter with itseslf!");
-//			} else {
-//				printEnemyAndTeamStats(badGuy, friends);
-//				System.out.println("\nSorry that monster cant be swapped");
-//			}
-//		} else {
-//			printEnemyAndTeamStats(badGuy, friends);
-//			System.out.println("\nSorry that monster cant be swapped");
-//		}
+		Scanner in = new Scanner(System.in);
+		
+	    String input1 = in.nextLine();
+	    while ((Character.isDigit(input1.charAt(0)) != true) || (Integer.parseInt(input1) < 1 || Integer.parseInt(input1) > friends.getSize())) {
+	    	System.out.println("not a valid monster, try again");	
+	    	input1 = in.nextLine();
+	    }
+	    
+		System.out.println("Now please type the postition of the monster you want to swap with");
+		String input2 = in.nextLine();
+	    while ((Character.isDigit(input2.charAt(0)) != true) || (Integer.parseInt(input2) < 1 || Integer.parseInt(input2) > friends.getSize())) {
+	    	System.out.println("not a valid monster, try again");	
+	    	input2 = in.nextLine();
+	    }
+		friends.swap(Integer.parseInt(input1) - 1, Integer.parseInt(input2) - 1);
+		attack(friends.getFriend(0), badGuy, friends, false);
+		printEnemyAndTeamStats(badGuy, friends);
 	}
 	/**
 	 * Gets called when the user inputs "heal".

@@ -1,9 +1,11 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterEach;
@@ -107,6 +109,8 @@ class BattlesTest {
 	
 	@Test
 	public void swapTest() {
+	    System.setOut(savedStandardOut);
+
 		testTeam.addFriend(new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testTeam.addFriend(new GrassMonster());
 		testTeam.addFriend(new WaterMonster("Water test", 100.0, 5.0, 5, 20.0, 1, 150, 250, ""));
@@ -127,36 +131,26 @@ class BattlesTest {
 	    testBattle.swap(testEnemy, testTeam);
 	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
 	    
-//		test for switching invalid with 1
-		String simulatedUserInput3 = "sdfsdf" + System.getProperty("line.separator")
-		+ "1" + System.getProperty("line.separator") + "1";
+//		test for switching invalid string with 1
+		String simulatedUserInput3 = "0" + System.getProperty("line.separator")
+		+ "1" + System.getProperty("line.separator") + "3";
 		System.setIn(new ByteArrayInputStream(simulatedUserInput3.getBytes()));
-		
-//		inputs invalid first then swaps with itself to avoid being caught in a loop works if the monster dosent get swaped
-	    String finalLineToCheck = "Good job swapping a monster with itself!";
-		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
-		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
-		while ((outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck).contains(finalLineToCheck) != true)) {
-			testBattle.swap(testEnemy, testTeam);
-		}	    
-	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
+		testBattle.swap(testEnemy, testTeam);
+	    assertEquals(testTeam.getFriend(0).getName(), "medical test");
 
-//		test for switching 1 with invalid
+//		test for switching 1 with invalid integer
 		String simulatedUserInput4 = "1" + System.getProperty("line.separator")
-		+ "-100" + System.getProperty("line.separator") + "1" + System.getProperty("line.separator") + "1";
+		+ "-100" + System.getProperty("line.separator") + "3" + System.getProperty("line.separator") + 1;
 		System.setIn(new ByteArrayInputStream(simulatedUserInput4.getBytes()));
-//		inputs invalid first then swaps with itself to avoid being caught in a loop works if the monster dosent get swapped
-		while ((outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck).contains(finalLineToCheck) != true)) {
-			testBattle.swap(testEnemy, testTeam);
-		}
+		testBattle.swap(testEnemy, testTeam);
 	    assertEquals(testTeam.getFriend(0).getName(), "Water test");
 	}
 	
 	@Test
 	public void itemTest() {
-		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
-		testTeam.addFriend(new RandomMonster(testPlayer));
 		testTeam.addFriend(new WaterMonster("Water test", 100.0, 5.0, 5, 20.0, 1, 150, 250, ""));
+		testTeam.addFriend(new RandomMonster(testPlayer));
+		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testTeam.addFriend(new GlassMonster());
 		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
 		testPlayer.playerBag.addtoBag(new TierPlus(), 1);
@@ -173,11 +167,8 @@ class BattlesTest {
 //		test the second item is now in the first slot
 		System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
 		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag);
-	    if (testTeam.getFriend(0).getType() == "Medical") {
-	    	assertEquals(testTeam.getFriend(0).getHealth(), (testTeam.getFriend(0).getMaxHealth() - 10));
-	    } else {
-		    assertEquals(testTeam.getFriend(0).getHealth(), (testTeam.getFriend(0).getMaxHealth() - 5));
-	    }
+	    assertEquals(testTeam.getFriend(0).getHealth(), (testTeam.getFriend(0).getMaxHealth() - 5));
+
 	}
 	
 	@Test
