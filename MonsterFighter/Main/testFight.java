@@ -9,9 +9,10 @@ public class testFight {
 		test.setDay(6);
 		test.setDifficulty(1);
 		test.setName("tester");
+		System.out.println(test.getPlayerDayCompleted());
 //		these above lines only need to be initialised once in main not in here
 
-		myTeam.addFriend(new HolyMonster("Holy test", 50.0, 5.0, 10, 20.0, 1, 150, 100, "fire"));
+		myTeam.addFriend(new RandomMonster(test));
 		myTeam.addFriend(new RandomMonster(test));
 		myTeam.addFriend(new RandomMonster(test));
 		

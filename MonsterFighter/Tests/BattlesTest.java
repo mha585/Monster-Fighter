@@ -1,11 +1,9 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterEach;
@@ -109,7 +107,6 @@ class BattlesTest {
 	
 	@Test
 	public void swapTest() {
-	    System.setOut(savedStandardOut);
 
 		testTeam.addFriend(new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testTeam.addFriend(new GrassMonster());
@@ -140,7 +137,7 @@ class BattlesTest {
 
 //		test for switching 1 with invalid integer
 		String simulatedUserInput4 = "1" + System.getProperty("line.separator")
-		+ "-100" + System.getProperty("line.separator") + "3" + System.getProperty("line.separator") + 1;
+		+ "-100" + System.getProperty("line.separator") + "3";
 		System.setIn(new ByteArrayInputStream(simulatedUserInput4.getBytes()));
 		testBattle.swap(testEnemy, testTeam);
 	    assertEquals(testTeam.getFriend(0).getName(), "Water test");

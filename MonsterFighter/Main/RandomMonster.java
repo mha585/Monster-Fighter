@@ -44,10 +44,12 @@ public class RandomMonster extends Monster{
 		super(name, maxHealth, healAmount, damage, speed, Tier, sell, cost, description);
 		super.setType(random.getType());
 	}
+	
 	/**
 	 * The constructor for the RandomMonster class
-	 * this gets called when no params are entered.
-	 * uses values from  a random Monster in possibleTypes to construct.
+	 * this gets called when the player in entered as a paramater
+	 * Generates different types of random monsters based on what day it is.
+	 * Generates these monsters stats with help from the generateMonsterStats function
 	 * 
 	 * As there is no set methods (only gain methods in Monster) we need to set each stat to 0 then
 	 * add the randomly generated Monsters stat in order to ensure that the stats
@@ -55,40 +57,51 @@ public class RandomMonster extends Monster{
 	 */
 	public RandomMonster(Player player) {
 		super();
-		if (player.getDayCompleted() <= 1) {
-			super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
-			super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
-			super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
-			super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
-			super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
-			super.setType(random.getType());
-			super.setDescription(random.getDescription());
-			super.setPrice(random.getPrice());
-			super.setSellPrice(random.sellPrice());
-			if (super.getMaxHealth() > 30) {
-				double toSet = -1 * (super.getMaxHealth() - 30);
-				super.gainMaxHealth((toSet));
+		int dayGlassAndMedicalCome = 3;
+		int dayHolyAndDemonCome = 5;
+		if (player.getPlayerDayCompleted() < dayGlassAndMedicalCome) {
+			while (random.getType() != "Fire" && random.getType() != "Grass" && random.getType() != "Water") {
+				random = generateMonster();
+				System.out.println(random.getType());
 			}
-			if (super.getDamage() > 10) {
-				double toSet = -1 * (super.getDamage() - 10);
-				super.gainDamage((toSet));
+			generateMonsterStats(player);
+		} else if ((player.getPlayerDayCompleted() > dayGlassAndMedicalCome) && (player.getPlayerDayCompleted() < dayHolyAndDemonCome)) {
+			while (random.getType() == "Holy" && random.getType() == "Demon") {
+				random = generateMonster();
+				System.out.println(random.getType());
 			}
-			if (super.getSpeed() > 25) {
-				double toSet = -1 * (super.getSpeed() - 30);
-				super.gainSpeed((toSet));
-			}
+			generateMonsterStats(player);
+		} else {
+			generateMonsterStats(player);
 		}
-		
-		else {
-			super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
-			super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
-			super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
-			super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
-			super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
-			super.setType(random.getType());
-			super.setDescription(random.getDescription());
-			super.setPrice(random.getPrice());
-			super.setSellPrice(random.sellPrice());
+	}
+	/**
+	 * Generates the stats for a randomMonster.
+	 * scales the stats based on the current day the player is on
+	 */
+	public void generateMonsterStats(Player player) {
+		int amountToScaleStatsBy = (int)(1+(player.getPlayerDayCompleted() / 2));
+		super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
+		super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
+		super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());
+		super.gainSpeed(((-1 * (super.getSpeed()))) + random.getSpeed());
+		super.gainHealAmount(((-1 * (super.getHealAmount()))) + random.getHealAmount());
+		super.setType(random.getType());
+		super.setDescription(random.getDescription());
+		super.setPrice(random.getPrice());
+		super.setSellPrice(random.sellPrice());
+		if (super.getMaxHealth() > (30 * amountToScaleStatsBy)) {
+			double toSet = -1 * (super.getMaxHealth() - (30 * amountToScaleStatsBy));
+			super.gainMaxHealth((toSet));
+			super.gainHealth((toSet));
+		}
+		if (super.getDamage() > (10 * amountToScaleStatsBy)) {
+			double toSet = -1 * (super.getDamage() - (10 * amountToScaleStatsBy));
+			super.gainDamage((toSet));
+		}
+		if (super.getSpeed() > (25 * amountToScaleStatsBy)) {
+			double toSet = -1 * (super.getSpeed() - (25 * amountToScaleStatsBy));
+			super.gainSpeed((toSet));
 		}
 	}
 	/**

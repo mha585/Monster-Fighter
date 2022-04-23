@@ -60,6 +60,10 @@ public class Player {
 		playerDays = days;
 	}
 	
+	public int getPlayerDayCompleted() {
+		return playerDays;
+	}
+	
 	public void setDifficulty(int diff) {
 		switch(diff) {
 			case 1:
