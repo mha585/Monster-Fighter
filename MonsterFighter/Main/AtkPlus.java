@@ -1,6 +1,5 @@
 /**
- * This class creates the Item "Attack Plus".
- * 
+ *
  * @author Angelo  Gasmin
  * @version 1.0
  */
@@ -22,16 +21,12 @@ public class AtkPlus extends Item{
 	 */
 	private static int sell = 40;
 	/**
-	 * The amount a monsters attack will increase by.
+	 * The amount a monsters attack will increase by
 	 */
 	private static int itemEffect = 10;
-	/**
-	 * The stat that Attack Plus effects.
-	 */
+
 	private static String statEffect = "atk";
-	/**
-	 * The situation where you can use Attack Plus.
-	 */
+
 	private static String whenToUse = "out";
 	/**
 	 * Basic attack plus constructor
@@ -39,11 +34,17 @@ public class AtkPlus extends Item{
 	 * @param price				The price of attack plus
 	 * @param sell				The selling price of attack plus
 	 * @param description		The description of attack plus
-	 * @param whenToUse			The situation where you can use Attack Plus
-	 * @param itemEffect		The stat that Attack Plus effects
-	 * @param statEffect		The amount a monsters attack will increase by
+	 * @param whenToUse
+	 * @param itemEffect
+	 * @param statEffect
 	 */
 	AtkPlus() {
 		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
 	}
+
+	/**
+	 * Use attack plus on a chosen monster
+	 * @param myMonster			The monster attack plus will be used on
+	 */
+
 }

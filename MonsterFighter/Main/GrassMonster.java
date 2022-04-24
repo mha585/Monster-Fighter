@@ -1,3 +1,5 @@
+
+
 public class GrassMonster extends Monster{
 	/**
 	 * The description of GrassMonster
