@@ -1,18 +1,14 @@
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * This class implements a Battle between a team of monsters and an enemy.
  *
  * @author Matthew Harper
- * @version 1.4, Apr 2022.
+ * @version 1.3, Apr 2022.
  */
 public class Battles {
-	
-//	private Scanner number = new Scanner(System.in);
-//	private Scanner in = new Scanner(System.in);
 	
 	public ArrayList<Trainers> getBattles (int numBattles, Player player) {
 		ArrayList<Trainers> trainerToBattle = new ArrayList<Trainers>();
@@ -103,23 +99,29 @@ public class Battles {
 		System.out.println("Look at the team memeber number to figure out who to swap with");
 		System.out.println("Be careful this will take your turn!\n");
 		System.out.println("Please type the position of the monster you would like to move");
-		Scanner in = new Scanner(System.in);
-		
-	    String input1 = in.nextLine();
-	    while ((Character.isDigit(input1.charAt(0)) != true) || (Integer.parseInt(input1) < 1 || Integer.parseInt(input1) > friends.getSize())) {
-	    	System.out.println("not a valid monster, try again");	
-	    	input1 = in.nextLine();
-	    }
-	    
-		System.out.println("Now please type the postition of the monster you want to swap with");
-		String input2 = in.nextLine();
-	    while ((Character.isDigit(input2.charAt(0)) != true) || (Integer.parseInt(input2) < 1 || Integer.parseInt(input2) > friends.getSize())) {
-	    	System.out.println("not a valid monster, try again");	
-	    	input2 = in.nextLine();
-	    }
-		friends.swap(Integer.parseInt(input1) - 1, Integer.parseInt(input2) - 1);
-		attack(friends.getFriend(0), badGuy, friends, false);
-		printEnemyAndTeamStats(badGuy, friends);
+		Scanner number = new Scanner(System.in);
+		int friendToSwapIndex = number.nextInt();
+		if ((friendToSwapIndex == (int) friendToSwapIndex) && (friendToSwapIndex <= friends.getSize()) && 
+				(friendToSwapIndex > 0) && (friends.getFriend(friendToSwapIndex - 1).getHealth() > 0)) {
+			System.out.println("Now please type the postition of the monster you want to swap with");
+			int friendToSwapWithIndex = number.nextInt();
+			if ((friendToSwapWithIndex == (int) friendToSwapWithIndex) && (friendToSwapWithIndex <= friends.getSize()) && 
+					(friendToSwapWithIndex > 0) && (friends.getFriend(friendToSwapWithIndex - 1).getHealth() > 0) && 
+					(friendToSwapIndex != friendToSwapWithIndex)) {
+				friends.swap(friendToSwapIndex - 1, friendToSwapWithIndex - 1);
+				attack(friends.getFriend(0), badGuy, friends, false);
+				printEnemyAndTeamStats(badGuy, friends);
+			} else if (friendToSwapIndex == friendToSwapWithIndex) {
+				printEnemyAndTeamStats(badGuy, friends);
+				System.out.println("\nCant swap a mosnter with itseslf!");
+			} else {
+				printEnemyAndTeamStats(badGuy, friends);
+				System.out.println("\nSorry that monster cant be swapped");
+			}
+		} else {
+			printEnemyAndTeamStats(badGuy, friends);
+			System.out.println("\nSorry that monster cant be swapped");
+		}
 	}
 	/**
 	 * Gets called when the user inputs "heal".

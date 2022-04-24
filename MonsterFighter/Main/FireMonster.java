@@ -1,5 +1,3 @@
-
-
 public class FireMonster extends Monster{
 	/**
 	 * The description of FireMonster

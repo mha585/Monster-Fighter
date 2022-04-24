@@ -1,5 +1,3 @@
-
-
 public class GlassMonster extends Monster{
 	/**
 	 * The description of GlassMonster

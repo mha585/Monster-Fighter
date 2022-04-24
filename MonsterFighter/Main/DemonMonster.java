@@ -1,4 +1,3 @@
-
 public class DemonMonster extends Monster{
 	/**
 	 * The description of DemonMonster
@@ -16,7 +15,7 @@ public class DemonMonster extends Monster{
 	/**
 	 * The basic constructor for the DemonMonster class
 	 * used when all values but type are given
-	 * manually updates the type to "Glass"
+	 * manually updates the type to "Demon"
 	 * @param name			The name of the DemonMonster
 	 * @param maxHealth		The maxHealth of the DemonMonster
 	 * @param healAmount	The healAmount of the DemonMonster
@@ -39,7 +38,6 @@ public class DemonMonster extends Monster{
 	public DemonMonster() {
 		super(price, sell, description);
 		super.setType("Demon");
-
 	}
 	/**
 	 * Generates a string representation of the DemonMonster

@@ -1,4 +1,3 @@
-
 public class HolyMonster extends Monster{
 	/**
 	 * The description of HolyMonster
@@ -38,7 +37,6 @@ public class HolyMonster extends Monster{
 	public HolyMonster() {
 		super(price, sell, description);
 		super.setType("Holy");
-
 	}
 	/**
 	 * Generates a string representation of the HolyMonster

@@ -1,12 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
-
 public class MAIN {
-
 	/**
 	 * Asks for players name, sets playerName to input
 	 * @param inputName			Scanner to check input
