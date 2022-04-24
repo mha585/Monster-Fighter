@@ -35,7 +35,7 @@ public class RandomEvent {
 	
 	public boolean shouldLeave(Team team, double faints) {
 		Set<Integer> num = new HashSet<Integer>();
-		if (team.getSize() > 0) {
+		if (team.getSize() > 1) {
 			if(faints == 0) {
 				while (num.size() < 5) {
 					int number = randNum.randNumInRange(0, 100);
@@ -43,13 +43,13 @@ public class RandomEvent {
 				}
 			}
 			else if (faints == 1) {
-				while(num.size() < 46) {
+				while(num.size() < 24) {
 					int number = randNum.randNumInRange(0, 100);
 					num.add(number);
 				}
 			}
 			else if (faints == 2) {
-				while(num.size() < 99) {
+				while(num.size() < 47) {
 					int number = randNum.randNumInRange(0, 100);
 					num.add(number);
 				}

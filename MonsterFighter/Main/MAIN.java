@@ -122,6 +122,12 @@ public class MAIN {
 		boolean isDone = false;
 		while (isDone == false) {
 			try {
+				System.out.println("Money: " + player.getMoney());
+				timer(1000);
+				System.out.println("Current Day: " + player.getDayCompleted());
+				timer(1000);
+				System.out.println("Days Remaining: " + player.daysLeft());
+				timer(1000);
 				Inventory bag = player.getInventory();
 				Team team = player.getTeam();
 				System.out.println("What would you like to do? (1)Look at Inventory\n                           (2)Look at Team\n                           (3)Move on");            
@@ -196,27 +202,30 @@ public class MAIN {
 	
 	public static ArrayList<Trainers> displayBattles(Scanner scanner, Player player, Battles battle) {
 		ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
-		if (player.daysLeft() > 0) {
-			if (player.getDifficulty() == "easy") {
+		if (player.getDayCompleted() == 1) {
+			System.out.println("This must be your first time battling. This is how it works: \nAt the start of each day you "
+					+ "will get the choice to battle 3 - 5 trainers. \nToday you will only battle 1. The trainer and their monsters will be displayed."
+					+ "\nAfter each battle you will recieve money that you can later spend in the shop.\n");
+			timer(8000);
+			System.out.println("Your battle today is: ");
+			timer(1000);
+			trainerBattles = battle.getBattles(1,  player);
+			battle.printBattles(trainerBattles);
+		}
+		else if (player.daysLeft() > 0) {
+			try { 
 				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
 				String inputBattles = scanner.nextLine();
-				int numBattles = Integer.parseInt(inputBattles);
-				trainerBattles = battle.getBattles(numBattles, player);
-				battle.printBattles(trainerBattles);
-			}
-			else if (player.getDifficulty() == "normal") {
-				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
-				String inputBattles = scanner.nextLine();
-				int numBattles = Integer.parseInt(inputBattles);
-				trainerBattles = battle.getBattles(numBattles, player);
-				battle.printBattles(trainerBattles);	
-			}
-			else if (player.getDifficulty() == "hard") {
-				System.out.println("How many battles do you want to fight today. Enter a number between 3 and 5.");
-				String inputBattles = scanner.nextLine();
-				int numBattles = Integer.parseInt(inputBattles);
-				trainerBattles = battle.getBattles(numBattles, player);
-				battle.printBattles(trainerBattles);		
+				if (Integer.parseInt(inputBattles) >= 3 && Integer.parseInt(inputBattles) <= 5) {
+					int numBattles = Integer.parseInt(inputBattles);
+					trainerBattles = battle.getBattles(numBattles, player);
+					battle.printBattles(trainerBattles);
+				}
+				else {
+					throw new InvalidInputException();
+				}
+			} catch (Exception e) {
+				System.out.println("Input must be a valid number between 3 and 5.");
 			}
 		}
 		else if (player.daysLeft() == 0) {
@@ -231,6 +240,8 @@ public class MAIN {
 	}
 	
 	public static void battleTime(Battles battle, Player player, ArrayList<Trainers> allBattles) {
+		System.out.println("It is time to battle!");
+		timer(2000);
 		boolean win = true;
 		boolean keepFighting = true;
 		while (keepFighting == true) {
@@ -270,11 +281,13 @@ public class MAIN {
 				else if (win == false) {
 					System.out.println("You Lose");
 					player.addPoints(-125);
+					keepFighting = false;
 				}
 			}
 			if (win == true) {
 				System.out.println("Good Job! You have won all your battles!");
 				player.addMoney(50);
+				keepFighting = false;
 			}
 		}
 	}
@@ -430,7 +443,7 @@ public class MAIN {
 			}
 		}
 		if (lostFriend == true) {
-			System.out.println("Oh no! "+ lostMonster +" monster has left");
+			System.out.println("Oh no! "+ lostMonster.getName() +" has left");
 		}
 		if (newFriend == true) {
 			System.out.println("A new monster has joined!");
@@ -493,14 +506,14 @@ public class MAIN {
 		setDifficulty(scanner, newPlayer);
 		selectMonster(scanner, newPlayer);
 		System.out.println("~||~||~||~||~||~||~||~||~||~||~||~||~\n~||~ Let's Begin The Adventure!! ~||~ \n~||~||~||~||~||~||~||~||~||~||~||~||~");
-		timer(3000);
+		timer(1500);
 		int inputDays = newPlayer.daysLeft();
 		while(newPlayer.daysLeft() >= 0) {
-			newPlayer.toString();
 			dayPrep(scanner, newPlayer);
 			timer(1000);
 			if (newPlayer.getTeam().getSize() > 0 ) {
 				ArrayList<Trainers> dayTrainers = displayBattles(scanner, newPlayer, battle);
+				timer(3000);
 				battleTime(battle, newPlayer, dayTrainers);
 			}
 			shoppingTime(scanner, newShop, newPlayer);
@@ -511,7 +524,6 @@ public class MAIN {
 			}
 			else {
 				newPlayer.abruptEnd();
-				
 			}
 		}
 		endGame(newPlayer, inputDays);
