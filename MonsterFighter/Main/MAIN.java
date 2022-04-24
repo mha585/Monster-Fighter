@@ -136,8 +136,6 @@ public class MAIN {
 						int indexItem = Integer.parseInt(useItem);
 						if (useItem.trim().matches("[0-9]+") == true) {
 							Item item = (Item) bag.getItem(indexItem - 1);
-							System.out.println(item.whenToUse());
-							System.out.println(item.whenToUse().getClass());
 							if (item.whenToUse().trim()=="out"|| item.whenToUse().trim()=="both") {
 								System.out.println(team);
 								System.out.println("Which monster do you want to use it on?");
@@ -394,7 +392,6 @@ public class MAIN {
 				}
 			}
 			catch(Exception e) {
-				System.out.println("aaaaaaaaaaaaaaaa");
 				System.out.println("Invalid input\n");
 			}
 		}

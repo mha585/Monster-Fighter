@@ -80,8 +80,9 @@ public class Team extends Monster{
 		List<Integer> buy = shop.getBuy();
 		List<RandomMonster> randMonList = shop.getMonsters();
 		RandomMonster randMon = randMonList.get(monsterNum - 1);
-		int m1Tier = randMon.getTier();
-		int m1Price = buy.get(m1Tier);
+//		int m1Tier = randMon.getTier();
+//		int m1Price = buy.get(m1Tier);
+		int m1Price = (randMonList.get(monsterNum - 1).getPrice());
 		if (m1Price > funds){
 			System.out.println("Insufficient funds for this monster");
 		}

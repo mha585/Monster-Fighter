@@ -73,6 +73,12 @@ public class Player {
 	 */
 	public void setDay(int days) {
 		playerDays = days;
+	}	
+	/**
+	 * Gets the number of days the player has played for.
+	 */
+	public int getPlayerDayCompleted() {
+		return playerDays;
 	}
 	/**
 	 * Sets the players difficulty.
