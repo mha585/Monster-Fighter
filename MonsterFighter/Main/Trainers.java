@@ -20,12 +20,36 @@ public class Trainers {
 		randomGen randomNum = new randomGen();
 		name = trainerName.get(randomNum.randNumInRange(0, trainerName.size()));
 		type = trainerType.get(randomNum.randNumInRange(0, trainerType.size()));
-		int monsters = randomNum.randNumInRange(1, 4);
-		int i = 0;
-		while (i <= monsters) {
+		if (player.getDayCompleted() == 1) {
 			RandomMonster monster = new RandomMonster(player);
 			enemyTeam.add(monster);
-			i++;
+		}
+		else if (player.getDayCompleted() > 1 && player.getDayCompleted() <= 3) {
+			int monsters = randomNum.randNumInRange(1, 2);
+			int i = 0;
+			while (i <= monsters) {
+				RandomMonster monster = new RandomMonster(player);
+				enemyTeam.add(monster);
+				i++;
+			}
+		}
+		else if (player.getDayCompleted() > 3 && player.getDayCompleted() <= 5) {
+			int monsters = randomNum.randNumInRange(1, 3);
+			int i = 0;
+			while (i <= monsters) {
+				RandomMonster monster = new RandomMonster(player);
+				enemyTeam.add(monster);
+				i++;
+			}
+		}
+		else if (player.getDayCompleted() > 5) {
+			int monsters = randomNum.randNumInRange(1, 4);
+			int i = 0;
+			while (i <= monsters) {
+				RandomMonster monster = new RandomMonster(player);
+				enemyTeam.add(monster);
+				i++;
+			}
 		}
 	}
 	
