@@ -98,7 +98,7 @@ public class Monster implements Purchasable{
 		mySpeed = speed;
 		myExperience = 0;
 		myTier = tier;
-		myReward = number.randNumInRange(0, 100);
+		myReward = number.randNumInRange(11, 99);
 		myDeaths = 0;
 		
 		myShopCost = cost;
@@ -121,7 +121,7 @@ public class Monster implements Purchasable{
 		myDamage = number.randNumInRange(1, 70);
 		mySpeed = number.randNumInRange(1, 15);
 		myExperience = 0;
-		myReward = number.randNumInRange(0, 100);
+		myReward = number.randNumInRange(11, 99);
 		myTier = number.randNumInRange(1, 3);
 		myDeaths = 0;
 		myShopCost = cost;
@@ -142,7 +142,7 @@ public class Monster implements Purchasable{
 		mySpeed = number.randNumInRange(1, 15);
 		myExperience = 0;
 		myDeaths = 0;
-		myReward = number.randNumInRange(0, 100);
+		myReward = number.randNumInRange(11, 99);
 		myTier = number.randNumInRange(1, 3);
 	}
 	/**

@@ -44,20 +44,20 @@ public class Battles {
 	 * @param friends		The current team of Monsters the Player has
 	 * @param badGuy		The enemy the player is fighting
 	 */
-	public boolean fight(Team friends, Monster badGuy, Inventory playerInventory) {
+	public boolean fight(Team friends, Monster badGuy, Inventory playerInventory, Scanner action) {
 		int fighterIndex = 0;
-		Scanner action = new Scanner(System.in);
+//		Scanner action = new Scanner(System.in);
 		printEnemyAndTeamStats(badGuy, friends);
 		while ((badGuy.getHealth() > 0) && friends.sumTeamHealth() > 0) {
 			String givenAction = action.nextLine();
 			if (givenAction.toLowerCase().trim().equals("fight")) {
 				attack(friends.getFriend(fighterIndex), badGuy, friends, true);
 			} else if (givenAction.toLowerCase().trim().equals("switch")) {
-				swap(badGuy, friends);
+				swap(badGuy, friends, action);
 			} else if (givenAction.toLowerCase().trim().equals("heal")) {
-				heal(friends.getFriend(fighterIndex), badGuy, friends);
+				heal(friends.getFriend(fighterIndex), badGuy, friends, action);
 			} else if (givenAction.toLowerCase().trim().equals("items")) {
-				useItem(friends, badGuy, playerInventory);
+				useItem(friends, badGuy, playerInventory, action);
 			} else {
 				System.out.println("\n-------------------------------------\n");
 				System.out.println("Sorry your command wasn't understood\n");
@@ -66,7 +66,7 @@ public class Battles {
 		}
 		if ((badGuy.getHealth() <= 0) && friends.getSize() > 0) {
 			return true;
-		} 
+		}
 		return false;
 	}
 	/**
@@ -97,28 +97,42 @@ public class Battles {
 	 * @param badGuy		The enemy that attacks while the switch is happening
 	 * @param friends		The current team of monsters the player has
 	 */
-	public void swap(Monster badGuy, Team friends) {
+	public void swap(Monster badGuy, Team friends, Scanner scanner) {
 		System.out.println("Which two monsters would you like to swap positions?");
 		System.out.println("Look at the team memeber number to figure out who to swap with");
 		System.out.println("Be careful this will take your turn!\n");
-		System.out.println("Please type the position of the monster you would like to move");
-		Scanner in = new Scanner(System.in);
+//		System.out.println("Please type the position of the monster you would like to move");
 		
-	    String input1 = in.nextLine();
-	    while ((Character.isDigit(input1.charAt(0)) != true) || (Integer.parseInt(input1) < 1 || Integer.parseInt(input1) > friends.getSize())) {
-	    	System.out.println("not a valid monster, try again");	
-	    	input1 = in.nextLine();
-	    }
-	    
-		System.out.println("Now please type the postition of the monster you want to swap with");
-		String input2 = in.nextLine();
-	    while ((Character.isDigit(input2.charAt(0)) != true) || (Integer.parseInt(input2) < 1 || Integer.parseInt(input2) > friends.getSize())) {
-	    	System.out.println("not a valid monster, try again");	
-	    	input2 = in.nextLine();
-	    }
-		friends.swap(Integer.parseInt(input1) - 1, Integer.parseInt(input2) - 1);
-		attack(friends.getFriend(0), badGuy, friends, false);
-		printEnemyAndTeamStats(badGuy, friends);
+		boolean isSwapped = false;
+		while (isSwapped == false) {
+			try {
+				System.out.println("Please type the position of the monster you would like to move");
+				String input1 = scanner.nextLine();
+				int indexOfFirstMonster = Integer.parseInt(input1);
+				if ((indexOfFirstMonster >= 1 && indexOfFirstMonster <= friends.getSize()) && 
+						friends.getFriend(indexOfFirstMonster - 1).getHealth() != 0) {
+					System.out.println("Now please type the postition of the monster you want to swap with");
+					String input2 = scanner.nextLine();
+					int indexOfSecondMonster = Integer.parseInt(input2);
+					if (indexOfSecondMonster >= 1 && indexOfSecondMonster <= friends.getSize() && 
+							friends.getFriend(indexOfSecondMonster - 1).getHealth() != 0) {
+						friends.swap(indexOfFirstMonster - 1, indexOfSecondMonster - 1);
+						attack(friends.getFriend(0), badGuy, friends, false);
+						printEnemyAndTeamStats(badGuy, friends);
+						isSwapped = true;
+					} else {
+						throw new InvalidInputException();
+					}
+				} else {
+					throw new InvalidInputException();
+				}
+			}
+			catch(Exception e) {
+				System.out.println("Input must be a number from 1 to " + friends.getSize());
+				System.out.println("Press any key to try switching again");
+	            scanner.nextLine();
+			}
+		}
 	}
 	/**
 	 * Gets called when the user inputs "heal".
@@ -128,11 +142,11 @@ public class Battles {
 	 * @param friend		The friend that does the healing
 	 * @param badGuy		The enemy that attacks while the healing is happening
 	 * @param friends		The current team of monsters the player has
+	 * @param healNumber	The scanner used to get input
 	 */
-	public void heal(Monster friend, Monster badGuy, Team friends) {
+	public void heal(Monster friend, Monster badGuy, Team friends, Scanner healNumber) {
 		System.out.println("Which monster would you like to heal?");
 		System.out.println("Please type the position of the monster you would like to heal");
-		Scanner healNumber = new Scanner(System.in);
 		int friendToHealIndex = healNumber.nextInt();
 		if ((friendToHealIndex == (int) friendToHealIndex) && (friendToHealIndex <= friends.getSize()) && (friendToHealIndex > 0)) {
 			friends.getFriend(friendToHealIndex - 1).gainHealth(friend.getHealAmount());
@@ -150,15 +164,15 @@ public class Battles {
 	 * @param friends			The current team of monsters the player has
 	 * @param badGuy			The enemy that attacks while the item is being used
 	 * @param playerInventory	The current inventory of the player
+	 * @param itemNumber		The scanner used to get input
 	 */
-	public void useItem(Team friends, Monster badGuy, Inventory playerInventory) {
+	public void useItem(Team friends, Monster badGuy, Inventory playerInventory, Scanner itemNumber) {
 		if (playerInventory.getSize() <= 0) {
 			printEnemyAndTeamStats(badGuy, friends);
 			System.out.println("You have no items left to use");
 		} else {
 			System.out.println(playerInventory);
 			System.out.println("Please type the position of the item you would like to use");
-			Scanner itemNumber = new Scanner(System.in);
 			int itemToUseIndex = itemNumber.nextInt();
 			if ((itemToUseIndex == (int) itemToUseIndex) && (itemToUseIndex <= playerInventory.getSize()) && 
 					(itemToUseIndex > 0) && playerInventory.getSize() > 0) {

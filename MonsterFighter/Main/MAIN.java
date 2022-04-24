@@ -8,7 +8,7 @@ public class MAIN {
 	 */
 	public static void setPlayerName(Scanner scanner, Player player) {
 		boolean isProper = false;
-		while (isProper == false) {
+		while (isProper == false) { 
 			System.out.println("Please enter a name: \nMust be between 3 and 15 characters. \nMust not contain numbers or special characters. ");
 			String givenName = scanner.nextLine();
 			if (givenName.trim().length() >= 3 && givenName.trim().length() <= 15 && givenName.trim().matches("[a-zA-Z]+")){
@@ -232,7 +232,7 @@ public class MAIN {
 		return trainerBattles;
 	}
 	
-	public static void battleTime(Battles battle, Player player, ArrayList<Trainers> allBattles) {
+	public static void battleTime(Scanner input, Battles battle, Player player, ArrayList<Trainers> allBattles) {
 		System.out.println("It is time to battle!");
 		timer(2000);
 		boolean win = true;
@@ -245,7 +245,7 @@ public class MAIN {
 				for (int monsters = 0; monsters <= trainer.getSize() - 1; monsters++) {
 					Monster enemyMonster = trainer.getEnemies().get(monsters);
 					System.out.println(trainer.getFullName() + " sends out " + enemyMonster.getName() + "\n" + enemyMonster.toString());
-					win = battle.fight(player.getTeam(), enemyMonster, player.getInventory());
+					win = battle.fight(player.getTeam(), enemyMonster, player.getInventory(), input);
 					if (win == false) {
 						keepFighting = false;
 						monsters = trainer.getSize();
@@ -492,6 +492,8 @@ public class MAIN {
 		Shop newShop = new Shop();
 		BasicHeal BH = new BasicHeal();
 		Inventory bag = newPlayer.getInventory();
+		
+		
 		bag.addtoBag(BH, 3);
 		setPlayerName(scanner, newPlayer);
 		setDays(scanner, newPlayer);
@@ -506,7 +508,7 @@ public class MAIN {
 			if (newPlayer.getTeam().getSize() > 0 ) {
 				ArrayList<Trainers> dayTrainers = displayBattles(scanner, newPlayer, battle);
 				timer(3000);
-				battleTime(battle, newPlayer, dayTrainers);
+				battleTime(scanner, battle, newPlayer, dayTrainers);
 			}
 			shoppingTime(scanner, newShop, newPlayer);
 			nightPhase(newPlayer);
@@ -519,6 +521,7 @@ public class MAIN {
 			}
 		}
 		endGame(newPlayer, inputDays);
+		scanner.close();
 	}
 
 	public static void main(String[] args) {
