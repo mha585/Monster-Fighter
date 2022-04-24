@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,8 +15,6 @@ public class RandomMonster extends Monster{
 	 * generates a random Monster from the list
 	 */
 	private Monster random = generateMonster();
-
-	
 	/**
 	 * Gets a random monster from the list of all possible monster types.
 	 * This is used to initialise the randomMonster with the given values
@@ -78,7 +75,6 @@ public class RandomMonster extends Monster{
 				super.gainSpeed((toSet));
 			}
 		}
-		
 		else {
 			super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
 			super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());

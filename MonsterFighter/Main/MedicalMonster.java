@@ -1,5 +1,3 @@
-
-
 public class MedicalMonster extends Monster{
 	/**
 	 * The description of MedicalMonster

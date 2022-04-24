@@ -1,9 +1,7 @@
-
 /**
- * This interface describes purchasable classes
- * Each class with the "Purchasable" attribute has 3 Attributes
- * They are: giveDescription, givePrice and give Sellpricee
- * @author Angelo  Gasmin
+ * This interface describes purchasable classes.
+ * Each class with the "Purchasable" attribute has 3 Attributes.
+ * They are: getDescription(), getPrice, sellPrice.
  * @version 1.0
  */
 public interface Purchasable {
@@ -22,5 +20,4 @@ public interface Purchasable {
 	 * @return
 	 */
 	int sellPrice();
-
 }
