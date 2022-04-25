@@ -146,14 +146,24 @@ public class Battles {
 	 */
 	public void heal(Monster friend, Monster badGuy, Team friends, Scanner healNumber) {
 		System.out.println("Which monster would you like to heal?");
-		System.out.println("Please type the position of the monster you would like to heal");
-		int friendToHealIndex = healNumber.nextInt();
-		if ((friendToHealIndex == (int) friendToHealIndex) && (friendToHealIndex <= friends.getSize()) && (friendToHealIndex > 0)) {
-			friends.getFriend(friendToHealIndex - 1).gainHealth(friend.getHealAmount());
-			attack(friend, badGuy, friends, false);
-			printEnemyAndTeamStats(badGuy, friends);
-		} else {
-			System.out.println("Sorry that number wasnt recognised");
+		boolean isHealed = false;
+		while (isHealed == false) {
+			try {
+				System.out.println("Please type the position of the monster you would like to heal");
+				String friendToHealIndex = healNumber.nextLine();
+				if ((Character.isDigit(friendToHealIndex.charAt(0)) == true) && (Integer.parseInt(friendToHealIndex) <= friends.getSize()) && (Integer.parseInt(friendToHealIndex) > 0)) {
+					friends.getFriend(Integer.parseInt(friendToHealIndex) - 1).gainHealth(friend.getHealAmount());
+					attack(friend, badGuy, friends, false);
+					printEnemyAndTeamStats(badGuy, friends);
+					isHealed = true;
+				} else {
+					throw new InvalidInputException();
+				}
+			} catch(Exception e) {
+				System.out.println("Sorry that number wasnt recognised");
+				System.out.println("Press any key to try healing again");
+				healNumber.nextLine();
+			}
 		}
 	}
 	/**
