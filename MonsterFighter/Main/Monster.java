@@ -147,12 +147,15 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the name of the Monster
+	 * @return String	the name of the Monster
 	 */
 	public String getName() {
 		return myName;
 	}
 	/**
 	 * Gets the tier / level of the Monster
+	 * @return int	the teir of the Monster
+	 * 
 	 */
 	public int getTier() {
 		return myTier;
@@ -166,6 +169,7 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the maxHealth of the Monster
+	 * @return double	the max health of the Monster
 	 */
 	public double getMaxHealth() {
 		return myMaxHealth;
@@ -186,6 +190,7 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the damage of the Monster
+	 * @return double	the damage of the Monster
 	 */
 	public double getDamage() {
 		return myDamage;
@@ -199,18 +204,21 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the amount the Monster can heal each turn
+	 * @return double	the heal amount of the Monster
 	 */
 	public double getHealAmount() {
 		return myHealAmount;
 	}
 	/**
 	 * Gets the current health of the Monster
+	 * @return double	the current health of the Monster
 	 */
 	public double getHealth() {
 		return myCurrentHealth;
 	}
 	/**
 	 * Gets the current speed of the Monster
+	 * @return double	the speed of the Monster
 	 */
 	public double getSpeed() {
 		return mySpeed;
@@ -246,6 +254,7 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the type of the Monster
+	 * @return String	the type of the Monster
 	 */
 	public String getType() {
 		return myType;
@@ -259,6 +268,7 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Returns the current experience of the Monster
+	 * @return double	the experience of the Monster
 	 */
 	public double getMyExperience() {
 		return myExperience;
@@ -277,6 +287,7 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the amount of time the Monster has died
+	 * @return double	the number of times the Monster has died
 	 */
 	public double getDeaths() {
 		return myDeaths;
@@ -302,41 +313,37 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Returns the reward for killing the Enemy
+	 * @return int	the reward for killing the Monster
 	 */
 	public int getReward() {
 		return myReward;
 	}
 	/**
-	 * Generates a string representation of the Monster
-	 */
-	public String toString() {
-		return "Name: " + getName() + "\nCurrent health: " + getHealth() +
-				" / " + getMaxHealth() + "\nDamage: " + getDamage() +
-				"\nCan heal: " + getHealAmount() + "\nSpeed: " + getSpeed() + "\nTier: " + 
-				getTier() + "\nexp: " + (int) getMyExperience() + " / 100";
-	}
-	/**
 	 * Checks how effective an attack is
 	 * @param attackerType		The type of attack e.g fire = 0, water = 1
 	 * @param victimType		The type of attack e.g grass = 2
+	 * @return double	multiplier gained when a monster attacks another type
 	 */
 	public double getEffectiveness(int attackerType, int victimType) {
 		return howEffective[attackerType][victimType];
 	}
 	/**
 	 * Returns the description of a Monster
+	 * @return String	the description of the Monster
 	 */
 	public String getDescription() {
 		return myShopDescription;
 	}
 	/**
 	 * Returns the price of a Monster
+	 * @return String	the price of the Monster
 	 */
 	public int getPrice() {
 		return myShopCost;
 	}
 	/**
 	 * Returns the selling price of a Monster
+	 * @return String	the selling price of the Monster
 	 */
 	public int sellPrice() {
 		return myShopSell;
@@ -361,5 +368,15 @@ public class Monster implements Purchasable{
 	 */
 	public void setSellPrice(int newCost) {
 		myShopCost = newCost;
+	}
+	/**
+	 * Generates a string representation of the Monster
+	 * @return String	the string representation of the monster
+	 */
+	public String toString() {
+		return "Name: " + getName() + "\nCurrent health: " + getHealth() +
+				" / " + getMaxHealth() + "\nDamage: " + getDamage() +
+				"\nCan heal: " + getHealAmount() + "\nSpeed: " + getSpeed() + "\nTier: " + 
+				getTier() + "\nexp: " + (int) getMyExperience() + " / 100";
 	}
 }

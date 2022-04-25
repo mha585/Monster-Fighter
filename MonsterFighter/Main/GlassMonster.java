@@ -47,6 +47,7 @@ public class GlassMonster extends Monster{
 	}
 	/**
 	 * Generates a string representation of the GlassMonster
+	 * @return String	 a string representation of the RandomMonster
 	 */
 	public String toString() {
 		return super.toString() + "\nType: " + super.getType();

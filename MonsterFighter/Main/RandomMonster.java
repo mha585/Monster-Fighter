@@ -54,6 +54,7 @@ public class RandomMonster extends Monster{
 	 * As there is no set methods (only gain methods in Monster) we need to set each stat to 0 then
 	 * add the randomly generated Monsters stat in order to ensure that the stats
 	 * are appropriate to each monster type.
+	 * @param player	the current player, used to scale the monster stats
 	 */
 	public RandomMonster(Player player) {
 		super();
@@ -76,6 +77,7 @@ public class RandomMonster extends Monster{
 	/**
 	 * Generates the stats for a randomMonster.
 	 * scales the stats based on the current day the player is on
+	 * @param player	the current player, used to scale the monster stats
 	 */
 	public void generateMonsterStats(Player player) {
 		int amountToScaleStatsBy = (int)(1+(player.getPlayerDayCompleted() / 2));
@@ -104,6 +106,7 @@ public class RandomMonster extends Monster{
 	}
 	/**
 	 * Generates a string representation of the RandomMonster
+	 * @return String	 a string representation of the RandomMonster
 	 */
 	public String toString() {
 		return super.toString() + "\nType: " + super.getType();

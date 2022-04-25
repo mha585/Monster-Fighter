@@ -40,6 +40,7 @@ public class FireMonster extends Monster{
 	}
 	/**
 	 * Generates a string representation of the FireMonster
+	 * @return String	 a string representation of the RandomMonster
 	 */
 	public String toString() {
 		return super.toString() + "\nType: " + super.getType();

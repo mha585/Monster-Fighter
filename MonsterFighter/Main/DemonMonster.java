@@ -41,6 +41,7 @@ public class DemonMonster extends Monster{
 	}
 	/**
 	 * Generates a string representation of the DemonMonster
+	 * @return String	 a string representation of the DemonMonster
 	 */
 	public String toString() {
 		return super.toString() + "\nType: " + super.getType();

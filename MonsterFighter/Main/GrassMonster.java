@@ -40,6 +40,7 @@ public class GrassMonster extends Monster{
 	}
 	/**
 	 * Generates a string representation of the GrassMonster
+	 * @return String	 a string representation of the RandomMonster
 	 */
 	public String toString() {
 		return super.toString() + "\nType: " + super.getType();

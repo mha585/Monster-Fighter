@@ -14,9 +14,12 @@ import java.util.Scanner;
  */
 public class Battles {
 	
-//	private Scanner number = new Scanner(System.in);
-//	private Scanner in = new Scanner(System.in);
-	
+	/**
+	 * Generates all the possible battles the player can fight in a day
+	 * @param numBattles			The number of battles the player wants to fight in a day
+	 * @param player				The current stats of the player
+	 * @return ArrayList			An array list containing all the possible battles
+	 */
 	public ArrayList<Trainers> getBattles (int numBattles, Player player) {
 		ArrayList<Trainers> trainerToBattle = new ArrayList<Trainers>();
 		int num = 1;
@@ -27,6 +30,10 @@ public class Battles {
 		}
 		return trainerToBattle;
 	}
+	/**
+	 * Prints the possible battles the player can fight in a day
+	 * @param possibleBattles		An array containing all the possible battles.
+	 */
 	public void printBattles(ArrayList<Trainers> possibleBattles) {
 		int num = 1;
 		while (num <= possibleBattles.size()) {
@@ -362,6 +369,7 @@ public class Battles {
 	 * Returns 0 for type Fire, 1 for type Water, 2 for type Grass,
 	 * 3 for type glass and 4 for type Medical
 	 * @param type		The type of the Monster.
+	 * @return int		an integer representation of the type of monster
 	 */
 	public int monsterTypeToIndex(String type) {
 		if (type == "Fire") {
@@ -385,6 +393,7 @@ public class Battles {
 	 * e.g if a fire monster attacks a grass monster then the attack will be super effective so * 2.
 	 * @param attacker		The Monster that is doing the attack.
 	 * @param attacked		The Monster that is being attacked.
+	 * @return double		returns how effective an attack is on a monster
 	 */
 	public double howEffective(Monster attacker, Monster attacked) {
 		int attackerTypeIndex = monsterTypeToIndex(attacker.getType());
