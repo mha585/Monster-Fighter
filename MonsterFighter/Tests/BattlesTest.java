@@ -63,27 +63,22 @@ class BattlesTest {
 	}
 	
 	@Test
-	public void holyDemonTest() {
-		testTeam.addFriend(new HolyMonster("Holy test", 100.0, 5.0, 5, 20.0, 1, 150, 250, "holy"));
-		testTeam.addFriend(new DemonMonster());
-		testTeam.addFriend(new HolyMonster());
-		testEnemy = new DemonMonster("demon test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "demon");
+	public void playerLosesTest() {
+		testTeam.addFriend(new FireMonster("Fire test", 50.0, 5.0, 5.425, 20.0, 1, 150, 250, "fire"));
+		testTeam.addFriend(new GrassMonster("Grass test", 100.0, 5.0, 20.0, 25.0, 1, 150, 250, "grass"));
+		testEnemy = new GlassMonster("Glass test", 50.0, 5.0, 50, 99.0, 1, 150, 250, "glass");
+		
 		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, true);
-		assertEquals(testTeam.getFriend(0).getHealth(), 80);
-		assertEquals(testEnemy.getHealth(), 40);
-		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, false);
-		assertEquals(testTeam.getFriend(0).getHealth(), 60);
-		assertEquals(testEnemy.getHealth(), 40);
-		testBattle.attack(testEnemy, testTeam.getFriend(0), testTeam, false);
-		testBattle.attack(testEnemy, testTeam.getFriend(0), testTeam, false);
-		testBattle.attack(testEnemy, testTeam.getFriend(0), testTeam, false);
+		assertEquals(testTeam.getFriend(0).getHealth(), 100);
 		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, true);
-		assertEquals(testTeam.getFriend(0).getHealth(), 60);
-		assertEquals(testEnemy.getHealth(), 0);
+		assertEquals(testTeam.getFriend(0).getHealth(), 0);
+		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, true);
+		assertEquals(testTeam.getFriend(0).getHealth(), 0);
 	}
 	
 	@Test
 	public void healTest() {
+
 		testTeam.addFriend(new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testTeam.addFriend(new GrassMonster());
 		testTeam.addFriend(new WaterMonster("Water test", 100.0, 5.0, 5, 20.0, 1, 150, 250, ""));
@@ -100,16 +95,24 @@ class BattlesTest {
 	
 	@Test
 	public void invalidHealTest() {
-		testTeam.addFriend(new MedicalMonster("medical test", 20.0, 5.0, 10, 19.0, 1, 150, 250, ""));
-		testEnemy = new FireMonster("fire test", 50.0, 5.0, 39, 10, 1, 150, 250, "");
 		
-	    String input = "-1";
+		testTeam.addFriend(new MedicalMonster("medical test", 20.0, 5.0, 10, 19.0, 1, 150, 250, ""));
+		testEnemy = new FireMonster("fire test", 50.0, 5.0, 10, 10, 1, 150, 250, "");
+		
+		String finalLineToCheck = "Sorry that number wasnt recognised";
+		
+	    String input = "-1\n" + "dsfsdf\n" + "1";
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		Scanner userInputs = new Scanner(System.in);
 		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, false);
 	    testBattle.heal(testTeam.getFriend(0), testEnemy, testTeam, userInputs);
-
-	    assertEquals(testTeam.getFriend(0).getHealth(), 0.5);
+	    
+	    int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 561));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 561);
+		
+	    System.out.println(outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
+		
+		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
 	    userInputs.close();
 	}
 	
