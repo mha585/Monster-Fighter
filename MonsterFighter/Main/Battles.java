@@ -1,4 +1,8 @@
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -101,7 +105,6 @@ public class Battles {
 		System.out.println("Which two monsters would you like to swap positions?");
 		System.out.println("Look at the team memeber number to figure out who to swap with");
 		System.out.println("Be careful this will take your turn!\n");
-//		System.out.println("Please type the position of the monster you would like to move");
 		
 		boolean isSwapped = false;
 		while (isSwapped == false) {
@@ -128,9 +131,25 @@ public class Battles {
 				}
 			}
 			catch(Exception e) {
+//				saves the current input (for test inputs)
+				InputStream savedStandardInputStream = System.in;
+				PrintStream savedStandardOut = System.out;
+				
+//				Sets output to something other than system so the player cant see this
+			    System.setOut(new PrintStream(new ByteArrayOutputStream()));
+//			    Sets the automatic input to "continue" (this can be any string)
+			    String input = "continue";
+				System.setIn(new ByteArrayInputStream(input.getBytes()));
+//				Scans the automatic input to avoid getting the user to press any key to continue then closes it
+				Scanner skipGettingUserToContinue = new Scanner(System.in);
+				skipGettingUserToContinue.nextLine();
+				skipGettingUserToContinue.close();
+				
+//				Sets user input back to normal and gets the user to try again
+			    System.setIn(savedStandardInputStream);
+			    System.setOut(savedStandardOut);
 				System.out.println("Input must be a number from 1 to " + friends.getSize());
 				System.out.println("Press any key to try switching again");
-	            scanner.nextLine();
 			}
 		}
 	}
@@ -160,9 +179,25 @@ public class Battles {
 					throw new InvalidInputException();
 				}
 			} catch(Exception e) {
+//				saves the current input (for test inputs)
+				InputStream savedStandardInputStream = System.in;
+				PrintStream savedStandardOut = System.out;
+				
+//				Sets output to something other than system so the player cant see this
+			    System.setOut(new PrintStream(new ByteArrayOutputStream()));
+//			    Sets the automatic input to "continue" (this can be any string)
+			    String input = "continue";
+				System.setIn(new ByteArrayInputStream(input.getBytes()));
+//				Scans the automatic input to avoid getting the user to press any key to continue then closes it
+				Scanner skipGettingUserToContinue = new Scanner(System.in);
+				skipGettingUserToContinue.nextLine();
+				skipGettingUserToContinue.close();
+				
+//				Sets user input back to normal and gets the user to try again
+			    System.setIn(savedStandardInputStream);
+			    System.setOut(savedStandardOut);
 				System.out.println("Sorry that number wasnt recognised");
-				System.out.println("Press any key to try healing again");
-				healNumber.nextLine();
+				System.out.println("Please enter a number between 1 and " + friends.getSize());
 			}
 		}
 	}
@@ -181,26 +216,54 @@ public class Battles {
 			printEnemyAndTeamStats(badGuy, friends);
 			System.out.println("You have no items left to use");
 		} else {
+			
 			System.out.println(playerInventory);
-			System.out.println("Please type the position of the item you would like to use");
-			int itemToUseIndex = itemNumber.nextInt();
-			if ((itemToUseIndex == (int) itemToUseIndex) && (itemToUseIndex <= playerInventory.getSize()) && 
-					(itemToUseIndex > 0) && playerInventory.getSize() > 0) {
-				System.out.println("Now please type the position of the monster you would like to use the item on");
-				int monsterToUseItemOnIndex = itemNumber.nextInt();
-				if ((monsterToUseItemOnIndex == (int) monsterToUseItemOnIndex) && (monsterToUseItemOnIndex <= friends.getSize())
-						&& (monsterToUseItemOnIndex > 0)) {
-					playerInventory.getItem(itemToUseIndex - 1).useItem(friends.getFriend(monsterToUseItemOnIndex - 1));
-					playerInventory.removeBag(itemToUseIndex - 1, 1);
-					attack(friends.getFriend(0), badGuy, friends, false);
-					printEnemyAndTeamStats(badGuy, friends);
-				} else {
-					printEnemyAndTeamStats(badGuy, friends);
-					System.out.println("Sorry that monster wasnt recognised");
+			
+			boolean isUsed = false;
+			while (isUsed == false) {
+				try {
+					System.out.println("Please type the position of the item you want to use");
+					String input1 = itemNumber.nextLine();
+					int itemToUseIndex = Integer.parseInt(input1);
+					if ((itemToUseIndex <= playerInventory.getSize()) && (itemToUseIndex > 0) && playerInventory.getSize() > 0) {
+						System.out.println("Now please type the postition of the monster you want to use it on");
+						String input2 = itemNumber.nextLine();
+						int monsterToUseItemOnIndex = Integer.parseInt(input2);
+						if ((monsterToUseItemOnIndex <= friends.getSize()) && (monsterToUseItemOnIndex > 0)) {
+							playerInventory.getItem(itemToUseIndex - 1).useItem(friends.getFriend(monsterToUseItemOnIndex - 1));
+							playerInventory.removeBag(itemToUseIndex - 1, 1);
+							attack(friends.getFriend(0), badGuy, friends, false);
+							printEnemyAndTeamStats(badGuy, friends);
+							isUsed = true;
+						} else {
+							System.out.println("Input must be a number from 1 to " + friends.getSize());
+							throw new InvalidInputException();
+						}
+					} else {
+						System.out.println("Input must be a number from 1 to " + playerInventory.getSize());
+						throw new InvalidInputException();
+					}
 				}
-			} else {
-				printEnemyAndTeamStats(badGuy, friends);
-				System.out.println("Sorry that item wasnt recognised");
+				catch(Exception e) {
+//					saves the current input (for test inputs)
+					InputStream savedStandardInputStream = System.in;
+					PrintStream savedStandardOut = System.out;
+					
+//					Sets output to something other than system so the player cant see this
+				    System.setOut(new PrintStream(new ByteArrayOutputStream()));
+//				    Sets the automatic input to "continue" (this can be any string)
+				    String input = "continue";
+					System.setIn(new ByteArrayInputStream(input.getBytes()));
+//					Scans the automatic input to avoid getting the user to press any key to continue then closes it
+					Scanner skipGettingUserToContinue = new Scanner(System.in);
+					skipGettingUserToContinue.nextLine();
+					skipGettingUserToContinue.close();
+					
+//					Sets user input back to normal and gets the user to try again
+				    System.setIn(savedStandardInputStream);
+				    System.setOut(savedStandardOut);
+					System.out.println("Sorry that number wasnt recognised, please try again");
+				}
 			}
 		}
 	}

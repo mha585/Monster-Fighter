@@ -95,22 +95,20 @@ class BattlesTest {
 	
 	@Test
 	public void invalidHealTest() {
-		
+
 		testTeam.addFriend(new MedicalMonster("medical test", 20.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testEnemy = new FireMonster("fire test", 50.0, 5.0, 10, 10, 1, 150, 250, "");
 		
 		String finalLineToCheck = "Sorry that number wasnt recognised";
 		
-	    String input = "-1\n" + "dsfsdf\n" + "1";
+	    String input = "-1\n" + "1";
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		Scanner userInputs = new Scanner(System.in);
 		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, false);
 	    testBattle.heal(testTeam.getFriend(0), testEnemy, testTeam, userInputs);
 	    
-	    int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 561));
-		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 561);
-		
-	    System.out.println(outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
+	    int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 564));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 564);
 		
 		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
 	    userInputs.close();
@@ -182,8 +180,8 @@ class BattlesTest {
 	    testBattle.swap(testEnemy, testTeam, userInputs);
 	    assertEquals(testTeam.getFriend(0).getName(), "invalid swap test2");
 	    
-//		test for switching 1 with invalid integer then can still switch 2
-	    input = "1\n" + "99\n" + "bdcsdhf\n" + "1\n" + "2";
+//		test for switching 1 with invalid integer
+	    input = "1\n" + "99\n" + "1\n" + "2";
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		userInputs = new Scanner(System.in);
 	    testBattle.swap(testEnemy, testTeam, userInputs);
@@ -199,7 +197,7 @@ class BattlesTest {
 		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
 		
 //		test for switching 1 with 3 (dead)
-		String input = "1\n" + "3\n" + "try again\n" + "1\n1";
+		String input = "1\n" + "3\n" + "1\n" + "1";
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		Scanner userInputs = new Scanner(System.in);
 	    testBattle.swap(testEnemy, testTeam, userInputs);
@@ -247,36 +245,37 @@ class BattlesTest {
 	
 	@Test
 	public void useInvalidItem() {
-		String finalLineToCheck = "Sorry that item wasnt recognised";
-		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
+		String finalLineToCheck = "Sorry that number wasnt recognised, please try again";
+		testTeam.addFriend(new MedicalMonster("UseItemOnMe", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
 		testPlayer.playerBag.addtoBag(new TierPlus(), 1);
 		testPlayer.playerBag.addtoBag(new BasicHeal(), 1);
 			    
-		String input = "99\n" + "3";
+		String input = "99\n" + "2\n" + "1";
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		Scanner userInputs = new Scanner(System.in);
 		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag, userInputs);
-		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
-		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 653));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 653);
+		
 		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
 	    userInputs.close();
 	}
 	
 	@Test
-	public void useItemOnInvalidMonster() {
-		String finalLineToCheck = "Sorry that monster wasnt recognised";
-		testTeam.addFriend(new RandomMonster("random test", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
+	public void useValidItemOnInvalidMonster() {
+		String finalLineToCheck = "Sorry that number wasnt recognised, please try again";
+		testTeam.addFriend(new MedicalMonster("UseItemOnMe", 50.0, 5.0, 10, 19.0, 1, 150, 250, ""));
 		testEnemy = new MedicalMonster("medical test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "");
 		testPlayer.playerBag.addtoBag(new TierPlus(), 1);
 		testPlayer.playerBag.addtoBag(new BasicHeal(), 1);
 			    
-		String input = "1\n" + "-7";
+		String input = "2\n" + "-7\n" + "2\n" + "1";
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		Scanner userInputs = new Scanner(System.in);
 		testBattle.useItem(testTeam, testEnemy, testPlayer.playerBag, userInputs);
-		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 2));
-		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 2);
+		int indexOfStartOfLineToCheck = (outputStreamContent.toString().length() - (finalLineToCheck.length() + 653));
+		int indexOfEndOfLineToCheck = (outputStreamContent.toString().length() - 653);
 		assertEquals(finalLineToCheck, outputStreamContent.toString().substring(indexOfStartOfLineToCheck, indexOfEndOfLineToCheck));
 	    userInputs.close();
 	}
