@@ -49,7 +49,6 @@ public class Team extends Monster{
 			  myTeam.add(friend);
 			  return true;
 		  } else {
-			  System.out.println("team size is > 4 so do something");
 			  return false;
 		  }
 	}
@@ -85,8 +84,9 @@ public class Team extends Monster{
 		int m1Price = (randMonList.get(monsterNum - 1).getPrice());
 		if (m1Price > funds){
 			System.out.println("Insufficient funds for this monster");
-		}
-		else {
+		} else if (player.playerTeam.getSize() >= 4) {
+			System.out.println("You already have the max amount of monsters\n try selling one.");
+		}else {
 			player.playerTeam.addFriend(randMonList.get(monsterNum - 1));
 			player.deductMoney(m1Price);
 			System.out.println("Purchase Successful");
