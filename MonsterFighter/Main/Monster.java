@@ -154,7 +154,7 @@ public class Monster implements Purchasable{
 	}
 	/**
 	 * Gets the tier / level of the Monster
-	 * @return int	the teir of the Monster
+	 * @return int	the tier of the Monster
 	 * 
 	 */
 	public int getTier() {

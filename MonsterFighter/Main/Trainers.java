@@ -47,7 +47,7 @@ public class Trainers {
 			enemyTeam.add(monster);
 		}
 		else if (player.getDayCompleted() > 1 && player.getDayCompleted() <= 3) {
-			int monsters = randomNum.randNumInRange(1, 2);
+			int monsters = randomNum.randNumInRange(0, 2);
 			int i = 0;
 			while (i <= monsters) {
 				RandomMonster monster = new RandomMonster(player);

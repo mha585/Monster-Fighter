@@ -68,9 +68,10 @@ class MonstersTest {
 		
 		while (random.getType() != "Glass") {
 			random = new RandomMonster(testPlayer);
-		return;
 		}
+		return;
 	}
+
 	
 	@Test
 	public void randomMonsterCanBeMedicalIfDayIsLargeEnoughTest() {

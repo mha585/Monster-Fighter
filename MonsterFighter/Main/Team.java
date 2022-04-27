@@ -79,14 +79,12 @@ public class Team extends Monster{
 		List<Integer> buy = shop.getBuy();
 		List<RandomMonster> randMonList = shop.getMonsters();
 		RandomMonster randMon = randMonList.get(monsterNum - 1);
-//		int m1Tier = randMon.getTier();
-//		int m1Price = buy.get(m1Tier);
 		int m1Price = (randMonList.get(monsterNum - 1).getPrice());
 		if (m1Price > funds){
 			System.out.println("Insufficient funds for this monster");
 		} else if (player.playerTeam.getSize() >= 4) {
 			System.out.println("You already have the max amount of monsters\n try selling one.");
-		}else {
+		} else {
 			player.playerTeam.addFriend(randMonList.get(monsterNum - 1));
 			player.deductMoney(m1Price);
 			System.out.println("Purchase Successful");
@@ -101,11 +99,16 @@ public class Team extends Monster{
 	 * @param player		The player
 	 */
 	public void sellMonster(int MonsterNum, int costIndex, Shop shop, Player player) {
-		List<Integer> sell = shop.getSell();
-		Object monster = getFriend(MonsterNum);
-		removeFriend(getFriend(MonsterNum));
-		player.addMoney(sell.get(costIndex));
-		System.out.println("Bye-bye "+((Monster)monster).getName());
+		if ((getSize() > 1) &&
+				(MonsterNum < getSize() && MonsterNum < getSize()) && (MonsterNum >= 0 && MonsterNum >= 0)) {
+			List<Integer> sell = shop.getSell();
+			Object monster = getFriend(MonsterNum);
+			removeFriend(getFriend(MonsterNum));
+			player.addMoney(sell.get(costIndex));
+			System.out.println("Bye-bye "+((Monster)monster).getName());
+		} else {
+			System.out.println("can't sell");
+		}
 	}
 	/**
 	 * Returns the monsters in the team as a String.
@@ -132,7 +135,11 @@ public class Team extends Monster{
 	 * @param index2		The second monster to be swapped
 	 */
 	public void swap(int index1, int index2) {
-		Collections.swap(myTeam, index1, index2);
+		if ((index1 < getSize() && index2 < getSize()) && (index1 >= 0 && index2 >= 0)) {
+			Collections.swap(myTeam, index1, index2);
+		} else {
+			System.out.println("can't swap");
+		}
 	}
 	/**
 	 * Pushes the first monster to the last index in the team.

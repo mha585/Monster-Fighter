@@ -48,7 +48,7 @@ public class RandomEvent {
 	}
 	/**
 	 * Determines whether or not each monster in they player's party should leave.
-	 * This is dependent on the number of times each monster has fainter.
+	 * This is dependent on the number of times each monster has fainted.
 	 * 
 	 * @param team			The Player's party of monsters
 	 * @param faints		The number of times a monster has fainted
