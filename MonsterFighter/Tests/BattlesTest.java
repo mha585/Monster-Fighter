@@ -41,7 +41,7 @@ class BattlesTest {
 	}
 	
 	@Test
-	public void attackTest() {
+	public void attackTest() {		
 		testTeam.addFriend(new FireMonster("Fire test", 50.0, 5.0, 5.425, 20.0, 1, 150, 250, "fire"));
 		testTeam.addFriend(new GrassMonster("Grass test", 100.0, 5.0, 20.0, 25.0, 1, 150, 250, "grass"));
 		testTeam.addFriend(new FireMonster());

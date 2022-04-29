@@ -15,6 +15,7 @@ class ItemTest {
 	private Monster testEnemy;
 	private Shop testShop;
 	
+	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
 	private InputStream savedStandardInputStream = System.in;
 	private PrintStream savedStandardOut = System.out;
@@ -39,10 +40,71 @@ class ItemTest {
 	}
 	
 	@Test
-	public void addFriendToTeamTest() {
-	    System.setOut(savedStandardOut);
-	    testTeam.addFriend(new RandomMonster(testPlayer));
-	    assertEquals(1, (testTeam.getSize()));
+	public void useHealItem() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    itemUser.gainHealth(-20);
+	    assertEquals(80, (itemUser.getHealth()));
+	    Item itemToUse = new BasicHeal();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(100, (itemUser.getHealth()));
 	}
+	
+//	@Test
+//	public void megaHealHeals50() {
+//	}
+	
+//	@Test
+//	public void fullHealHealsToMax() {
+//	}
+	
+//	@Test
+//	public void cantHealPastMax() {
+//	}
+	
+//	@Test
+//	public void cantHealADeadMonster() {
+//	}
 
+	@Test
+	public void useAtkPlusItem() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    assertEquals(10, (itemUser.getDamage()));
+	    Item itemToUse = new AtkPlus();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(20, (itemUser.getDamage()));
+	}
+	
+//	@Test
+//	public void atkBoostIncreaseGoesAwayAfterBattle() {
+//	}
+	
+	@Test
+	public void useSpeedPlusItem() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    assertEquals(19, (itemUser.getSpeed()));
+	    Item itemToUse = new SpeedPlus();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(29, (itemUser.getSpeed()));
+	}
+	
+//	@Test
+//	public void speedBoostIncreaseGoesAwayAfterBattle() {
+//	}
+	
+//	@Test
+//	public void tierPlusTest() {
+//	check both the stats increase and the tier increases
+//	}
+	
+//	@Test
+//	public void reviveTest() {
+//	}
+	
+//	@Test
+//	public void reviveDontWorkOnLivingMonsterTest() {
+//	}
+	
+//	@Test
+//	public void itemGoesFromInventoryAfterUse() {
+//	}
 }
