@@ -39,10 +39,11 @@ class BossTest {
 	}
 	
 	@Test
-	public void addFriendToTeamTest() {
-	    System.setOut(savedStandardOut);
-	    testTeam.addFriend(new RandomMonster(testPlayer));
-	    assertEquals(1, (testTeam.getSize()));
+	public void testBoss() {
+	    Boss newBoss = new Boss(testPlayer);
+	    assertEquals(4, (newBoss.getSize()));
+	    assertEquals("Boss Miguel", newBoss.getFullName());
+	    assertEquals("Leviathan", newBoss.getEnemies().get(2).getName());
 	}
 
 }
