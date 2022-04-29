@@ -86,13 +86,14 @@ public class Player {
 	 * @param diff		The difficulty the game is set to
 	 */
 	public void setDifficulty(int diff) {
-		switch(diff) {
-			case 1:
-				playerDifficulty = "easy";
-			case 2:
-				playerDifficulty = "normal";
-			case 3:
-				playerDifficulty = "hard";
+		if (diff == 1) {
+			playerDifficulty = "easy";
+		}
+		else if (diff == 2) {
+			playerDifficulty = "normal";
+		}
+		else {
+			playerDifficulty = "hard";
 		}
 	}
 	/**
