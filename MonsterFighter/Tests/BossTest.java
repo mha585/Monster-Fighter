@@ -10,10 +10,8 @@ import org.junit.jupiter.api.Test;
 
 class BossTest {
 
-	private Team testTeam;
 	private Player testPlayer;
-	private Monster testEnemy;
-	private Shop testShop;
+	private Boss myBoss;
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
 	private InputStream savedStandardInputStream = System.in;
@@ -22,13 +20,12 @@ class BossTest {
 	
 	@BeforeEach
 	public void init() {
-		testTeam = new Team();
 		testPlayer = new Player();
-		testShop = new Shop();
 		testPlayer.setDay(1);
-		testPlayer.setDifficulty(1);
+		testPlayer.setDifficulty(7);
 		testPlayer.setName("tester");
-		
+	    myBoss = new Boss(testPlayer);
+
 	    System.setOut(new PrintStream(outputStreamContent));
     }
 	
@@ -40,10 +37,13 @@ class BossTest {
 	
 	@Test
 	public void testBoss() {
-	    Boss newBoss = new Boss(testPlayer);
-	    assertEquals(4, (newBoss.getSize()));
-	    assertEquals("Boss Miguel", newBoss.getFullName());
-	    assertEquals("Leviathan", newBoss.getEnemies().get(2).getName());
+	    assertEquals(4, (myBoss.getSize()));
+	    assertEquals("Boss Miguel", myBoss.getFullName());
+	    assertEquals("Leviathan", myBoss.getEnemies().get(2).getName());
+	    myBoss.printBossFight();
+
+	    String fight = outputStreamContent.toString();
+	    assertEquals(700, fight.length());
 	}
 
 }
