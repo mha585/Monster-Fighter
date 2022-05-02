@@ -1,6 +1,9 @@
 
 public class MonsterManager {
-	private static Player newPlayer = new Player();
+	private Player newPlayer = new Player();
+	private Battles battle = new Battles();
+	private Shop newShop = new Shop();
+//	private Inventory bag = newPlayer.getInventory();
 	
 	public void launchHomeScreen() {
 		HomeScreen mainWindow = new HomeScreen(this);
@@ -8,6 +11,14 @@ public class MonsterManager {
 	
 	public void closeHomeScreen(HomeScreen homeWindow) {
 		homeWindow.closeWindow();
+	}
+	
+	public void launchChooseMonsterScreen() {
+		ChooseMonsterScreen chooseWindow = new ChooseMonsterScreen(this);
+	}
+	
+	public void closeChooseMonsterScreen(ChooseMonsterScreen chooseWindow) {
+		chooseWindow.closeWindow();
 	}
 	
 	public void launchBattleScreen() {
@@ -18,9 +29,18 @@ public class MonsterManager {
 		battleWindow.closeWindow();
 	}
 	
-	public static Player getPlayer() {
+	public void launchTeamScreen() {
+		TeamScreen teamWindow = new TeamScreen(this);
+	}
+	
+	public void closeTeamScreen(TeamScreen teamWindow) {
+		teamWindow.closeWindow();
+	}
+	
+	public Player getPlayer() {
 		return newPlayer;
 	}
+	
 //	public void launchSetupScreen() {
 //		SetupScreen mainWindow = new SetupScreen(this);
 //	}
@@ -31,8 +51,6 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
-//		test line delete later;
-		getPlayer().getTeam().addFriend(new HolyMonster("Holy test", 50.0, 5.0, 10, 20.0, 1, 150, 100, "Holy"));
 		manager.launchHomeScreen();
 	}
 }

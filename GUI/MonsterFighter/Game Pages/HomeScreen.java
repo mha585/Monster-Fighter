@@ -6,6 +6,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class HomeScreen {
 
@@ -40,6 +41,7 @@ public class HomeScreen {
 	public void closeWindow() {
 		homeScreen.dispose();
 	}
+	
 	public void finishedWindow() {
 		manager.closeHomeScreen(this);
 	}
@@ -60,20 +62,43 @@ public class HomeScreen {
 				manager.launchBattleScreen();
 			}
 		});
+		
+		JButton btnResizableButtonTo = new JButton("Static button to test the choose monster screen");
+		btnResizableButtonTo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchChooseMonsterScreen();
+			}
+		});
+		
+		JLabel lblNewLabel = new JLabel("Careful this crashes if team has no monsters in it!!");
 		GroupLayout groupLayout = new GroupLayout(homeScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(346)
-					.addComponent(btnBattle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(365))
+					.addGap(128)
+					.addComponent(btnResizableButtonTo)
+					.addContainerGap(559, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(517)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnBattle, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+							.addGap(194))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(238)
-					.addComponent(btnBattle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(290))
+					.addGap(211)
+					.addComponent(btnResizableButtonTo, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+					.addGap(111)
+					.addComponent(btnBattle, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(146))
 		);
 		homeScreen.getContentPane().setLayout(groupLayout);
 	}

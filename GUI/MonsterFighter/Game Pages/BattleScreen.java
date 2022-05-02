@@ -179,8 +179,10 @@ public class BattleScreen {
 		JButton btnTeam = new JButton("Monsters");
 		btnTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblCurrentName.setText(manager.getPlayer().getTeam().getFriend(0).getName());
-				lblName.setText("this is a test");
+				closeWindow();
+				manager.launchTeamScreen();
+//				lblCurrentName.setText(manager.getPlayer().getTeam().getFriend(0).getName());
+//				lblName.setText("this is a test");
 			}
 		});
 		
