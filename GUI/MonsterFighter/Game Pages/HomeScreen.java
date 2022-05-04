@@ -59,7 +59,7 @@ public class HomeScreen {
 		btnBattle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchBattleScreen();
+				manager.launchBattleScreen(new RandomMonster(manager.getPlayer()));
 			}
 		});
 		

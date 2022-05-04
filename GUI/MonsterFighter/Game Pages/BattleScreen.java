@@ -15,11 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public class BattleScreen {
 
 	private JFrame battleScreen;
 	private MonsterManager manager;
+	private Monster LeadingMonster;
+	private Monster enemyMonster;
 
 //	/**
 //	 * Launch the application.
@@ -41,8 +45,10 @@ public class BattleScreen {
 	/**
 	 * Create the application.
 	 */
-	public BattleScreen(MonsterManager incomingManager) {
+	public BattleScreen(MonsterManager incomingManager, Monster enemy) {
 		manager = incomingManager;
+		enemyMonster = enemy;
+		LeadingMonster = manager.getPlayer().getTeam().getFriend(0);
 		initialize();
 		battleScreen.setVisible(true);
 	}
@@ -53,23 +59,29 @@ public class BattleScreen {
 	public void finishedWindow() {
 		manager.closeBattleScreen(this);
 	}
-
+	
+	public void setStatLabels(Monster monster, JLabel lblCurrentName, JLabel lblCurrentHealth, JLabel lblMaxHealth) {
+		lblCurrentName.setText(monster.getName());
+		
+		Double currentHealth = (monster.getHealth());
+		lblCurrentHealth.setText(currentHealth.toString());
+		
+		Double maxHealth = (monster.getMaxHealth());
+		lblMaxHealth.setText(maxHealth.toString());
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		battleScreen = new JFrame();
-		battleScreen.setTitle("MonsterFighter Battle");
+		battleScreen.setTitle("Fight!");
 		battleScreen.setBounds(100, 100, 960, 540);
 		battleScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JLabel lblCurrentHealth = new JLabel("99");
-		
-		JLabel lblMaxHealth = new JLabel("100");
+		Double currentHealth = (LeadingMonster.getHealth());
+		Double maxHealth = (LeadingMonster.getMaxHealth());
 		
 		JPanel panelButtons = new JPanel();
-		
-		JLabel lblSlash = new JLabel("/");
 		
 		JPanel pannelMonsters = new JPanel();
 		
@@ -82,26 +94,24 @@ public class BattleScreen {
 		gl_pannelMonsters.setHorizontalGroup(
 			gl_pannelMonsters.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pannelMonsters.createSequentialGroup()
-					.addContainerGap(39, Short.MAX_VALUE)
-					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pannelMonsters.createSequentialGroup()
-							.addComponent(btnTempMonsterImage)
-							.addGap(150)
-							.addComponent(btnEnemyImageGoes, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-							.addGap(252))
-						.addGroup(Alignment.TRAILING, gl_pannelMonsters.createSequentialGroup()
-							.addComponent(btnQuit)
-							.addGap(55))))
+					.addGap(40)
+					.addComponent(btnTempMonsterImage)
+					.addPreferredGap(ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+					.addComponent(btnEnemyImageGoes, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
+					.addGap(80)
+					.addComponent(btnQuit)
+					.addGap(55))
 		);
 		gl_pannelMonsters.setVerticalGroup(
 			gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pannelMonsters.createSequentialGroup()
 					.addGap(10)
-					.addComponent(btnQuit, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEnemyImageGoes, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnTempMonsterImage, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnTempMonsterImage, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnEnemyImageGoes, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnQuit, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+					.addGap(99))
 		);
 		pannelMonsters.setLayout(gl_pannelMonsters);
 		
@@ -110,69 +120,138 @@ public class BattleScreen {
 		JLabel lblName = new JLabel("Name:");
 		
 		JLabel lblCurrentName = new JLabel("");
-		lblCurrentName.setText(manager.getPlayer().getTeam().getFriend(0).getName());
+		
+		JLabel lblMyHealth = new JLabel("Health:");
+		
+		JLabel lblCurrentHealth = new JLabel("0.0");
+		
+		JLabel lblSlash = new JLabel("/");
+		
+		JLabel lblMaxHealth = new JLabel("0.0");
+		
+		setStatLabels(LeadingMonster, lblCurrentName, lblCurrentHealth, lblMaxHealth);
+		
+		JLabel lblName_1 = new JLabel("Name:");
+		
+		JLabel lblMyHealth_1 = new JLabel("Health:");
+		
+		JLabel lblCurrentName_1 = new JLabel((String) null);
+		
+		JLabel lblCurrentHealth_1 = new JLabel("0.0");
+		
+		JLabel lblSlash_1 = new JLabel("/");
+		
+		JLabel lblMaxHealth_1 = new JLabel("0.0");
+		
+		setStatLabels(enemyMonster, lblCurrentName_1, lblCurrentHealth_1, lblMaxHealth_1);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
 		
 		GroupLayout gl_panelWords = new GroupLayout(panelWords);
 		gl_panelWords.setHorizontalGroup(
 			gl_panelWords.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelWords.createSequentialGroup()
 					.addGap(22)
-					.addComponent(lblName)
+					.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblName)
+						.addComponent(lblMyHealth, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(lblCurrentName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(429))
+					.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addComponent(lblCurrentName, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+							.addGap(96))
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addComponent(lblCurrentHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(lblSlash, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(lblMaxHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+							.addGap(79)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 12, GroupLayout.PREFERRED_SIZE)
+					.addGap(73)
+					.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addComponent(lblName_1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+							.addGap(30)
+							.addComponent(lblCurrentName_1, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+							.addGap(17))
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addComponent(lblMyHealth_1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lblCurrentHealth_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(lblSlash_1, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(lblMaxHealth_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
+					.addGap(76))
 		);
 		gl_panelWords.setVerticalGroup(
-			gl_panelWords.createParallelGroup(Alignment.LEADING)
+			gl_panelWords.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelWords.createSequentialGroup()
-					.addGap(30)
-					.addGroup(gl_panelWords.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblName)
-						.addComponent(lblCurrentName, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(161, Short.MAX_VALUE))
+					.addGap(17)
+					.addGroup(gl_panelWords.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addGroup(gl_panelWords.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblName)
+								.addComponent(lblCurrentName, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMyHealth)
+								.addComponent(lblCurrentHealth)
+								.addComponent(lblSlash)
+								.addComponent(lblMaxHealth)))
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblCurrentName_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblName_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(11)
+							.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMyHealth_1)
+								.addComponent(lblCurrentHealth_1)
+								.addComponent(lblSlash_1)
+								.addComponent(lblMaxHealth_1))))
+					.addGap(163))
+				.addGroup(gl_panelWords.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(separator, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
 		);
 		panelWords.setLayout(gl_panelWords);
 		GroupLayout groupLayout = new GroupLayout(battleScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblCurrentHealth, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblSlash)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblMaxHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(panelButtons, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-							.addGap(18)
-							.addComponent(panelWords, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(171)))
-					.addGap(0))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(105, Short.MAX_VALUE)
+					.addComponent(panelButtons, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(panelWords, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(171))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(109, Short.MAX_VALUE)
 					.addComponent(pannelMonsters, GroupLayout.PREFERRED_SIZE, 757, GroupLayout.PREFERRED_SIZE)
 					.addGap(82))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCurrentHealth)
-						.addComponent(lblSlash)
-						.addComponent(lblMaxHealth))
-					.addGap(8)
-					.addComponent(pannelMonsters, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+					.addGap(33)
+					.addComponent(pannelMonsters, GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
 					.addGap(29)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelWords, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-						.addComponent(panelButtons, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+						.addComponent(panelWords, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panelButtons, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
 					.addGap(0))
 		);
 		
 		JButton btnFight = new JButton("Fight");
+		btnFight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				LeadingMonster.gainHealth(-10);
+				manager.getBattle().attack(LeadingMonster, enemyMonster, manager.getPlayer().getTeam(), true);
+				Double currentHealth = (LeadingMonster.getHealth());
+				lblCurrentHealth.setText(currentHealth.toString());
+			}
+		});
 		
 		JButton btnHeal = new JButton("Heal");
 		

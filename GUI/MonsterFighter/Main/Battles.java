@@ -46,42 +46,7 @@ public class Battles {
 		}
 	}
 	/**
-	 * Battles your team of Monsters with an enemy Monster
-	 * the battle continues until either the player is out of Monsters or the enemy is dead
-	 * gets user input to allow the user to switch which monster is fighting,
-	 * heal itself, use items, fight or switch the team positions around.
-	 * Returns true if the player still has a living team at the end of the battle.
-	 * Returns false if all the players monsters are dead by the end of the battle.
-	 * @param friends		The current team of Monsters the Player has
-	 * @param badGuy		The enemy the player is fighting
-	 */
-	public boolean fight(Team friends, Monster badGuy, Inventory playerInventory, Scanner action) {
-		int fighterIndex = 0;
-//		Scanner action = new Scanner(System.in);
-		printEnemyAndTeamStats(badGuy, friends);
-		while ((badGuy.getHealth() > 0) && friends.sumTeamHealth() > 0) {
-			String givenAction = action.nextLine();
-			if (givenAction.toLowerCase().trim().equals("fight")) {
-				attack(friends.getFriend(fighterIndex), badGuy, friends, true);
-			} else if (givenAction.toLowerCase().trim().equals("switch")) {
-				swap(badGuy, friends, action);
-			} else if (givenAction.toLowerCase().trim().equals("heal")) {
-				heal(friends.getFriend(fighterIndex), badGuy, friends, action);
-			} else if (givenAction.toLowerCase().trim().equals("items")) {
-				useItem(friends, badGuy, playerInventory, action);
-			} else {
-				System.out.println("\n-------------------------------------\n");
-				System.out.println("Sorry your command wasn't understood\n");
-				System.out.println("Please select a action. \nType either Fight, Switch, Heal or Items.");
-			}
-		}
-		if ((badGuy.getHealth() <= 0) && friends.getSize() > 0) {
-			return true;
-		}
-		return false;
-	}
-	/**
-	 * Gets called when the user inputs "attack".
+	 * Gets called when the user clicks btnFight.
 	 * Checks the effectiveness of the current attack then multiplies the damage by that
 	 * If the attack is one sided (aka the friend is either healing, switching or using an item)
 	 * then only the enemy attack as the player has already used their turn.
@@ -128,7 +93,6 @@ public class Battles {
 							friends.getFriend(indexOfSecondMonster - 1).getHealth() != 0) {
 						friends.swap(indexOfFirstMonster - 1, indexOfSecondMonster - 1);
 						attack(friends.getFriend(0), badGuy, friends, false);
-						printEnemyAndTeamStats(badGuy, friends);
 						isSwapped = true;
 					} else {
 						throw new InvalidInputException();
@@ -161,7 +125,7 @@ public class Battles {
 		}
 	}
 	/**
-	 * Gets called when the user inputs "heal".
+	 * Gets called when the user clicks btnHeal.
 	 * Allows the monster in position 1 to heal any monster (including itself) in the team
 	 * This will use the players turn and cause a one sided attack by the enemy monster against the friend
 	 * Checks that the index of the monster to heal is in a valid range else will ask the user to input another valid command
@@ -180,7 +144,6 @@ public class Battles {
 				if ((Character.isDigit(friendToHealIndex.charAt(0)) == true) && (Integer.parseInt(friendToHealIndex) <= friends.getSize()) && (Integer.parseInt(friendToHealIndex) > 0)) {
 					friends.getFriend(Integer.parseInt(friendToHealIndex) - 1).gainHealth(friend.getHealAmount());
 					attack(friend, badGuy, friends, false);
-					printEnemyAndTeamStats(badGuy, friends);
 					isHealed = true;
 				} else {
 					throw new InvalidInputException();
@@ -220,7 +183,6 @@ public class Battles {
 	 */
 	public void useItem(Team friends, Monster badGuy, Inventory playerInventory, Scanner itemNumber) {
 		if (playerInventory.getSize() <= 0) {
-			printEnemyAndTeamStats(badGuy, friends);
 			System.out.println("You have no items left to use");
 		} else {
 			
@@ -240,7 +202,6 @@ public class Battles {
 							playerInventory.getItem(itemToUseIndex - 1).useItem(friends.getFriend(monsterToUseItemOnIndex - 1));
 							playerInventory.removeBag(itemToUseIndex - 1, 1);
 							attack(friends.getFriend(0), badGuy, friends, false);
-							printEnemyAndTeamStats(badGuy, friends);
 							isUsed = true;
 						} else {
 							System.out.println("Input must be a number from 1 to " + friends.getSize());
@@ -310,19 +271,6 @@ public class Battles {
 		return true;
 	}
 	/**
-	 * Prints the stats of both the enemy and the players team.
-	 * If the health of the enemy is less than or equal to 0 it returns false else returns true.
-	 * @param badGuy		The enemy that stats get printed
-	 * @param friends		The current team of monsters the player has
-	 */
-	public void printEnemyAndTeamStats(Monster badGuy, Team friends) {
-		System.out.println("The enemies current stats:\n");
-		System.out.println(badGuy + "\n\n-------------------------------------\n");
-		System.out.println("Your teams current stats:\n");
-		System.out.println(friends);
-		System.out.println("Please select a action. \nType either Fight, Switch, Heal or Items.");
-	}
-	/**
 	 * Considers the speed of the enemy and friend before performing an attack.
 	 * The monster with the fastest speed will attack first.
 	 * If the Monster that gets attacked first dies then the other monster does not get attacked.
@@ -345,10 +293,7 @@ public class Battles {
 				badGuy.gainHealth((-1 * friend.getDamage()) * friendAttackMultiplier);
 				checkEnemysHealth(badGuy, friend, friends);
 			}
-		}
-		if ((badGuy.getHealth() > 0) && friends.sumTeamHealth() > 0) {
-			printEnemyAndTeamStats(badGuy, friends);
-		}
+		} 
 	}
 	/**
 	 * Performs a one sided attack so that only the badGuy gets to attack the friend.
