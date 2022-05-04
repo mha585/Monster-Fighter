@@ -3,6 +3,7 @@ public class MonsterManager {
 	private Player newPlayer = new Player();
 	private Battles newbattle = new Battles();
 	private Shop newShop = new Shop();
+	private Monster enemy;
 //	private Inventory bag = newPlayer.getInventory();
 	
 	public void launchHomeScreen() {
@@ -21,8 +22,8 @@ public class MonsterManager {
 		chooseWindow.closeWindow();
 	}
 	
-	public void launchBattleScreen(Monster enemyMonster) {
-		BattleScreen battleWindow = new BattleScreen(this, enemyMonster);
+	public void launchBattleScreen() {
+		BattleScreen battleWindow = new BattleScreen(this, enemy);
 	}
 	
 	public void closeBattleScreen(BattleScreen battleWindow) {
@@ -43,6 +44,10 @@ public class MonsterManager {
 	
 	public Battles getBattle() {
 		return newbattle;
+	}
+	
+	public void setEnemy(Monster myEnemy) {
+		enemy = myEnemy;
 	}
 	
 //	public void launchSetupScreen() {

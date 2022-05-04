@@ -539,7 +539,7 @@ public class TeamScreen {
 				closeWindow();
 //				Returns to the battle screen needs a if statement to get to the previous page not just battles
 //				and need to ensure enemy monster is the same
-				manager.launchBattleScreen(new RandomMonster(manager.getPlayer()));
+				manager.launchBattleScreen();
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(teamScreen.getContentPane());

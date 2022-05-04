@@ -64,7 +64,8 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(grassMonsterToAdd);
 				closeWindow();
-				manager.launchBattleScreen(new RandomMonster(manager.getPlayer()));
+				manager.setEnemy(new RandomMonster(manager.getPlayer()));
+				manager.launchBattleScreen();
 			}
 		});
 		
@@ -73,7 +74,8 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(fireMonsterToAdd);
 				closeWindow();
-				manager.launchBattleScreen(new RandomMonster(manager.getPlayer()));
+				manager.setEnemy(new RandomMonster(manager.getPlayer()));
+				manager.launchBattleScreen();
 			}
 		});
 		
@@ -82,7 +84,8 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(waterMonsterToAdd);
 				closeWindow();
-				manager.launchBattleScreen(new RandomMonster(manager.getPlayer()));
+				manager.setEnemy(new RandomMonster(manager.getPlayer()));
+				manager.launchBattleScreen();
 			}
 		});
 		
