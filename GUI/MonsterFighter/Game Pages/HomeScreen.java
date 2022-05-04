@@ -55,7 +55,7 @@ public class HomeScreen {
 		homeScreen.setBounds(100, 100, 960, 590);
 		homeScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnChooseMonster = new JButton("Resizable button to test the choose monster screen");
+		JButton btnChooseMonster = new JButton("Choose your first monster");
 		btnChooseMonster.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
@@ -65,17 +65,17 @@ public class HomeScreen {
 		GroupLayout groupLayout = new GroupLayout(homeScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(128)
-					.addComponent(btnChooseMonster, GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-					.addGap(478))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGap(338)
+					.addComponent(btnChooseMonster, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+					.addGap(333))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(211)
-					.addComponent(btnChooseMonster, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-					.addGap(317))
+					.addGap(258)
+					.addComponent(btnChooseMonster, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(270))
 		);
 		homeScreen.getContentPane().setLayout(groupLayout);
 	}
