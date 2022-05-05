@@ -135,7 +135,8 @@ public class Team extends Monster{
 	 * @param index2		The second monster to be swapped
 	 */
 	public void swap(int index1, int index2) {
-		if ((index1 < getSize() && index2 < getSize()) && (index1 >= 0 && index2 >= 0)) {
+		if ((index1 < getSize() && index2 < getSize()) && (index1 >= 0 && index2 >= 0) && 
+				((getFriend(index1).getHealth() > 0) && (getFriend(index2).getHealth() > 0))) {
 			Collections.swap(myTeam, index1, index2);
 		} else {
 			System.out.println("can't swap");

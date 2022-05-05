@@ -102,176 +102,6 @@ public class TeamScreen {
 		teamScreen.setBounds(100, 100, 960, 590);
 		teamScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panelMonster1 = new JPanel();
-		
-		JLabel lblSpeed = new JLabel("");
-		
-		JLabel lblHealth = new JLabel("");
-		
-		JLabel lblHealAmount = new JLabel("");
-		
-		JLabel lblType = new JLabel("");
-		
-		JLabel lblExp = new JLabel("");
-		
-		JLabel lblCurrentExp = new JLabel("");
-		
-		JLabel lblMaxExp = new JLabel("");
-		
-		JLabel lblCurrentType = new JLabel("");
-		
-		JLabel lblCurrentHealAmount = new JLabel("");
-		
-		JLabel lblCurrentName = new JLabel("None");
-		lblCurrentName.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
-		JLabel lblCurrentHealth = new JLabel("");
-		
-		JLabel lblSlash = new JLabel("");
-		
-		JLabel lblMaxHealth = new JLabel("");
-		
-		JLabel lblCurrentSpeed = new JLabel("");
-		
-		JLabel lblAttack = new JLabel("");
-		
-		JLabel lblTier = new JLabel("");
-		
-		JLabel lblCurrentTier = new JLabel("");
-		
-		JLabel lblCurrentAttack = new JLabel("");
-		
-		JSeparator separator = new JSeparator();
-		
-		JSeparator separator_1 = new JSeparator();
-		
-		JButton btnReturn = new JButton("Return");
-		btnReturn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				closeWindow();
-//				Returns to the battle screen needs a if statement to get to the previous page not just battles
-//				and need to ensure enemy monster is the same
-				manager.launchBattleScreen();
-			}
-		});
-		
-		JButton btnNewButton = new JButton("Switch");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				manager.getPlayer().getTeam().swap(0, 1);
-				closeWindow();
-				manager.launchTeamScreen();
-			}
-		});
-		
-		GroupLayout gl_panelMonster1 = new GroupLayout(panelMonster1);
-		gl_panelMonster1.setHorizontalGroup(
-			gl_panelMonster1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelMonster1.createSequentialGroup()
-					.addComponent(separator, GroupLayout.DEFAULT_SIZE, 1206, Short.MAX_VALUE)
-					.addGap(3))
-				.addGroup(gl_panelMonster1.createSequentialGroup()
-					.addComponent(separator_1, GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
-					.addGap(396))
-				.addGroup(gl_panelMonster1.createSequentialGroup()
-					.addGap(43)
-					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelMonster1.createSequentialGroup()
-							.addComponent(lblExp, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblCurrentExp, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-							.addGap(2)
-							.addComponent(lblMaxExp, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panelMonster1.createSequentialGroup()
-							.addComponent(lblTier, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblCurrentTier, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblCurrentName, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-					.addGap(68)
-					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panelMonster1.createSequentialGroup()
-							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelMonster1.createSequentialGroup()
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblSpeed, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblHealth, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-									.addGap(22)
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panelMonster1.createSequentialGroup()
-											.addComponent(lblCurrentSpeed, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-											.addGap(327)
-											.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblCurrentAttack, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_panelMonster1.createSequentialGroup()
-											.addComponent(lblCurrentHealth, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-											.addGap(2)
-											.addComponent(lblSlash)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(lblMaxHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-											.addGap(352)
-											.addComponent(btnReturn, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))))
-								.addComponent(lblAttack, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-							.addGap(395))
-						.addGroup(gl_panelMonster1.createSequentialGroup()
-							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblHealAmount)
-								.addComponent(lblType, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-							.addGap(22)
-							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblCurrentType, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblCurrentHealAmount)))))
-		);
-		gl_panelMonster1.setVerticalGroup(
-			gl_panelMonster1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelMonster1.createSequentialGroup()
-					.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelMonster1.createSequentialGroup()
-							.addGap(13)
-							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(gl_panelMonster1.createSequentialGroup()
-									.addComponent(lblCurrentName)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblTier)
-										.addComponent(lblCurrentTier))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblExp)
-										.addComponent(lblCurrentExp)
-										.addComponent(lblMaxExp)))
-								.addGroup(gl_panelMonster1.createSequentialGroup()
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblHealth)
-										.addComponent(lblSlash)
-										.addComponent(lblMaxHealth)
-										.addComponent(lblCurrentHealth))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblAttack)
-										.addComponent(lblCurrentAttack))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblSpeed)
-										.addComponent(lblCurrentSpeed))))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblHealAmount)
-								.addComponent(lblCurrentHealAmount))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblType)
-								.addComponent(lblCurrentType)))
-						.addGroup(gl_panelMonster1.createSequentialGroup()
-							.addGap(12)
-							.addComponent(btnReturn)
-							.addGap(4)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE))
-		);
-		panelMonster1.setLayout(gl_panelMonster1);
-		
 		JPanel panelMonster2 = new JPanel();
 		
 		JLabel lblExp_1 = new JLabel("");
@@ -666,31 +496,299 @@ public class TeamScreen {
 					.addComponent(separator_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		panelMonster4.setLayout(gl_panelMonster4);
+		
+		JButton btnSwapFirstDown = new JButton("↓");
+		btnSwapFirstDown.setVisible(false);
+		if (manager.getPlayer().getTeam().getSize() > 1) {
+			btnSwapFirstDown.setVisible(true);
+			btnSwapFirstDown.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					manager.getPlayer().getTeam().swap(0, 1);
+					closeWindow();
+					manager.launchTeamScreen();
+				}
+			});
+		}
+		JPanel panelMonster1 = new JPanel();
+		
+		JLabel lblExp = new JLabel("");
+		
+		JLabel lblCurrentExp = new JLabel("");
+		
+		JLabel lblMaxExp = new JLabel("");
+		
+		JLabel lblTier = new JLabel("");
+		
+		JLabel lblCurrentTier = new JLabel("");
+		
+		JLabel lblCurrentName = new JLabel("None");
+		lblCurrentName.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JLabel lblSpeed = new JLabel("");
+		
+		JLabel lblHealth = new JLabel("");
+		
+		JLabel lblCurrentHealth = new JLabel("");
+		
+		JLabel lblSlash = new JLabel("");
+		
+		JLabel lblMaxHealth = new JLabel("");
+		
+		JLabel lblCurrentSpeed = new JLabel("");
+		
+		JLabel lblCurrentAttack = new JLabel("");
+		
+		JLabel lblAttack = new JLabel("");
+		
+		JLabel lblHealAmount = new JLabel("");
+		
+		JLabel lblType = new JLabel("");
+		
+		JLabel lblCurrentType = new JLabel("");
+		
+		JLabel lblCurrentHealAmount = new JLabel("");
+		
+		JSeparator separator = new JSeparator();
+		GroupLayout gl_panelMonster1 = new GroupLayout(panelMonster1);
+		gl_panelMonster1.setHorizontalGroup(
+			gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 859, Short.MAX_VALUE)
+				.addGroup(gl_panelMonster1.createSequentialGroup()
+					.addGap(43)
+					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelMonster1.createSequentialGroup()
+							.addComponent(lblExp, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblCurrentExp, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+							.addGap(2)
+							.addComponent(lblMaxExp, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelMonster1.createSequentialGroup()
+							.addComponent(lblTier, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblCurrentTier, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblCurrentName, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+					.addGap(68)
+					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelMonster1.createSequentialGroup()
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblSpeed, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblHealth, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+							.addGap(22)
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelMonster1.createSequentialGroup()
+									.addComponent(lblCurrentHealth, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+									.addGap(2)
+									.addComponent(lblSlash)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblMaxHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblCurrentSpeed, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCurrentAttack, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(lblAttack, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelMonster1.createSequentialGroup()
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblHealAmount)
+								.addComponent(lblType, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+							.addGap(22)
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblCurrentType, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCurrentHealAmount))))
+					.addGap(837))
+				.addGroup(gl_panelMonster1.createSequentialGroup()
+					.addComponent(separator, GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+					.addGap(396))
+		);
+		gl_panelMonster1.setVerticalGroup(
+			gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 126, Short.MAX_VALUE)
+				.addGroup(gl_panelMonster1.createSequentialGroup()
+					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
+					.addGap(13)
+					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_panelMonster1.createSequentialGroup()
+							.addComponent(lblCurrentName)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTier)
+								.addComponent(lblCurrentTier))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblExp)
+								.addComponent(lblCurrentExp)
+								.addComponent(lblMaxExp)))
+						.addGroup(gl_panelMonster1.createSequentialGroup()
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblHealth)
+								.addComponent(lblSlash)
+								.addComponent(lblMaxHealth)
+								.addComponent(lblCurrentHealth))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblAttack)
+								.addComponent(lblCurrentAttack))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblSpeed)
+								.addComponent(lblCurrentSpeed))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblHealAmount)
+						.addComponent(lblCurrentHealAmount))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelMonster1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblType)
+						.addComponent(lblCurrentType))
+					.addContainerGap(67, Short.MAX_VALUE))
+		);
+		panelMonster1.setLayout(gl_panelMonster1);
+		
+		JButton btnSwapSecondDown = new JButton("↓");
+		btnSwapSecondDown.setVisible(false);
+		if (manager.getPlayer().getTeam().getSize() > 2) {
+			btnSwapSecondDown.setVisible(true);
+			btnSwapSecondDown.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					manager.getPlayer().getTeam().swap(1, 2);
+					closeWindow();
+					manager.launchTeamScreen();
+				}
+			});
+		}
+		
+		JButton btnSwapSecondUp = new JButton("↑");
+		btnSwapSecondUp.setVisible(false);
+		if (manager.getPlayer().getTeam().getSize() > 1) {
+			btnSwapSecondUp.setVisible(true);
+			btnSwapSecondUp.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					manager.getPlayer().getTeam().swap(0, 1);
+					closeWindow();
+					manager.launchTeamScreen();
+				}
+			});
+		}
+		
+		JButton btnSwapThirdDown = new JButton("↓");
+		btnSwapThirdDown.setVisible(false);
+		if (manager.getPlayer().getTeam().getSize() > 3) {
+			btnSwapThirdDown.setVisible(true);
+			btnSwapThirdDown.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					manager.getPlayer().getTeam().swap(2, 3);
+					closeWindow();
+					manager.launchTeamScreen();
+				}
+			});
+		}
+		
+		JButton btnSwapThirdUp = new JButton("↑");
+		btnSwapThirdUp.setVisible(false);
+		if (manager.getPlayer().getTeam().getSize() > 2) {
+			btnSwapThirdUp.setVisible(true);
+			btnSwapThirdUp.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					manager.getPlayer().getTeam().swap(1, 2);
+					closeWindow();
+					manager.launchTeamScreen();
+				}
+			});
+		}
+		
+		JButton btnSwapFourthUp = new JButton("↑");
+		btnSwapFourthUp.setVisible(false);
+		if (manager.getPlayer().getTeam().getSize() > 3) {
+			btnSwapFourthUp.setVisible(true);
+			btnSwapFourthUp.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					manager.getPlayer().getTeam().swap(2, 3);
+					closeWindow();
+					manager.launchTeamScreen();
+				}
+			});
+		}
+		
+		JPanel panelExitPadding = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(teamScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(45)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelMonster4, GroupLayout.PREFERRED_SIZE, 859, Short.MAX_VALUE)
-						.addComponent(panelMonster3, GroupLayout.PREFERRED_SIZE, 859, Short.MAX_VALUE)
-						.addComponent(panelMonster2, GroupLayout.PREFERRED_SIZE, 859, Short.MAX_VALUE)
-						.addComponent(panelMonster1, GroupLayout.PREFERRED_SIZE, 859, Short.MAX_VALUE))
-					.addGap(40))
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnSwapFirstDown)
+						.addComponent(btnSwapSecondUp, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+						.addComponent(btnSwapSecondDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSwapThirdUp, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSwapThirdDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnSwapFourthUp, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panelMonster1, GroupLayout.PREFERRED_SIZE, 824, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panelMonster4, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+								.addComponent(panelMonster3, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 823, Short.MAX_VALUE)
+								.addComponent(panelMonster2, GroupLayout.PREFERRED_SIZE, 823, Short.MAX_VALUE))
+							.addGap(1)))
+					.addGap(6)
+					.addComponent(panelExitPadding, GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE)
+					.addGap(6))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelMonster1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelMonster2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelMonster3, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelMonster4, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(18, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panelMonster1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+							.addGap(8)
+							.addComponent(panelMonster2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panelMonster3, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panelMonster4, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panelExitPadding, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+							.addGap(23)
+							.addComponent(btnSwapFirstDown, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addGap(59)
+							.addComponent(btnSwapSecondUp, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSwapSecondDown, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addGap(62)
+							.addComponent(btnSwapThirdUp, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSwapThirdDown, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addGap(66)
+							.addComponent(btnSwapFourthUp, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(16, Short.MAX_VALUE))
 		);
+		
+		JButton btnReturn_1 = new JButton("X");
+		btnReturn_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+//				Returns to the battle screen needs a if statement to get to the previous page not just battles
+//				and need to ensure enemy monster is the same
+				manager.launchBattleScreen();
+			}
+		});
+		GroupLayout gl_panelExitPadding = new GroupLayout(panelExitPadding);
+		gl_panelExitPadding.setHorizontalGroup(
+			gl_panelExitPadding.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelExitPadding.createSequentialGroup()
+					.addGap(1)
+					.addComponent(btnReturn_1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelExitPadding.setVerticalGroup(
+			gl_panelExitPadding.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelExitPadding.createSequentialGroup()
+					.addGap(6)
+					.addComponent(btnReturn_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelExitPadding.setLayout(gl_panelExitPadding);
 		
 		if (manager.getPlayer().getTeam().getSize() == 1) {
 			setTitles(lblHealth, lblAttack, lblSlash, lblSpeed, lblHealAmount, lblType, lblMaxExp, lblExp, lblTier);
