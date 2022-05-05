@@ -811,7 +811,7 @@ public class TeamScreen {
 			setStats(manager.getPlayer().getTeam(), 1, lblCurrentName_1, lblCurrentHealth_1, lblCurrentAttack_1, lblMaxHealth_1, 
 					lblCurrentSpeed_1, lblCurrentHealAmount_1, lblCurrentType_1, lblCurrentExp_1, lblCurrentTier_1);
 			
-			setTitles(lblHealth, lblAttack, lblSlash, lblSpeed, lblHealAmount, lblType, lblMaxExp, lblExp, lblTier);
+			setTitles(lblHealth_2, lblAttack_2, lblSlash_2, lblSpeed_2, lblHealAmount_2, lblType_2, lblMaxExp_2, lblExp_2, lblTier_2);
 			setStats(manager.getPlayer().getTeam(), 2, lblCurrentName_2, lblCurrentHealth_2, lblCurrentAttack_2, lblMaxHealth_2, 
 					lblCurrentSpeed_2, lblCurrentHealAmount_2, lblCurrentType_2, lblCurrentExp_2, lblCurrentTier_2);
 			
