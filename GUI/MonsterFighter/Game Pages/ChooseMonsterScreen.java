@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 
 public class ChooseMonsterScreen {
 
@@ -17,6 +18,10 @@ public class ChooseMonsterScreen {
 	private FireMonster fireMonsterToAdd = new FireMonster("Fireguy", 50.0, 5.0, 20.0, 20.0, 1, 150, 250, "A strong fire type Monster capable of burning down buildings.");
 	private GrassMonster grassMonsterToAdd = new GrassMonster("Grassdude", 70, 5.0, 10.0, 20.0, 1, 150, 250, "A strong grass type Monster. It is said that they dwell in the deapest parts of the jungle.");
 	private WaterMonster waterMonsterToAdd = new WaterMonster("Waterman", 60, 5.0, 15.0, 20.0, 1, 150, 250, "A strong water type Monster. These streamline monsters are known to have existed before humans.");
+	/**
+	 * @wbp.nonvisual location=956,-36
+	 */
+	private final JSpinner spinner = new JSpinner();
 //	/**
 //	 * Launch the application.
 //	 */
