@@ -2,6 +2,7 @@
 public class MonsterManager {
 	private Player newPlayer = new Player();
 	private Battles newbattle = new Battles();
+	private Trainers newTrainer = new Trainers(getPlayer());
 	private Shop newShop = new Shop();
 	private Monster enemy;
 //	private Inventory bag = newPlayer.getInventory();
@@ -22,7 +23,12 @@ public class MonsterManager {
 		chooseWindow.closeWindow();
 	}
 	
-	public void launchBattleScreen() {
+	public void launchBattleScreen(boolean initialiseFight) {
+		if (initialiseFight) {
+			Trainers newEnemy = new Trainers(getPlayer());
+			setEnemyTrainer(newEnemy);
+			setEnemy(newEnemy.getFirstEnemy());
+		}
 		BattleScreen battleWindow = new BattleScreen(this, enemy);
 	}
 	
@@ -50,6 +56,14 @@ public class MonsterManager {
 		enemy = myEnemy;
 	}
 	
+	public Trainers getTrainer() {
+		return newTrainer;
+	}
+	
+	public void setEnemyTrainer(Trainers enemyTrainer) {
+		newTrainer = enemyTrainer;
+	}
+	
 //	public void launchSetupScreen() {
 //		SetupScreen mainWindow = new SetupScreen(this);
 //	}
@@ -60,6 +74,8 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
+
+		manager.getPlayer().setDifficulty(1);
 		manager.launchHomeScreen();
 	}
 }

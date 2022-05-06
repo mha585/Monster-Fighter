@@ -770,7 +770,7 @@ public class TeamScreen {
 				closeWindow();
 //				Returns to the battle screen needs a if statement to get to the previous page not just battles
 //				and need to ensure enemy monster is the same
-				manager.launchBattleScreen();
+				manager.launchBattleScreen(false);
 			}
 		});
 		GroupLayout gl_panelExitPadding = new GroupLayout(panelExitPadding);
