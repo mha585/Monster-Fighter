@@ -20,6 +20,7 @@ public class InventoryScreen {
 
 	private JFrame bagScreen;
 	private MonsterManager manager;
+	private String previousPage;
 
 	/**
 	 * Launch the application.
@@ -40,8 +41,9 @@ public class InventoryScreen {
 	/**
 	 * Create the application.
 	 */
-	public InventoryScreen(MonsterManager incomingManager) {
+	public InventoryScreen(MonsterManager incomingManager, String previous) {
 		manager = incomingManager;
+		previousPage = previous;
 		initialize();
 		bagScreen.setVisible(true);
 	}
@@ -83,7 +85,11 @@ public class InventoryScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchBattleScreen(false);
+				if (previousPage == "Prep") {
+					manager.launchPrepScreen();
+				} else if (previousPage == "Fight") {
+					manager.launchBattleScreen(false);
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -94,11 +100,13 @@ public class InventoryScreen {
 					.addGap(42)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addComponent(btnNewButton)
-							.addComponent(list, GroupLayout.PREFERRED_SIZE, 862, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(42, Short.MAX_VALUE))
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnNewButton))
+							.addComponent(list, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 862, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(40, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -108,10 +116,10 @@ public class InventoryScreen {
 					.addGap(18)
 					.addComponent(list, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(btnNewButton))
+					.addContainerGap(39, Short.MAX_VALUE))
 		);
 		bagScreen.getContentPane().setLayout(groupLayout);
 	}

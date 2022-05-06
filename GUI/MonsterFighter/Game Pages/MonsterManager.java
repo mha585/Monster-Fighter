@@ -36,8 +36,8 @@ public class MonsterManager {
 //		battleWindow.closeWindow();
 //	}
 	
-	public void launchTeamScreen() {
-		TeamScreen teamWindow = new TeamScreen(this);
+	public void launchTeamScreen(String previousPage) {
+		TeamScreen teamWindow = new TeamScreen(this, previousPage);
 	}
 	
 //	public void closeTeamScreen(TeamScreen teamWindow) {
@@ -45,8 +45,8 @@ public class MonsterManager {
 //	}
 	
 	
-	public void launchInventoryScreen() {
-		InventoryScreen invWindow = new InventoryScreen(this);
+	public void launchInventoryScreen(String previousPage) {
+		InventoryScreen invWindow = new InventoryScreen(this, previousPage);
 	}
 	
 //	public void closeInventoryScreen(InventoryScreen invWindow) {
@@ -147,6 +147,8 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
+//		test
+		manager.getPlayer().addDay();
 
 		manager.getPlayer().setDifficulty(1);
 		manager.launchHomeScreen();

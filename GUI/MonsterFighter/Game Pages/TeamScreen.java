@@ -16,6 +16,7 @@ public class TeamScreen {
 
 	private JFrame teamScreen;
 	private MonsterManager manager;
+	private String previousPage;
 
 //	/**
 //	 * Launch the application.
@@ -36,8 +37,9 @@ public class TeamScreen {
 	/**
 	 * Create the application.
 	 */
-	public TeamScreen(MonsterManager incomingManager) {
+	public TeamScreen(MonsterManager incomingManager, String previous) {
 		manager = incomingManager;
+		previousPage = previous;
 		initialize();
 		teamScreen.setVisible(true);
 	}
@@ -505,7 +507,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(0, 1);
 					closeWindow();
-					manager.launchTeamScreen();
+					manager.launchTeamScreen(previousPage);
 				}
 			});
 		}
@@ -649,7 +651,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(1, 2);
 					closeWindow();
-					manager.launchTeamScreen();
+					manager.launchTeamScreen(previousPage);
 				}
 			});
 		}
@@ -662,7 +664,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(0, 1);
 					closeWindow();
-					manager.launchTeamScreen();
+					manager.launchTeamScreen(previousPage);
 				}
 			});
 		}
@@ -675,7 +677,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(2, 3);
 					closeWindow();
-					manager.launchTeamScreen();
+					manager.launchTeamScreen(previousPage);
 				}
 			});
 		}
@@ -688,7 +690,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(1, 2);
 					closeWindow();
-					manager.launchTeamScreen();
+					manager.launchTeamScreen(previousPage);
 				}
 			});
 		}
@@ -701,7 +703,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(2, 3);
 					closeWindow();
-					manager.launchTeamScreen();
+					manager.launchTeamScreen(previousPage);
 				}
 			});
 		}
@@ -768,9 +770,11 @@ public class TeamScreen {
 		btnReturn_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-//				Returns to the battle screen needs a if statement to get to the previous page not just battles
-//				and need to ensure enemy monster is the same
-				manager.launchBattleScreen(false);
+				if (previousPage == "Prep") {
+					manager.launchPrepScreen();
+				} else if (previousPage == "Fight") {
+					manager.launchBattleScreen(false);
+				}
 			}
 		});
 		GroupLayout gl_panelExitPadding = new GroupLayout(panelExitPadding);

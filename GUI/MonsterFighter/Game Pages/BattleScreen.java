@@ -340,7 +340,7 @@ public class BattleScreen {
 		btnTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchTeamScreen();
+				manager.launchTeamScreen("Fight");
 			}
 		});
 		
@@ -348,7 +348,7 @@ public class BattleScreen {
 		btnItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchInventoryScreen();
+				manager.launchInventoryScreen("Fight");
 			}
 		});
 		GroupLayout gl_panelButtons = new GroupLayout(panelButtons);
