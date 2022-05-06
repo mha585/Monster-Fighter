@@ -83,6 +83,23 @@ public class Trainers {
 		return enemyTeam;
 	}
 	/**
+	 * Returns the first monster that belong to the trainer.
+	 * 
+	 * @return The first Monster in the trainers team (the one the player fights)
+	 */
+	public Monster getFirstEnemy() {
+		return enemyTeam.get(0);
+	}
+	
+	/**
+	 * Removes the first enemy from the team
+	 */
+	public void removeEnemy() {
+		if (enemyTeam.size() > 0) {
+			enemyTeam.remove(0);
+		}
+	}
+	/**
 	 * Returns the size of the trainer's party.
 	 * 
 	 * @return int size of the trainer's party

@@ -65,66 +65,6 @@ public class Battles {
 		}
 	}
 	/**
-	 * Gets called when the user inputs "switch".
-	 * Gets the user to input the position of the first and second monster they want to switch then switches their positions
-	 * Checks that the numbers are in a valid range else will ask the user to input another valid command
-	 * Also checks that the monster you are trying to swap is not currently dead
-	 * After the switch happens the Monster that is now at the front of the team will get attacked.
-	 * @param badGuy		The enemy that attacks while the switch is happening
-	 * @param friends		The current team of monsters the player has
-	 */
-	public void swap(Monster badGuy, Team friends, Scanner scanner) {
-		System.out.println("Which two monsters would you like to swap positions?");
-		System.out.println("Look at the team memeber number to figure out who to swap with");
-		System.out.println("Be careful this will take your turn!\n");
-		
-		boolean isSwapped = false;
-		while (isSwapped == false) {
-			try {
-				System.out.println("Please type the position of the monster you would like to move");
-				String input1 = scanner.nextLine();
-				int indexOfFirstMonster = Integer.parseInt(input1);
-				if ((indexOfFirstMonster >= 1 && indexOfFirstMonster <= friends.getSize()) && 
-						friends.getFriend(indexOfFirstMonster - 1).getHealth() != 0) {
-					System.out.println("Now please type the postition of the monster you want to swap with");
-					String input2 = scanner.nextLine();
-					int indexOfSecondMonster = Integer.parseInt(input2);
-					if (indexOfSecondMonster >= 1 && indexOfSecondMonster <= friends.getSize() && 
-							friends.getFriend(indexOfSecondMonster - 1).getHealth() != 0) {
-						friends.swap(indexOfFirstMonster - 1, indexOfSecondMonster - 1);
-						attack(friends.getFriend(0), badGuy, friends, false);
-						isSwapped = true;
-					} else {
-						throw new InvalidInputException();
-					}
-				} else {
-					throw new InvalidInputException();
-				}
-			}
-			catch(Exception e) {
-//				saves the current input (for test inputs)
-				InputStream savedStandardInputStream = System.in;
-				PrintStream savedStandardOut = System.out;
-				
-//				Sets output to something other than system so the player cant see this
-			    System.setOut(new PrintStream(new ByteArrayOutputStream()));
-//			    Sets the automatic input to "continue" (this can be any string)
-			    String input = "continue";
-				System.setIn(new ByteArrayInputStream(input.getBytes()));
-//				Scans the automatic input to avoid getting the user to press any key to continue then closes it
-				Scanner skipGettingUserToContinue = new Scanner(System.in);
-				skipGettingUserToContinue.nextLine();
-				skipGettingUserToContinue.close();
-				
-//				Sets user input back to normal and gets the user to try again
-			    System.setIn(savedStandardInputStream);
-			    System.setOut(savedStandardOut);
-				System.out.println("Input must be a number from 1 to " + friends.getSize());
-				System.out.println("Press any key to try switching again");
-			}
-		}
-	}
-	/**
 	 * Gets called when the user clicks btnHeal.
 	 * Allows the monster in position 1 to heal any monster (including itself) in the team
 	 * This will use the players turn and cause a one sided attack by the enemy monster against the friend
@@ -132,47 +72,13 @@ public class Battles {
 	 * @param friend		The friend that does the healing
 	 * @param badGuy		The enemy that attacks while the healing is happening
 	 * @param friends		The current team of monsters the player has
-	 * @param healNumber	The scanner used to get input
 	 */
-	public void heal(Monster friend, Monster badGuy, Team friends, Scanner healNumber) {
-		System.out.println("Which monster would you like to heal?");
-		boolean isHealed = false;
-		while (isHealed == false) {
-			try {
-				System.out.println("Please type the position of the monster you would like to heal");
-				String friendToHealIndex = healNumber.nextLine();
-				if ((Character.isDigit(friendToHealIndex.charAt(0)) == true) && (Integer.parseInt(friendToHealIndex) <= friends.getSize()) && (Integer.parseInt(friendToHealIndex) > 0)) {
-					friends.getFriend(Integer.parseInt(friendToHealIndex) - 1).gainHealth(friend.getHealAmount());
-					attack(friend, badGuy, friends, false);
-					isHealed = true;
-				} else {
-					throw new InvalidInputException();
-				}
-			} catch(Exception e) {
-//				saves the current input (for test inputs)
-				InputStream savedStandardInputStream = System.in;
-				PrintStream savedStandardOut = System.out;
-				
-//				Sets output to something other than system so the player cant see this
-			    System.setOut(new PrintStream(new ByteArrayOutputStream()));
-//			    Sets the automatic input to "continue" (this can be any string)
-			    String input = "continue";
-				System.setIn(new ByteArrayInputStream(input.getBytes()));
-//				Scans the automatic input to avoid getting the user to press any key to continue then closes it
-				Scanner skipGettingUserToContinue = new Scanner(System.in);
-				skipGettingUserToContinue.nextLine();
-				skipGettingUserToContinue.close();
-				
-//				Sets user input back to normal and gets the user to try again
-			    System.setIn(savedStandardInputStream);
-			    System.setOut(savedStandardOut);
-				System.out.println("Sorry that number wasnt recognised");
-				System.out.println("Please enter a number between 1 and " + friends.getSize());
-			}
-		}
+	public void heal(Monster friend, Monster badGuy, Team friends) {
+		friends.getFriend(0).gainHealth(friend.getHealAmount());
+		attack(friend, badGuy, friends, false);
 	}
 	/**
-	 * Gets called when the user inputs "items".
+	 * Gets called when the user clicks items.
 	 * Allows the use of any items currently in the players bag
 	 * This will use the players turn and cause a one sided attack by the enemy monster against the friend
 	 * Checks that both the item index and the Monster index is in a valid range else asks for a different input
@@ -181,7 +87,7 @@ public class Battles {
 	 * @param playerInventory	The current inventory of the player
 	 * @param itemNumber		The scanner used to get input
 	 */
-	public void useItem(Team friends, Monster badGuy, Inventory playerInventory, Scanner itemNumber) {
+	public void useItem(Team friends, Monster badGuy, Inventory playerInventory) {
 		if (playerInventory.getSize() <= 0) {
 			System.out.println("You have no items left to use");
 		} else {
@@ -247,7 +153,7 @@ public class Battles {
 			System.out.println("\nYour friend " + friend.getName() +
 					" just died r.i.p\n");
 			friend.gainDeaths();
-			friends.pushFrontToBack();
+//			friends.pushFrontToBack();
 			return false;
 		} 
 		return true;
