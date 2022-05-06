@@ -13,28 +13,35 @@ import javax.swing.JButton;
 public class TodaysBattlesScreen {
 
 	private JFrame newBattleFrames;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TodaysBattlesScreen window = new TodaysBattlesScreen();
-					window.newBattleFrames.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TodaysBattlesScreen window = new TodaysBattlesScreen();
+//					window.newBattleFrames.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public TodaysBattlesScreen() {
+	public TodaysBattlesScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		newBattleFrames.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		newBattleFrames.dispose();
 	}
 
 	/**
@@ -42,7 +49,7 @@ public class TodaysBattlesScreen {
 	 */
 	private void initialize() {
 		newBattleFrames = new JFrame();
-		newBattleFrames.setBounds(100, 100, 960, 590);
+		newBattleFrames.setBounds(100, 100, 960, 540);
 		newBattleFrames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Check the Trainers you want to Fight today.");

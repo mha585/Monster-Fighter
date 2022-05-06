@@ -13,32 +13,41 @@ import javax.swing.AbstractListModel;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class InventoryScreen {
 
 	private JFrame bagScreen;
+	private MonsterManager manager;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InventoryScreen window = new InventoryScreen();
-					window.bagScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					InventoryScreen window = new InventoryScreen();
+//					window.bagScreen.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public InventoryScreen() {
+	public InventoryScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		bagScreen.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		bagScreen.dispose();
 	}
 
 	/**
@@ -46,7 +55,8 @@ public class InventoryScreen {
 	 */
 	private void initialize() {
 		bagScreen = new JFrame();
-		bagScreen.setBounds(100, 100, 960, 590);
+		bagScreen.setTitle("Your inventory");
+		bagScreen.setBounds(100, 100, 960, 540);
 		bagScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Your Inventory:");
@@ -70,6 +80,12 @@ public class InventoryScreen {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JButton btnNewButton = new JButton("Exit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchBattleScreen(false);
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout groupLayout = new GroupLayout(bagScreen.getContentPane());
 		groupLayout.setHorizontalGroup(

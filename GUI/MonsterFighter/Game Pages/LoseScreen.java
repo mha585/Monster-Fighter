@@ -13,28 +13,35 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class LoseScreen {
 
 	private JFrame loseFrame;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoseScreen window = new LoseScreen();
-					window.loseFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoseScreen window = new LoseScreen();
+//					window.loseFrame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public LoseScreen() {
+	public LoseScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		loseFrame.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		loseFrame.dispose();
 	}
 
 	/**
@@ -43,7 +50,7 @@ public class LoseScreen {
 	private void initialize() {
 		loseFrame = new JFrame();
 		loseFrame.getContentPane().setBackground(SystemColor.desktop);
-		loseFrame.setBounds(100, 100, 960, 590);
+		loseFrame.setBounds(100, 100, 960, 540);
 		loseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblGame = new JLabel("G A M E    O V E R");

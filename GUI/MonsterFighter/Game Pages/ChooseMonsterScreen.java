@@ -51,9 +51,9 @@ public class ChooseMonsterScreen {
 		chooseMonsterScreen.dispose();
 	}
 	
-	public void finishedWindow() {
-		manager.closeChooseMonsterScreen(this);
-	}
+//	public void finishedWindow() {
+//		manager.closeChooseMonsterScreen(this);
+//	}
 
 	/**
 	 * Initialize the contents of the frame.

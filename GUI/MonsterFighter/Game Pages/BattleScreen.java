@@ -56,9 +56,10 @@ public class BattleScreen {
 	public void closeWindow() {
 		battleScreen.dispose();
 	}
-	public void finishedWindow() {
-		manager.closeBattleScreen(this);
-	}
+	
+//	public void finishedWindow() {
+//		manager.closeBattleScreen(this);
+//	}
 	
 	public void setStatLabels(Monster monster, JLabel lblCurrentName, JLabel lblCurrentHealth, JLabel lblMaxHealth) {
 		lblCurrentName.setText(monster.getName());
@@ -96,7 +97,7 @@ public class BattleScreen {
 			} else {
 				getPrizes(manager.getPlayer());
 //				launch the you win screen and go to next day
-				manager.launchHomeScreen();
+				manager.launchNightScreen();
 			}
 
 			
@@ -110,8 +111,6 @@ public class BattleScreen {
 			manager.getPlayer().deductMoney(lost);
 			closeWindow();			
 		} 
-		System.out.println("the new enemy team size is " + enemyTrainer.getSize());
-
 	}
 	
 	/**
@@ -346,6 +345,12 @@ public class BattleScreen {
 		});
 		
 		JButton btnItems = new JButton("Inventory");
+		btnItems.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchInventoryScreen();
+			}
+		});
 		GroupLayout gl_panelButtons = new GroupLayout(panelButtons);
 		gl_panelButtons.setHorizontalGroup(
 			gl_panelButtons.createParallelGroup(Alignment.LEADING)

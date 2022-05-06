@@ -11,28 +11,35 @@ import javax.swing.JButton;
 public class PrepScreen {
 
 	private JFrame prepScreen;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrepScreen window = new PrepScreen();
-					window.prepScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					PrepScreen window = new PrepScreen();
+//					window.prepScreen.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public PrepScreen() {
+	public PrepScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		prepScreen.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		prepScreen.dispose();
 	}
 
 	/**
@@ -40,7 +47,7 @@ public class PrepScreen {
 	 */
 	private void initialize() {
 		prepScreen = new JFrame();
-		prepScreen.setBounds(100, 100, 960, 590);
+		prepScreen.setBounds(100, 100, 960, 540);
 		prepScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblDay = new JLabel("Current Day:");

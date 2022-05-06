@@ -23,28 +23,35 @@ public class ShopScreen {
 
 	private JFrame shopFrame;
 	private JTextField textField;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShopScreen window = new ShopScreen();
-					window.shopFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ShopScreen window = new ShopScreen();
+//					window.shopFrame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public ShopScreen() {
+	public ShopScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		shopFrame.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		shopFrame.dispose();
 	}
 
 	/**
@@ -52,7 +59,7 @@ public class ShopScreen {
 	 */
 	private void initialize() {
 		shopFrame = new JFrame();
-		shopFrame.setBounds(100, 100, 960, 590);
+		shopFrame.setBounds(100, 100, 960, 540);
 		shopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Money:");

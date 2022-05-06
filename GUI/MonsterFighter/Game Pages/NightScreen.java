@@ -9,28 +9,35 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class NightScreen {
 
 	private JFrame nightFrame;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NightScreen window = new NightScreen();
-					window.nightFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					NightScreen window = new NightScreen();
+//					window.nightFrame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public NightScreen() {
+	public NightScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		nightFrame.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		nightFrame.dispose();
 	}
 
 	/**
@@ -38,7 +45,8 @@ public class NightScreen {
 	 */
 	private void initialize() {
 		nightFrame = new JFrame();
-		nightFrame.setBounds(100, 100, 960, 590);
+		nightFrame.setTitle("Night time");
+		nightFrame.setBounds(100, 100, 960, 540);
 		nightFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Bunch of Images + Summary of Day (stardew valley style)");

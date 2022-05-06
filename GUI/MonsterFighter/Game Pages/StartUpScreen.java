@@ -18,28 +18,35 @@ public class StartUpScreen {
 
 	private JFrame startupScreen;
 	private JTextField tfName;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StartUpScreen window = new StartUpScreen();
-					window.startupScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					StartUpScreen window = new StartUpScreen();
+//					window.startupScreen.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public StartUpScreen() {
+	public StartUpScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		startupScreen.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		startupScreen.dispose();
 	}
 
 	/**
@@ -47,7 +54,7 @@ public class StartUpScreen {
 	 */
 	private void initialize() {
 		startupScreen = new JFrame();
-		startupScreen.setBounds(100, 100, 960, 590);
+		startupScreen.setBounds(100, 100, 960, 540);
 		startupScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		tfName = new JTextField();

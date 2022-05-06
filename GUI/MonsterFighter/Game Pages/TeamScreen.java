@@ -46,9 +46,9 @@ public class TeamScreen {
 		teamScreen.dispose();
 	}
 	
-	public void finishedWindow() {
-		manager.closeTeamScreen(this);
-	}
+//	public void finishedWindow() {
+//		manager.closeTeamScreen(this);
+//	}
 	
 	public void setTitles(JLabel lblHealth, JLabel lblAttack, JLabel lblSlash, JLabel lblSpeed, 
 			JLabel lblHealAmount, JLabel lblType, JLabel lblMaxExp, JLabel lblExp, JLabel lblTier) {
