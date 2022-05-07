@@ -57,9 +57,9 @@ public class StartUpScreen {
 		startupScreen.dispose();
 	}
 	
-	public void finishedWindow() {
-		manager.closeStartScreen(this);
-	}
+//	public void finishedWindow() {
+//		manager.closeStartScreen(this);
+//	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
