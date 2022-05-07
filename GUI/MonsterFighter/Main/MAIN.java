@@ -11,7 +11,7 @@ public class MAIN {
 		while (isProper == false) { 
 			System.out.println("Please enter a name: \nMust be between 3 and 15 characters. \nMust not contain numbers or special characters. ");
 			String givenName = scanner.nextLine();
-			if (givenName.trim().length() >= 3 && givenName.trim().length() <= 15 && givenName.trim().matches("[a-zA-Z]+")){
+			if (player.checkName(givenName) == true){
 				player.setName(givenName);
 				isProper = true;
 				System.out.println("\n");

@@ -7,6 +7,14 @@ public class MonsterManager {
 	private Monster enemy;
 //	private Inventory bag = newPlayer.getInventory();
 	
+	public void launchStartScreen() {
+		StartUpScreen startWindow = new StartUpScreen(this, newPlayer);
+	}
+	
+	public void closeStartScreen(StartUpScreen startWindow) {
+		startWindow.closeWindow();
+	}
+	
 	public void launchHomeScreen() {
 		HomeScreen mainWindow = new HomeScreen(this);
 	}
@@ -74,8 +82,13 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
+<<<<<<< Upstream, based on origin/Angelo
 
 		manager.getPlayer().setDifficulty(1);
 		manager.launchHomeScreen();
+=======
+		manager.launchStartScreen();
+
+>>>>>>> 0b3dfac Completed Code for StartUpScreen
 	}
 }

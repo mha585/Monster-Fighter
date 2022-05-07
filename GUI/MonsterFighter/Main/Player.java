@@ -67,6 +67,20 @@ public class Player {
 		playerName = name;
 	}
 	/**
+	 * Checks if the name of the player is a proper name
+	 * 
+	 * @param name      Inputed name
+	 * @return          boolean for if name is proper
+	 */
+	public boolean checkName(String name) {
+		if (name.trim().length() >= 3 && name.trim().length() <= 15 && name.trim().matches("[a-zA-Z]+")){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	/**
 	 * Sets the number of days the player's adventure will last for.
 	 * 
 	 * @param days		The number of days the game will last for.
