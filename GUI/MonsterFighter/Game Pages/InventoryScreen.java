@@ -82,7 +82,7 @@ public class InventoryScreen {
 				if (event.getClickCount() >= 1) {
 					int itemIndex = itemJList.locationToIndex(event.getPoint());
 					closeWindow();
-					manager.launchUseItemScreen("Inventory", itemIndex);
+					manager.launchUseItemScreen(previousPage, itemIndex);
 				}
 			}
 		});
@@ -97,6 +97,7 @@ public class InventoryScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
+				System.out.println(previousPage);
 				if (previousPage == "Prep") {
 					manager.launchPrepScreen();
 				} else if (previousPage == "Fight") {

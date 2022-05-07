@@ -6,14 +6,6 @@ public class MonsterManager {
 	private Monster enemy;
 //	private Inventory bag = newPlayer.getInventory();
 	
-	public void launchHomeScreen() {
-		HomeScreen mainWindow = new HomeScreen(this);
-	}
-	
-//	public void closeHomeScreen(HomeScreen homeWindow) {
-//		homeWindow.closeWindow();
-//	}
-	
 	public void launchChooseMonsterScreen() {
 		ChooseMonsterScreen chooseWindow = new ChooseMonsterScreen(this);
 	}
@@ -162,7 +154,6 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
-//		test
 		manager.launchStartUpScreen();
 	}
 }

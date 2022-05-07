@@ -133,7 +133,7 @@ public class StartUpScreen {
 				manager.getPlayer().setDay(intDay);
 				manager.getPlayer().setDifficulty(intDiff);
 				closeWindow();
-				manager.launchHomeScreen();
+				manager.launchChooseMonsterScreen();
 			}
 		});
 		

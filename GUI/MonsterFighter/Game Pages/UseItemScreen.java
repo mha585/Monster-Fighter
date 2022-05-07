@@ -74,7 +74,9 @@ public class UseItemScreen {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(previous);
 				closeWindow();
+				manager.launchInventoryScreen(previous);
 			}
 		});
 		
@@ -106,9 +108,7 @@ public class UseItemScreen {
 				JList<Object> itemJList = (JList<Object>) event.getSource();
 				if (event.getClickCount() >= 1) {
 					int monsterIndex = listMonsters.locationToIndex(event.getPoint());
-					System.out.println(monsterIndex);
-					System.out.println(item);
-					manager.launchItemSuccessScreen("UseItem", monsterIndex, item);
+					manager.launchItemSuccessScreen(previous, monsterIndex, item);
 					manager.getPlayer().getInventory().getItem(item).addFreq(manager.getPlayer().getInventory().getItem(item), -1);
 					closeWindow();
 				}

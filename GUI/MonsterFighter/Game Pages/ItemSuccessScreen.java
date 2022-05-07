@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.JPanel;
 
 public class ItemSuccessScreen {
 
@@ -61,7 +62,8 @@ public class ItemSuccessScreen {
 	 */
 	private void initialize() {
 		ISScreen = new JFrame();
-		ISScreen.setBounds(100, 100, 500, 300);
+		ISScreen.setTitle("Item used");
+		ISScreen.setBounds(100, 100, 960, 540);
 		ISScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Monster monster = manager.getPlayer().getTeam().getFriend(monsterInt);
 		String stat = manager.getPlayer().getInventory().getItem(itemInt).getStat();
@@ -104,11 +106,12 @@ public class ItemSuccessScreen {
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchInventoryScreen("Prep");
+				manager.launchInventoryScreen(previousPage);
 			}
 		});
 		
 		JLabel lblPrevStat = new JLabel(String.valueOf(previousVal));
+		lblPrevStat.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPrevStat.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JLabel lblArrow = new JLabel("> > >");
@@ -121,43 +124,62 @@ public class ItemSuccessScreen {
 		JLabel lblMStat = new JLabel(monster.getName() +" Increased "+statString+":");
 		lblMStat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMStat.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		JPanel panel = new JPanel();
+		
+		JPanel panel_1 = new JPanel();
+		
+		JPanel panel_1_1 = new JPanel();
+		
+		JPanel panel_1_1_1 = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(ISScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(lblMStat, GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(417, Short.MAX_VALUE)
-					.addComponent(btnOK)
-					.addContainerGap())
-				.addComponent(lblMStat, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(82, Short.MAX_VALUE)
-					.addComponent(lblPrevStat)
-					.addGap(59)
-					.addComponent(lblArrow)
-					.addGap(60)
-					.addComponent(lblNewStat)
-					.addGap(85))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblPrevStat, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+							.addGap(42))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(8)
+							.addComponent(panel_1_1_1, GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnOK, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_1_1, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblArrow, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+							.addGap(32)
+							.addComponent(lblNewStat, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblMStat)
+					.addGap(70)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblArrow)
+							.addComponent(lblPrevStat)
+							.addComponent(lblNewStat))
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+					.addGap(114)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(66)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblArrow)
-									.addComponent(lblPrevStat))
-								.addComponent(lblNewStat))
-							.addContainerGap(113, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnOK)
-							.addContainerGap())))
+						.addComponent(btnOK, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_1_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_1_1_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+					.addGap(159))
 		);
 		ISScreen.getContentPane().setLayout(groupLayout);
 	}
-
 }
