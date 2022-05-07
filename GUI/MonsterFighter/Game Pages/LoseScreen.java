@@ -13,28 +13,35 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class LoseScreen {
 
 	private JFrame loseFrame;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoseScreen window = new LoseScreen();
-					window.loseFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoseScreen window = new LoseScreen();
+//					window.loseFrame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public LoseScreen() {
+	public LoseScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		loseFrame.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		loseFrame.dispose();
 	}
 
 	/**
@@ -42,8 +49,9 @@ public class LoseScreen {
 	 */
 	private void initialize() {
 		loseFrame = new JFrame();
+		loseFrame.setTitle("You lose!");
 		loseFrame.getContentPane().setBackground(SystemColor.desktop);
-		loseFrame.setBounds(100, 100, 960, 590);
+		loseFrame.setBounds(100, 100, 960, 540);
 		loseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblGame = new JLabel("G A M E    O V E R");
@@ -82,9 +90,9 @@ public class LoseScreen {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(311, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(309, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblLose, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
@@ -93,9 +101,9 @@ public class LoseScreen {
 								.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE))
 							.addGap(309))
-						.addGroup(groupLayout.createSequentialGroup()
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(449))))
+							.addGap(447))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -104,17 +112,17 @@ public class LoseScreen {
 					.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblLose, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-					.addGap(111)
+					.addGap(58)
 					.addComponent(lblNewLabel)
-					.addGap(85)
+					.addGap(54)
 					.addComponent(lblName)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblDays)
 					.addGap(18)
 					.addComponent(lblMoney)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(18)
 					.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(22, Short.MAX_VALUE))
+					.addContainerGap(79, Short.MAX_VALUE))
 		);
 		loseFrame.getContentPane().setLayout(groupLayout);
 	}

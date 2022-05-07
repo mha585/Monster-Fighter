@@ -42,9 +42,9 @@ public class HomeScreen {
 		homeScreen.dispose();
 	}
 	
-	public void finishedWindow() {
-		manager.closeHomeScreen(this);
-	}
+//	public void finishedWindow() {
+//		manager.closeHomeScreen(this);
+//	}
 
 	/**
 	 * Initialize the contents of the frame.

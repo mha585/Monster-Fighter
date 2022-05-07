@@ -9,31 +9,38 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class WelcomScreen {
+public class WelcomeScreen {
 
 	private JFrame welcomeScreen;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WelcomScreen window = new WelcomScreen();
-					window.welcomeScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					WelcomScreen window = new WelcomScreen();
+//					window.welcomeScreen.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public WelcomScreen() {
+	public WelcomeScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		welcomeScreen.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		welcomeScreen.dispose();
 	}
 
 	/**
@@ -44,7 +51,7 @@ public class WelcomScreen {
 		welcomeScreen.getContentPane().setForeground(new Color(0, 0, 0));
 		welcomeScreen.getContentPane().setBackground(SystemColor.desktop);
 		welcomeScreen.setBackground(SystemColor.control);
-		welcomeScreen.setBounds(100, 100, 960, 590);
+		welcomeScreen.setBounds(100, 100, 960, 540);
 		welcomeScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Let's Begin The Game!\r\n");

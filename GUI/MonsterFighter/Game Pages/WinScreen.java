@@ -11,28 +11,35 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class WinScreen {
 
 	private JFrame winFrame;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WinScreen window = new WinScreen();
-					window.winFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					WinScreen window = new WinScreen();
+//					window.winFrame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public WinScreen() {
+	public WinScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		winFrame.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		winFrame.dispose();
 	}
 
 	/**
@@ -40,7 +47,7 @@ public class WinScreen {
 	 */
 	private void initialize() {
 		winFrame = new JFrame();
-		winFrame.setBounds(100, 100, 960, 590);
+		winFrame.setBounds(100, 100, 960, 540);
 		winFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblGame = new JLabel("G A M E    O V E R");

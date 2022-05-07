@@ -7,32 +7,41 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrepScreen {
 
 	private JFrame prepScreen;
+	private MonsterManager manager;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrepScreen window = new PrepScreen();
-					window.prepScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					PrepScreen window = new PrepScreen();
+//					window.prepScreen.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public PrepScreen() {
+	public PrepScreen(MonsterManager incomingManager) {
+		manager = incomingManager;
 		initialize();
+		prepScreen.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		prepScreen.dispose();
 	}
 
 	/**
@@ -40,7 +49,8 @@ public class PrepScreen {
 	 */
 	private void initialize() {
 		prepScreen = new JFrame();
-		prepScreen.setBounds(100, 100, 960, 590);
+		prepScreen.setTitle("Day prep");
+		prepScreen.setBounds(100, 100, 960, 540);
 		prepScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblDay = new JLabel("Current Day:");
@@ -54,23 +64,51 @@ public class PrepScreen {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setText(Integer.toString(manager.getPlayer().getDayCompleted()));
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1.setText(Integer.toString(manager.getPlayer().getMoney()));
 		
 		JLabel lblNewLabel_1_1 = new JLabel("New label");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_1.setText(Integer.toString(manager.getPlayer().getPoints()));
+
 		
 		JButton btnNewButton = new JButton("View Team");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchTeamScreen("Prep");
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JButton btnNewButton_1 = new JButton("View Battles");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchTodaysBattlesScreen();
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JButton btnNewButton_1_1 = new JButton("View Bag");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchInventoryScreen("Prep");
+			}
+		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JButton btnNewButton_2 = new JButton("Fight");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchBattleScreen(true);
+			}
+		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout groupLayout = new GroupLayout(prepScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
