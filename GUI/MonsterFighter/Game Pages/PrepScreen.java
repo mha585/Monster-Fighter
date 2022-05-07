@@ -62,54 +62,54 @@ public class PrepScreen {
 		JLabel lblPoints = new JLabel("Points:");
 		lblPoints.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setText(Integer.toString(manager.getPlayer().getDayCompleted()));
+		JLabel lblDayNum = new JLabel("New label");
+		lblDayNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDayNum.setText(Integer.toString(manager.getPlayer().getDayCompleted()));
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setText(Integer.toString(manager.getPlayer().getMoney()));
+		JLabel lblPointsNum = new JLabel("New label");
+		lblPointsNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPointsNum.setText(Integer.toString(manager.getPlayer().getPoints()));
 		
-		JLabel lblNewLabel_1_1 = new JLabel("New label");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_1.setText(Integer.toString(manager.getPlayer().getPoints()));
+		JLabel lblMoneyNum = new JLabel("New label");
+		lblMoneyNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblMoneyNum.setText(Integer.toString(manager.getPlayer().getMoney()));
 
 		
-		JButton btnNewButton = new JButton("View Team");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnTeam = new JButton("View Team");
+		btnTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				manager.launchTeamScreen("Prep");
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTeam.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JButton btnNewButton_1 = new JButton("View Battles");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnBattles = new JButton("View Battles");
+		btnBattles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				manager.launchTodaysBattlesScreen();
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBattles.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JButton btnNewButton_1_1 = new JButton("View Bag");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
+		JButton btnBag = new JButton("View Bag");
+		btnBag.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				manager.launchInventoryScreen("Prep");
 			}
 		});
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBag.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JButton btnNewButton_2 = new JButton("Fight");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnFight = new JButton("Fight");
+		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				manager.launchBattleScreen(true);
 			}
 		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnFight.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout groupLayout = new GroupLayout(prepScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -119,28 +119,28 @@ public class PrepScreen {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblDay)
 							.addGap(18)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblDayNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnTeam, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 							.addComponent(lblPoints)
 							.addGap(18)
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblPointsNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnBag, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
 							.addGap(56)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblMoney)
 							.addGap(18)
-							.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnNewButton_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblMoneyNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnBattles, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE))
 					.addGap(34))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(396, Short.MAX_VALUE)
-					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnFight, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
 					.addGap(379))
 		);
 		groupLayout.setVerticalGroup(
@@ -148,18 +148,18 @@ public class PrepScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDay, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblDayNum, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPointsNum, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblMoneyNum, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
 					.addGap(73)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnTeam, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBag, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBattles, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE))
 					.addGap(61)
-					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnFight, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
 					.addGap(67))
 		);
 		prepScreen.getContentPane().setLayout(groupLayout);

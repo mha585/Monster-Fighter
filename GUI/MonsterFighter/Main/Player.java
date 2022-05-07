@@ -33,7 +33,7 @@ public class Player {
 	/**
 	 * The total points earned throughout the game.
 	 */
-	private int playerPoints = 125;
+	private int playerPoints = 0;
 	/**
 	 * The player's team.
 	 */
@@ -53,10 +53,14 @@ public class Player {
 	 * @param difficulty		The difficulty the player has chosen
 	 */
 	Player() {
+		BasicHeal BH = new BasicHeal();
+		AtkPlus AP = new AtkPlus();
 		Team newTeam = new Team();
 		playerTeam = newTeam;
 		Inventory bag = new Inventory();
 		playerBag = bag;
+		playerBag.addtoBag(BH, 3);
+		playerBag.addtoBag(AP, 3);
 	}
 	/**
 	 * Sets the name of the player.

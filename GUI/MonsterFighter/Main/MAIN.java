@@ -490,11 +490,6 @@ public class MAIN {
 		Scanner scanner = new Scanner(System.in);
 		Player newPlayer = new Player();
 		Shop newShop = new Shop();
-		BasicHeal BH = new BasicHeal();
-		Inventory bag = newPlayer.getInventory();
-		
-		
-		bag.addtoBag(BH, 3);
 		setPlayerName(scanner, newPlayer);
 		setDays(scanner, newPlayer);
 		setDifficulty(scanner, newPlayer);

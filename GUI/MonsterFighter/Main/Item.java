@@ -8,35 +8,35 @@ public class Item implements Purchasable{
 	/**
 	 * The name of the item.
 	 */
-	String itemName;
+	private String itemName;
 	/**
 	 * The cost of the item.
 	 */
-	int itemCost;
+	private int itemCost;
 	/** 
 	 * The selling price of the item.
 	 */
-	int itemSell;
+	private int itemSell;
 	/**
 	 * The description of the item.
 	 */
-	String itemDescription;
+	private String itemDescription;
 	/***
 	 * The total amount of an item in the player's bag.
 	 */
-	int totalFrequency;
+	private int totalFrequency;
 	/**
 	 * The situation where an item can be used.
 	 */
-	String itemUse;
+	private String itemUse;
 	/**
 	 * The amount an item effects a stat by.
 	 */
-	int itemEffect;
+	private int itemEffect;
 	/**
 	 * The stat that an item effects.
 	 */
-	String itemStat;
+	private String itemStat;
 	/**
 	 * Basic Item constructor.
 	 * @param name				Name of the item
@@ -95,6 +95,14 @@ public class Item implements Purchasable{
 	 */
 	public String whenToUse() {
 		return itemUse;
+	}
+	/**
+	 * Returns the stat that the item affects.
+	 * 
+	 * @return String that describes the stat
+	 */
+	public String getStat() {
+		return itemStat;
 	}
 	/**
 	 * Returns the total amount of an item in the players inventory.

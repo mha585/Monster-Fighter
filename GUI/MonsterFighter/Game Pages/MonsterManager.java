@@ -85,7 +85,7 @@ public class MonsterManager {
 //	}
 	
 	public void launchStartUpScreen() {
-		StartUpScreen startUpWindow = new StartUpScreen(this, newPlayer);
+		StartUpScreen startUpWindow = new StartUpScreen(this);
 	}
 	
 //	public void closeStartUpScreen(StartUpScreen startUpWindow) {
@@ -114,6 +114,22 @@ public class MonsterManager {
 	
 //	public void closeWinScreen(WinScreen winWindow) {
 //		winWindow.closeWindow();
+//	}
+	
+	public void launchUseItemScreen(String previousPage, int itemIndex) {
+		UseItemScreen useWindow = new UseItemScreen(this, previousPage, itemIndex);
+	}
+	
+//	public void closeUseItemScreen(UseItemScreen useWindow) {
+//		useWindow.closeWindow();
+//	}
+	
+	public void launchItemSuccessScreen(String previousPage, int monsterIndex, int itemIndex) {
+		ItemSuccessScreen successWindow = new ItemSuccessScreen(this, previousPage, monsterIndex, itemIndex);
+	}
+	
+//	public void closeUseItemScreen(UseItemScreen useWindow) {
+//		useWindow.closeWindow();
 //	}
 	
 	public Player getPlayer() {
@@ -147,9 +163,6 @@ public class MonsterManager {
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 //		test
-		manager.getPlayer().addDay();
-
-		manager.getPlayer().setDifficulty(1);
-		manager.launchHomeScreen();
+		manager.launchStartUpScreen();
 	}
 }

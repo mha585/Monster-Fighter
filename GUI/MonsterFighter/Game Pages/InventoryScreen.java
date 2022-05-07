@@ -10,10 +10,14 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class InventoryScreen {
@@ -64,21 +68,29 @@ public class InventoryScreen {
 		JLabel lblNewLabel = new JLabel("Your Inventory:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		JList list = new JList();
-		list.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Item1: Description x 90", "Item2: Description x91"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		DefaultListModel<Object> itemList = new DefaultListModel<Object>();
+		for (int i = 0; i < manager.getPlayer().getInventory().getSize(); i++) {
+			Item item = (Item) manager.getPlayer().getInventory().getItem(i);
+			itemList.addElement(item+": "+item.getDescription());
+		}
+		
+		JList<Object> itemJList = new JList<Object>(itemList);
+		itemJList.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		itemJList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent event) {
+				JList<Object> itemJList = (JList<Object>) event.getSource();
+				if (event.getClickCount() >= 1) {
+					int itemIndex = itemJList.locationToIndex(event.getPoint());
+					closeWindow();
+					manager.launchUseItemScreen("Inventory", itemIndex);
+				}
 			}
 		});
-		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		itemJList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		itemJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JLabel lblNewLabel_1 = new JLabel("Click on a Item to use it");
+		JLabel lblNewLabel_1 = new JLabel("Click on an item to use it");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JButton btnNewButton = new JButton("Exit");
@@ -105,7 +117,7 @@ public class InventoryScreen {
 								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(btnNewButton))
-							.addComponent(list, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 862, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(itemJList, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 862, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(40, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -114,7 +126,7 @@ public class InventoryScreen {
 					.addGap(18)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(list, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
+					.addComponent(itemJList, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)

@@ -56,7 +56,7 @@ public class TeamScreen {
 			JLabel lblHealAmount, JLabel lblType, JLabel lblMaxExp, JLabel lblExp, JLabel lblTier) {
 		lblHealth.setText("Health:");
 		lblAttack.setText("Attack:");
-		lblSlash.setText("/");
+		lblSlash.setText("/ ");
 		lblSpeed.setText("Speed:");
 		lblHealAmount.setText("Heal:");
 		lblType.setText("Type:");

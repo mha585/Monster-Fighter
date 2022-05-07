@@ -23,7 +23,7 @@ public class StartUpScreen {
 	private JFrame startupScreen;
 	private JTextField tfName;
 	private MonsterManager manager;
-	private Player user;
+
 	
 
 //	/**
@@ -46,8 +46,7 @@ public class StartUpScreen {
 	 * Create the application.
 	 * @param newPlayer 
 	 */
-	public StartUpScreen(MonsterManager incomingManager, Player newPlayer) {
-		user = newPlayer;
+	public StartUpScreen(MonsterManager incomingManager) {
 		manager = incomingManager;
 		initialize();
 		startupScreen.setVisible(true);
@@ -131,8 +130,8 @@ public class StartUpScreen {
 				else if (strDiff == "Hard") {
 					intDiff = 3;
 				}
-				user.setDay(intDay);
-				user.setDifficulty(intDiff);
+				manager.getPlayer().setDay(intDay);
+				manager.getPlayer().setDifficulty(intDiff);
 				closeWindow();
 				manager.launchHomeScreen();
 			}
@@ -143,11 +142,11 @@ public class StartUpScreen {
 		btnSubmitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				String stringName = tfName.getText();
-				if (user.checkName(stringName) == true) {
+				if (manager.getPlayer().checkName(stringName) == true) {
 					lblReqLen.setVisible(false);
 					lblReqAlpha.setVisible(false);
 					lblSuccess.setVisible(true);
-					user.setName(stringName);
+					manager.getPlayer().setName(stringName);
 					lblDay.setVisible(true);
 					sliderDay.setVisible(true);
 					lblDiff.setVisible(true);
