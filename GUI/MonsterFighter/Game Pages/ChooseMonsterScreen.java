@@ -69,8 +69,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(grassMonsterToAdd);
 				closeWindow();
-//				this is true as we initialise the enemy but only for a test remove later
-				manager.setSetUp();
+				manager.launchPrepScreen();
 				
 			}
 		});
@@ -80,8 +79,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(fireMonsterToAdd);
 				closeWindow();
-//				this is true as we initialise the enemy but only for a test remove later
-				manager.setSetUp();
+				manager.launchPrepScreen();
 			}
 		});
 		
@@ -90,8 +88,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(waterMonsterToAdd);
 				closeWindow();
-//				this is true as we initialise the enemy but only for a test remove later
-				manager.setSetUp();
+				manager.launchPrepScreen();
 			}
 		});
 		
@@ -222,7 +219,8 @@ public class ChooseMonsterScreen {
 		JButton btnDeleteLater = new JButton("RandomMonster Test");
 		btnDeleteLater.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.getPlayer().getTeam().addFriend(new RandomMonster(manager.getPlayer()));
+				System.out.println(manager.getNumInRange(5, 2000));
+				manager.getPlayer().getTeam().addFriend(new RandomMonster(manager.getPlayer(), manager.getRandom()));
 			}
 		});
 		

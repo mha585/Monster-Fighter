@@ -11,10 +11,10 @@ public class MedicalMonster extends Monster{
 	 * The selling price of MedicalMonster
 	 */
 	private static int sell = 200;
-	/**
-	 * generates a random number in a given range
-	 */
-	private randomGen number = new randomGen();
+//	/**
+//	 * generates a random number in a given range
+//	 */
+//	private RandomGen num;
 	/**
 	 * The basic constructor for the MedicalMonster class
 	 * used when all values but type are given
@@ -42,10 +42,10 @@ public class MedicalMonster extends Monster{
 		super(price, sell, description);
 		super.setType("Medical");
 		super.gainDamage((-1 * (super.getDamage())) + (super.getDamage() / 4));
-		super.gainMaxHealth((-1 * (super.getMaxHealth())) + number.randNumInRange(100, 200));
+		super.gainMaxHealth((-1 * (super.getMaxHealth())) + 150);
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());
 		super.gainDamage((int)((-1 * (super.getDamage())) + (super.getDamage() / 4)));
-		super.gainHealAmount((-1 * (super.getHealAmount())) + number.randNumInRange(10, 50));
+		super.gainHealAmount((-1 * (super.getHealAmount())) + 30);
 	}
 	/**
 	 * Generates a string representation of the MedicalMonster

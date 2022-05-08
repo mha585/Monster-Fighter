@@ -4,18 +4,18 @@ import java.util.List;
 
 public class RandomMonster extends Monster{
 	/**
+	 * generates a random number in a given range
+	 */
+	private RandomGen number;
+	/**
 	 * List containing all possible types of monsters
 	 */
 	private List<Monster> possibleTypes = Arrays.asList(new WaterMonster(), new FireMonster(), new GrassMonster(), 
 			new GlassMonster(), new MedicalMonster(), new HolyMonster());
 	/**
-	 * generates a random number in a given range
-	 */
-	private randomGen number = new randomGen();
-	/**
 	 * generates a random Monster from the list
 	 */
-	private Monster random = generateMonster();
+	private Monster random;
 
 	
 	/**
@@ -42,6 +42,7 @@ public class RandomMonster extends Monster{
 	public RandomMonster(String name, double maxHealth, double healAmount, double damage, double speed, int Tier, 
 			int sell, int cost, String description) {
 		super(name, maxHealth, healAmount, damage, speed, Tier, sell, cost, description);
+		random = generateMonster();
 		super.setType(random.getType());
 	}
 	
@@ -56,8 +57,11 @@ public class RandomMonster extends Monster{
 	 * are appropriate to each monster type.
 	 * @param player	the current player, used to scale the monster stats
 	 */
-	public RandomMonster(Player player) {
-		super();
+	public RandomMonster(Player player, RandomGen num) {
+		super(num);
+		number = num;
+		random = generateMonster();
+//		System.out.println(num.randNumInRange(30, 35));
 		int dayGlassAndMedicalCome = 3;
 		int dayHolyComes = 5;
 		if (player.getDayCompleted() < dayGlassAndMedicalCome) {
@@ -80,6 +84,9 @@ public class RandomMonster extends Monster{
 	 * @param player	the current player, used to scale the monster stats
 	 */
 	public void generateMonsterStats(Player player) {
+		System.out.println(random.getName());
+		System.out.println(random.getSpeed());
+
 		int amountToScaleStatsBy = (int)(1+(player.getDayCompleted() / 2));
 		super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
 		super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());

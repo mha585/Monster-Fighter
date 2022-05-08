@@ -23,6 +23,7 @@ public class StartUpScreen {
 	private JFrame startupScreen;
 	private JTextField tfName;
 	private MonsterManager manager;
+	private JTextField textFieldSeed;
 
 	
 
@@ -113,6 +114,15 @@ public class StartUpScreen {
 		spinnerDiff.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		spinnerDiff.setModel(new SpinnerListModel(new String[] {"Easy", "Normal", "Hard"}));
 		
+		JLabel lblNewLabel_1 = new JLabel("(Optional) Enter a seed:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1.setVisible(false);
+		
+		textFieldSeed = new JTextField("");
+		textFieldSeed.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		textFieldSeed.setColumns(10);
+		textFieldSeed.setVisible(false);
+		
 		JButton btnFinished = new JButton("Next");
 		btnFinished.setVisible(false);
 		btnFinished.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -132,11 +142,12 @@ public class StartUpScreen {
 				}
 				manager.getPlayer().setDay(intDay);
 				manager.getPlayer().setDifficulty(intDiff);
+				String stringSeed = textFieldSeed.getText();
+				manager.SetRNG(stringSeed);
 				closeWindow();
 				manager.launchChooseMonsterScreen();
 			}
 		});
-		
 		
 		JButton btnSubmitButton = new JButton("Submit");
 		btnSubmitButton.addActionListener(new ActionListener() {
@@ -152,6 +163,8 @@ public class StartUpScreen {
 					lblDiff.setVisible(true);
 					spinnerDiff.setVisible(true);
 					btnFinished.setVisible(true);
+					lblNewLabel_1.setVisible(true);
+					textFieldSeed.setVisible(true);
 				}
 				else {
 					lblReqLen.setVisible(true);
@@ -172,38 +185,46 @@ public class StartUpScreen {
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 567, GroupLayout.PREFERRED_SIZE)
 							.addGap(255))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnFinished, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+							.addGap(818)
+							.addComponent(btnFinished, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblDay)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)))
-							.addContainerGap())
+									.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblDiff, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
+									.addGap(33)
+									.addComponent(spinnerDiff, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 401, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblName)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(lblReqLen)
+											.addPreferredGap(ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+											.addComponent(lblSuccess, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+										.addComponent(tfName, GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+										.addComponent(lblReqAlpha))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnSubmitButton)
+									.addGap(187)))
+							.addGap(72))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblDiff, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
-							.addGap(33)
-							.addComponent(spinnerDiff, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(420, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblName)
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-									.addComponent(lblReqLen)
-									.addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-									.addComponent(lblSuccess, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
-								.addComponent(tfName, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-								.addComponent(lblReqAlpha, Alignment.LEADING))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnSubmitButton)
-							.addGap(259))))
+							.addComponent(textFieldSeed, GroupLayout.PREFERRED_SIZE, 389, GroupLayout.PREFERRED_SIZE)
+							.addGap(266))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(31)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-					.addGap(86)
+					.addGap(31)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblName)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -223,7 +244,11 @@ public class StartUpScreen {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblDay))
-					.addGap(48)
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldSeed, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+					.addGap(12)
 					.addComponent(btnFinished, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);

@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
 public class MonsterManager {
+	private RandomGen rng;
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
-	private Trainers newTrainer = new Trainers(getPlayer());
+	private Trainers newTrainer;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Shop newShop = new Shop();
 	private Monster enemy;
-	private static boolean setUpDone = false;
+//	private static boolean setUpDone = false;
 //	private Inventory bag = newPlayer.getInventory();
 	
 	public void launchChooseMonsterScreen() {
@@ -144,9 +145,29 @@ public class MonsterManager {
 		return newTrainer;
 	}
 	
-	public void setSetUp() {
-		setUpDone = true;
+	public void SetRNG(String seed) {
+		if (seed.isEmpty()) {
+			rng = new RandomGen();
+		} else {
+			rng = new RandomGen(seed);
+		}
+//		System.out.println(getNumInRange(2, 10));
 	}
+	
+	public int getNumInRange(int min, int max) {
+		return rng.randNumInRange(min, max);
+	}
+	
+	public RandomGen getRandom() {
+		return rng;
+	}
+	
+	
+//	public void setSetUp() {
+//		setUpDone = true;
+//		System.out.println("setup is done after main is finished \nsetUpDone: " + setUpDone);
+//	}
+	
 	public void setEnemyTrainer(Trainers enemyTrainer) {
 		newTrainer = enemyTrainer;
 	}
@@ -162,13 +183,15 @@ public class MonsterManager {
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 		manager.launchStartUpScreen();
-		System.out.println(setUpDone);
-		if(setUpDone == true) {
-			while (manager.newPlayer.daysLeft() > 0) {
-				manager.newPlayer.addDay();
-				trainerBattles = newbattle.getBattles(5, newPlayer);
-				manager.launchPrepScreen();
-			}
-		}
+//		System.out.println(setUpDone);
+//		if(setUpDone == true) {
+//			System.out.println(manager.newPlayer.daysLeft());
+//			while (manager.newPlayer.daysLeft() > 0) {
+//				manager.newPlayer.addDay();
+//				trainerBattles = newbattle.getBattles(5, newPlayer);
+//				manager.launchPrepScreen();
+//			}
+//		}
+//		System.out.println(setUpDone);
 	}
 }

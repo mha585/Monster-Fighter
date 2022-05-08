@@ -9,7 +9,7 @@ public class RandomEvent {
 	/**
 	 * Creates an instance of the object randomGen to be used to generate random numbers.
 	 */
-	private randomGen randNum = new randomGen();
+	private RandomGen randNum = new RandomGen();
 	/**
 	 * Creates an instance of RandomEvent.
 	 */

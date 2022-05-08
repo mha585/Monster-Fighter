@@ -39,7 +39,7 @@ public class Trainers {
 	 * @param player		The player
 	 */
 	public Trainers(Player player) {
-		randomGen randomNum = new randomGen();
+		RandomGen randomNum = new RandomGen();
 		name = trainerName.get(randomNum.randNumInRange(0, trainerName.size()));
 		type = trainerType.get(randomNum.randNumInRange(0, trainerType.size()));
 		if (player.getDayCompleted() == 1) {

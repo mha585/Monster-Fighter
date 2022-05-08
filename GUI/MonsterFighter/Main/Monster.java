@@ -74,6 +74,9 @@ public class Monster implements Purchasable{
 	 * The selling price of the Monster
 	 */
 	String myShopDescription;
+	
+	private RandomGen number; 
+	
 	/**
 	 * The basic constructor for the Monster class
 	 * @param name			The name of the Monster
@@ -89,7 +92,7 @@ public class Monster implements Purchasable{
 	 */
 	public Monster(String name, double maxHealth, double healAmount, double damage, double speed, int tier, 
 			int sell, int cost, String description) {
-		randomGen number = new randomGen();
+		RandomGen number = new RandomGen();
 		myName = name;
 		myMaxHealth = maxHealth;
 		myCurrentHealth = myMaxHealth;
@@ -113,7 +116,7 @@ public class Monster implements Purchasable{
 	 * @param description	Description of the Monster
 	 */
 	public Monster(int sell, int cost, String description) {
-		randomGen number = new randomGen();
+		RandomGen number = new RandomGen();
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
 		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;
@@ -132,8 +135,25 @@ public class Monster implements Purchasable{
 	 * The constructor for the Monster class.
 	 * This gets called when nothing gets entered.
 	 */
+	public Monster(RandomGen number) {
+//		RandomGen number = new RandomGen();
+		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
+		myMaxHealth = number.randNumInRange(1, 100);
+		myCurrentHealth = myMaxHealth;
+		myHealAmount = number.randNumInRange(0, 5);
+		myDamage = number.randNumInRange(1, 70);
+		mySpeed = number.randNumInRange(1, 15);
+		myExperience = 0;
+		myDeaths = 0;
+		myReward = number.randNumInRange(11, 99);
+		myTier = number.randNumInRange(1, 3);
+	}
+	/**
+	 * The constructor for the Monster class.
+	 * This gets called when nothing gets entered.
+	 */
 	public Monster() {
-		randomGen number = new randomGen();
+		RandomGen number = new RandomGen();
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
 		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;

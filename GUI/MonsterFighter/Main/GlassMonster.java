@@ -11,10 +11,10 @@ public class GlassMonster extends Monster{
 	 * The selling price of GlassMonster
 	 */
 	private static int sell = 200;
-	/**
-	 * generates a random number in a given range
-	 */
-	private randomGen number = new randomGen();
+//	/**
+//	 * generates a random number in a given range
+//	 */
+//	private RandomGen num;
 	/**
 	 * The basic constructor for the GlassMonster class
 	 * used when all values but type are given
@@ -41,7 +41,7 @@ public class GlassMonster extends Monster{
 	public GlassMonster() {
 		super(price, sell, description);
 		super.setType("Glass");
-		super.gainMaxHealth((-1 * (super.getMaxHealth())) + number.randNumInRange(1, (int) super.getMaxHealth() / 2));
+		super.gainMaxHealth((-1 * (super.getMaxHealth())) + (int) super.getMaxHealth() / 2);
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());
 		super.gainDamage(super.getDamage() + 10);
 	}
