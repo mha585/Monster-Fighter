@@ -10,6 +10,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -18,6 +19,7 @@ public class TodaysBattlesScreen {
 	private JFrame newBattleFrames;
 	private MonsterManager manager;
 	private RandomGen num;
+	private ArrayList<Trainers> possibleTrainers;
 
 //	/**
 //	 * Launch the application.
@@ -37,11 +39,13 @@ public class TodaysBattlesScreen {
 
 	/**
 	 * Create the application.
+	 * @param trainerBattles 
 	 * @param previousPage 
 	 */
-	public TodaysBattlesScreen(MonsterManager incomingManager, RandomGen number) {
+	public TodaysBattlesScreen(MonsterManager incomingManager, RandomGen number, ArrayList<Trainers> trainerBattles) {
 		manager = incomingManager;
 		num = number;
+		possibleTrainers = trainerBattles;
 		initialize();
 		newBattleFrames.setVisible(true);
 	}
@@ -57,34 +61,137 @@ public class TodaysBattlesScreen {
 		newBattleFrames = new JFrame();
 		newBattleFrames.setBounds(100, 100, 1187, 540);
 		newBattleFrames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ArrayList<Monster> trainer1Team = possibleTrainers.get(0).getEnemies();
+		String trainer1String = "";
+		String trainer2String = "";
+		String trainer3String = "";
+		String trainer4String = "";
+		String trainer5String = "";
+		for (int i = 0; i < trainer1Team.size(); i++) {
+			Monster monster = trainer1Team.get(i);
+			trainer1String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + "Health: "
+			+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
+					"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
+		}
+		JCheckBox chckbxTrainer1 = new JCheckBox("Fight " + possibleTrainers.get(0).getFullName()+"?");
+		chckbxTrainer1.setSelected(true);
+		JTextArea TADiplayTrainer1 = new JTextArea();
+		TADiplayTrainer1.setText(possibleTrainers.get(0).getFullName()+'\n'+"Monsters: " + trainer1String);
+		TADiplayTrainer1.setEditable(false);
+		TADiplayTrainer1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			ArrayList<Monster> trainer2Team = possibleTrainers.get(1).getEnemies();
+			for (int i = 0; i < trainer2Team.size(); i++) {
+				Monster monster = trainer2Team.get(i);
+				trainer2String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + "Health: "
+				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
+						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
+			}
+			ArrayList<Monster> trainer3Team = possibleTrainers.get(2).getEnemies();
+			for (int i = 0; i < trainer3Team.size(); i++) {
+				Monster monster = trainer3Team.get(i);
+				trainer3String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + "Health: "
+				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
+						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
+			}
+			ArrayList<Monster> trainer4Team = possibleTrainers.get(3).getEnemies();
+			for (int i = 0; i < trainer4Team.size(); i++) {
+				Monster monster = trainer4Team.get(i);
+				trainer4String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + "Health: "
+				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
+						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
+			}
+			ArrayList<Monster> trainer5Team = possibleTrainers.get(4).getEnemies();
+			for (int i = 0; i < trainer5Team.size(); i++) {
+				Monster monster = trainer5Team.get(i);
+				trainer5String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + "Health: "
+				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
+						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
+			}
+		}
+		
 		
 		JLabel lblInstrct = new JLabel("Click the checkboxes of the trainers you want to fight.");
 		lblInstrct.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JCheckBox chckbxTrainer1 = new JCheckBox("FightTrainerName\r\n");
+		String chkbox2Label = "";
+		String chkbox3Label = "";
+		String chkbox4Label = "";
+		String chkbox5Label = "";
 		
-		JCheckBox chckbxTrainer3 = new JCheckBox("FightTrainerName");
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			chkbox2Label = "Fight " + possibleTrainers.get(1).getFullName()+"?";
+			chkbox3Label = "Fight " + possibleTrainers.get(2).getFullName()+"?";
+			chkbox4Label = "Fight " + possibleTrainers.get(3).getFullName()+"?";
+			chkbox5Label = "Fight " + possibleTrainers.get(4).getFullName()+"?";
+		}
+		JCheckBox chckbxTrainer2 = new JCheckBox(chkbox2Label);
+		chckbxTrainer2.setEnabled(false);
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			chckbxTrainer2.setEnabled(true);
+			chckbxTrainer1.setSelected(true);
+		}
+		JCheckBox chckbxTrainer3 = new JCheckBox(chkbox3Label);
+		chckbxTrainer3.setEnabled(false);
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			chckbxTrainer3.setEnabled(true);
+			chckbxTrainer1.setSelected(true);
+		}
+		JCheckBox chckbxTrainer4 = new JCheckBox(chkbox4Label);
+		chckbxTrainer4.setEnabled(false);
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			chckbxTrainer4.setEnabled(true);
+			chckbxTrainer1.setSelected(true);
+		}
+		JCheckBox chckbxTrainer5 = new JCheckBox(chkbox5Label);
+		chckbxTrainer5.setEnabled(false);
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			chckbxTrainer5.setEnabled(true);
+			chckbxTrainer1.setSelected(true);
+		}
+
 		
-		JCheckBox chckbxTrainer4 = new JCheckBox("FightTrainerName");
-		
-		JCheckBox chckbxTrainer5 = new JCheckBox("FightTrainerName");
-		
-		JTextArea TADiplayTrainer1 = new JTextArea();
-		TADiplayTrainer1.setEditable(false);
-		TADiplayTrainer1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		JTextArea TADiplayTrainer2 = new JTextArea();
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			TADiplayTrainer2.setText(possibleTrainers.get(1).getFullName()+'\n'+"Monsters: " + trainer2String);
+			TADiplayTrainer2.setEditable(false);
+			TADiplayTrainer2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		}
+		else {
+			TADiplayTrainer2.setEditable(false);
+		}
 		
 		JTextArea TADiplayTrainer3 = new JTextArea();
-		TADiplayTrainer3.setEditable(false);
-		TADiplayTrainer3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			TADiplayTrainer3.setText(possibleTrainers.get(2).getFullName()+'\n'+"Monsters: " + trainer3String);
+			TADiplayTrainer3.setEditable(false);
+			TADiplayTrainer3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		}
+		else {
+			TADiplayTrainer3.setEditable(false);
+		}
 		
 		JTextArea TADiplayTrainer4 = new JTextArea();
-		TADiplayTrainer4.setEditable(false);
-		TADiplayTrainer4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			TADiplayTrainer4.setText(possibleTrainers.get(3).getFullName()+'\n'+"Monsters: " + trainer4String);
+			TADiplayTrainer4.setEditable(false);
+			TADiplayTrainer4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		}
+		else {
+			TADiplayTrainer4.setEditable(false);
+		
+		}
 		
 		JTextArea TADiplayTrainer5 = new JTextArea();
-		TADiplayTrainer5.setEditable(false);
-		TADiplayTrainer5.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
+		if (manager.getPlayer().getDayCompleted() > 1) {
+			TADiplayTrainer5.setText(possibleTrainers.get(4).getFullName()+'\n'+"Monsters: " + trainer5String);
+			TADiplayTrainer5.setEditable(false);
+			TADiplayTrainer5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		} else {
+			TADiplayTrainer5.setEditable(false);
+		}
+			
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,11 +201,9 @@ public class TodaysBattlesScreen {
 			}
 		});
 		
-		JTextArea TADiplayTrainer2 = new JTextArea();
-		TADiplayTrainer2.setEditable(false);
-		TADiplayTrainer2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+
 		
-		JCheckBox chckbxTrainer2 = new JCheckBox("FightTrainerName");
+		
 		GroupLayout groupLayout = new GroupLayout(newBattleFrames.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

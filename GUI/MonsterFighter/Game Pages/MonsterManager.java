@@ -93,7 +93,7 @@ public class MonsterManager {
 //	}
 	
 	public void launchTodaysBattlesScreen(RandomGen num) {
-		TodaysBattlesScreen todaysBattlesWindow = new TodaysBattlesScreen(this, num);
+		TodaysBattlesScreen todaysBattlesWindow = new TodaysBattlesScreen(this, num, trainerBattles);
 	}
 	
 //	public void closeTodaysBattlesScreen(TodaysBattlesScreen todaysBattlesWindow) {
@@ -173,6 +173,14 @@ public class MonsterManager {
 	
 	public void setEnemyTrainer(Trainers enemyTrainer) {
 		newTrainer = enemyTrainer;
+	}
+	
+	public void setTrainerListD1() {
+		trainerBattles = newbattle.getBattles(1, newPlayer, rng);
+	}
+	
+	public void setTrainerListNotD1() {
+		trainerBattles = newbattle.getBattles(5, newPlayer, rng);
 	}
 	
 //	public void launchSetupScreen() {
