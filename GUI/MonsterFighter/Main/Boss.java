@@ -47,8 +47,8 @@ public class Boss extends Trainers{
 	 * 
 	 * @param player		User player
 	 */
-	public Boss(Player player) {
-		super(player);
+	public Boss(Player player, RandomGen num) {
+		super(player, num);
 	}
 	/**
 	 * Returns the size of the Boss' team

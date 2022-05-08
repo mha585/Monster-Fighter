@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class MonsterManager {
-	private RandomGen rng;
+	private static RandomGen rng;
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
 	private Trainers newTrainer;
@@ -11,29 +11,29 @@ public class MonsterManager {
 //	private static boolean setUpDone = false;
 //	private Inventory bag = newPlayer.getInventory();
 	
-	public void launchChooseMonsterScreen() {
-		ChooseMonsterScreen chooseWindow = new ChooseMonsterScreen(this);
+	public void launchChooseMonsterScreen(RandomGen num) {
+		ChooseMonsterScreen chooseWindow = new ChooseMonsterScreen(this, num);
 	}
 	
 //	public void closeChooseMonsterScreen(ChooseMonsterScreen chooseWindow) {
 //		chooseWindow.closeWindow();
 //	}
 	
-	public void launchBattleScreen(boolean initialiseFight) {
+	public void launchBattleScreen(boolean initialiseFight, RandomGen num) {
 		if (initialiseFight) {
-			Trainers newEnemy = new Trainers(getPlayer());
+			Trainers newEnemy = new Trainers(getPlayer(), num);
 			setEnemyTrainer(newEnemy);
 			setEnemy(newEnemy.getFirstEnemy());
 		}
-		BattleScreen battleWindow = new BattleScreen(this, enemy);
+		BattleScreen battleWindow = new BattleScreen(this, enemy, num);
 	}
 	
 //	public void closeBattleScreen(BattleScreen battleWindow) {
 //		battleWindow.closeWindow();
 //	}
 	
-	public void launchTeamScreen(String previousPage) {
-		TeamScreen teamWindow = new TeamScreen(this, previousPage);
+	public void launchTeamScreen(String previousPage, RandomGen num) {
+		TeamScreen teamWindow = new TeamScreen(this, previousPage, num);
 	}
 	
 //	public void closeTeamScreen(TeamScreen teamWindow) {
@@ -41,8 +41,8 @@ public class MonsterManager {
 //	}
 	
 	
-	public void launchInventoryScreen(String previousPage) {
-		InventoryScreen invWindow = new InventoryScreen(this, previousPage);
+	public void launchInventoryScreen(String previousPage, RandomGen num) {
+		InventoryScreen invWindow = new InventoryScreen(this, previousPage, num);
 	}
 	
 //	public void closeInventoryScreen(InventoryScreen invWindow) {
@@ -65,8 +65,8 @@ public class MonsterManager {
 //		loseWindow.closeWindow();
 //	}
 	
-	public void launchPrepScreen() {
-		PrepScreen prepWindow = new PrepScreen(this);
+	public void launchPrepScreen(RandomGen num) {
+		PrepScreen prepWindow = new PrepScreen(this, num);
 	}
 	
 //	public void closePrepScreen(PrepScreen prepWindow) {
@@ -81,16 +81,19 @@ public class MonsterManager {
 //		shopWindow.closeWindow();
 //	}
 	
-	public void launchStartUpScreen() {
-		StartUpScreen startUpWindow = new StartUpScreen(this);
+	public void launchStartUpScreen(RandomGen num) {
+//		System.out.println(getRandom().randNumInRange(10, 200));
+//		System.out.println(num.randNumInRange(10, 200));
+
+		StartUpScreen startUpWindow = new StartUpScreen(this, num);
 	}
 	
 //	public void closeStartUpScreen(StartUpScreen startUpWindow) {
 //		startUpWindow.closeWindow();
 //	}
 	
-	public void launchTodaysBattlesScreen() {
-		TodaysBattlesScreen todaysBattlesWindow = new TodaysBattlesScreen(this);
+	public void launchTodaysBattlesScreen(RandomGen num) {
+		TodaysBattlesScreen todaysBattlesWindow = new TodaysBattlesScreen(this, num);
 	}
 	
 //	public void closeTodaysBattlesScreen(TodaysBattlesScreen todaysBattlesWindow) {
@@ -113,16 +116,16 @@ public class MonsterManager {
 //		winWindow.closeWindow();
 //	}
 	
-	public void launchUseItemScreen(String previousPage, int itemIndex) {
-		UseItemScreen useWindow = new UseItemScreen(this, previousPage, itemIndex);
+	public void launchUseItemScreen(String previousPage, int itemIndex, RandomGen num) {
+		UseItemScreen useWindow = new UseItemScreen(this, previousPage, itemIndex, num);
 	}
 	
 //	public void closeUseItemScreen(UseItemScreen useWindow) {
 //		useWindow.closeWindow();
 //	}
 	
-	public void launchItemSuccessScreen(String previousPage, int monsterIndex, int itemIndex) {
-		ItemSuccessScreen successWindow = new ItemSuccessScreen(this, previousPage, monsterIndex, itemIndex);
+	public void launchItemSuccessScreen(String previousPage, int monsterIndex, int itemIndex, RandomGen num) {
+		ItemSuccessScreen successWindow = new ItemSuccessScreen(this, previousPage, monsterIndex, itemIndex, num);
 	}
 	
 //	public void closeUseItemScreen(UseItemScreen useWindow) {
@@ -182,7 +185,8 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
-		manager.launchStartUpScreen();
+		newPlayer.addDay();
+		manager.launchStartUpScreen(rng);
 //		System.out.println(setUpDone);
 //		if(setUpDone == true) {
 //			System.out.println(manager.newPlayer.daysLeft());

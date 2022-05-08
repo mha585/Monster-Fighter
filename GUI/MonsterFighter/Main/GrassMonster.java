@@ -34,8 +34,8 @@ public class GrassMonster extends Monster{
 	 * The empty constructor for the GrassMonster class
 	 * this gets called when no params are entered.
 	 */
-	public GrassMonster() {
-		super(price, sell, description);
+	public GrassMonster(RandomGen num) {
+		super(price, sell, description, num);
 		super.setType("Grass");
 	}
 	/**

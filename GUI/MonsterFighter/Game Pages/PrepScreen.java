@@ -14,6 +14,7 @@ public class PrepScreen {
 
 	private JFrame prepScreen;
 	private MonsterManager manager;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -34,8 +35,9 @@ public class PrepScreen {
 	/**
 	 * Create the application.
 	 */
-	public PrepScreen(MonsterManager incomingManager) {
+	public PrepScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
+		num = number;
 		initialize();
 		prepScreen.setVisible(true);
 	}
@@ -79,7 +81,7 @@ public class PrepScreen {
 		btnTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchTeamScreen("Prep");
+				manager.launchTeamScreen("Prep", num);
 			}
 		});
 		btnTeam.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -88,7 +90,7 @@ public class PrepScreen {
 		btnBattles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchTodaysBattlesScreen();
+				manager.launchTodaysBattlesScreen(num);
 			}
 		});
 		btnBattles.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -97,7 +99,7 @@ public class PrepScreen {
 		btnBag.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchInventoryScreen("Prep");
+				manager.launchInventoryScreen("Prep", num);
 			}
 		});
 		btnBag.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -106,7 +108,7 @@ public class PrepScreen {
 		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchBattleScreen(true);
+				manager.launchBattleScreen(true, num);
 			}
 		});
 		btnFight.setFont(new Font("Tahoma", Font.PLAIN, 20));

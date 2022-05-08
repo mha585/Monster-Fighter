@@ -24,6 +24,7 @@ public class StartUpScreen {
 	private JTextField tfName;
 	private MonsterManager manager;
 	private JTextField textFieldSeed;
+	private RandomGen num;
 
 	
 
@@ -47,8 +48,9 @@ public class StartUpScreen {
 	 * Create the application.
 	 * @param newPlayer 
 	 */
-	public StartUpScreen(MonsterManager incomingManager) {
+	public StartUpScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
+		num = number;
 		initialize();
 		startupScreen.setVisible(true);
 	}
@@ -145,7 +147,7 @@ public class StartUpScreen {
 				String stringSeed = textFieldSeed.getText();
 				manager.SetRNG(stringSeed);
 				closeWindow();
-				manager.launchChooseMonsterScreen();
+				manager.launchChooseMonsterScreen(num);
 			}
 		});
 		

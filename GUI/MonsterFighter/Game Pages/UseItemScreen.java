@@ -23,6 +23,7 @@ public class UseItemScreen {
 	private int item;
 	private MonsterManager manager;
 	private String previous;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -46,10 +47,11 @@ public class UseItemScreen {
 	 * @param monsterManager 
 	 * @param previousPage 
 	 */
-	public UseItemScreen(MonsterManager monsterManager, String previousPage, int itemIndex) {
+	public UseItemScreen(MonsterManager monsterManager, String previousPage, int itemIndex, RandomGen number) {
 		item = itemIndex;
 		manager = monsterManager;
 		previous = previousPage;
+		num = number;
 		initialize();
 		useItemScreen.setVisible(true);
 	}
@@ -76,7 +78,7 @@ public class UseItemScreen {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(previous);
 				closeWindow();
-				manager.launchInventoryScreen(previous);
+				manager.launchInventoryScreen(previous, num);
 			}
 		});
 		
@@ -108,7 +110,7 @@ public class UseItemScreen {
 				JList<Object> itemJList = (JList<Object>) event.getSource();
 				if (event.getClickCount() >= 1) {
 					int monsterIndex = listMonsters.locationToIndex(event.getPoint());
-					manager.launchItemSuccessScreen(previous, monsterIndex, item);
+					manager.launchItemSuccessScreen(previous, monsterIndex, item, num);
 					manager.getPlayer().getInventory().getItem(item).addFreq(manager.getPlayer().getInventory().getItem(item), -1);
 					closeWindow();
 				}

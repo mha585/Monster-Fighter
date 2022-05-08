@@ -20,6 +20,7 @@ public class ItemSuccessScreen {
 	private int monsterInt;
 	private int itemInt;
 	private String previousPage;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -44,11 +45,12 @@ public class ItemSuccessScreen {
 	 * @param previousPage 
 	 * @param itemIndex 
 	 */
-	public ItemSuccessScreen(MonsterManager monsterManager, String previous, int monsterIndex, int itemIndex) {
+	public ItemSuccessScreen(MonsterManager monsterManager, String previous, int monsterIndex, int itemIndex, RandomGen number) {
 		manager = monsterManager;
 		previousPage = previous;
 		monsterInt = monsterIndex;
 		itemInt = itemIndex;
+		num = number;
 		initialize();
 		ISScreen.setVisible(true);
 	}
@@ -106,7 +108,7 @@ public class ItemSuccessScreen {
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchInventoryScreen(previousPage);
+				manager.launchInventoryScreen(previousPage, num);
 			}
 		});
 		

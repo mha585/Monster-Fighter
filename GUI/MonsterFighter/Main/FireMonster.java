@@ -34,8 +34,8 @@ public class FireMonster extends Monster{
 	 * The empty constructor for the FireMonster class
 	 * this gets called when no params are entered.
 	 */
-	public FireMonster() {
-		super(price, sell, description);
+	public FireMonster(RandomGen num) {
+		super(price, sell, description, num);
 		super.setType("Fire");
 	}
 	/**

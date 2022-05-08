@@ -24,6 +24,7 @@ public class BattleScreen {
 	private MonsterManager manager;
 	private Monster LeadingMonster;
 	private Monster enemyMonster;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -45,10 +46,11 @@ public class BattleScreen {
 	/**
 	 * Create the application.
 	 */
-	public BattleScreen(MonsterManager incomingManager, Monster enemy) {
+	public BattleScreen(MonsterManager incomingManager, Monster enemy, RandomGen randomNumber) {
 		manager = incomingManager;
 		enemyMonster = enemy;
 		LeadingMonster = manager.getPlayer().getTeam().getFriend(0);
+		num = randomNumber;
 		initialize();
 		battleScreen.setVisible(true);
 	}
@@ -93,7 +95,7 @@ public class BattleScreen {
 			enemyTrainer.removeEnemy();
 			closeWindow();
 			if (enemy.getHealth() > 0) {
-				manager.launchBattleScreen(false);
+				manager.launchBattleScreen(false, num);
 			} else {
 				getPrizes(manager.getPlayer());
 //				launch the you win screen and go to next day
@@ -104,7 +106,7 @@ public class BattleScreen {
 		} else if (playerTeam.getFriend(0).getHealth() <= 0) {
 			playerTeam.pushFrontToBack();
 			closeWindow();
-			manager.launchBattleScreen(false);
+			manager.launchBattleScreen(false, num);
 		} else if (playerTeam.sumTeamHealth() <= 0) {
 			double tenPercent = manager.getPlayer().getMoney() * 0.1;
 			int lost = (int) (-1 * Math.floor(tenPercent));
@@ -340,7 +342,7 @@ public class BattleScreen {
 		btnTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchTeamScreen("Fight");
+				manager.launchTeamScreen("Fight", num);
 			}
 		});
 		
@@ -348,7 +350,7 @@ public class BattleScreen {
 		btnItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchInventoryScreen("Fight");
+				manager.launchInventoryScreen("Fight", num);
 			}
 		});
 		GroupLayout gl_panelButtons = new GroupLayout(panelButtons);

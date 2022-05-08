@@ -38,8 +38,8 @@ public class GlassMonster extends Monster{
 	 * The empty constructor for the GlassMonster class
 	 * this gets called when no params are entered.
 	 */
-	public GlassMonster() {
-		super(price, sell, description);
+	public GlassMonster(RandomGen num) {
+		super(price, sell, description, num);
 		super.setType("Glass");
 		super.gainMaxHealth((-1 * (super.getMaxHealth())) + (int) super.getMaxHealth() / 2);
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());

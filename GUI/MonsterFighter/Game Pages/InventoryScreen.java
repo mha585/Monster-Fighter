@@ -25,6 +25,7 @@ public class InventoryScreen {
 	private JFrame bagScreen;
 	private MonsterManager manager;
 	private String previousPage;
+	private RandomGen number;
 
 	/**
 	 * Launch the application.
@@ -45,9 +46,10 @@ public class InventoryScreen {
 	/**
 	 * Create the application.
 	 */
-	public InventoryScreen(MonsterManager incomingManager, String previous) {
+	public InventoryScreen(MonsterManager incomingManager, String previous, RandomGen num) {
 		manager = incomingManager;
 		previousPage = previous;
+		number = num;
 		initialize();
 		bagScreen.setVisible(true);
 	}
@@ -82,7 +84,7 @@ public class InventoryScreen {
 				if (event.getClickCount() >= 1) {
 					int itemIndex = itemJList.locationToIndex(event.getPoint());
 					closeWindow();
-					manager.launchUseItemScreen(previousPage, itemIndex);
+					manager.launchUseItemScreen(previousPage, itemIndex, number);
 				}
 			}
 		});
@@ -99,9 +101,9 @@ public class InventoryScreen {
 				closeWindow();
 				System.out.println(previousPage);
 				if (previousPage == "Prep") {
-					manager.launchPrepScreen();
+					manager.launchPrepScreen(number);
 				} else if (previousPage == "Fight") {
-					manager.launchBattleScreen(false);
+					manager.launchBattleScreen(false, number);
 				}
 			}
 		});

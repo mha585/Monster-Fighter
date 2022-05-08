@@ -115,8 +115,8 @@ public class Monster implements Purchasable{
 	 * @param cost			Price of the Monster
 	 * @param description	Description of the Monster
 	 */
-	public Monster(int sell, int cost, String description) {
-		RandomGen number = new RandomGen();
+	public Monster(int sell, int cost, String description, RandomGen number) {
+//		RandomGen number = new RandomGen();
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
 		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;
@@ -137,6 +137,7 @@ public class Monster implements Purchasable{
 	 */
 	public Monster(RandomGen number) {
 //		RandomGen number = new RandomGen();
+		System.out.println(number.randNumInRange(20, 27));
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
 		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;

@@ -38,8 +38,8 @@ public class MedicalMonster extends Monster{
 	 * The empty constructor for the MedicalMonster class
 	 * this gets called when no params are entered.
 	 */
-	public MedicalMonster() {
-		super(price, sell, description);
+	public MedicalMonster(RandomGen num) {
+		super(price, sell, description, num);
 		super.setType("Medical");
 		super.gainDamage((-1 * (super.getDamage())) + (super.getDamage() / 4));
 		super.gainMaxHealth((-1 * (super.getMaxHealth())) + 150);

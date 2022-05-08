@@ -134,12 +134,12 @@ public class Shop {
 	 * 
 	 * @param player
 	 */
-	public void generateNewMonsters(Player player) {
+	public void generateNewMonsters(Player player, RandomGen num) {
 		if (player.daysLeft() <= 2) {
-			shopMonster1 = new RandomMonster(player);
-			shopMonster2 = new RandomMonster(player);
-			shopMonster3 = new RandomMonster(player);
-			shopMonster4 = new RandomMonster(player);
+			shopMonster1 = new RandomMonster(player, num);
+			shopMonster2 = new RandomMonster(player, num);
+			shopMonster3 = new RandomMonster(player, num);
+			shopMonster4 = new RandomMonster(player, num);
 			listMonsters.add(shopMonster1);
 			listMonsters.add(shopMonster2);
 			listMonsters.add(shopMonster3);
@@ -148,7 +148,7 @@ public class Shop {
 		else {
 			boolean notHoly1 = false;
 			while (notHoly1 == false) {
-				shopMonster1 = new RandomMonster(player);
+				shopMonster1 = new RandomMonster(player, num);
 				if (shopMonster1.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster1);
 					notHoly1 = true;
@@ -156,7 +156,7 @@ public class Shop {
 			}
 			boolean notHoly2 = false;
 			while (notHoly2 == false) {
-				shopMonster2 = new RandomMonster(player);
+				shopMonster2 = new RandomMonster(player, num);
 				if (shopMonster2.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster2);
 					notHoly2 = true;
@@ -164,7 +164,7 @@ public class Shop {
 			}
 			boolean notHoly3 = false;
 			while (notHoly3 == false) {
-				shopMonster3 = new RandomMonster(player);
+				shopMonster3 = new RandomMonster(player, num);
 				if (shopMonster3.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster3);
 					notHoly3 = true;
@@ -172,7 +172,7 @@ public class Shop {
 			}
 			boolean notHoly4 = false;
 			while (notHoly4 == false) {
-				shopMonster4 = new RandomMonster(player);
+				shopMonster4 = new RandomMonster(player, num);
 				if (shopMonster4.getType().equalsIgnoreCase("holy") == false) {
 					listMonsters.add(shopMonster4);
 					notHoly4 = true;

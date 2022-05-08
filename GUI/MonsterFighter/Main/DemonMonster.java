@@ -35,8 +35,8 @@ public class DemonMonster extends Monster{
 	 * The empty constructor for the DemonMonster class
 	 * this gets called when no params are entered.
 	 */
-	public DemonMonster() {
-		super(price, sell, description);
+	public DemonMonster(RandomGen num) {
+		super(price, sell, description, num);
 		super.setType("Demon");
 	}
 	/**

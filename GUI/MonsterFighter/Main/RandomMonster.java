@@ -10,20 +10,24 @@ public class RandomMonster extends Monster{
 	/**
 	 * List containing all possible types of monsters
 	 */
-	private List<Monster> possibleTypes = Arrays.asList(new WaterMonster(), new FireMonster(), new GrassMonster(), 
-			new GlassMonster(), new MedicalMonster(), new HolyMonster());
+//	private List<Monster> possibleTypes = Arrays.asList(new WaterMonster(), new FireMonster(), new GrassMonster(), 
+//			new GlassMonster(), new MedicalMonster(), new HolyMonster());
 	/**
 	 * generates a random Monster from the list
 	 */
 	private Monster random;
 
+	public List<Monster> getPossibleTypes() {
+		return  Arrays.asList(new WaterMonster(number), new FireMonster(number), new GrassMonster(number), 
+				new GlassMonster(number), new MedicalMonster(number), new HolyMonster(number));
+	}
 	
 	/**
 	 * Gets a random monster from the list of all possible monster types.
 	 * This is used to initialise the randomMonster with the given values
 	 */	
 	public Monster generateMonster() {
-		return possibleTypes.get(number.randNumInRange(0, possibleTypes.size()));
+		return getPossibleTypes().get(number.randNumInRange(0, getPossibleTypes().size()));
 	}
 	/**
 	 * The basic constructor for the RandomMonster class
@@ -61,7 +65,6 @@ public class RandomMonster extends Monster{
 		super(num);
 		number = num;
 		random = generateMonster();
-//		System.out.println(num.randNumInRange(30, 35));
 		int dayGlassAndMedicalCome = 3;
 		int dayHolyComes = 5;
 		if (player.getDayCompleted() < dayGlassAndMedicalCome) {
@@ -84,8 +87,6 @@ public class RandomMonster extends Monster{
 	 * @param player	the current player, used to scale the monster stats
 	 */
 	public void generateMonsterStats(Player player) {
-		System.out.println(random.getName());
-		System.out.println(random.getSpeed());
 
 		int amountToScaleStatsBy = (int)(1+(player.getDayCompleted() / 2));
 		super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());

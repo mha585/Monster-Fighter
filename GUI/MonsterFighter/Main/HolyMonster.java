@@ -34,8 +34,8 @@ public class HolyMonster extends Monster{
 	 * The empty constructor for the HolyMonster class
 	 * this gets called when no params are entered.
 	 */
-	public HolyMonster() {
-		super(price, sell, description);
+	public HolyMonster(RandomGen num) {
+		super(price, sell, description, num);
 		super.setType("Holy");
 	}
 	/**

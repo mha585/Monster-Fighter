@@ -17,6 +17,7 @@ public class TodaysBattlesScreen {
 
 	private JFrame newBattleFrames;
 	private MonsterManager manager;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -38,8 +39,9 @@ public class TodaysBattlesScreen {
 	 * Create the application.
 	 * @param previousPage 
 	 */
-	public TodaysBattlesScreen(MonsterManager incomingManager) {
+	public TodaysBattlesScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
+		num = number;
 		initialize();
 		newBattleFrames.setVisible(true);
 	}
@@ -87,7 +89,7 @@ public class TodaysBattlesScreen {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchPrepScreen();
+				manager.launchPrepScreen(num);
 				
 			}
 		});

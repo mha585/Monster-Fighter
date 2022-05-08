@@ -17,6 +17,7 @@ public class TeamScreen {
 	private JFrame teamScreen;
 	private MonsterManager manager;
 	private String previousPage;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -37,9 +38,10 @@ public class TeamScreen {
 	/**
 	 * Create the application.
 	 */
-	public TeamScreen(MonsterManager incomingManager, String previous) {
+	public TeamScreen(MonsterManager incomingManager, String previous, RandomGen number) {
 		manager = incomingManager;
 		previousPage = previous;
+		num = number;
 		initialize();
 		teamScreen.setVisible(true);
 	}
@@ -507,7 +509,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(0, 1);
 					closeWindow();
-					manager.launchTeamScreen(previousPage);
+					manager.launchTeamScreen(previousPage, num);
 				}
 			});
 		}
@@ -651,7 +653,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(1, 2);
 					closeWindow();
-					manager.launchTeamScreen(previousPage);
+					manager.launchTeamScreen(previousPage, num);
 				}
 			});
 		}
@@ -664,7 +666,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(0, 1);
 					closeWindow();
-					manager.launchTeamScreen(previousPage);
+					manager.launchTeamScreen(previousPage, num);
 				}
 			});
 		}
@@ -677,7 +679,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(2, 3);
 					closeWindow();
-					manager.launchTeamScreen(previousPage);
+					manager.launchTeamScreen(previousPage, num);
 				}
 			});
 		}
@@ -690,7 +692,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(1, 2);
 					closeWindow();
-					manager.launchTeamScreen(previousPage);
+					manager.launchTeamScreen(previousPage, num);
 				}
 			});
 		}
@@ -703,7 +705,7 @@ public class TeamScreen {
 				public void actionPerformed(ActionEvent e) {
 					manager.getPlayer().getTeam().swap(2, 3);
 					closeWindow();
-					manager.launchTeamScreen(previousPage);
+					manager.launchTeamScreen(previousPage, num);
 				}
 			});
 		}
@@ -771,9 +773,9 @@ public class TeamScreen {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				if (previousPage == "Prep") {
-					manager.launchPrepScreen();
+					manager.launchPrepScreen(num);
 				} else if (previousPage == "Fight") {
-					manager.launchBattleScreen(false);
+					manager.launchBattleScreen(false, num);
 				}
 			}
 		});

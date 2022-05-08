@@ -18,6 +18,7 @@ public class ChooseMonsterScreen {
 	private FireMonster fireMonsterToAdd = new FireMonster("Fireguy", 50.0, 5.0, 20.0, 20.0, 1, 150, 250, "A strong fire type Monster capable of burning down buildings.");
 	private GrassMonster grassMonsterToAdd = new GrassMonster("Grassdude", 70, 5.0, 10.0, 20.0, 1, 150, 250, "A strong grass type Monster. It is said that they dwell in the deapest parts of the jungle.");
 	private WaterMonster waterMonsterToAdd = new WaterMonster("Waterman", 60, 5.0, 15.0, 20.0, 1, 150, 250, "A strong water type Monster. These streamline monsters are known to have existed before humans.");
+	private RandomGen num;
 	/**
 	 * @wbp.nonvisual location=956,-36
 	 */
@@ -41,8 +42,9 @@ public class ChooseMonsterScreen {
 	/**
 	 * Create the application.
 	 */
-	public ChooseMonsterScreen(MonsterManager incomingManager) {
+	public ChooseMonsterScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
+		num = manager.getRandom();
 		initialize();
 		chooseMonsterScreen.setVisible(true);
 	}
@@ -69,7 +71,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(grassMonsterToAdd);
 				closeWindow();
-				manager.launchPrepScreen();
+				manager.launchPrepScreen(num);
 				
 			}
 		});
@@ -79,7 +81,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(fireMonsterToAdd);
 				closeWindow();
-				manager.launchPrepScreen();
+				manager.launchPrepScreen(num);
 			}
 		});
 		
@@ -88,7 +90,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(waterMonsterToAdd);
 				closeWindow();
-				manager.launchPrepScreen();
+				manager.launchPrepScreen(num);
 			}
 		});
 		
@@ -219,7 +221,6 @@ public class ChooseMonsterScreen {
 		JButton btnDeleteLater = new JButton("RandomMonster Test");
 		btnDeleteLater.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(manager.getNumInRange(5, 2000));
 				manager.getPlayer().getTeam().addFriend(new RandomMonster(manager.getPlayer(), manager.getRandom()));
 			}
 		});
