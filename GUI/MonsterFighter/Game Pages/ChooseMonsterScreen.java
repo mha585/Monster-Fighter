@@ -70,7 +70,8 @@ public class ChooseMonsterScreen {
 				manager.getPlayer().getTeam().addFriend(grassMonsterToAdd);
 				closeWindow();
 //				this is true as we initialise the enemy but only for a test remove later
-				manager.launchPrepScreen();
+				manager.setSetUp();
+				
 			}
 		});
 		
@@ -80,7 +81,7 @@ public class ChooseMonsterScreen {
 				manager.getPlayer().getTeam().addFriend(fireMonsterToAdd);
 				closeWindow();
 //				this is true as we initialise the enemy but only for a test remove later
-				manager.launchPrepScreen();
+				manager.setSetUp();
 			}
 		});
 		
@@ -90,7 +91,7 @@ public class ChooseMonsterScreen {
 				manager.getPlayer().getTeam().addFriend(waterMonsterToAdd);
 				closeWindow();
 //				this is true as we initialise the enemy but only for a test remove later
-				manager.launchPrepScreen();
+				manager.setSetUp();
 			}
 		});
 		

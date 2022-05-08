@@ -9,11 +9,11 @@ public class Player {
 	/**
 	 * Stores the number of player days.
 	 */
-	private int playerDays;
+	private int playerDays = 1;
 	/**
 	 * Stores the current day.
 	 */
-	private int currentDay = 1;
+	private int currentDay = 0;
 	/**
 	 * Stores the player's name.
 	 */

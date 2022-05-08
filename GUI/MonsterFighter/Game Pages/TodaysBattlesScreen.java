@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class TodaysBattlesScreen {
 
@@ -35,6 +36,7 @@ public class TodaysBattlesScreen {
 
 	/**
 	 * Create the application.
+	 * @param previousPage 
 	 */
 	public TodaysBattlesScreen(MonsterManager incomingManager) {
 		manager = incomingManager;
@@ -51,86 +53,114 @@ public class TodaysBattlesScreen {
 	 */
 	private void initialize() {
 		newBattleFrames = new JFrame();
-		newBattleFrames.setBounds(100, 100, 960, 540);
+		newBattleFrames.setBounds(100, 100, 1187, 540);
 		newBattleFrames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("Check the Trainers you want to Fight today.");
+		JLabel lblInstrct = new JLabel("Click the checkboxes of the trainers you want to fight.");
+		lblInstrct.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
+		JCheckBox chckbxTrainer1 = new JCheckBox("FightTrainerName\r\n");
 		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("New check box");
+		JCheckBox chckbxTrainer3 = new JCheckBox("FightTrainerName");
 		
-		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("New check box");
+		JCheckBox chckbxTrainer4 = new JCheckBox("FightTrainerName");
 		
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("New check box");
+		JCheckBox chckbxTrainer5 = new JCheckBox("FightTrainerName");
 		
-		JTextArea textArea = new JTextArea();
+		JTextArea TADiplayTrainer1 = new JTextArea();
+		TADiplayTrainer1.setEditable(false);
+		TADiplayTrainer1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JTextArea textArea_1 = new JTextArea();
+		JTextArea TADiplayTrainer3 = new JTextArea();
+		TADiplayTrainer3.setEditable(false);
+		TADiplayTrainer3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JTextArea textArea_2 = new JTextArea();
+		JTextArea TADiplayTrainer4 = new JTextArea();
+		TADiplayTrainer4.setEditable(false);
+		TADiplayTrainer4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JTextArea textArea_3 = new JTextArea();
+		JTextArea TADiplayTrainer5 = new JTextArea();
+		TADiplayTrainer5.setEditable(false);
+		TADiplayTrainer5.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JButton btnNewButton = new JButton("Next");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+				manager.launchPrepScreen();
+				
 			}
 		});
+		
+		JTextArea TADiplayTrainer2 = new JTextArea();
+		TADiplayTrainer2.setEditable(false);
+		TADiplayTrainer2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JCheckBox chckbxTrainer2 = new JCheckBox("FightTrainerName");
 		GroupLayout groupLayout = new GroupLayout(newBattleFrames.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(12)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(TADiplayTrainer1, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+						.addComponent(chckbxTrainer1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(chckbxTrainer2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+						.addComponent(TADiplayTrainer2, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+							.addComponent(chckbxTrainer3, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addGap(138)
+							.addComponent(chckbxTrainer4, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addGap(138)
+							.addComponent(chckbxTrainer5, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addGap(136))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(21)
-							.addComponent(chckbxNewCheckBox, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnBack)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(142)
-									.addComponent(chckbxNewCheckBox_1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-									.addGap(138)
-									.addComponent(chckbxNewCheckBox_2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-									.addComponent(chckbxNewCheckBox_3, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-									.addGap(36)
-									.addComponent(btnNewButton)
-									.addGap(29))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
-									.addContainerGap(604, Short.MAX_VALUE))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(textArea_2, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(textArea_3, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addGap(14))))
+									.addComponent(TADiplayTrainer3, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGap(14))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblInstrct, GroupLayout.PREFERRED_SIZE, 707, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(469, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel)
-					.addGap(19)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(textArea_2, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-							.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-							.addComponent(textArea_3, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)))
-					.addGap(24)
+					.addGap(11)
+					.addComponent(lblInstrct)
+					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxNewCheckBox)
-						.addComponent(chckbxNewCheckBox_1)
-						.addComponent(chckbxNewCheckBox_2)
-						.addComponent(chckbxNewCheckBox_3)
-						.addComponent(btnNewButton))
-					.addContainerGap(40, Short.MAX_VALUE))
+						.addComponent(TADiplayTrainer1, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+						.addComponent(TADiplayTrainer2, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+						.addComponent(TADiplayTrainer3, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+						.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+						.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(24)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(chckbxTrainer5)
+								.addComponent(chckbxTrainer4)
+								.addComponent(chckbxTrainer3)
+								.addComponent(chckbxTrainer1)
+								.addComponent(chckbxTrainer2))
+							.addContainerGap(11, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnBack)
+							.addContainerGap())))
 		);
 		newBattleFrames.getContentPane().setLayout(groupLayout);
 	}

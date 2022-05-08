@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+
 public class MonsterManager {
-	private Player newPlayer = new Player();
-	private Battles newbattle = new Battles();
+	private static Player newPlayer = new Player();
+	private static Battles newbattle = new Battles();
 	private Trainers newTrainer = new Trainers(getPlayer());
+	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Shop newShop = new Shop();
 	private Monster enemy;
+	private static boolean setUpDone = false;
 //	private Inventory bag = newPlayer.getInventory();
 	
 	public void launchChooseMonsterScreen() {
@@ -140,6 +144,9 @@ public class MonsterManager {
 		return newTrainer;
 	}
 	
+	public void setSetUp() {
+		setUpDone = true;
+	}
 	public void setEnemyTrainer(Trainers enemyTrainer) {
 		newTrainer = enemyTrainer;
 	}
@@ -155,5 +162,13 @@ public class MonsterManager {
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 		manager.launchStartUpScreen();
+		System.out.println(setUpDone);
+		if(setUpDone == true) {
+			while (manager.newPlayer.daysLeft() > 0) {
+				manager.newPlayer.addDay();
+				trainerBattles = newbattle.getBattles(5, newPlayer);
+				manager.launchPrepScreen();
+			}
+		}
 	}
 }
