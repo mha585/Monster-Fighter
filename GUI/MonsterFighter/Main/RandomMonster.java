@@ -7,11 +7,7 @@ public class RandomMonster extends Monster{
 	 * generates a random number in a given range
 	 */
 	private RandomGen number;
-	/**
-	 * List containing all possible types of monsters
-	 */
-//	private List<Monster> possibleTypes = Arrays.asList(new WaterMonster(), new FireMonster(), new GrassMonster(), 
-//			new GlassMonster(), new MedicalMonster(), new HolyMonster());
+
 	/**
 	 * generates a random Monster from the list
 	 */

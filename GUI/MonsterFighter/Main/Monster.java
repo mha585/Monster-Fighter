@@ -56,7 +56,7 @@ public class Monster implements Purchasable{
 	 */
 	private List<String> possibleNames = Arrays.asList("Chonky", "Cordoba", "Bart", "Blurple", "Blargle",
 			"Chog", "Post Malone", "Ratman", "Goopy", "Dinky", "Donkey", "Carla", "Zingle", "Mr. Normal",
-			"Mc Murder", "Charlie Cleantooth", "Reese Witherspoon", "Lil-man", "Blobagon");
+			"Mc Murder", "Charlie", "Reese", "Lil-man", "Blobagon");
 	/**
 	 * Matrix containing how effective each type of monster is against each other.
 	 */
@@ -65,17 +65,15 @@ public class Monster implements Purchasable{
 	/**
 	 * The cost of the Monster
 	 */
-	int myShopCost;
+	private int myShopCost;
 	/**
 	 * The selling price of the Monster
 	 */
-	int myShopSell;
+	private int myShopSell;
 	/**
 	 * The selling price of the Monster
 	 */
-	String myShopDescription;
-	
-	private RandomGen number; 
+	private String myShopDescription;
 	
 	/**
 	 * The basic constructor for the Monster class
@@ -116,7 +114,6 @@ public class Monster implements Purchasable{
 	 * @param description	Description of the Monster
 	 */
 	public Monster(int sell, int cost, String description, RandomGen number) {
-//		RandomGen number = new RandomGen();
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
 		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;
@@ -136,8 +133,6 @@ public class Monster implements Purchasable{
 	 * This gets called when nothing gets entered.
 	 */
 	public Monster(RandomGen number) {
-//		RandomGen number = new RandomGen();
-		System.out.println(number.randNumInRange(20, 27));
 		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
 		myMaxHealth = number.randNumInRange(1, 100);
 		myCurrentHealth = myMaxHealth;
@@ -176,7 +171,6 @@ public class Monster implements Purchasable{
 	/**
 	 * Gets the tier / level of the Monster
 	 * @return int	the tier of the Monster
-	 * 
 	 */
 	public int getTier() {
 		return myTier;

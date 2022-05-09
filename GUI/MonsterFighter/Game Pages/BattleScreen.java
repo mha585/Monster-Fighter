@@ -24,31 +24,19 @@ public class BattleScreen {
 	private MonsterManager manager;
 	private Monster LeadingMonster;
 	private Monster enemyMonster;
+	private Trainers enemy;
 	private RandomGen num;
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					MonsterManager test = new MonsterManager();
-//					BattleScreen window = new BattleScreen(test);
-//					window.battleScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private String whoKilledWho;
 
 	/**
 	 * Create the application.
 	 */
-	public BattleScreen(MonsterManager incomingManager, Monster enemy, RandomGen randomNumber) {
+	public BattleScreen(MonsterManager incomingManager, Trainers myEnemy, RandomGen randomNumber, String status) {
 		manager = incomingManager;
-		enemyMonster = enemy;
+		enemy = manager.getTrainer();
+		enemyMonster = enemy.getFirstEnemy();
+		
+		whoKilledWho = status;
 		LeadingMonster = manager.getPlayer().getTeam().getFriend(0);
 		num = randomNumber;
 		initialize();
@@ -57,18 +45,6 @@ public class BattleScreen {
 	
 	public void closeWindow() {
 		battleScreen.dispose();
-	}
-	
-//	public void finishedWindow() {
-//		manager.closeBattleScreen(this);
-//	}
-	
-	public void setStatLabels(Monster monster, JLabel lblCurrentName, JLabel lblCurrentHealth, JLabel lblMaxHealth) {
-		lblCurrentName.setText(monster.getName());
-		
-		Double currentHealth = (monster.getHealth());
-		
-		Double maxHealth = (monster.getMaxHealth());
 	}
 	
 	public void getPrizes(Player player) {
@@ -90,29 +66,33 @@ public class BattleScreen {
 	}
 	
 	public void checkIfBattleEnds(Team playerTeam, Monster enemy, Trainers enemyTrainer) {
-		if (enemy.getHealth() <= 0 && enemyTrainer.getSize() >= 1) {
-			manager.setEnemy(enemyTrainer.getFirstEnemy());
+		if (enemy.getHealth() <= 0) {
+//			manager.setEnemy(enemyTrainer.getFirstEnemy());
 			enemyTrainer.removeEnemy();
+			getPrizes(manager.getPlayer());
 			closeWindow();
-			if (enemy.getHealth() > 0) {
-				manager.launchBattleScreen(false, num);
+			if (playerTeam.getFriend(0).getHealth() == 0) {
+				String status = "Your friend " + playerTeam.getFriend(0).getName() + " just died rip :(\n"
+						+ "But in the process they killed " + enemy.getName();
+				manager.launchBattleScreen(false, num, status);
+			} else if (enemyTrainer.getSize() == 0){
+				manager.launchShopScreen();
 			} else {
-				getPrizes(manager.getPlayer());
-//				launch the you win screen and go to next day
-				manager.launchNightScreen();
+				String status = "Congrats you killed " + enemyMonster.getName() + " great job!";
+				manager.launchBattleScreen(false, num, status);
 			}
-
-			
-		} else if (playerTeam.getFriend(0).getHealth() <= 0) {
-			playerTeam.pushFrontToBack();
-			closeWindow();
-			manager.launchBattleScreen(false, num);
-		} else if (playerTeam.sumTeamHealth() <= 0) {
+		}  else if (playerTeam.sumTeamHealth() <= 0) {
 			double tenPercent = manager.getPlayer().getMoney() * 0.1;
 			int lost = (int) (-1 * Math.floor(tenPercent));
 			manager.getPlayer().deductMoney(lost);
-			closeWindow();			
-		} 
+			closeWindow();	
+			manager.launchLoseScreen();
+		} else if (playerTeam.getFriend(0).getHealth() <= 0) {
+			String status = "Your friend " + playerTeam.getFriend(0).getName() + " just died rip :(";
+			playerTeam.pushFrontToBack();
+			closeWindow();
+			manager.launchBattleScreen(false, num, status);
+		}
 	}
 	
 	/**
@@ -223,22 +203,23 @@ public class BattleScreen {
 		
 		JLabel lblSecondAction = new JLabel("");
 		
-		JButton btnQuit = new JButton("Run from battle?");
-
+		JLabel lblStatus = new JLabel("");
+		lblStatus.setText(whoKilledWho);
 		
 		GroupLayout gl_panelWords = new GroupLayout(panelWords);
 		gl_panelWords.setHorizontalGroup(
-			gl_panelWords.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelWords.createSequentialGroup()
-					.addContainerGap(426, Short.MAX_VALUE)
-					.addComponent(btnQuit)
-					.addGap(19))
+			gl_panelWords.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelWords.createSequentialGroup()
 					.addGap(76)
 					.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblSecondAction, GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-						.addComponent(lblFirstAction, GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
-					.addGap(81))
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addComponent(lblStatus, GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panelWords.createSequentialGroup()
+							.addGroup(gl_panelWords.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblSecondAction, GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+								.addComponent(lblFirstAction, GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
+							.addGap(81))))
 		);
 		gl_panelWords.setVerticalGroup(
 			gl_panelWords.createParallelGroup(Alignment.LEADING)
@@ -247,9 +228,9 @@ public class BattleScreen {
 					.addComponent(lblFirstAction)
 					.addGap(18)
 					.addComponent(lblSecondAction)
-					.addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-					.addComponent(btnQuit, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(21))
+					.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+					.addComponent(lblStatus, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addGap(20))
 		);
 		panelWords.setLayout(gl_panelWords);
 		
@@ -301,6 +282,15 @@ public class BattleScreen {
 				lblCurrentHealth.setText(currentFriendHealth.toString());
 				lblCurrentHealth_1.setText(currentEnemyHealth.toString());
 				
+				
+//				if (enemyMonster.getHealth() == 0) {
+//					getPrizes(manager.getPlayer());
+//					String status = "Congrats you killed " + enemyMonster.getName() + " great job!";
+//					manager.getTrainer().removeEnemy();
+//					closeWindow();
+//					manager.launchBattleScreen(false, num, status);
+//				}
+				
 				Double changeInFriendHealth = intialFriendHealth - currentFriendHealth;
 				Double changeInEnemyHealth = intialEnemyHealth - currentEnemyHealth;
 				
@@ -311,7 +301,7 @@ public class BattleScreen {
 					lblFirstAction.setText("First " + enemyMonster.getName() + " attacked " + LeadingMonster.getName() + " dealing " + (changeInFriendHealth.toString()) + " points of damage, then:");
 					lblSecondAction.setText(LeadingMonster.getName() + " attacked " + enemyMonster.getName() + " dealing " + (changeInEnemyHealth.toString()) + " points of damage");
 				}
-				
+				lblStatus.setText("");				
 				checkIfBattleEnds(manager.getPlayer().getTeam(), enemyMonster, manager.getTrainer());
 			}
 		});
@@ -332,7 +322,8 @@ public class BattleScreen {
 				
 				lblFirstAction.setText("First " + LeadingMonster.getName() + " healed itself by " + LeadingMonster.getHealAmount() + " points of health");
 				lblSecondAction.setText(enemyMonster.getName() + " took the opportunity to attack " + LeadingMonster.getName() + " dealing " + (changeInFriendHealth.toString()) + " points of damage");
-				
+				lblStatus.setText("");
+
 				checkIfBattleEnds(manager.getPlayer().getTeam(), enemyMonster, manager.getTrainer());
 
 			}
