@@ -113,11 +113,6 @@ public class MonsterManager {
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 		newPlayer.addDay();
-		newPlayer.addDay();
-
-		newPlayer.addDay();
-		newPlayer.addDay();
-
 		manager.launchStartUpScreen(rng);
 	}
 }

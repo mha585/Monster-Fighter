@@ -99,7 +99,6 @@ public class InventoryScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				System.out.println(previousPage);
 				if (previousPage == "Prep") {
 					manager.launchPrepScreen(number);
 				} else if (previousPage == "Fight") {
