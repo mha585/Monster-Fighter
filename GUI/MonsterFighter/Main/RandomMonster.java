@@ -67,12 +67,12 @@ public class RandomMonster extends Monster{
 		random = generateMonster();
 		int dayGlassAndMedicalCome = 3;
 		int dayHolyComes = 5;
-		if (player.getDayCompleted() < dayGlassAndMedicalCome) {
+		if (player.getCurrentDay() < dayGlassAndMedicalCome) {
 			while (random.getType() != "Fire" && random.getType() != "Grass" && random.getType() != "Water") {
 				random = generateMonster();
 			}
 			generateMonsterStats(player);
-		} else if ((player.getDayCompleted() >= dayGlassAndMedicalCome) && (player.getDayCompleted() < dayHolyComes)) {
+		} else if ((player.getCurrentDay() >= dayGlassAndMedicalCome) && (player.getCurrentDay() < dayHolyComes)) {
 			while (random.getType() == "Holy") {
 				random = generateMonster();
 			}
@@ -88,7 +88,7 @@ public class RandomMonster extends Monster{
 	 */
 	public void generateMonsterStats(Player player) {
 
-		int amountToScaleStatsBy = (int)(1+(player.getDayCompleted() / 2));
+		int amountToScaleStatsBy = (int)(1+(player.getCurrentDay() / 2));
 		super.gainMaxHealth(((-1 * (super.getMaxHealth()))) + random.getMaxHealth());
 		super.gainHealth(((-1 * (super.getHealth()))) + random.getHealth());
 		super.gainDamage(((-1 * (super.getDamage()))) + random.getDamage());

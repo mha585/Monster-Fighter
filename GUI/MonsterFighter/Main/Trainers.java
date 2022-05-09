@@ -41,43 +41,20 @@ public class Trainers {
 	 * @param player		The player
 	 */
 	public Trainers(Player player, RandomGen randomNum) {
-//		RandomGen randomNum = new RandomGen();
-		number = randomNum;
-//		name = trainerName.get(number.randNumInRange(0, trainerName.size()));
-//		type = trainerType.get(number.randNumInRange(0, trainerType.size()));
-		name = trainerName.get(2);
-		type = trainerType.get(2);
-		if (player.getDayCompleted() == 1) {
-			RandomMonster monster = new RandomMonster(player, number);
-			enemyTeam.add(monster);
-		}
-		else if (player.getDayCompleted() > 1 && player.getDayCompleted() <= 3) {
-			int monsters = number.randNumInRange(0, 2);
-			int i = 0;
-			while (i <= monsters) {
-				RandomMonster monster = new RandomMonster(player, number);
-				enemyTeam.add(monster);
-				i++;
-			}
-		}
-		else if (player.getDayCompleted() > 3 && player.getDayCompleted() <= 5) {
-			int monsters = number.randNumInRange(1, 3);
-			int i = 0;
-			while (i <= monsters) {
-				RandomMonster monster = new RandomMonster(player, number);
-				enemyTeam.add(monster);
-				i++;
-			}
-		}
-		else if (player.getDayCompleted() > 5) {
-			int monsters = number.randNumInRange(1, 4);
-			int i = 0;
-			while (i <= monsters) {
-				RandomMonster monster = new RandomMonster(player, number);
-				enemyTeam.add(monster);
-				i++;
-			}
-		}
+		int randomName = randomNum.randNumInRange(0, trainerName.size());
+		int randomType = randomNum.randNumInRange(0, trainerType.size());
+		name = trainerName.get(randomName);
+		type = trainerType.get(randomType);
+		RandomMonster monster = new RandomMonster(player, randomNum);
+		enemyTeam.add(monster);
+	}
+	
+		
+	public Trainers() {}
+	
+	
+	public void addMonster(Monster monster) {
+		enemyTeam.add(monster);
 	}
 	/**
 	 * Returns the monsters that belong to the trainer.

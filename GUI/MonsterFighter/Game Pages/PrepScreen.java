@@ -66,7 +66,7 @@ public class PrepScreen {
 		
 		JLabel lblDayNum = new JLabel("New label");
 		lblDayNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblDayNum.setText(Integer.toString(manager.getPlayer().getDayCompleted()));
+		lblDayNum.setText(Integer.toString(manager.getPlayer().getCurrentDay()));
 		
 		JLabel lblPointsNum = new JLabel("New label");
 		lblPointsNum.setFont(new Font("Tahoma", Font.PLAIN, 20));

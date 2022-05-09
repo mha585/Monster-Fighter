@@ -119,7 +119,7 @@ public class MAIN {
 			try {
 				System.out.println("Money: " + player.getMoney());
 				timer(1000);
-				System.out.println("Current Day: " + player.getDayCompleted());
+				System.out.println("Current Day: " + player.getCurrentDay());
 				timer(1000);
 				System.out.println("Days Remaining: " + player.daysLeft());
 				timer(1000);
@@ -195,7 +195,7 @@ public class MAIN {
 	
 	public static ArrayList<Trainers> displayBattles(Scanner scanner, Player player, Battles battle) {
 		ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
-		if (player.getDayCompleted() == 1) {
+		if (player.getCurrentDay() == 1) {
 			System.out.println("This must be your first time battling. This is how it works: \nAt the start of each day you "
 					+ "will get the choice to battle 3 - 5 trainers. \nToday you will only battle 1. The trainer and their monsters will be displayed."
 					+ "\nAfter each battle you will recieve money that you can later spend in the shop.\n");
@@ -463,14 +463,14 @@ public class MAIN {
 	}
 	
 	public static void endGame(Player player, int originalDays) {
-		if (player.getDayCompleted() < originalDays){
+		if (player.getCurrentDay() < originalDays){
 			System.out.println("Y O U    L O S E");
-			System.out.println("Game Stats: \nName: " + player.getPlayerName() + "\nDays Completed: " + player.getDayCompleted()+ " / " + originalDays + "\nMoney Earned: +player.getMoneyEarned() + \nPoints Gained: +player.getPoints()");
+			System.out.println("Game Stats: \nName: " + player.getPlayerName() + "\nDays Completed: " + player.getCurrentDay()+ " / " + originalDays + "\nMoney Earned: +player.getMoneyEarned() + \nPoints Gained: +player.getPoints()");
 		}
 		else {
 			System.out.println("    GAME OVER    ");
 			System.out.println(" Y O U    W I N");
-			System.out.println("Game Stats: \nName: " + player.getPlayerName() + "\nDays Completed: " + player.getDayCompleted()+ " / " + originalDays + "\nMoney Earned: +player.getMoneyEarned() + \nPoints Gained: +player.getPoints()");
+			System.out.println("Game Stats: \nName: " + player.getPlayerName() + "\nDays Completed: " + player.getCurrentDay()+ " / " + originalDays + "\nMoney Earned: +player.getMoneyEarned() + \nPoints Gained: +player.getPoints()");
 		}
 	}
 	
