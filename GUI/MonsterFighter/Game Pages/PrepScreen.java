@@ -108,7 +108,7 @@ public class PrepScreen {
 		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchBattleScreen(true, num);
+				manager.launchBattleScreen(true, num, "");
 			}
 		});
 		btnFight.setFont(new Font("Tahoma", Font.PLAIN, 20));
