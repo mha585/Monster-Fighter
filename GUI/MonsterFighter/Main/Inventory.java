@@ -93,27 +93,12 @@ public class Inventory {
 	public void removeBag(int index, int freq) {
 		Item item = (Item)bag.get(index);
 		if (item.getFrequency() > freq) {
-			item.totalFrequency -= freq;
-		}else if(item.getFrequency() == freq) {
-			item.totalFrequency = 0;
+			int currentFreq = item.getFrequency();
+			item.setFrequency(currentFreq - freq);
+		} else if(item.getFrequency() == freq) {
+			item.setFrequency(0);
 			bag.remove(index);
 		}
 	}
-	/**
-	 * Returns a string representation of the player's inventory
-	 * 
-	 * @return a new line
-	 */
-	public String toString() {
-		if (bag.size() == 0) {
-			return "Your bag is empty\n";
-		} else {
-			System.out.println("Inventory: ");
-			for (int i = 0; i < bag.size();i++) {
-				Item item = (Item) bag.get(i);
-				System.out.println("("+(i+1)+")"+item.totalFrequency + "x " + item.getName()+" - - - "+item.getDescription());
-			}
-		}	
-		return "\n";
-	}
+
 }
