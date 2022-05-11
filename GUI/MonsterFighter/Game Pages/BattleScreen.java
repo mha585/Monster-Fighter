@@ -117,6 +117,7 @@ public class BattleScreen {
 		JButton btnEnemyImageGoes = new JButton("Enemy image goes here");
 		
 		JLabel lblCurrentHealth = new JLabel("0.0");
+		lblCurrentHealth.setHorizontalAlignment(SwingConstants.RIGHT);
 		Double currentHealth = (LeadingMonster.getHealth());
 		lblCurrentHealth.setText(currentHealth.toString());
 		
@@ -137,54 +138,51 @@ public class BattleScreen {
 		Double enemyMaxHealth = (enemyMonster.getMaxHealth());
 		lblMaxHealth_1.setText(enemyMaxHealth.toString());
 		
-		JLabel lblEnemysLeft = new JLabel("Team size:");
+		JLabel lblEnemysLeft = new JLabel("Enemies left:");
 		
 		JLabel lblCurrentEnemysLeft = new JLabel("1");
 		int enemiesLeft = manager.getTrainer().getSize();
 		lblCurrentEnemysLeft.setText(Integer.toString(enemiesLeft));
 		
-		JLabel lblPlayerName = new JLabel("Player name");
+		JLabel lblPlayerName = new JLabel("New label");
 		lblPlayerName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayerName.setText(manager.getPlayer().getPlayerName());
+		lblPlayerName.setText(LeadingMonster.getName());
 		
-		JLabel lblEnemyName = new JLabel("Enemy name");
+		JLabel lblEnemyName = new JLabel("New label");
 		lblEnemyName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEnemyName.setText(enemy.getFullName());
+		lblEnemyName.setText(enemyMonster.getName());
 		
 		GroupLayout gl_pannelMonsters = new GroupLayout(pannelMonsters);
 		gl_pannelMonsters.setHorizontalGroup(
-			gl_pannelMonsters.createParallelGroup(Alignment.TRAILING)
+			gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pannelMonsters.createSequentialGroup()
-					.addContainerGap(41, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblCurrentHealth, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblSlash, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(lblMaxHealth, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblPlayerName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnTempMonsterImage, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+					.addGap(8)
+					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblEnemyName, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnEnemyImageGoes, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
-							.addGap(27)
-							.addComponent(lblCurrentHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(lblSlash, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(lblMaxHealth, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnTempMonsterImage))
-					.addGap(37)
-					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnEnemyImageGoes)
+							.addComponent(lblEnemysLeft, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblCurrentEnemysLeft, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
 							.addComponent(lblCurrentHealth_1, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblSlash_1, GroupLayout.PREFERRED_SIZE, 4, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
 							.addComponent(lblMaxHealth_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblEnemysLeft, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
-					.addComponent(lblCurrentEnemysLeft, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addGap(7))
-				.addGroup(Alignment.LEADING, gl_pannelMonsters.createSequentialGroup()
-					.addGap(9)
-					.addComponent(lblPlayerName, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addGap(19)
-					.addComponent(lblEnemyName, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(70, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_pannelMonsters.setVerticalGroup(
 			gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
@@ -192,39 +190,30 @@ public class BattleScreen {
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
 							.addGap(7)
-							.addComponent(lblPlayerName))
+							.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblCurrentEnemysLeft)
+								.addComponent(lblEnemysLeft)))
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblEnemyName)))
+							.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblEnemyName)
+								.addComponent(lblPlayerName))))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnTempMonsterImage, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblCurrentHealth)
-								.addComponent(lblSlash)
-								.addComponent(lblMaxHealth))
-							.addGap(55))
+							.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnTempMonsterImage, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+								.addComponent(btnEnemyImageGoes, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+								.addComponent(lblSlash, Alignment.LEADING)
+								.addComponent(lblCurrentHealth, Alignment.LEADING)
+								.addComponent(lblMaxHealth, Alignment.LEADING))
+							.addGap(74))
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
-							.addGap(7)
 							.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_pannelMonsters.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnEnemyImageGoes, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblSlash_1)
-											.addComponent(lblCurrentHealth_1))
-										.addComponent(lblMaxHealth_1))
-									.addGap(54))
-								.addGroup(gl_pannelMonsters.createSequentialGroup()
-									.addGap(17)
-									.addComponent(lblEnemysLeft))
-								.addGroup(gl_pannelMonsters.createSequentialGroup()
-									.addGap(17)
-									.addComponent(lblCurrentEnemysLeft)))
+								.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblSlash_1)
+									.addComponent(lblCurrentHealth_1))
+								.addComponent(lblMaxHealth_1))
 							.addContainerGap())))
 		);
 		pannelMonsters.setLayout(gl_pannelMonsters);
