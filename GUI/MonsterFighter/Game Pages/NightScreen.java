@@ -5,11 +5,15 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NightScreen {
 
 	private JFrame nightFrame;
 	private MonsterManager manager;
+	private RandomGen num;
 
 //	/**
 //	 * Launch the application.
@@ -30,15 +34,16 @@ public class NightScreen {
 	/**
 	 * Create the application.
 	 */
-	public NightScreen(MonsterManager incomingManager) {
+	public NightScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
+		num = number;
 		initialize();
 		nightFrame.setVisible(true);
 	}
 	
 	public void closeWindow() {
 		nightFrame.dispose();
-	}
+	}	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -61,29 +66,38 @@ public class NightScreen {
 		
 		JLabel lblRandom = new JLabel("Random Events:");
 		
-		JLabel lblNewLabel_1 = new JLabel("Next");
+		JButton btnNewButton = new JButton("Next Day");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				manager.getPlayer().addDay();
+				closeWindow();
+				manager.launchPrepScreen(num);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(nightFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(309)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(345, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(438, Short.MAX_VALUE)
-					.addComponent(lblSummary, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-					.addGap(426))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(448, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblBattles, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblRandom, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))
-					.addGap(279))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(891, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(343, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(401, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblSummary, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+							.addGap(147))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 10, GroupLayout.PREFERRED_SIZE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblBattles, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblRandom, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))))
+					.addGap(314))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(845, Short.MAX_VALUE)
+					.addComponent(btnNewButton)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -91,7 +105,7 @@ public class NightScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(34)
 					.addComponent(lblNewLabel)
-					.addGap(98)
+					.addGap(45)
 					.addComponent(lblSummary)
 					.addGap(104)
 					.addComponent(lblPPoints)
@@ -101,9 +115,9 @@ public class NightScreen {
 					.addComponent(lblBattles)
 					.addGap(56)
 					.addComponent(lblRandom)
-					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnNewButton)
+					.addContainerGap(18, Short.MAX_VALUE))
 		);
 		nightFrame.getContentPane().setLayout(groupLayout);
 	}

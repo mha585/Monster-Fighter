@@ -4,6 +4,7 @@ public class MonsterManager {
 	private static RandomGen rng;
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
+	private Shop newShop = new Shop();
 	private Trainers newTrainer;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
@@ -12,12 +13,18 @@ public class MonsterManager {
 		new ChooseMonsterScreen(this, num);
 	}
 	
-	public void launchBattleScreen(boolean initialiseFight, RandomGen num, String status) {
-		if (initialiseFight) {
+	public void launchBattleScreen(boolean initialiseFight, RandomGen num, String status, boolean isBoss) {
+		if (initialiseFight && !isBoss) {
 			Trainers newEnemy = new Trainers(getPlayer(), num);
 			setEnemyTrainer(newEnemy);
 			setEnemy(newEnemy.getFirstEnemy());
+		} else if (initialiseFight && isBoss) {
+			Trainers bossEnemy = new Boss();
+			System.out.println(bossEnemy.getFirstEnemy().getName());
+			setEnemyTrainer(bossEnemy);
+			setEnemy(bossEnemy.getFirstEnemy());
 		}
+		
 		new BattleScreen(this, newTrainer, num, status);
 	}
 	
@@ -29,8 +36,8 @@ public class MonsterManager {
 		new InventoryScreen(this, previousPage, num);
 	}
 
-	public void launchNightScreen() {
-		new NightScreen(this);
+	public void launchNightScreen(RandomGen num) {
+		new NightScreen(this, num);
 	}
 	
 	public void launchLoseScreen() {
@@ -111,7 +118,6 @@ public class MonsterManager {
 	
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
-		newPlayer.addDay();
 		manager.launchStartUpScreen(rng);
 	}
 }

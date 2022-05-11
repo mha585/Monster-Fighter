@@ -26,27 +26,8 @@ public class StartUpScreen {
 	private JTextField textFieldSeed;
 	private RandomGen num;
 
-	
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					StartUpScreen window = new StartUpScreen();
-//					window.startupScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
-	 * @param newPlayer 
 	 */
 	public StartUpScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -59,14 +40,12 @@ public class StartUpScreen {
 		startupScreen.dispose();
 	}
 	
-//	public void finishedWindow() {
-//		manager.closeStartScreen(this);
-//	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		startupScreen = new JFrame();
+		startupScreen.setTitle("Monster Fighter");
 		startupScreen.setBounds(100, 100, 960, 590);
 		startupScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -98,6 +77,7 @@ public class StartUpScreen {
 		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JSlider sliderDay = new JSlider();
+		sliderDay.setValue(10);
 		sliderDay.setVisible(false);
 		sliderDay.setSnapToTicks(true);
 		sliderDay.setPaintLabels(true);

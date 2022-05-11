@@ -13,7 +13,7 @@ public class Player {
 	/**
 	 * Stores the current day.
 	 */
-	private int currentDay = 0;
+	private int currentDay = 1;
 	/**
 	 * Stores the player's name.
 	 */
