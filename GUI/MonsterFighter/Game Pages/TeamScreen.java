@@ -775,7 +775,7 @@ public class TeamScreen {
 				if (previousPage == "Prep") {
 					manager.launchPrepScreen(num);
 				} else if (previousPage == "Fight") {
-					manager.launchBattleScreen(false, num, "");
+					manager.launchBattleScreen(false, num, "", false);
 				}
 			}
 		});

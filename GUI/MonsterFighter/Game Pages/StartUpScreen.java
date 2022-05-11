@@ -77,6 +77,7 @@ public class StartUpScreen {
 		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JSlider sliderDay = new JSlider();
+		sliderDay.setValue(10);
 		sliderDay.setVisible(false);
 		sliderDay.setSnapToTicks(true);
 		sliderDay.setPaintLabels(true);

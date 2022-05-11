@@ -80,6 +80,16 @@ public class Trainers {
 		}
 	}
 	/**
+	 * Used for generating a boss trainer
+	 */
+	public Trainers(ArrayList<Monster> boss) {
+		name = trainerName.get(2);
+		type = trainerType.get(2);
+		for (Monster mon : boss) {
+			enemyTeam.add(mon);
+		}
+	}
+	/**
 	 * Returns the monsters that belong to the trainer.
 	 * 
 	 * @return ArrayList containing objects of type Monster that belong to the trainer

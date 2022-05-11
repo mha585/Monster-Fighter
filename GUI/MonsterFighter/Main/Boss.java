@@ -17,23 +17,23 @@ public class Boss extends Trainers{
 	/**
 	 * Boss' grass type monster.
 	 */
-	private GrassMonster grassBoss = new GrassMonster("Tane ", 90, 5, 40, 9, 3, 500, 750, "God of Forests and Birds");
+	private static GrassMonster grassBoss = new GrassMonster("Tane ", 90, 5, 40, 9, 3, 500, 750, "God of Forests and Birds");
 	/**
 	 * Boss' fire type monster.
 	 */
-	private FireMonster fireBoss = new FireMonster("Ra", 80, 3, 50, 13, 3, 500, 750, "God of the Sun");
+	private static FireMonster fireBoss = new FireMonster("Ra", 80, 3, 50, 13, 3, 500, 750, "God of the Sun");
 	/**
 	 * Boss' water type monster.
 	 */
-	private WaterMonster waterBoss = new WaterMonster("Leviathan", 100, 3, 50, 10, 3, 500, 750, "Water Serpent");
+	private static WaterMonster waterBoss = new WaterMonster("Leviathan", 100, 3, 50, 10, 3, 500, 750, "Water Serpent");
 	/**
 	 * Boss' demon type monster.
 	 */
-	private DemonMonster demonBoss = new DemonMonster("Shinigami", 100, 3, 65, 13, 3, 500, 750, "DEATH");
+	private static DemonMonster demonBoss = new DemonMonster("Shinigami", 100, 3, 65, 13, 3, 500, 750, "DEATH");
 	/**
 	 * Boss' party.
 	 */
-	private ArrayList<Monster> enemyTeam = new ArrayList<Monster>(Arrays.asList(grassBoss, fireBoss, waterBoss, demonBoss));
+	private static ArrayList<Monster> enemyTeam = new ArrayList<Monster>(Arrays.asList(grassBoss, fireBoss, waterBoss, demonBoss));
 	/**
 	 * Returns the Boss' party.
 	 * 
@@ -47,8 +47,8 @@ public class Boss extends Trainers{
 	 * 
 	 * @param player		User player
 	 */
-	public Boss(Player player, RandomGen num) {
-		super(player, num);
+	public Boss() {
+		super(enemyTeam);
 	}
 	/**
 	 * Returns the size of the Boss' team
@@ -57,6 +57,22 @@ public class Boss extends Trainers{
 	 */
 	public int getSize() {
 		return enemyTeam.size();
+	}
+	/**
+	 * Removes the first enemy from the team
+	 */
+	public void removeEnemy() {
+		if (enemyTeam.size() > 0) {
+			enemyTeam.remove(0);
+		}
+	}
+	/**
+	 * Returns the first monster that belong to the trainer.
+	 * 
+	 * @return The first Monster in the trainers team (the one the player fights)
+	 */
+	public Monster getFirstEnemy() {
+		return enemyTeam.get(0);
 	}
 	/**
 	 * Returns the type and name of the trainer
