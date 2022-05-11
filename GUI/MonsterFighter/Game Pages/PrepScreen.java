@@ -49,7 +49,7 @@ public class PrepScreen {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() {	
 		prepScreen = new JFrame();
 		prepScreen.setTitle("Day prep");
 		prepScreen.setBounds(100, 100, 960, 540);
@@ -108,7 +108,12 @@ public class PrepScreen {
 		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchBattleScreen(true, num, "");
+				if (manager.getPlayer().getDayCompleted() >= manager.getPlayer().getPlayerDayCompleted()) {
+					manager.launchBattleScreen(true, num, "This is it the final battle!!", true);
+				} else {
+					manager.launchBattleScreen(true, num, "", false);
+				}
+//				manager.launchBattleScreen(true, num, "", false);
 			}
 		});
 		btnFight.setFont(new Font("Tahoma", Font.PLAIN, 20));
