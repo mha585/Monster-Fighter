@@ -76,7 +76,7 @@ public class BattleScreen {
 						+ "But in the process they killed " + enemy.getName();
 				manager.launchBattleScreen(false, num, status);
 			} else if (enemyTrainer.getSize() == 0){
-				manager.launchShopScreen();
+				manager.launchShopScreen(num);
 			} else {
 				String status = "Congrats you killed " + enemyMonster.getName() + " great job!";
 				manager.launchBattleScreen(false, num, status);

@@ -77,11 +77,11 @@ public class Inventory {
 	 */
 	public void addtoBag(Object item, int freq) {
 		if (bag.contains(item) == true) {
-			((Item)item).addFreq(item, freq);
+			((Item)item).addFreq(freq);
 		}
 		else {
 			bag.add(item);
-			((Item)item).addFreq(item, freq);
+			((Item)item).addFreq(freq);
 		}
 	}
 	/**
@@ -93,9 +93,9 @@ public class Inventory {
 	public void removeBag(int index, int freq) {
 		Item item = (Item)bag.get(index);
 		if (item.getFrequency() > freq) {
-			item.totalFrequency -= freq;
+			item.addFreq((-1 * freq));
 		}else if(item.getFrequency() == freq) {
-			item.totalFrequency = 0;
+			item.addFreq((-1 * freq));
 			bag.remove(index);
 		}
 	}
@@ -111,7 +111,7 @@ public class Inventory {
 			System.out.println("Inventory: ");
 			for (int i = 0; i < bag.size();i++) {
 				Item item = (Item) bag.get(i);
-				System.out.println("("+(i+1)+")"+item.totalFrequency + "x " + item.getName()+" - - - "+item.getDescription());
+				System.out.println("("+(i+1)+")"+item.getFrequency() + "x " + item.getName()+" - - - "+item.getDescription());
 			}
 		}	
 		return "\n";

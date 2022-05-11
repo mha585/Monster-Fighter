@@ -80,7 +80,52 @@ public class Shop {
 	/**
 	 * Creates an instance of the Shop
 	 */
-	public Shop() {}
+	public Shop(Player player, RandomGen num) {
+		if (player.daysLeft() <= 2) {
+			shopMonster1 = new RandomMonster(player, num);
+			shopMonster2 = new RandomMonster(player, num);
+			shopMonster3 = new RandomMonster(player, num);
+			shopMonster4 = new RandomMonster(player, num);
+			listMonsters.add(shopMonster1);
+			listMonsters.add(shopMonster2);
+			listMonsters.add(shopMonster3);
+			listMonsters.add(shopMonster4);
+		}
+		else {
+			boolean notHoly1 = false;
+			while (notHoly1 == false) {
+				shopMonster1 = new RandomMonster(player, num);
+				if (shopMonster1.getType().equalsIgnoreCase("holy") == false) {
+					listMonsters.add(shopMonster1);
+					notHoly1 = true;
+				}
+			}
+			boolean notHoly2 = false;
+			while (notHoly2 == false) {
+				shopMonster2 = new RandomMonster(player, num);
+				if (shopMonster2.getType().equalsIgnoreCase("holy") == false) {
+					listMonsters.add(shopMonster2);
+					notHoly2 = true;
+				}
+			}
+			boolean notHoly3 = false;
+			while (notHoly3 == false) {
+				shopMonster3 = new RandomMonster(player, num);
+				if (shopMonster3.getType().equalsIgnoreCase("holy") == false) {
+					listMonsters.add(shopMonster3);
+					notHoly3 = true;
+				}
+			}
+			boolean notHoly4 = false;
+			while (notHoly4 == false) {
+				shopMonster4 = new RandomMonster(player, num);
+				if (shopMonster4.getType().equalsIgnoreCase("holy") == false) {
+					listMonsters.add(shopMonster4);
+					notHoly4 = true;
+				}
+			}
+		}
+	}
 	/**
 	 * Returns the string representation of items that can be bought.
 	 * 
@@ -129,57 +174,7 @@ public class Shop {
 			System.out.println("(4)\nOut of stock\n");
 		}
 	}
-	/**
-	 * Generates a 4 new monsters for each day.
-	 * 
-	 * @param player
-	 */
-	public void generateNewMonsters(Player player, RandomGen num) {
-		if (player.daysLeft() <= 2) {
-			shopMonster1 = new RandomMonster(player, num);
-			shopMonster2 = new RandomMonster(player, num);
-			shopMonster3 = new RandomMonster(player, num);
-			shopMonster4 = new RandomMonster(player, num);
-			listMonsters.add(shopMonster1);
-			listMonsters.add(shopMonster2);
-			listMonsters.add(shopMonster3);
-			listMonsters.add(shopMonster4);
-		}
-		else {
-			boolean notHoly1 = false;
-			while (notHoly1 == false) {
-				shopMonster1 = new RandomMonster(player, num);
-				if (shopMonster1.getType().equalsIgnoreCase("holy") == false) {
-					listMonsters.add(shopMonster1);
-					notHoly1 = true;
-				}
-			}
-			boolean notHoly2 = false;
-			while (notHoly2 == false) {
-				shopMonster2 = new RandomMonster(player, num);
-				if (shopMonster2.getType().equalsIgnoreCase("holy") == false) {
-					listMonsters.add(shopMonster2);
-					notHoly2 = true;
-				}
-			}
-			boolean notHoly3 = false;
-			while (notHoly3 == false) {
-				shopMonster3 = new RandomMonster(player, num);
-				if (shopMonster3.getType().equalsIgnoreCase("holy") == false) {
-					listMonsters.add(shopMonster3);
-					notHoly3 = true;
-				}
-			}
-			boolean notHoly4 = false;
-			while (notHoly4 == false) {
-				shopMonster4 = new RandomMonster(player, num);
-				if (shopMonster4.getType().equalsIgnoreCase("holy") == false) {
-					listMonsters.add(shopMonster4);
-					notHoly4 = true;
-				}
-			}
-		}
-	}
+	
 	/**
 	 * Returns the List of monster prices.
 	 * 

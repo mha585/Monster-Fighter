@@ -4,7 +4,6 @@ public class MonsterManager {
 	private static RandomGen rng;
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
-	private Shop newShop = new Shop();
 	private Trainers newTrainer;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
@@ -42,8 +41,8 @@ public class MonsterManager {
 		new PrepScreen(this, num);
 	}
 	
-	public void launchShopScreen() {
-		new ShopScreen(this);
+	public void launchShopScreen(RandomGen num) {
+		new ShopScreen(this, num);
 	}
 	
 	public void launchStartUpScreen(RandomGen num) {
@@ -113,11 +112,6 @@ public class MonsterManager {
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 		newPlayer.addDay();
-		newPlayer.addDay();
-
-		newPlayer.addDay();
-		newPlayer.addDay();
-
 		manager.launchStartUpScreen(rng);
 	}
 }

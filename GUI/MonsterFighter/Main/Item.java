@@ -118,8 +118,8 @@ public class Item implements Purchasable{
 	 * @param item		The item to be added to into the players inventory
 	 * @param freq		The amount of the item to be added to the players inventory
 	 */
-	public void addFreq(Object item, int freq) {
-		((Item)item).totalFrequency += freq;
+	public void addFreq(int freq) {
+		totalFrequency += freq;
 	}
 	/**
 	 * Returns the item as its frequency and name.

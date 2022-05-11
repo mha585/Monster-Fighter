@@ -193,7 +193,7 @@ public class MAIN {
 		}
 	}
 	
-	public static ArrayList<Trainers> displayBattles(Scanner scanner, Player player, Battles battle) {
+	public static ArrayList<Trainers> displayBattles(Scanner scanner, Player player, Battles battle, RandomGen num) {
 		ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 		if (player.getCurrentDay() == 1) {
 			System.out.println("This must be your first time battling. This is how it works: \nAt the start of each day you "
@@ -202,7 +202,7 @@ public class MAIN {
 			timer(8000);
 			System.out.println("Your battle today is: ");
 			timer(1000);
-			trainerBattles = battle.getBattles(1,  player);
+			trainerBattles = battle.getBattles(1, player, num);
 			battle.printBattles(trainerBattles);
 		}
 		else if (player.daysLeft() > 0) {
@@ -211,7 +211,7 @@ public class MAIN {
 				String inputBattles = scanner.nextLine();
 				if (Integer.parseInt(inputBattles) >= 3 && Integer.parseInt(inputBattles) <= 5) {
 					int numBattles = Integer.parseInt(inputBattles);
-					trainerBattles = battle.getBattles(numBattles, player);
+					trainerBattles = battle.getBattles(numBattles, player, num);
 					battle.printBattles(trainerBattles);
 				}
 				else {
@@ -222,7 +222,7 @@ public class MAIN {
 			}
 		}
 		else if (player.daysLeft() == 0) {
-			Boss bossBattle = new Boss(player);
+			Boss bossBattle = new Boss(player, num);
 			System.out.println("B O S S    l E V E L");
 			System.out.println("This is the final battle! Shinzo wo Sasageyo!");
 			System.out.println("Your Opponent: ");
@@ -287,7 +287,6 @@ public class MAIN {
 	
 	public static void shoppingTime(Scanner scanner, Shop shop, Player player) {
 		System.out.println("Welcome to the Shop!");
-		shop.generateNewMonsters(player);
 		boolean isDone = false;
 		while (isDone == false) {
 			try {
@@ -397,7 +396,7 @@ public class MAIN {
 		}
 	}
 	
-	public static void nightPhase(Player player) {
+	public static void nightPhase(Player player, RandomGen num) {
 		System.out.println("Time to go to sleep. Goodnight!");
 		RandomEvent event = new RandomEvent();
 		Team notUpdatedTeam = player.getTeam();
@@ -418,7 +417,7 @@ public class MAIN {
 				numMonsters += 1;
 			}
 		}
-		RandomMonster couldAdd = new RandomMonster(player);
+		RandomMonster couldAdd = new RandomMonster(player, num);
 		if (event.shouldJoin(updatedTeam) == true) {
 			newMonster = couldAdd;
 			couldAdd.setPrice(0);
@@ -489,7 +488,8 @@ public class MAIN {
 		Battles battle = new Battles();
 		Scanner scanner = new Scanner(System.in);
 		Player newPlayer = new Player();
-		Shop newShop = new Shop();
+		RandomGen num = new RandomGen();
+		Shop newShop = new Shop(newPlayer, num);
 		setPlayerName(scanner, newPlayer);
 		setDays(scanner, newPlayer);
 		setDifficulty(scanner, newPlayer);
@@ -501,12 +501,12 @@ public class MAIN {
 			dayPrep(scanner, newPlayer);
 			timer(1000);
 			if (newPlayer.getTeam().getSize() > 0 ) {
-				ArrayList<Trainers> dayTrainers = displayBattles(scanner, newPlayer, battle);
+				ArrayList<Trainers> dayTrainers = displayBattles(scanner, newPlayer, battle, num);
 				timer(3000);
 				battleTime(scanner, battle, newPlayer, dayTrainers);
 			}
 			shoppingTime(scanner, newShop, newPlayer);
-			nightPhase(newPlayer);
+			nightPhase(newPlayer, num);
 			boolean gameOver = checkAbruptEnd(newPlayer);
 			if (gameOver == false) {
 				newPlayer.addDay();
