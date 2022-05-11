@@ -31,21 +31,6 @@ public class Battles {
 		return trainerToBattle;
 	}
 	/**
-	 * Prints the possible battles the player can fight in a day
-	 * @param possibleBattles		An array containing all the possible battles.
-	 */
-	public void printBattles(ArrayList<Trainers> possibleBattles) {
-		int num = 1;
-		while (num <= possibleBattles.size()) {
-			System.out.println("Battle" + " "+num);
-			Trainers trainer = possibleBattles.get(num-1);
-			System.out.println("Trainer: " + trainer.getFullName());
-			System.out.println(trainer.printEnemyTeam());
-			System.out.println("--------------------------------------");
-			num++;
-		}
-	}
-	/**
 	 * Gets called when the user clicks btnFight.
 	 * Checks the effectiveness of the current attack then multiplies the damage by that
 	 * If the attack is one sided (aka the friend is either healing, switching or using an item)
@@ -86,10 +71,7 @@ public class Battles {
 	 */
 	public boolean checkFriendsHealth(Monster friend, Team friends) {
 		if (friend.getHealth() <= 0) {
-			System.out.println("\nYour friend " + friend.getName() +
-					" just died r.i.p\n");
 			friend.gainDeaths();
-//			friends.pushFrontToBack();
 			return false;
 		} 
 		return true;
@@ -104,10 +86,6 @@ public class Battles {
 	public boolean checkEnemysHealth(Monster badGuy, Monster friend, Team friends) {
 		if (badGuy.getHealth() <= 0) {
 			friend.gainExperience(badGuy.getReward());
-			System.out.println("Congrats you killed " + badGuy.getName() +
-					"\n\n-------------------------------------\n");
-			System.out.println("Team stats after the battle:\n");
-			System.out.println(friends);
 			return false;
 		}
 		return true;

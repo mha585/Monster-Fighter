@@ -63,7 +63,6 @@ public class Team extends Monster{
 			  myTeam.remove(friend);
 			  return true;
 		  } else {
-			  System.out.println("could not remove");
 			  return false;
 		  }
 	}
@@ -80,14 +79,9 @@ public class Team extends Monster{
 		List<RandomMonster> randMonList = shop.getMonsters();
 		RandomMonster randMon = randMonList.get(monsterNum - 1);
 		int m1Price = (randMonList.get(monsterNum - 1).getPrice());
-		if (m1Price > funds){
-			System.out.println("Insufficient funds for this monster");
-		} else if (player.playerTeam.getSize() >= 4) {
-			System.out.println("You already have the max amount of monsters\n try selling one.");
-		} else {
+		if ((m1Price <= funds) && (player.playerTeam.getSize() < 4)) {
 			player.playerTeam.addFriend(randMonList.get(monsterNum - 1));
 			player.deductMoney(m1Price);
-			System.out.println("Purchase Successful");
 		}
 	}
 	/**
@@ -105,9 +99,6 @@ public class Team extends Monster{
 			Object monster = getFriend(MonsterNum);
 			removeFriend(getFriend(MonsterNum));
 			player.addMoney(sell.get(costIndex));
-			System.out.println("Bye-bye "+((Monster)monster).getName());
-		} else {
-			System.out.println("can't sell");
 		}
 	}
 	/**
@@ -138,8 +129,6 @@ public class Team extends Monster{
 		if ((index1 < getSize() && index2 < getSize()) && (index1 >= 0 && index2 >= 0) && 
 				((getFriend(index1).getHealth() > 0) && (getFriend(index2).getHealth() > 0))) {
 			Collections.swap(myTeam, index1, index2);
-		} else {
-			System.out.println("can't swap");
 		}
 	}
 	/**
