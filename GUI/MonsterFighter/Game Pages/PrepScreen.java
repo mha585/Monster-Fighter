@@ -108,7 +108,7 @@ public class PrepScreen {
 		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				if (manager.getPlayer().getDayCompleted() >= manager.getPlayer().getPlayerDayCompleted()) {
+				if (manager.getPlayer().getCurrentDay() >= manager.getPlayer().getTotalDays()) {
 					manager.launchBattleScreen(true, num, "This is it the final battle!!", true);
 				} else {
 					manager.launchBattleScreen(true, num, "", false);

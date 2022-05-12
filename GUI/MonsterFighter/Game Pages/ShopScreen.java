@@ -29,6 +29,7 @@ import javax.swing.DefaultListModel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import java.awt.CardLayout;
@@ -101,7 +102,7 @@ public class ShopScreen {
 		JLabel lblCost = new JLabel("Total Cost:");
 		lblCost.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblCostOfCart = new JLabel(""+totalCost);
+		JLabel lblCostOfCart = new JLabel("$"+totalCost);
 		lblCostOfCart.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JPanel shopPanel = new JPanel();
@@ -121,23 +122,59 @@ public class ShopScreen {
 					int index = JLShoppingCart.locationToIndex(event.getPoint());
 					if (current == "BI") {
 						Item item = (Item) cartObjects.get(index);
-						System.out.println(item.toString());
 						if (item.getFrequency() > 1) {
 							item.addFreq(-1);
+							System.out.println(cart);
+							System.out.println(cartObjects);
+							JLShoppingCart.setModel(cart);
+							totalCost -= item.getPrice();
+							lblCostOfCart.setText("$"+totalCost);
 						}
 						else if (item.getFrequency() == 1) {
 							cart.remove(index);
 							cartObjects.remove(index);
+							System.out.println(cart);
+							System.out.println(cartObjects);
+							JLShoppingCart.setModel(cart);
+							totalCost -= item.getPrice();
+							lblCostOfCart.setText("$"+totalCost);
 						}
 					}
 					else if (current == "BM") {
-						Monster monster = (Monster) cart.get(index);
+						Monster monster = (Monster) cartObjects.get(index);
+						cart.remove(index);
+						cartObjects.remove(index);
+						JLShoppingCart.setModel(cart);
+						totalCost -= monster.getPrice();
+						lblCostOfCart.setText("$"+totalCost);
 					}
 					else if (current == "SI") {
-						Item item = (Item) cart.get(index);
+						Item item = (Item) cartObjects.get(index);
+						if (item.getFrequency() > 1) {
+							item.addFreq(-1);
+							System.out.println(cart);
+							System.out.println(cartObjects);
+							JLShoppingCart.setModel(cart);
+							totalCost += item.sellPrice();
+							lblCostOfCart.setText("$"+totalCost);
+						}
+						else if (item.getFrequency() == 1) {
+							cart.remove(index);
+							cartObjects.remove(index);
+							System.out.println(cart);
+							System.out.println(cartObjects);
+							JLShoppingCart.setModel(cart);
+							totalCost += item.sellPrice();
+							lblCostOfCart.setText("$"+totalCost);
+						}
 					}
 					else if (current == "SM") {
 						Monster monster = (Monster) cart.get(index);
+						cart.remove(index);
+						cartObjects.remove(index);
+						JLShoppingCart.setModel(cart);
+						totalCost += monster.sellPrice();
+						lblCostOfCart.setText("$"+totalCost);
 					}
 					if (cart.isEmpty()) {
 						JLShoppingCart.setEnabled(true);
@@ -145,6 +182,7 @@ public class ShopScreen {
 				}
 			}
 		});
+		
 
 		items = newShop.getItems();
 		monsters = newShop.getMonsters();
@@ -209,20 +247,27 @@ public class ShopScreen {
 						cart.remove(cartIndex);
 						item.addFreq(1);
 						cart.add(0, item);
+						cartObjects.remove(cartIndex);
+						cartObjects.add(0, item);
 						cartCost += item.getPrice();
-						lblCostOfCart.setText(""+cartCost);
+						lblCostOfCart.setText("$"+cartCost);
 						totalCost = cartCost;
-						Item cartItem = (Item) cartObjects.get(cartIndex);
-						cartItem.addFreq(1);
+						System.out.println(cart);
+						System.out.println(cartObjects);
 					}
 					else {
 						Item item = items.get(itemIndex);
-						item.addFreq(1);
+						if (item.getFrequency() == 0) {
+							item.addFreq(1);
+						}
 						cart.add(0, item);
 						cartCost += item.getPrice();
-						lblCostOfCart.setText(""+cartCost);
+						lblCostOfCart.setText("$"+cartCost);
 						totalCost = cartCost;
 						cartObjects.add(0, item);
+						System.out.println(cart);
+						System.out.println(cartObjects);
+						System.out.println(item.getFrequency());
 					}
 				}
 			}
@@ -240,7 +285,7 @@ public class ShopScreen {
 					if (cart.contains(monsters.get(mnstrIndex).getName()) == false) {
 						cart.add(0, monsters.get(mnstrIndex).getName());
 						cartCost += monsters.get(mnstrIndex).getPrice();
-						lblCostOfCart.setText(""+cartCost);
+						lblCostOfCart.setText("$"+cartCost);
 						totalCost = cartCost;
 						cartObjects.add(0, monsters.get(mnstrIndex));
 					}
@@ -262,8 +307,7 @@ public class ShopScreen {
 					int mnstrIndex = listSellMnstr.locationToIndex(event.getPoint());
 					if (cart.contains(monsters.get(mnstrIndex).getName()) == false && manager.getPlayer().getTeam().getSize() > 1) {
 						cart.add(0,  monsters.get(mnstrIndex).getName());
-						cartObjects.add(0,  monsters.get(mnstrIndex));
-						
+						cartObjects.add(0,  manager.getPlayer().getTeam().getFriend(mnstrIndex));
 					}
 					else if(cart.contains(monsters.get(mnstrIndex).getName())) {
 						System.out.println("You cannot sell the same monster twice");
@@ -286,19 +330,39 @@ public class ShopScreen {
 			public void mouseClicked(MouseEvent event) {
 				JList<Object> listSellItm = (JList<Object>) event.getSource();
 				if (event.getClickCount() == 2) {
-					Inventory PlayerBag = new Inventory();
+					Inventory playerBag = new Inventory();
 					for (int i = 0; i < manager.getPlayer().getInventory().getSize(); i++) {
-						PlayerBag.addtoBag(manager.getPlayer().getInventory().getItem(i), 0);
+						playerBag.addtoBag(manager.getPlayer().getInventory().getItem(i), 0);
 					}
-					System.out.println(PlayerBag);
+					System.out.println(playerBag);
 					int itemIndex = listSellItm.locationToIndex(event.getPoint());
-					Inventory updatedBag = PlayerBag;
-					if (updatedBag.getItem(itemIndex).getFrequency() > 0) {
-						cart.add(0,  items.get(itemIndex).getName());
-						updatedBag.removeBag(itemIndex, 1);
-						PlayerBag = updatedBag;
-						System.out.println(updatedBag);
-						cartObjects.add(0, items.get(itemIndex));
+					Inventory updatedBag = playerBag;
+					System.out.println(updatedBag);
+					System.out.println(cart);
+					System.out.println(cartObjects);
+					if (updatedBag.getItem(itemIndex).getFrequency() >= 1) {
+						if (cartObjects.contains(playerBag.getItem(itemIndex))) {
+							cart.add(0, playerBag.getItem(itemIndex));
+							cartObjects.add(0, playerBag.getItem(itemIndex));
+							updatedBag.removeBag(itemIndex, 1);
+							playerBag = updatedBag;
+							System.out.println(updatedBag);
+							System.out.println(cart);
+							System.out.println(cartObjects);
+						}
+						else if (cartObjects.contains(playerBag.getItem(itemIndex)) == false) {
+							Item item = playerBag.getItem(itemIndex);
+							int freq = item.getFrequency();
+							item.addFreq(-freq);
+							System.out.println(item.getFrequency());
+							item.addFreq(1);
+							System.out.println(item.getFrequency());
+							cart.add(0, item);
+							cartObjects.add(0, item);
+							System.out.println(cart);
+							System.out.println(cartObjects);
+							System.out.println(item.getFrequency());
+						}
 					}
 					else {
 						System.out.println("KEKW");
@@ -334,6 +398,7 @@ public class ShopScreen {
 				lblCost.setVisible(true);
 				lblCostOfCart.setVisible(true);
 				cart.clear();
+				cartObjects.clear();
 				current = "BI";
 			}
 		});
@@ -352,6 +417,7 @@ public class ShopScreen {
 				lblCost.setVisible(true);
 				lblCostOfCart.setVisible(true);
 				cart.clear();
+				cartObjects.clear();
 				current = "BM";
 			}
 		});
@@ -370,6 +436,7 @@ public class ShopScreen {
 				lblCost.setVisible(false);
 				lblCostOfCart.setVisible(false);
 				cart.clear();
+				cartObjects.clear();
 				current = "SI";
 			}
 		});
@@ -388,6 +455,7 @@ public class ShopScreen {
 				lblCost.setVisible(false);
 				lblCostOfCart.setVisible(false);
 				cart.clear();
+				cartObjects.clear();
 				current = "SM";
 			}
 		});
@@ -395,7 +463,7 @@ public class ShopScreen {
 		btnExitShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchNightScreen();
+				manager.launchNightScreen(num);
 			}
 		});
 		
@@ -424,10 +492,57 @@ public class ShopScreen {
 				for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
 					totalCost += ((Purchasable) JLShoppingCart.getModel().getElementAt(i)).getPrice();
 				}
-				if (manager.getPlayer().getMoney() >= totalCost) {
+				if (manager.getPlayer().getMoney() >= totalCost && current == "BI") {
 					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
 						Item item = (Item) JLShoppingCart.getModel().getElementAt(i);
-						int frequency = 0;
+						int frequency = item.getFrequency();
+						manager.getPlayer().getInventory().buyItem(frequency, item, manager.getPlayer());
+						lblUserMoney.setText(""+manager.getPlayer().getMoney());
+						totalCost = 0;
+						lblCost.setVisible(true);
+						lblCostOfCart.setVisible(true);
+						cart.clear();
+						cartObjects.clear();
+					}
+				}
+				else if (manager.getPlayer().getMoney() >= totalCost && current == "BM") {
+					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
+						Monster monster = (Monster) JLShoppingCart.getModel().getElementAt(i);
+						manager.getPlayer().getTeam().addFriend(monster);
+						lblUserMoney.setText(""+manager.getPlayer().getMoney());
+						totalCost = 0;
+						lblCost.setVisible(true);
+						lblCostOfCart.setVisible(true);
+						cart.clear();
+						cartObjects.clear();
+					}
+				}
+				else if (manager.getPlayer().getMoney() >= totalCost && current == "SI") {
+					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
+						Item item = (Item) JLShoppingCart.getModel().getElementAt(i);
+						int frequency = item.getFrequency();
+						int index = manager.getPlayer().getInventory().getIndex(item.getName());
+						manager.getPlayer().getInventory().sellItem(frequency, index, user, manager.getPlayer().getInventory());
+						lblUserMoney.setText(""+manager.getPlayer().getMoney());
+						totalCost = 0;
+						lblCost.setVisible(true);
+						lblCostOfCart.setVisible(true);
+						cart.clear();
+						cartObjects.clear();
+					}
+				}
+				else if (manager.getPlayer().getMoney() >= totalCost && current == "SM") {
+					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
+						Monster monster = (Monster) JLShoppingCart.getModel().getElementAt(i);
+						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
+						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, user);
+						lblUserMoney.setText(""+manager.getPlayer().getMoney());
+						totalCost = 0;
+						lblCost.setVisible(true);
+						lblCostOfCart.setVisible(true);
+						cart.clear();
+						cartObjects.clear();
+						
 					}
 				}
 			}
