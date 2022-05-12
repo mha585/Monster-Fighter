@@ -247,6 +247,10 @@ public class Player {
 	public void abruptEnd() {
 		playerDays = currentDay;
 	}
+	
+	public int getPlayerDay() {
+		return playerDays;
+	}
 	/**
 	 * Returns the player, their bag, their money, their party, their team, and the days left as a string.
 	 * 

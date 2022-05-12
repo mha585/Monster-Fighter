@@ -8,6 +8,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JPanel;
 
 public class NightScreen {
 
@@ -54,17 +56,79 @@ public class NightScreen {
 		nightFrame.setBounds(100, 100, 960, 540);
 		nightFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("Bunch of Images + Summary of Day (stardew valley style)");
-		
-		JLabel lblSummary = new JLabel("Summary:");
-		
 		JLabel lblPPoints = new JLabel("Points:");
 		
 		JLabel lblMoney = new JLabel("Money:");
 		
-		JLabel lblBattles = new JLabel("Battles:");
+		JPanel panelMain = new JPanel();
 		
-		JLabel lblRandom = new JLabel("Random Events:");
+		JPanel panel = new JPanel();
+		
+		JPanel panel_1 = new JPanel();
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 42, Short.MAX_VALUE)
+				.addGap(0, 42, Short.MAX_VALUE)
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 404, Short.MAX_VALUE)
+				.addGap(0, 404, Short.MAX_VALUE)
+		);
+		panel_1.setLayout(gl_panel_1);
+		GroupLayout groupLayout = new GroupLayout(nightFrame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblPPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+							.addGap(12)
+							.addComponent(panelMain, GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+							.addGap(18)))
+					.addGap(18)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblPPoints)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblMoney)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelMain, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(39, Short.MAX_VALUE))
+		);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 42, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 404, Short.MAX_VALUE)
+		);
+		panel.setLayout(gl_panel);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Your monsters fainted (amount) times today");
+		
+		JLabel lblYourMonsterGet = new JLabel("Your monster get a good night sleep and will wake up with 20 extra health");
+		
+		JLabel lblSuddenlyInThe = new JLabel("Suddenly in the middle of the night...");
+		
+		JLabel lbleventDescriptionHere = new JLabel("(event description here)");
+		lbleventDescriptionHere.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblSummary = new JLabel("Summary:");
 		
 		JButton btnNewButton = new JButton("Next Day");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -74,52 +138,65 @@ public class NightScreen {
 				manager.launchPrepScreen(num);
 			}
 		});
-		GroupLayout groupLayout = new GroupLayout(nightFrame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(309)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(343, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(401, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSummary, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-							.addGap(147))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 10, GroupLayout.PREFERRED_SIZE)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblBattles, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblRandom, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))))
-					.addGap(314))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(845, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addContainerGap())
+		
+		JLabel lblRandom = new JLabel("Random Events:");
+		
+		JLabel lblNewLabel_1 = new JLabel("Today you defeated (amount) monsters");
+		GroupLayout gl_panelMain = new GroupLayout(panelMain);
+		gl_panelMain.setHorizontalGroup(
+			gl_panelMain.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelMain.createSequentialGroup()
+					.addContainerGap(67, Short.MAX_VALUE)
+					.addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelMain.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panelMain.createSequentialGroup()
+								.addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panelMain.createSequentialGroup()
+										.addGap(304)
+										.addComponent(lblSummary, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
+									.addGroup(gl_panelMain.createSequentialGroup()
+										.addGap(242)
+										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
+									.addGroup(gl_panelMain.createSequentialGroup()
+										.addGap(228)
+										.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lbleventDescriptionHere, GroupLayout.PREFERRED_SIZE, 677, GroupLayout.PREFERRED_SIZE))
+								.addGap(65))
+							.addGroup(gl_panelMain.createSequentialGroup()
+								.addComponent(lblSuddenlyInThe, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+								.addGap(287))
+							.addGroup(gl_panelMain.createSequentialGroup()
+								.addComponent(lblRandom, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+								.addGap(335))
+							.addGroup(gl_panelMain.createSequentialGroup()
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+								.addGap(358)))
+						.addGroup(Alignment.TRAILING, gl_panelMain.createSequentialGroup()
+							.addComponent(lblYourMonsterGet, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
+							.addGap(173))))
 		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(34)
-					.addComponent(lblNewLabel)
-					.addGap(45)
+		gl_panelMain.setVerticalGroup(
+			gl_panelMain.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelMain.createSequentialGroup()
+					.addGap(40)
 					.addComponent(lblSummary)
-					.addGap(104)
-					.addComponent(lblPPoints)
-					.addGap(57)
-					.addComponent(lblMoney)
-					.addGap(69)
-					.addComponent(lblBattles)
-					.addGap(56)
+					.addGap(11)
+					.addComponent(lblNewLabel_1)
+					.addGap(18)
+					.addComponent(lblNewLabel_1_1)
+					.addGap(59)
 					.addComponent(lblRandom)
+					.addGap(32)
+					.addComponent(lblSuddenlyInThe)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lbleventDescriptionHere)
+					.addGap(25)
+					.addComponent(lblYourMonsterGet)
+					.addGap(18)
 					.addComponent(btnNewButton)
-					.addContainerGap(18, Short.MAX_VALUE))
+					.addContainerGap(69, Short.MAX_VALUE))
 		);
+		panelMain.setLayout(gl_panelMain);
 		nightFrame.getContentPane().setLayout(groupLayout);
 	}
-
 }

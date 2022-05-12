@@ -395,7 +395,7 @@ public class ShopScreen {
 		btnExitShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				manager.launchNightScreen();
+				manager.launchNightScreen(num);
 			}
 		});
 		

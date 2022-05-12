@@ -111,7 +111,7 @@ public class UseItemScreen {
 				if (event.getClickCount() >= 1) {
 					int monsterIndex = listMonsters.locationToIndex(event.getPoint());
 					manager.launchItemSuccessScreen(previous, monsterIndex, item, num);
-					manager.getPlayer().getInventory().getItem(item).addFreq(manager.getPlayer().getInventory().getItem(item), -1);
+					manager.getPlayer().getInventory().getItem(item).addFreq(-1);
 					closeWindow();
 				}
 			}

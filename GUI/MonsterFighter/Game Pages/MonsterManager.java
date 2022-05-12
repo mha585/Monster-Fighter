@@ -4,7 +4,7 @@ public class MonsterManager {
 	private static RandomGen rng;
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
-	private Shop newShop = new Shop();
+	private Shop newShop;
 	private Trainers newTrainer;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
