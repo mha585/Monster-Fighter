@@ -134,6 +134,7 @@ public class NightScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().addDay();
+				manager.setTrainerListNotD1();
 				closeWindow();
 				manager.launchPrepScreen(num);
 			}

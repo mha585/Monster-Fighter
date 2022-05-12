@@ -109,10 +109,11 @@ public class ShopScreen {
 		CardLayout CL = new CardLayout(0,0);
 		shopPanel.setLayout(CL);
 		
-		DefaultListModel<Object> cart = new DefaultListModel<Object>();
-		DefaultListModel<Object> cartObjects = new DefaultListModel<Object>();
+		DefaultListModel<Object> cartDisplay = new DefaultListModel<Object>();
+		Inventory cart = new Inventory();
+		Team kennel = new Team();
 		
-		JList<Object> JLShoppingCart = new JList<Object>(cart);
+		JList<Object> JLShoppingCart = new JList<Object>(cartDisplay);
 		JLShoppingCart.setEnabled(true);
 		JLShoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		JLShoppingCart.addMouseListener(new MouseAdapter() {
@@ -121,62 +122,54 @@ public class ShopScreen {
 				if (event.getClickCount() == 2) {
 					int index = JLShoppingCart.locationToIndex(event.getPoint());
 					if (current == "BI") {
-						Item item = (Item) cartObjects.get(index);
+						Item item = (Item) cart.getItem(index);
 						if (item.getFrequency() > 1) {
 							item.addFreq(-1);
-							System.out.println(cart);
-							System.out.println(cartObjects);
-							JLShoppingCart.setModel(cart);
+							JLShoppingCart.setModel(cartDisplay);
 							totalCost -= item.getPrice();
 							lblCostOfCart.setText("$"+totalCost);
 						}
 						else if (item.getFrequency() == 1) {
-							cart.remove(index);
-							cartObjects.remove(index);
-							System.out.println(cart);
-							System.out.println(cartObjects);
-							JLShoppingCart.setModel(cart);
+							cart.removeBag(index, 1);
+							cartDisplay.remove(index);
+							JLShoppingCart.setModel(cartDisplay);
 							totalCost -= item.getPrice();
 							lblCostOfCart.setText("$"+totalCost);
 						}
 					}
 					else if (current == "BM") {
-						Monster monster = (Monster) cartObjects.get(index);
-						cart.remove(index);
-						cartObjects.remove(index);
-						JLShoppingCart.setModel(cart);
+						Monster monster = (Monster) kennel.getFriend(index);
+						kennel.removeFriend(monster);
+						cartDisplay.remove(index);
+						JLShoppingCart.setModel(cartDisplay);
 						totalCost -= monster.getPrice();
 						lblCostOfCart.setText("$"+totalCost);
 					}
 					else if (current == "SI") {
-						Item item = (Item) cartObjects.get(index);
+						Item item = (Item) cart.getItem(index);
 						if (item.getFrequency() > 1) {
 							item.addFreq(-1);
-							System.out.println(cart);
-							System.out.println(cartObjects);
-							JLShoppingCart.setModel(cart);
+							JLShoppingCart.setModel(cartDisplay);
 							totalCost += item.sellPrice();
 							lblCostOfCart.setText("$"+totalCost);
 						}
 						else if (item.getFrequency() == 1) {
-							cart.remove(index);
-							cartObjects.remove(index);
-							System.out.println(cart);
-							System.out.println(cartObjects);
-							JLShoppingCart.setModel(cart);
+							cart.removeBag(index, 1);
+							cartDisplay.remove(index);
+							JLShoppingCart.setModel(cartDisplay);
 							totalCost += item.sellPrice();
 							lblCostOfCart.setText("$"+totalCost);
 						}
 					}
 					else if (current == "SM") {
-						Monster monster = (Monster) cart.get(index);
-						cart.remove(index);
-						cartObjects.remove(index);
-						JLShoppingCart.setModel(cart);
+						Monster monster = (Monster) kennel.getFriend(index);
+						kennel.removeFriend(monster);
+						cartDisplay.remove(index);
+						JLShoppingCart.setModel(cartDisplay);
 						totalCost += monster.sellPrice();
 						lblCostOfCart.setText("$"+totalCost);
 					}
-					if (cart.isEmpty()) {
+					if (cart.getSize() == 0) {
 						JLShoppingCart.setEnabled(true);
 					}
 				}
@@ -241,33 +234,19 @@ public class ShopScreen {
 				if (event.getClickCount() == 2) {
 					int cartCost = totalCost;
 					int itemIndex = listBuyItm.locationToIndex(event.getPoint());
-					if (cartObjects.contains(items.get(itemIndex))) {
-						int cartIndex = cart.indexOf(items.get(itemIndex));
-						Item item = ((Item) cart.get(cartIndex));
-						cart.remove(cartIndex);
-						item.addFreq(1);
-						cart.add(0, item);
-						cartObjects.remove(cartIndex);
-						cartObjects.add(0, item);
-						cartCost += item.getPrice();
+					if (cartDisplay.contains(items.get(itemIndex).getName())) {
+						int cartIndex = cart.getIndex(items.get(itemIndex).getName());
+						cart.getItem(cartIndex).addFreq(1);
+						cartCost += items.get(itemIndex).getPrice();
 						lblCostOfCart.setText("$"+cartCost);
 						totalCost = cartCost;
-						System.out.println(cart);
-						System.out.println(cartObjects);
 					}
 					else {
-						Item item = items.get(itemIndex);
-						if (item.getFrequency() == 0) {
-							item.addFreq(1);
-						}
-						cart.add(0, item);
-						cartCost += item.getPrice();
+						cartDisplay.addElement(items.get(itemIndex).getName());
+						cart.addtoBag(items.get(itemIndex), 1);
+						cartCost += items.get(itemIndex).getPrice();
 						lblCostOfCart.setText("$"+cartCost);
 						totalCost = cartCost;
-						cartObjects.add(0, item);
-						System.out.println(cart);
-						System.out.println(cartObjects);
-						System.out.println(item.getFrequency());
 					}
 				}
 			}
@@ -282,16 +261,20 @@ public class ShopScreen {
 				if (event.getClickCount() == 2) {
 					int cartCost = totalCost;
 					int mnstrIndex = listBuyMnstr.locationToIndex(event.getPoint());
-					if (cart.contains(monsters.get(mnstrIndex).getName()) == false) {
-						cart.add(0, monsters.get(mnstrIndex).getName());
-						cartCost += monsters.get(mnstrIndex).getPrice();
-						lblCostOfCart.setText("$"+cartCost);
-						totalCost = cartCost;
-						cartObjects.add(0, monsters.get(mnstrIndex));
-					}
+					if (kennel.getSize() + 1 + manager.getPlayer().getTeam().getSize() <= 4 ) {
+						if (cartDisplay.contains(monsters.get(mnstrIndex).getName()) == false) {
+							cartDisplay.addElement(monsters.get(mnstrIndex).getName());
+							kennel.addFriend(monsters.get(mnstrIndex));
+							cartCost += monsters.get(mnstrIndex).getPrice();
+							lblCostOfCart.setText("$"+cartCost);
+							totalCost = cartCost;
+						}
+						else {
+							System.out.println("Monster already in cart");
+						}
+					}	
 					else {
-						System.out.println("Monster already in cart");
-						
+						System.out.println("There are too many monsters");
 					}
 				}
 			}
@@ -305,11 +288,11 @@ public class ShopScreen {
 				JList<Object> listSellMnstr = (JList<Object>) event.getSource();
 				if (event.getClickCount() == 2) {
 					int mnstrIndex = listSellMnstr.locationToIndex(event.getPoint());
-					if (cart.contains(monsters.get(mnstrIndex).getName()) == false && manager.getPlayer().getTeam().getSize() > 1) {
-						cart.add(0,  monsters.get(mnstrIndex).getName());
-						cartObjects.add(0,  manager.getPlayer().getTeam().getFriend(mnstrIndex));
+					if (cartDisplay.contains(manager.getPlayer().getTeam().getFriend(mnstrIndex).getName()) == false && manager.getPlayer().getTeam().getSize() > 1) {
+						cartDisplay.addElement(manager.getPlayer().getTeam().getFriend(mnstrIndex).getName());
+						kennel.addFriend(manager.getPlayer().getTeam().getFriend(mnstrIndex));
 					}
-					else if(cart.contains(monsters.get(mnstrIndex).getName())) {
+					else if(((List<Monster>) kennel).contains(manager.getPlayer().getTeam().getFriend(mnstrIndex))) {
 						System.out.println("You cannot sell the same monster twice");
 					}
 					else if(manager.getPlayer().getTeam().getSize() == 1) {
@@ -322,7 +305,7 @@ public class ShopScreen {
 		
 		shopPanel.add(new JScrollPane(listSellMnstr), "SellMonsters");
 
-
+		
 		
 		JList listSellItm = new JList(itemUsrDisplay);
 		listSellItm.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -330,42 +313,19 @@ public class ShopScreen {
 			public void mouseClicked(MouseEvent event) {
 				JList<Object> listSellItm = (JList<Object>) event.getSource();
 				if (event.getClickCount() == 2) {
-					Inventory playerBag = new Inventory();
-					for (int i = 0; i < manager.getPlayer().getInventory().getSize(); i++) {
-						playerBag.addtoBag(manager.getPlayer().getInventory().getItem(i), 0);
-					}
-					System.out.println(playerBag);
 					int itemIndex = listSellItm.locationToIndex(event.getPoint());
-					Inventory updatedBag = playerBag;
-					System.out.println(updatedBag);
-					System.out.println(cart);
-					System.out.println(cartObjects);
-					if (updatedBag.getItem(itemIndex).getFrequency() >= 1) {
-						if (cartObjects.contains(playerBag.getItem(itemIndex))) {
-							cart.add(0, playerBag.getItem(itemIndex));
-							cartObjects.add(0, playerBag.getItem(itemIndex));
-							updatedBag.removeBag(itemIndex, 1);
-							playerBag = updatedBag;
-							System.out.println(updatedBag);
-							System.out.println(cart);
-							System.out.println(cartObjects);
-						}
-						else if (cartObjects.contains(playerBag.getItem(itemIndex)) == false) {
-							Item item = playerBag.getItem(itemIndex);
-							int freq = item.getFrequency();
-							item.addFreq(-freq);
-							System.out.println(item.getFrequency());
-							item.addFreq(1);
-							System.out.println(item.getFrequency());
-							cart.add(0, item);
-							cartObjects.add(0, item);
-							System.out.println(cart);
-							System.out.println(cartObjects);
-							System.out.println(item.getFrequency());
+					Item item = manager.getPlayer().getInventory().getItem(itemIndex);
+					if (cartDisplay.contains(item.getName())) {
+						int cartIndex = cart.getIndex(item.getName());
+						if (cart.getItem(cartIndex).getFrequency() < manager.getPlayer().getInventory().getItem(itemIndex).getFrequency()) {
+							cart.getItem(cartIndex).addFreq(1);
 						}
 					}
-					else {
-						System.out.println("KEKW");
+					else if (cartDisplay.contains(item.getName()) == false) {
+						cartDisplay.addElement(item.getName());
+						Item bagItem = item;
+						bagItem.setFrequency(1);
+						cart.addtoBag(item, 1);
 					}
 				}
 			}
@@ -397,8 +357,9 @@ public class ShopScreen {
 				totalCost = 0;
 				lblCost.setVisible(true);
 				lblCostOfCart.setVisible(true);
+				cartDisplay.clear();
+				kennel.clear();
 				cart.clear();
-				cartObjects.clear();
 				current = "BI";
 			}
 		});
@@ -416,8 +377,9 @@ public class ShopScreen {
 				totalCost = 0;
 				lblCost.setVisible(true);
 				lblCostOfCart.setVisible(true);
+				cartDisplay.clear();
+				kennel.clear();
 				cart.clear();
-				cartObjects.clear();
 				current = "BM";
 			}
 		});
@@ -435,8 +397,9 @@ public class ShopScreen {
 				totalCost = 0;
 				lblCost.setVisible(false);
 				lblCostOfCart.setVisible(false);
+				cartDisplay.clear();
+				kennel.clear();
 				cart.clear();
-				cartObjects.clear();
 				current = "SI";
 			}
 		});
@@ -454,8 +417,9 @@ public class ShopScreen {
 				totalCost = 0;
 				lblCost.setVisible(false);
 				lblCostOfCart.setVisible(false);
+				cartDisplay.clear();
+				kennel.clear();
 				cart.clear();
-				cartObjects.clear();
 				current = "SM";
 			}
 		});
@@ -489,37 +453,40 @@ public class ShopScreen {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int totalCost = 0;
-				for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
-					totalCost += ((Purchasable) JLShoppingCart.getModel().getElementAt(i)).getPrice();
+				for (int i = 0; i < cart.getSize(); i++) {
+					totalCost += cart.getItem(i).getPrice();
+				}
+				for (int i = 0; i < kennel.getSize(); i++) {
+					totalCost += kennel.getFriend(i).getPrice();
 				}
 				if (manager.getPlayer().getMoney() >= totalCost && current == "BI") {
-					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
-						Item item = (Item) JLShoppingCart.getModel().getElementAt(i);
+					for (int i = 0; i < cart.getSize(); i++) {
+						Item item = (Item) cart.getItem(i);
 						int frequency = item.getFrequency();
 						manager.getPlayer().getInventory().buyItem(frequency, item, manager.getPlayer());
 						lblUserMoney.setText(""+manager.getPlayer().getMoney());
 						totalCost = 0;
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
+						cartDisplay.clear();
 						cart.clear();
-						cartObjects.clear();
 					}
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "BM") {
-					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
-						Monster monster = (Monster) JLShoppingCart.getModel().getElementAt(i);
+					for (int i = 0; i < kennel.getSize(); i++) {
+						Monster monster = kennel.getFriend(i);
 						manager.getPlayer().getTeam().addFriend(monster);
 						lblUserMoney.setText(""+manager.getPlayer().getMoney());
 						totalCost = 0;
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
-						cart.clear();
-						cartObjects.clear();
+						cartDisplay.clear();
+						kennel.clear();
 					}
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "SI") {
-					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
-						Item item = (Item) JLShoppingCart.getModel().getElementAt(i);
+					for (int i = 0; i < cart.getSize(); i++) {
+						Item item = cart.getItem(i);
 						int frequency = item.getFrequency();
 						int index = manager.getPlayer().getInventory().getIndex(item.getName());
 						manager.getPlayer().getInventory().sellItem(frequency, index, user, manager.getPlayer().getInventory());
@@ -527,22 +494,21 @@ public class ShopScreen {
 						totalCost = 0;
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
+						cartDisplay.clear();
 						cart.clear();
-						cartObjects.clear();
 					}
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "SM") {
-					for (int i = 0; i < JLShoppingCart.getModel().getSize(); i++) {
-						Monster monster = (Monster) JLShoppingCart.getModel().getElementAt(i);
+					for (int i = 0; i < kennel.getSize(); i++) {
+						Monster monster = kennel.getFriend(i);
 						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
 						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, user);
 						lblUserMoney.setText(""+manager.getPlayer().getMoney());
 						totalCost = 0;
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
-						cart.clear();
-						cartObjects.clear();
-						
+						cartDisplay.clear();
+						kennel.clear();
 					}
 				}
 			}

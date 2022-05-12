@@ -67,6 +67,12 @@ public class Team extends Monster{
 		  }
 	}
 	/**
+	 * Removes all items in myTeam
+	 */
+	public void clear() {
+		myTeam.clear();
+	}
+	/**
 	 * Adds a monster to the party. Deducts money from the player accordingly.
 	 * 
 	 * @param monsterNum	The index of the number in the shop

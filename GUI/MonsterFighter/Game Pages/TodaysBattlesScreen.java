@@ -62,14 +62,13 @@ public class TodaysBattlesScreen {
 		newBattleFrames = new JFrame();
 		newBattleFrames.setBounds(100, 100, 1187, 540);
 		newBattleFrames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ArrayList<Monster> trainer1Team = possibleTrainers.get(0).getEnemies();
 		String trainer1String = "";
 		String trainer2String = "";
 		String trainer3String = "";
 		String trainer4String = "";
 		String trainer5String = "";
-		for (int i = 0; i < trainer1Team.size(); i++) {
-			Monster monster = trainer1Team.get(i);
+		for (int i = 0; i < possibleTrainers.get(0).getEnemies().size(); i++) {
+			Monster monster = possibleTrainers.get(0).getEnemies().get(i);
 			System.out.println(monster.getName());
 			trainer1String = trainer1String + '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
 			+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
@@ -214,13 +213,13 @@ public class TodaysBattlesScreen {
 				if (manager.getPlayer().getCurrentDay() == 1) {
 					fightsNeeded = 1;
 					if (chckbxTrainer1.isSelected() == true) {
-						trainer.addMonster(trainer1Team.get(0));
+						trainer.addMonster(possibleTrainers.get(0).getEnemies().get(0));
 					}
 				}
 				else {
 					fightsNeeded = 3;
 					if (chckbxTrainer1.isSelected() == true) {
-						trainer.addMonster(trainer1Team.get(0));
+						trainer.addMonster(possibleTrainers.get(0).getFirstEnemy());
 					}
 					if (chckbxTrainer2.isSelected() == true) {
 						trainer.addMonster(possibleTrainers.get(1).getFirstEnemy());
@@ -241,6 +240,8 @@ public class TodaysBattlesScreen {
 				else {
 					manager.setEnemyTrainer(trainer);
 					closeWindow();
+					System.out.println(possibleTrainers);
+					System.out.println(trainer.getEnemies().toString());
 					manager.launchPrepScreen(num);
 				}
 			}

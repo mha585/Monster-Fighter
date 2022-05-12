@@ -112,9 +112,13 @@ public class Item implements Purchasable{
 	public int getFrequency() {
 		return totalFrequency;
 	}
-	
-	public void setFrequency(int amountGained) {
-		totalFrequency = amountGained;
+	/**
+	 * Sets an item's frequency to amount.
+	 * 
+	 * @param amount the frequency the item's frequency will be set to
+	 */
+	public void setFrequency(int amount) {
+		totalFrequency = amount;
 	}
 	/**
 	 * Adds x amount of an item into the players inventory.

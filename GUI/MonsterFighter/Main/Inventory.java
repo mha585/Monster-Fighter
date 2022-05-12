@@ -116,6 +116,12 @@ public class Inventory {
 		}
 	}
 	/**
+	 * Removes all items in bag.
+	 */
+	public void clear() {
+		bag.clear();
+	}
+	/**
 	 * Returns a string representation of the player's inventory
 	 * 
 	 * @return a new line
