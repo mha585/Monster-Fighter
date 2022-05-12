@@ -45,7 +45,39 @@ public class NightScreen {
 	
 	public void closeWindow() {
 		nightFrame.dispose();
-	}	
+	}
+	
+	public String randomEvent() {
+		int whatEventHappend = num.randNumInRange(1, 10);
+		if ((whatEventHappend >= 1 && whatEventHappend <= 3) && (manager.getPlayer().getTeam().getSize() > 1)) {
+//			monster leaves in the night
+			int monsterToLeaveIndex = num.randNumInRange(0, manager.getPlayer().getTeam().getSize());
+			Monster monsterThatLeaves = manager.getPlayer().getTeam().getFriend(monsterToLeaveIndex);
+			manager.getPlayer().getTeam().removeFriend(monsterThatLeaves);
+			return monsterThatLeaves.getName() + " left your team in the night";
+		} else if ((whatEventHappend >= 4 && whatEventHappend <= 6) && (manager.getPlayer().getTeam().getSize() < 4)) {
+//			monster joins in the night
+			Monster newMonster = new RandomMonster(manager.getPlayer(), num);
+			manager.getPlayer().getTeam().addFriend(newMonster);
+			return newMonster.getName() + " joined your team in the night";
+		} else {
+//			monster levels up
+			int monsterToLevelUpIndex = num.randNumInRange(0, manager.getPlayer().getTeam().getSize());
+			Monster leveledUpMonster = manager.getPlayer().getTeam().getFriend(monsterToLevelUpIndex);
+			manager.getPlayer().getTeam().getFriend(monsterToLevelUpIndex).levelUp();
+			return leveledUpMonster.getName() + " gained a level";
+		}
+	}
+	
+	public void allMonsterGainHealth(Team team) {
+		for (int i = 0; i < team.getSize(); i ++) {
+			team.getFriend(i).gainHealth(20);
+			if (team.getFriend(i).getHealth() == 0) {
+				team.getFriend(i).revive();
+				team.getFriend(i).gainHealth((-1 * team.getFriend(i).getMaxHealth()) + 20);
+			}
+		}
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -127,12 +159,14 @@ public class NightScreen {
 		
 		JLabel lbleventDescriptionHere = new JLabel("(event description here)");
 		lbleventDescriptionHere.setHorizontalAlignment(SwingConstants.CENTER);
+		lbleventDescriptionHere.setText(randomEvent());
 		
 		JLabel lblSummary = new JLabel("Summary:");
 		
 		JButton btnNewButton = new JButton("Next Day");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				allMonsterGainHealth(manager.getPlayer().getTeam());
 				manager.getPlayer().addDay();
 				manager.setTrainerListNotD1();
 				closeWindow();
