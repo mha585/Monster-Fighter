@@ -158,4 +158,14 @@ public class Team extends Monster{
 	public String toString() {
 		return printFriends();
 	}
+	public int getIndex(String name) {
+		int index = 0;
+		for (int i = 0; i < myTeam.size(); i++) {
+			Monster current = (Monster) myTeam.get(i);	
+			if (current.getName() == name) {
+				index = i;
+			}
+		}
+		return index;
+	}
 }

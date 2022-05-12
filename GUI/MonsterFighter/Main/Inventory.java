@@ -36,6 +36,22 @@ public class Inventory {
 		return (Item) bag.get(i);
 	}
 	/**
+	 * returns index of given item in player's bag
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public int getIndex(String name) {
+		int index = 0;
+		for (int i = 0; i < bag.size(); i++) {
+			Item current = (Item) bag.get(i);	
+			if (current.getName() == name) {
+				index = i;
+			}
+		}
+		return index;
+	}
+	/**
 	 * Buy's an item from the shop and adds it to the player's inventory and deducts money accordingly.
 	 * 
 	 * @param amount	Number of items bought

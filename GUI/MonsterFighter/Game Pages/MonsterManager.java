@@ -115,7 +115,7 @@ public class MonsterManager {
 	public void setTrainerListNotD1() {
 		trainerBattles = newbattle.getBattles(5, newPlayer, rng);
 	}
-	
+
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 		manager.launchStartUpScreen(rng);

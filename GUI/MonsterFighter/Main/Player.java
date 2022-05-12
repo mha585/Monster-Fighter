@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Player {
 	/**
-	 * Stores the number of player days.
+	 * Stores the number of days the game will last for.
 	 */
 	private int playerDays = 1;
 	/**
@@ -162,6 +162,9 @@ public class Player {
 	 */
 	public void addDay() {
 		currentDay++;
+	}
+	public int getTotalDays() {
+		return playerDays;
 	}
 	/**
 	 * Return the player's bag.
