@@ -48,6 +48,13 @@ public class PrepScreen {
 	public void closeWindow() {
 		prepScreen.dispose();
 	}
+	
+	public boolean isItTheFinalDay() {
+		if (manager.getPlayer().getCurrentDay() >= manager.getPlayer().getPlayerDay()) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -119,16 +126,21 @@ public class PrepScreen {
 		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
-				if (manager.getPlayer().getCurrentDay() >= manager.getPlayer().getPlayerDay()) {
-					manager.launchBattleScreen(true, num, "This is it the final battle!!", true);
+				if (isItTheFinalDay()) {
+					manager.launchBattleScreen(true, num, "This is it the final battle!!");
 				} else {
-					manager.launchBattleScreen(false, num, "", false);
+					manager.launchBattleScreen(false, num, "");
 				}
 //				manager.launchBattleScreen(true, num, "", false);
 			}
 		});
 		btnFight.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
+		if (isItTheFinalDay()) {
+			lblViewBattlesInstructions.setText("Your next battle will be your last, get ready");
+			btnFight.setEnabled(true);
+			btnBattles.setEnabled(false);
+		}
 
 		GroupLayout groupLayout = new GroupLayout(prepScreen.getContentPane());
 		groupLayout.setHorizontalGroup(

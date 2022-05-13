@@ -78,12 +78,12 @@ public class BattleScreen {
 			if (playerTeam.getFriend(0).getHealth() == 0) {
 				String status = "Your friend " + playerTeam.getFriend(0).getName() + " just died rip :(\n"
 						+ "But in the process they killed " + enemy.getName();
-				manager.launchBattleScreen(false, num, status, false);
+				manager.launchBattleScreen(false, num, status);
 			} else if (enemyTrainer.getSize() == 0 && enemyTrainer.getFullName() != "Boss Miguel"){
 				manager.launchShopScreen(num);
 			} else {
 				String status = "Congrats you killed " + enemyMonster.getName() + " great job!";
-				manager.launchBattleScreen(false, num, status, false);
+				manager.launchBattleScreen(false, num, status);
 			}
 //		if the player is out of usable monsters the game ends
 		}  else if (playerTeam.sumTeamHealth() <= 0) {
@@ -97,7 +97,7 @@ public class BattleScreen {
 			String status = "Your friend " + playerTeam.getFriend(0).getName() + " just died rip :(";
 			playerTeam.pushFrontToBack();
 			closeWindow();
-			manager.launchBattleScreen(false, num, status, false);
+			manager.launchBattleScreen(false, num, status);
 		}
 	}
 	

@@ -14,12 +14,8 @@ public class MonsterManager {
 		new ChooseMonsterScreen(this, num);
 	}
 	
-	public void launchBattleScreen(boolean initialiseFight, RandomGen num, String status, boolean isBoss) {
-		if (initialiseFight && !isBoss) {
-			Trainers newEnemy = new Trainers(getPlayer(), num);
-			setEnemyTrainer(newEnemy);
-			setEnemy(newEnemy.getFirstEnemy());
-		} else if (initialiseFight && isBoss) {
+	public void launchBattleScreen(boolean initialiseBossFight, RandomGen num, String status) {
+		 if (initialiseBossFight) {
 			Trainers bossEnemy = new Boss();
 			System.out.println(bossEnemy.getFirstEnemy().getName());
 			setEnemyTrainer(bossEnemy);

@@ -775,7 +775,7 @@ public class TeamScreen {
 				if (previousPage == "Prep") {
 					manager.launchPrepScreen(num, manager.isAbleToFight());
 				} else if (previousPage == "Fight") {
-					manager.launchBattleScreen(false, num, "", false);
+					manager.launchBattleScreen(false, num, "");
 				}
 			}
 		});
