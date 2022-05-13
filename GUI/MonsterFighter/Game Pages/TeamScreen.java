@@ -773,7 +773,7 @@ public class TeamScreen {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				if (previousPage == "Prep") {
-					manager.launchPrepScreen(num);
+					manager.launchPrepScreen(num, manager.isAbleToFight());
 				} else if (previousPage == "Fight") {
 					manager.launchBattleScreen(false, num, "", false);
 				}

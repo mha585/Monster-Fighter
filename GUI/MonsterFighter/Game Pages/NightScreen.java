@@ -169,8 +169,9 @@ public class NightScreen {
 				allMonsterGainHealth(manager.getPlayer().getTeam());
 				manager.getPlayer().addDay();
 				manager.setTrainerListNotD1();
+				manager.setIsAbleToFight(false);
 				closeWindow();
-				manager.launchPrepScreen(num);
+				manager.launchPrepScreen(num, manager.isAbleToFight());
 			}
 		});
 		

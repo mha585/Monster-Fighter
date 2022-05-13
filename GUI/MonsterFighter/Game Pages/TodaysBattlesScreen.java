@@ -239,10 +239,11 @@ public class TodaysBattlesScreen {
 				}
 				else {
 					manager.setEnemyTrainer(trainer);
+					manager.setIsAbleToFight(true);
 					closeWindow();
 					System.out.println(possibleTrainers);
 					System.out.println(trainer.getEnemies().toString());
-					manager.launchPrepScreen(num);
+					manager.launchPrepScreen(num, manager.isAbleToFight());
 				}
 			}
 		});

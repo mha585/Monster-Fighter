@@ -8,6 +8,7 @@ public class MonsterManager {
 	private Trainers newTrainer;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
+	private boolean canFight = false;
 	
 	public void launchChooseMonsterScreen(RandomGen num) {
 		new ChooseMonsterScreen(this, num);
@@ -44,8 +45,8 @@ public class MonsterManager {
 		new LoseScreen(this);
 	}
 	
-	public void launchPrepScreen(RandomGen num) {
-		new PrepScreen(this, num);
+	public void launchPrepScreen(RandomGen num, boolean canFight) {
+		new PrepScreen(this, num, canFight);
 	}
 	
 	public void launchShopScreen(RandomGen num) {
@@ -98,6 +99,14 @@ public class MonsterManager {
 		} else {
 			rng = new RandomGen(seed);
 		}
+	}
+	
+	public boolean isAbleToFight() {
+		return canFight;
+	}
+	
+	public void setIsAbleToFight(boolean hasChosenBattles) {
+		canFight = hasChosenBattles;
 	}
 	
 	public RandomGen getRandom() {

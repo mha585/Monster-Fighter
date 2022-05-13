@@ -9,12 +9,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class PrepScreen {
 
 	private JFrame prepScreen;
 	private MonsterManager manager;
 	private RandomGen num;
+	private boolean canPressFight;
 
 //	/**
 //	 * Launch the application.
@@ -35,9 +37,10 @@ public class PrepScreen {
 	/**
 	 * Create the application.
 	 */
-	public PrepScreen(MonsterManager incomingManager, RandomGen number) {
+	public PrepScreen(MonsterManager incomingManager, RandomGen number, boolean canFight) {
 		manager = incomingManager;
 		num = number;
+		canPressFight = canFight;
 		initialize();
 		prepScreen.setVisible(true);
 	}
@@ -75,7 +78,9 @@ public class PrepScreen {
 		JLabel lblMoneyNum = new JLabel("New label");
 		lblMoneyNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMoneyNum.setText(Integer.toString(manager.getPlayer().getMoney()));
-
+		
+		JLabel lblViewBattlesInstructions = new JLabel("Please view battles before fighting");
+		lblViewBattlesInstructions.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton btnTeam = new JButton("View Team");
 		btnTeam.addActionListener(new ActionListener() {
@@ -105,21 +110,33 @@ public class PrepScreen {
 		btnBag.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JButton btnFight = new JButton("Fight");
+		if (!canPressFight) {
+			btnFight.setEnabled(false);
+		} else {
+			lblViewBattlesInstructions.setVisible(false);
+			btnFight.setEnabled(true);
+		}
 		btnFight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				if (manager.getPlayer().getCurrentDay() >= manager.getPlayer().getPlayerDay()) {
 					manager.launchBattleScreen(true, num, "This is it the final battle!!", true);
 				} else {
-					manager.launchBattleScreen(true, num, "", false);
+					manager.launchBattleScreen(false, num, "", false);
 				}
 //				manager.launchBattleScreen(true, num, "", false);
 			}
 		});
 		btnFight.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+
 		GroupLayout groupLayout = new GroupLayout(prepScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(398, Short.MAX_VALUE)
+					.addComponent(btnFight, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
+					.addGap(379))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(29)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -128,16 +145,14 @@ public class PrepScreen {
 							.addGap(18)
 							.addComponent(lblDayNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnTeam, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblPoints)
 							.addGap(18)
-							.addComponent(lblPointsNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnBag, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-							.addGap(56)))
+							.addComponent(lblPointsNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnBag, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE))
+					.addGap(56)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblMoney)
@@ -146,9 +161,9 @@ public class PrepScreen {
 						.addComponent(btnBattles, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE))
 					.addGap(34))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(396, Short.MAX_VALUE)
-					.addComponent(btnFight, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addGap(379))
+					.addContainerGap(356, Short.MAX_VALUE)
+					.addComponent(lblViewBattlesInstructions, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
+					.addGap(333))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -165,11 +180,12 @@ public class PrepScreen {
 						.addComponent(btnTeam, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBag, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBattles, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE))
-					.addGap(61)
+					.addGap(27)
+					.addComponent(lblViewBattlesInstructions, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
 					.addComponent(btnFight, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
 					.addGap(67))
 		);
 		prepScreen.getContentPane().setLayout(groupLayout);
 	}
-
 }

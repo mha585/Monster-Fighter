@@ -100,7 +100,7 @@ public class InventoryScreen {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				if (previousPage == "Prep") {
-					manager.launchPrepScreen(number);
+					manager.launchPrepScreen(number, manager.isAbleToFight());
 				} else if (previousPage == "Fight") {
 					manager.launchBattleScreen(false, number, "", false);
 				} else if (previousPage == "Shop") {
