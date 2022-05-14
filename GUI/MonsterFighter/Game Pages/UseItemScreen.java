@@ -65,6 +65,7 @@ public class UseItemScreen {
 	 */
 	private void initialize() {
 		useItemScreen = new JFrame();
+		useItemScreen.setTitle("Use an item");
 		useItemScreen.setBounds(100, 100, 960, 540);
 		useItemScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -107,11 +108,10 @@ public class UseItemScreen {
 		listMonsters.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		listMonsters.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
-				JList<Object> itemJList = (JList<Object>) event.getSource();
-				if (event.getClickCount() >= 1) {
+				if (event.getClickCount() >= 2) {
 					int monsterIndex = listMonsters.locationToIndex(event.getPoint());
 					manager.launchItemSuccessScreen(previous, monsterIndex, item, num);
-					manager.getPlayer().getInventory().getItem(item).addFreq(-1);
+					manager.getPlayer().getInventory().removeBag(item, 1);
 					closeWindow();
 				}
 			}

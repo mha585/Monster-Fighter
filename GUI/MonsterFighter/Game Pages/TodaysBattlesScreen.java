@@ -85,28 +85,28 @@ public class TodaysBattlesScreen {
 			ArrayList<Monster> trainer2Team = possibleTrainers.get(1).getEnemies();
 			for (int i = 0; i < trainer2Team.size(); i++) {
 				Monster monster = trainer2Team.get(i);
-				trainer2String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
+				trainer2String = trainer2String + '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
 				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
 						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
 			}
 			ArrayList<Monster> trainer3Team = possibleTrainers.get(2).getEnemies();
 			for (int i = 0; i < trainer3Team.size(); i++) {
 				Monster monster = trainer3Team.get(i);
-				trainer3String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
+				trainer3String = trainer3String + '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
 				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
 						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
 			}
 			ArrayList<Monster> trainer4Team = possibleTrainers.get(3).getEnemies();
 			for (int i = 0; i < trainer4Team.size(); i++) {
 				Monster monster = trainer4Team.get(i);
-				trainer4String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' + "Health: "
+				trainer4String = trainer4String + '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' + "Health: "
 				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
 						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
 			}
 			ArrayList<Monster> trainer5Team = possibleTrainers.get(4).getEnemies();
 			for (int i = 0; i < trainer5Team.size(); i++) {
 				Monster monster = trainer5Team.get(i);
-				trainer5String += '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
+				trainer5String = trainer5String + '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
 				+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
 						"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
 			}
@@ -253,42 +253,37 @@ public class TodaysBattlesScreen {
 		
 		GroupLayout groupLayout = new GroupLayout(newBattleFrames.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblInstrct, GroupLayout.PREFERRED_SIZE, 707, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(12)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(chckbxTrainer1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(TADiplayTrainer1, GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+							.addGap(5)
+							.addComponent(TADiplayTrainer1, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(chckbxTrainer2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(TADiplayTrainer2, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+							.addComponent(TADiplayTrainer2, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(TADiplayTrainer3, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 							.addGap(6)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(chckbxTrainer3, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(chckbxTrainer4, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(chckbxTrainer5, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblReq)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnBack))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(TADiplayTrainer3, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))))
-							.addPreferredGap(ComponentPlacement.RELATED))
+							.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(lblReq)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblInstrct, GroupLayout.PREFERRED_SIZE, 707, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(14, Short.MAX_VALUE))
+							.addComponent(chckbxTrainer1, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(chckbxTrainer2, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)
+							.addComponent(chckbxTrainer3, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(chckbxTrainer4, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(chckbxTrainer5, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -296,29 +291,31 @@ public class TodaysBattlesScreen {
 					.addGap(11)
 					.addComponent(lblInstrct)
 					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(1)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(TADiplayTrainer1, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+									.addComponent(TADiplayTrainer2, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(TADiplayTrainer3, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+							.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
+							.addGap(2)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(TADiplayTrainer1, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-						.addComponent(TADiplayTrainer2, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-						.addComponent(TADiplayTrainer3, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-						.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE)
-						.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 370, GroupLayout.PREFERRED_SIZE))
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(37)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(chckbxTrainer5)
-								.addComponent(chckbxTrainer1)
-								.addComponent(chckbxTrainer2)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(chckbxTrainer3)
-									.addComponent(chckbxTrainer4)))
-							.addContainerGap(20, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(57)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnBack)
-								.addComponent(lblReq, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
-							.addContainerGap())))
+						.addComponent(chckbxTrainer5)
+						.addComponent(chckbxTrainer1)
+						.addComponent(chckbxTrainer2)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(chckbxTrainer3)
+							.addComponent(chckbxTrainer4)))
+					.addGap(4)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblReq, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(13, Short.MAX_VALUE))
 		);
 		newBattleFrames.getContentPane().setLayout(groupLayout);
 	}

@@ -42,10 +42,10 @@ public class MedicalMonster extends Monster{
 		super(price, sell, description, num);
 		super.setType("Medical");
 		super.gainDamage((-1 * (super.getDamage())) + (super.getDamage() / 4));
-		super.gainMaxHealth((-1 * (super.getMaxHealth())) + 150);
+		super.gainMaxHealth((-1 * (super.getMaxHealth())) + num.randNumInRange(100, 200));
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());
 		super.gainDamage((int)((-1 * (super.getDamage())) + (super.getDamage() / 4)));
-		super.gainHealAmount((-1 * (super.getHealAmount())) + 30);
+		super.gainHealAmount((-1 * (super.getHealAmount())) + num.randNumInRange(10, 50));
 	}
 	/**
 	 * Generates a string representation of the MedicalMonster

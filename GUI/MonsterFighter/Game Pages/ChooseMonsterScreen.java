@@ -17,7 +17,7 @@ public class ChooseMonsterScreen {
 	private MonsterManager manager;
 	private FireMonster fireMonsterToAdd = new FireMonster("Fireguy", 50.0, 5.0, 20.0, 20.0, 1, 150, 250, "A strong fire type Monster capable of burning down buildings.");
 	private GrassMonster grassMonsterToAdd = new GrassMonster("Grassdude", 70, 5.0, 10.0, 20.0, 1, 150, 250, "A strong grass type Monster. It is said that they dwell in the deapest parts of the jungle.");
-	private WaterMonster waterMonsterToAdd = new WaterMonster("Waterman", 600, 5.0, 1500.0, 2000.0, 1, 150, 250, "A strong water type Monster. These streamline monsters are known to have existed before humans.");
+	private WaterMonster waterMonsterToAdd = new WaterMonster("Waterman", 60, 5.0, 150.0, 20.0, 1, 150, 250, "A strong water type Monster. These streamline monsters are known to have existed before humans.");
 	private RandomGen num;
 
 	/**
@@ -201,13 +201,6 @@ public class ChooseMonsterScreen {
 					.addGap(90))
 		);
 		panelChoiceMonster1.setLayout(gl_panelChoiceMonster1);
-		
-		JButton btnDeleteLater = new JButton("RandomMonster Test");
-		btnDeleteLater.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				manager.getPlayer().getTeam().addFriend(new RandomMonster(manager.getPlayer(), manager.getRandom()));
-			}
-		});
 		
 		JPanel panelChoiceMonster2 = new JPanel();
 		
@@ -459,32 +452,26 @@ public class ChooseMonsterScreen {
 					.addGap(91)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnChooseWater, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+							.addComponent(btnChooseWater, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
 							.addGap(161)
-							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
 							.addGap(140))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panelChoiceMonster1, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+							.addComponent(panelChoiceMonster1, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
 							.addGap(117)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(btnDeleteLater, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-											.addGap(80))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(btnChooseFire, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-											.addGap(82)))
-									.addGap(75))
+									.addComponent(btnChooseFire, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+									.addGap(157))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(panelChoiceMonster3, GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+									.addComponent(panelChoiceMonster3, GroupLayout.PREFERRED_SIZE, 182, Short.MAX_VALUE)
 									.addGap(141)))))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(panelChoiceMonster2, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
 							.addGap(50))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnChooseGrass, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+							.addComponent(btnChooseGrass, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
 							.addGap(59))))
 		);
 		groupLayout.setVerticalGroup(
@@ -500,16 +487,10 @@ public class ChooseMonsterScreen {
 						.addComponent(panelChoiceMonster2, GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE))
 					.addGap(132))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(29)
-							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-							.addGap(96)
-							.addComponent(btnChooseFire, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(88)
-							.addComponent(btnDeleteLater, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-							.addGap(117)))
+					.addGap(29)
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+					.addGap(96)
+					.addComponent(btnChooseFire, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelChoiceMonster3, GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE)
 					.addGap(7))

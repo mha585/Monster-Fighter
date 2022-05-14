@@ -58,42 +58,43 @@ public class WinScreen {
 		lblYouWin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblYouWin.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JLabel lblNewLabel_1 = new JLabel("Image");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel lblName = new JLabel("Name:");
+		JLabel lblName = new JLabel("");
+		lblName.setText("Name: " + manager.getPlayer().getPlayerName());
 		lblName.setHorizontalAlignment(SwingConstants.LEFT);
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JLabel lblDays = new JLabel("Days Completed:");
+		JLabel lblDays = new JLabel("");
+		lblDays.setText("Days Completed: " + manager.getPlayer().getCurrentDay());
 		lblDays.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDays.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JLabel lblMoney = new JLabel("Total Money Earned:");
+		JLabel lblMoney = new JLabel("");
+		lblMoney.setText("Total Money Earned: " + manager.getPlayer().getMoneyEarned());
 		lblMoney.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMoney.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblMoney.setText("Total Points Earned: " + manager.getPlayer().getPoints());
 		
-		JLabel lblPoints = new JLabel("Total Points Earned:");
+		JLabel lblPoints = new JLabel("");
+		lblPoints.setText("Total Points Earned: " + manager.getPlayer().getPoints());
 		lblPoints.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPoints.setFont(new Font("Tahoma", Font.BOLD, 30));
 		GroupLayout groupLayout = new GroupLayout(winFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(304)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblName, GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(304)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblYouWin, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblDays)
-								.addComponent(lblName)
-								.addComponent(lblMoney)
-								.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblDays, GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+							.addGap(56))
+						.addComponent(lblMoney, GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+						.addComponent(lblYouWin, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(352)
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 231, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(316, Short.MAX_VALUE))
+							.addComponent(lblPoints, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+							.addGap(27)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -102,9 +103,7 @@ public class WinScreen {
 					.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblYouWin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addGap(74)
 					.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblDays, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
@@ -112,9 +111,8 @@ public class WinScreen {
 					.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(17, Short.MAX_VALUE))
+					.addContainerGap(116, Short.MAX_VALUE))
 		);
 		winFrame.getContentPane().setLayout(groupLayout);
 	}
-
 }

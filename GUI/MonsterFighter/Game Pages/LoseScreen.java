@@ -64,25 +64,26 @@ public class LoseScreen {
 		lblLose.setForeground(Color.WHITE);
 		lblLose.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JLabel lblNewLabel = new JLabel("iMAGE");
-		lblNewLabel.setForeground(SystemColor.window);
-		
-		JLabel lblName = new JLabel("Name:");
+		JLabel lblName = new JLabel("");
+		lblName.setText("Name: " + manager.getPlayer().getPlayerName());
 		lblName.setHorizontalAlignment(SwingConstants.LEFT);
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
 		JLabel lblDays = new JLabel("Days Completed:");
+		lblDays.setText("Days Completed: " + manager.getPlayer().getCurrentDay());
 		lblDays.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDays.setForeground(Color.WHITE);
 		lblDays.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JLabel lblMoney = new JLabel("Total Money Earned:");
+		JLabel lblMoney = new JLabel("");
+		lblMoney.setText("Total Money Earned: " + manager.getPlayer().getMoneyEarned());
 		lblMoney.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMoney.setForeground(Color.WHITE);
 		lblMoney.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JLabel lblPoints = new JLabel("Total Points Earned:");
+		JLabel lblPoints = new JLabel("");
+		lblPoints.setText("Total Points Earned: " + manager.getPlayer().getPoints());
 		lblPoints.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPoints.setForeground(Color.WHITE);
 		lblPoints.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -90,20 +91,19 @@ public class LoseScreen {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(309, Short.MAX_VALUE)
+					.addGap(309)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblLose, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblDays, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE))
-							.addGap(309))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(447))))
+						.addComponent(lblLose, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblMoney, GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+							.addGap(73))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblDays, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+							.addGap(130))
+						.addComponent(lblName, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+						.addComponent(lblPoints, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
+					.addGap(71))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -112,9 +112,7 @@ public class LoseScreen {
 					.addComponent(lblGame, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblLose, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-					.addGap(58)
-					.addComponent(lblNewLabel)
-					.addGap(54)
+					.addGap(126)
 					.addComponent(lblName)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblDays)
@@ -122,7 +120,7 @@ public class LoseScreen {
 					.addComponent(lblMoney)
 					.addGap(18)
 					.addComponent(lblPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(79, Short.MAX_VALUE))
+					.addContainerGap(47, Short.MAX_VALUE))
 		);
 		loseFrame.getContentPane().setLayout(groupLayout);
 	}

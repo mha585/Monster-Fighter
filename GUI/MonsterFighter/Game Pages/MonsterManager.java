@@ -9,6 +9,8 @@ public class MonsterManager {
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
 	private boolean canFight = false;
+	private int amountOfMonsterKilledToaday;
+	private int amountOfFriendsWhoFaintedToday;
 	
 	public void launchChooseMonsterScreen(RandomGen num) {
 		new ChooseMonsterScreen(this, num);
@@ -120,6 +122,23 @@ public class MonsterManager {
 	public void setTrainerListNotD1() {
 		trainerBattles = newbattle.getBattles(5, newPlayer, rng);
 	}
+	
+	public int getAmountOfMonsterKilledToaday() {
+		return amountOfMonsterKilledToaday;
+	}
+	
+	public void gainAmountOfMonsterKilledToaday(int amountGained) {
+		amountOfMonsterKilledToaday += amountGained;
+	}
+	
+	public int getAmountOfFriendsWhoFaintedToday() {
+		return amountOfFriendsWhoFaintedToday;
+	}
+	
+	public void gainAmountOfFriendsWhoFaintedToday(int amountGained) {
+		amountOfFriendsWhoFaintedToday += amountGained;
+	}
+
 
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();

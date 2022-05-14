@@ -81,8 +81,10 @@ public class InventoryScreen {
 		itemJList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				JList<Object> itemJList = (JList<Object>) event.getSource();
-				if (event.getClickCount() >= 1) {
+				if (event.getClickCount() >= 2) {
 					int itemIndex = itemJList.locationToIndex(event.getPoint());
+					System.out.println(manager.getPlayer().getInventory().getItem(itemIndex).getName());
+					System.out.println(manager.getPlayer().getInventory().getItem(itemIndex).getFrequency());
 					closeWindow();
 					manager.launchUseItemScreen(previousPage, itemIndex, number);
 				}

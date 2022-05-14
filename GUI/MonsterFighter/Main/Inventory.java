@@ -63,6 +63,7 @@ public class Inventory {
 		if(totalCost1 <= player.getMoney()) {
 			player.playerBag.addtoBag(item, amount);
 			player.deductMoney(totalCost1);
+			System.out.println(player.playerBag);
 			System.out.println("Purchase Successful.");
 		}
 		else {

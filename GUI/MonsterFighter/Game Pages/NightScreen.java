@@ -88,9 +88,11 @@ public class NightScreen {
 		nightFrame.setBounds(100, 100, 960, 540);
 		nightFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblPPoints = new JLabel("Points:");
+		JLabel lblPoints = new JLabel("");
+		lblPoints.setText("Points: " + manager.getPlayer().getPoints());
 		
-		JLabel lblMoney = new JLabel("Money:");
+		JLabel lblMoney = new JLabel("");
+		lblMoney.setText("Money: " + manager.getPlayer().getMoney());
 		
 		JPanel panelMain = new JPanel();
 		
@@ -115,22 +117,25 @@ public class NightScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblPPoints, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMoney, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
 							.addGap(12)
-							.addComponent(panelMain, GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
-							.addGap(18)))
+							.addComponent(panelMain, GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+							.addGap(18))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblMoney, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+								.addComponent(lblPoints, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
+							.addGap(660)))
 					.addGap(18)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblPPoints)
+					.addComponent(lblPoints)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblMoney)
 					.addGap(18)
@@ -138,7 +143,7 @@ public class NightScreen {
 						.addComponent(panelMain, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
 						.addComponent(panel_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(39, Short.MAX_VALUE))
+					.addContainerGap(34, Short.MAX_VALUE))
 		);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -151,7 +156,7 @@ public class NightScreen {
 		);
 		panel.setLayout(gl_panel);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Your monsters fainted (amount) times today");
+		JLabel lblNewLabel_1_1 = new JLabel("Your monsters fainted " + manager.getAmountOfFriendsWhoFaintedToday() + " times today");
 		
 		JLabel lblYourMonsterGet = new JLabel("Your monster get a good night sleep and will wake up with 20 extra health");
 		
@@ -170,6 +175,8 @@ public class NightScreen {
 				manager.getPlayer().addDay();
 				manager.setTrainerListNotD1();
 				manager.setIsAbleToFight(false);
+				manager.gainAmountOfFriendsWhoFaintedToday(-1 * manager.getAmountOfFriendsWhoFaintedToday());
+				manager.gainAmountOfMonsterKilledToaday(-1 * manager.getAmountOfMonsterKilledToaday());
 				closeWindow();
 				manager.launchPrepScreen(num, manager.isAbleToFight());
 			}
@@ -177,7 +184,8 @@ public class NightScreen {
 		
 		JLabel lblRandom = new JLabel("Random Events:");
 		
-		JLabel lblNewLabel_1 = new JLabel("Today you defeated (amount) monsters");
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setText("Today you defeated " + manager.getAmountOfMonsterKilledToaday() + " monsters");
 		GroupLayout gl_panelMain = new GroupLayout(panelMain);
 		gl_panelMain.setHorizontalGroup(
 			gl_panelMain.createParallelGroup(Alignment.TRAILING)

@@ -72,6 +72,7 @@ public class BattleScreen {
 		}
 //		if the enemy is dead
 		else if (enemy.getHealth() <= 0) {
+			manager.gainAmountOfMonsterKilledToaday(1);
 			enemyTrainer.removeEnemy();
 			getPrizes(manager.getPlayer());
 			closeWindow();
@@ -94,6 +95,7 @@ public class BattleScreen {
 			manager.launchLoseScreen();
 //		if the players monster dies
 		} else if (playerTeam.getFriend(0).getHealth() <= 0) {
+			manager.gainAmountOfFriendsWhoFaintedToday(1);
 			String status = "Your friend " + playerTeam.getFriend(0).getName() + " just died rip :(";
 			playerTeam.pushFrontToBack();
 			closeWindow();
