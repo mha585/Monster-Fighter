@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 class TrainersTest {
 
 	private Player testPlayer;
+	private RandomGen num;
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
 	private InputStream savedStandardInputStream = System.in;
@@ -20,6 +21,7 @@ class TrainersTest {
 	@BeforeEach
 	public void init() {
 		testPlayer = new Player();
+		num = new RandomGen();
 		testPlayer.setDay(1);
 		testPlayer.setDifficulty(1);
 		testPlayer.setName("tester");
@@ -35,7 +37,7 @@ class TrainersTest {
 	
 	@Test
 	public void dayOneTrainerTest() {
-	    Trainers newTrainer = new Trainers(testPlayer);
+	    Trainers newTrainer = new Trainers(testPlayer, num);
 	    assertEquals(1, (newTrainer.getSize()));
 	}
 	
@@ -45,7 +47,7 @@ class TrainersTest {
 		testPlayer.addDay();
 	    
 	    for (int i = 0; i < 10; i++) {
-	    	Trainers newTrainer = new Trainers(testPlayer);
+	    	Trainers newTrainer = new Trainers(testPlayer, num);
 		    if (newTrainer.getSize() != 2 && newTrainer.getSize() != 1) {
 		    	fail("incorrect enemy team size");
 		    }
@@ -55,12 +57,12 @@ class TrainersTest {
 	@Test
 	public void dayFourToFiveTrainerTest() {
 		testPlayer.setDay(4);
-		for (int i = 0; i < testPlayer.getPlayerDayCompleted(); i++) {
+		for (int i = 0; i < testPlayer.getPlayerDay(); i++) {
 			testPlayer.addDay();
 		}
 		
 	    for (int i = 0; i < 10; i++) {
-	    	Trainers newTrainer = new Trainers(testPlayer);
+	    	Trainers newTrainer = new Trainers(testPlayer, num);
 		    if (newTrainer.getSize() > 3 && newTrainer.getSize() <= 1) {
 		    	fail("incorrect enemy team size");
 		    }
@@ -70,12 +72,12 @@ class TrainersTest {
 	@Test
 	public void daySixOnwardsTrainerTest() {
 		testPlayer.setDay(6);
-		for (int i = 0; i < testPlayer.getPlayerDayCompleted(); i++) {
+		for (int i = 0; i < testPlayer.getPlayerDay(); i++) {
 			testPlayer.addDay();
 		}
 		
 	    for (int i = 0; i < 10; i++) {
-	    	Trainers newTrainer = new Trainers(testPlayer);
+	    	Trainers newTrainer = new Trainers(testPlayer, num);
 		    if (newTrainer.getSize() > 4 && newTrainer.getSize() <= 1) {
 		    	fail("incorrect enemy team size");
 		    }

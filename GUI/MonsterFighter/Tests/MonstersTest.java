@@ -13,6 +13,7 @@ class MonstersTest {
 	private Battles testBattle;
 	private Player testPlayer;
 	private Monster testEnemy;
+	private RandomGen num;
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
 	private InputStream savedStandardInputStream = System.in;
@@ -24,6 +25,7 @@ class MonstersTest {
 		testTeam = new Team();
 		testBattle = new Battles();
 		testPlayer = new Player();
+		num = new RandomGen();
 		testPlayer.setDay(1);
 		testPlayer.setDifficulty(1);
 		testPlayer.setName("tester");
@@ -39,35 +41,35 @@ class MonstersTest {
 	
 	@Test
 	public void randomMonsterIsRandomTest() {
-		RandomMonster random = new RandomMonster(testPlayer);
+		RandomMonster random = new RandomMonster(testPlayer, num);
 		RandomMonster original = random;
 		
 		for (int i = 0; i < 10; i++) {
-			random = new RandomMonster(testPlayer);
+			random = new RandomMonster(testPlayer, num);
 		}
 		assertNotEquals(random, original);
 	}
 	
 	@Test
 	public void randomMonsterCantBeGlassOrMedicalIfDayIsTooSmallTest() {
-		RandomMonster random = new RandomMonster(testPlayer);
+		RandomMonster random = new RandomMonster(testPlayer, num);
 		
 		for (int i = 0; i < 10; i++) {
 			assertNotEquals(random.getType(), "Medical");
 			assertNotEquals(random.getType(), "Glass");
-			random = new RandomMonster(testPlayer);
+			random = new RandomMonster(testPlayer, num);
 		}
 	}
 	
 	@Test
 	public void randomMonsterCanBeGlassIfDayIsLargeEnoughTest() {
-	    System.setOut(savedStandardOut);
-
-		testPlayer.setDay(4);
-		RandomMonster random = new RandomMonster(testPlayer);
+		for (int i = 0; i <= 4; i++) {
+			testPlayer.addDay();
+		}
+		RandomMonster random = new RandomMonster(testPlayer, num);
 		
 		while (random.getType() != "Glass") {
-			random = new RandomMonster(testPlayer);
+			random = new RandomMonster(testPlayer, num);
 		}
 		return;
 	}
@@ -75,34 +77,36 @@ class MonstersTest {
 	
 	@Test
 	public void randomMonsterCanBeMedicalIfDayIsLargeEnoughTest() {
-		testPlayer.setDay(3);
-	    System.setOut(savedStandardOut);
-		RandomMonster random = new RandomMonster(testPlayer);
+		for (int i = 0; i <= 3; i++) {
+			testPlayer.addDay();
+		}
+		RandomMonster random = new RandomMonster(testPlayer, num);
 		
 		while (random.getType() != "Medical") {
-			random = new RandomMonster(testPlayer);
+			random = new RandomMonster(testPlayer, num);
 		}
 		return;
 	}
 	
 	@Test
 	public void randomMonsterCantBeHolyIfDayIsTooSmallTest() {
-		RandomMonster random = new RandomMonster(testPlayer);
+		RandomMonster random = new RandomMonster(testPlayer, num);
 		
 		for (int i = 0; i < 10; i++) {
 			assertNotEquals(random.getType(), "Holy");
-			random = new RandomMonster(testPlayer);
+			random = new RandomMonster(testPlayer, num);
 		}
 	}
 	
 	@Test
 	public void randomMonsterCanBeHolyIfDayIsLargeEnoughTest() {
-		testPlayer.setDay(5);
-	    System.setOut(savedStandardOut);
-		RandomMonster random = new RandomMonster(testPlayer);
+		for (int i = 0; i <= 5; i++) {
+			testPlayer.addDay();
+		}
+		RandomMonster random = new RandomMonster(testPlayer, num);
 		
 		while (random.getType() != "Holy") {
-			random = new RandomMonster(testPlayer);
+			random = new RandomMonster(testPlayer, num);
 		}
 		return;
 	}
@@ -110,8 +114,8 @@ class MonstersTest {
 	@Test
 	public void holyDemonEffectivenessTest() {
 		testTeam.addFriend(new HolyMonster("Holy test", 100.0, 5.0, 5, 20.0, 1, 150, 250, "holy"));
-		testTeam.addFriend(new DemonMonster());
-		testTeam.addFriend(new HolyMonster());
+		testTeam.addFriend(new DemonMonster(num));
+		testTeam.addFriend(new HolyMonster(num));
 		testEnemy = new DemonMonster("demon test", 50.0, 5.0, 10, 19.0, 1, 150, 250, "demon");
 		
 		testBattle.attack(testTeam.getFriend(0), testEnemy, testTeam, true);

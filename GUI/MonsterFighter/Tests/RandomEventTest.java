@@ -14,6 +14,7 @@ class RandomEventTest {
 	private Player testPlayer;
 	private Monster testEnemy;
 	private Shop testShop;
+	private RandomGen num;
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
 	private InputStream savedStandardInputStream = System.in;
@@ -24,7 +25,8 @@ class RandomEventTest {
 	public void init() {
 		testTeam = new Team();
 		testPlayer = new Player();
-		testShop = new Shop();
+		num = new RandomGen();
+		testShop = new Shop(testPlayer, num);
 		testPlayer.setDay(1);
 		testPlayer.setDifficulty(1);
 		testPlayer.setName("tester");
@@ -41,7 +43,7 @@ class RandomEventTest {
 	@Test
 	public void addFriendToTeamTest() {
 	    System.setOut(savedStandardOut);
-	    testTeam.addFriend(new RandomMonster(testPlayer));
+	    testTeam.addFriend(new RandomMonster(testPlayer, num));
 	    assertEquals(1, (testTeam.getSize()));
 	}
 

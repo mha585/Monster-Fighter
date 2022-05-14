@@ -24,7 +24,7 @@ class BossTest {
 		testPlayer.setDay(1);
 		testPlayer.setDifficulty(7);
 		testPlayer.setName("tester");
-	    myBoss = new Boss(testPlayer);
+	    myBoss = new Boss();
 
 	    System.setOut(new PrintStream(outputStreamContent));
     }
@@ -45,5 +45,4 @@ class BossTest {
 	    String fight = outputStreamContent.toString();
 	    assertEquals(700, fight.length());
 	}
-
 }

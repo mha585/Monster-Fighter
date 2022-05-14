@@ -14,6 +14,7 @@ class ItemTest {
 	private Player testPlayer;
 	private Monster testEnemy;
 	private Shop testShop;
+	private RandomGen num;
 	
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
@@ -25,7 +26,8 @@ class ItemTest {
 	public void init() {
 		testTeam = new Team();
 		testPlayer = new Player();
-		testShop = new Shop();
+		num = new RandomGen();
+		testShop = new Shop(testPlayer, num);
 		testPlayer.setDay(1);
 		testPlayer.setDifficulty(1);
 		testPlayer.setName("tester");
