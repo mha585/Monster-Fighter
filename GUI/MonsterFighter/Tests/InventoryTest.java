@@ -10,10 +10,8 @@ import org.junit.jupiter.api.Test;
 
 class InventoryTest {
 
-	private Team testTeam;
+	private Inventory testBag;
 	private Player testPlayer;
-	private Monster testEnemy;
-	private Shop testShop;
 	private RandomGen num;
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
@@ -23,14 +21,9 @@ class InventoryTest {
 	
 	@BeforeEach
 	public void init() {
-		testTeam = new Team();
+		testBag = new Inventory();
 		testPlayer = new Player();
 		num = new RandomGen();
-		testShop = new Shop(testPlayer, num);
-		testPlayer.setDay(1);
-		testPlayer.setDifficulty(1);
-		testPlayer.setName("tester");
-		
 	    System.setOut(new PrintStream(outputStreamContent));
     }
 	
@@ -41,10 +34,71 @@ class InventoryTest {
 	}
 	
 	@Test
-	public void addFriendToTeamTest() {
-	    System.setOut(savedStandardOut);
-	    testTeam.addFriend(new RandomMonster(testPlayer, num));
-	    assertEquals(1, (testTeam.getSize()));
+	public void addItemToBagTest() {
+	    Item testItemToAdd = new BasicHeal();
+	    testBag.addtoBag(testItemToAdd, 3);
+	    assertEquals(1, (testBag.getSize()));
+	    assertEquals(3, testBag.getItem(0).getFrequency());
+	}
+	
+	@Test
+	public void addExistingItemToBagTest() {
+	    Item testItemToAdd = new BasicHeal();
+	    testBag.addtoBag(testItemToAdd, 3);
+	    testBag.addtoBag(testItemToAdd, 5);
+	    assertEquals(1, (testBag.getSize()));
+	    assertEquals(8, testBag.getItem(0).getFrequency());
+	}
+	
+	@Test
+	public void removeItemFromBagTest() {
+	    Item testItemToAdd = new BasicHeal();
+	    testBag.addtoBag(testItemToAdd, 3);
+	    testBag.removeBag(0, 2);
+	    assertEquals(1, (testBag.getSize()));
+	    assertEquals(1, testBag.getItem(0).getFrequency());
+	    testBag.removeBag(0, 1);
+	    assertEquals(0, (testBag.getSize()));
+	}
+	
+	@Test
+	public void clearBagTest() {
+	    Item testItemToAddOne = new BasicHeal();
+	    Item testItemToAddTwo = new Revive();
+	    Item testItemToAddThree = new FullHeal();
+
+	    testBag.addtoBag(testItemToAddOne, 92);
+	    testBag.addtoBag(testItemToAddTwo, -12);
+	    testBag.addtoBag(testItemToAddThree, 2);
+	    assertEquals(3, (testBag.getSize()));
+	    testBag.clear();
+	    assertEquals(0, (testBag.getSize()));
+	}
+	
+	@Test
+	public void buyItemTest() {
+	    Item testItemToBuyOne = new Revive();
+
+	    testBag.buyItem(1, testItemToBuyOne, testPlayer);
+	    assertEquals(3, (testPlayer.getInventory().getSize()));
+	    assertEquals(0, testPlayer.getMoney());
+	}
+	
+	@Test
+	public void notEnoughMoneyToBuyItemTest() {
+		testPlayer.addMoney(-250);
+	    Item testItemToBuyOne = new Revive();
+	    testBag.buyItem(2, testItemToBuyOne, testPlayer);
+	    assertEquals(2, (testPlayer.getInventory().getSize()));
+	}
+	
+	@Test
+	public void sellItemsTest() {
+		testPlayer.addMoney(-250);
+		testBag = testPlayer.getInventory();
+	    int indexOfItemToSell = testBag.getIndex(testPlayer.getInventory().getItem(1).getName());
+	    testBag.sellItem(1, indexOfItemToSell, testPlayer, testPlayer.getInventory());
+	    assertEquals(40, testPlayer.getMoney());
 	}
 
 }

@@ -44,7 +44,7 @@ public class Inventory {
 	public int getIndex(String name) {
 		int index = 0;
 		for (int i = 0; i < bag.size(); i++) {
-			Item current = (Item) bag.get(i);	
+			Item current = (Item) bag.get(i);
 			if (current.getName() == name) {
 				index = i;
 			}

@@ -25,7 +25,7 @@ public final class RandomGen {
 	}
 
 	/**
-	 * Generates a random number in a range
+	 * Generates a random number in a range from min up to but not including max
 	 * @param min		The minimum value the number can be
 	 * @param max		The maximum value the number can be
 	 * @return int		a randomly generated number in a given range

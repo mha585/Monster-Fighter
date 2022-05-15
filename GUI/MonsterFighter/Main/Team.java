@@ -160,10 +160,18 @@ public class Team extends Monster{
 	}
 	/**
 	 * Returns the team in string form.
+	 * 
+	 * @return an string representation of the team
 	 */
 	public String toString() {
 		return printFriends();
 	}
+	/**
+	 * gets the index of a monster
+	 * 
+	 * @param name	The name of the Monster that is being searched for
+	 * @return an string representation of the team
+	 */
 	public int getIndex(String name) {
 		int index = 0;
 		for (int i = 0; i < myTeam.size(); i++) {

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 class BossTest {
 
-	private Player testPlayer;
 	private Boss myBoss;
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
@@ -20,10 +19,6 @@ class BossTest {
 	
 	@BeforeEach
 	public void init() {
-		testPlayer = new Player();
-		testPlayer.setDay(1);
-		testPlayer.setDifficulty(7);
-		testPlayer.setName("tester");
 	    myBoss = new Boss();
 
 	    System.setOut(new PrintStream(outputStreamContent));
@@ -43,6 +38,18 @@ class BossTest {
 	    myBoss.printBossFight();
 
 	    String fight = outputStreamContent.toString();
-	    assertEquals(700, fight.length());
+	    assertEquals(699, fight.length());
+	}
+	
+	@Test
+	public void testFirstEnemy() {
+		Monster firstBossMonster = myBoss.getFirstEnemy();
+		assertEquals("Ra", firstBossMonster.getName());
+	}
+	
+	@Test
+	public void testRemoveEnemy() {
+		myBoss.removeEnemy();
+		assertEquals(3, myBoss.getSize());
 	}
 }

@@ -162,41 +162,38 @@ class TeamTest {
 	    assertEquals(-118.0, health);
 	}
 	
-//	@Test
-//	public void buyMonsterTest() {
-//	    assertEquals(250, testPlayer.getMoney());
-//	    testShop.generateNewMonsters(testPlayer, num);
-//		testTeam.buyMonster(1, testShop, testPlayer);
-//		assertEquals(1, testPlayer.getTeam().getSize());
-//		assertEquals(100, testPlayer.getMoney());
-//	}
+	@Test
+	public void buyMonsterTest() {
+	    assertEquals(250, testPlayer.getMoney());
+		testTeam.buyMonster(1, testShop, testPlayer);
+		assertEquals(1, testPlayer.getTeam().getSize());
+		assertEquals(100, testPlayer.getMoney());
+	}
 	
-//	@Test
-//	public void notEnoughMoneyToBuyMonsterTest() {
-//		testPlayer.deductMoney(250);
-//	    assertEquals(0, testPlayer.getMoney());
-//	    testShop.generateNewMonsters(testPlayer, num);
-//		testTeam.buyMonster(1, testShop, testPlayer);
-//		assertEquals(0, testPlayer.getTeam().getSize());
-//		assertEquals(0, testPlayer.getMoney());
-//	}
+	@Test
+	public void notEnoughMoneyToBuyMonsterTest() {
+		testPlayer.deductMoney(250);
+	    assertEquals(0, testPlayer.getMoney());
+		testTeam.buyMonster(1, testShop, testPlayer);
+		assertEquals(0, testPlayer.getTeam().getSize());
+		assertEquals(0, testPlayer.getMoney());
+	}
 	
-//	@Test
-//	public void teamAlreadyFullWhenBuyingMonsterTest() {
-//	    FireMonster monster1 = new FireMonster("Monster1", -100.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
-//	    FireMonster monster2 = new FireMonster("Monster2", -20.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
-//	    FireMonster monster3 = new FireMonster("Monster3", -10.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
-//	    FireMonster monster4 = new FireMonster("Monster4", 12.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
-//	    testPlayer.playerTeam.addFriend(monster1);
-//	    testPlayer.playerTeam.addFriend(monster2);
-//	    testPlayer.playerTeam.addFriend(monster3);
-//	    testPlayer.playerTeam.addFriend(monster4);
-//	    
-//	    testShop.generateNewMonsters(testPlayer);
-//		testTeam.buyMonster(1, testShop, testPlayer);
-//		assertEquals(4, testPlayer.getTeam().getSize());
-//		assertEquals(250, testPlayer.getMoney());
-//	}
+	@Test
+	public void teamAlreadyFullWhenBuyingMonsterTest() {
+	    FireMonster monster1 = new FireMonster("Monster1", -100.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
+	    FireMonster monster2 = new FireMonster("Monster2", -20.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
+	    FireMonster monster3 = new FireMonster("Monster3", -10.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
+	    FireMonster monster4 = new FireMonster("Monster4", 12.0, 5.0, 5.425, 20.0, 1, 150, 250, "");
+	    testPlayer.playerTeam.addFriend(monster1);
+	    testPlayer.playerTeam.addFriend(monster2);
+	    testPlayer.playerTeam.addFriend(monster3);
+	    testPlayer.playerTeam.addFriend(monster4);
+	    
+		testTeam.buyMonster(1, testShop, testPlayer);
+		assertEquals(4, testPlayer.getTeam().getSize());
+		assertEquals(250, testPlayer.getMoney());
+	}
 	
 	@Test
 	public void sellMonsterTest() {
@@ -239,5 +236,13 @@ class TeamTest {
 	    
 		assertEquals(250, testPlayer.getMoney());
 		assertEquals(1, testTeam.getSize());
+	}
+	
+	@Test
+	public void correctIndexTest() {
+	    FireMonster monster1 = new FireMonster("Monster1", 100.0, 5.0, 5.425, 20.0, 2, 150, 250, "");
+	    testTeam.addFriend(monster1);
+	    
+	    assertEquals(0, testTeam.getIndex(monster1.getName()));
 	}
 }

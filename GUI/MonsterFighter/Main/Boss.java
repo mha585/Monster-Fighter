@@ -17,7 +17,7 @@ public class Boss extends Trainers{
 	/**
 	 * Boss' grass type monster.
 	 */
-	private static GrassMonster grassBoss = new GrassMonster("Tane ", 90, 5, 40, 9, 3, 500, 750, "God of Forests and Birds");
+	private static GrassMonster grassBoss = new GrassMonster("Tane", 90, 5, 40, 9, 3, 500, 750, "God of Forests and Birds");
 	/**
 	 * Boss' fire type monster.
 	 */
