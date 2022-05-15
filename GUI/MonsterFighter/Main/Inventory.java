@@ -93,12 +93,21 @@ public class Inventory {
 	 * @param freq		Amount of the item to be added
 	 */
 	public void addtoBag(Object item, int freq) {
-		if (bag.contains(item) == true) {
-			((Item)item).addFreq(freq);
+		boolean inBag = false;
+		int i = 0;
+		while (i < bag.size()) {
+			for (i = 0; i < bag.size(); i++) {
+				if (((Item) bag.get(i)).getName() == ((Item) item).getName()) {
+					((Item) bag.get(i)).addFreq(1);
+					System.out.println("Successsssssss");
+					inBag = true;
+				}
+			}
 		}
-		else {
+		if (inBag == false) {
 			bag.add(item);
 			((Item)item).addFreq(freq);
+			System.out.println("faillll");
 		}
 	}
 	/**
@@ -120,6 +129,9 @@ public class Inventory {
 	 * Removes all items in bag.
 	 */
 	public void clear() {
+		for (int i = 0; i < bag.size(); i++) {
+			((Item) bag.get(i)).setFrequency(0);
+		}
 		bag.clear();
 	}
 	/**

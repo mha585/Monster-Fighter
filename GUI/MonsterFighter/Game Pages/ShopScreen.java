@@ -113,6 +113,25 @@ public class ShopScreen {
 		Inventory cart = new Inventory();
 		Team kennel = new Team();
 		
+		JPanel panelfill1 = new JPanel();
+		JPanel panelfill2 = new JPanel();
+		
+		JLabel lblUserMoney = new JLabel("$"+manager.getPlayer().getMoney());
+		lblUserMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		JLabel lblAddItem = new JLabel("Double click on an item/ monster to add it to your cart");
+		
+		JLabel lblStart = new JLabel("");
+		JLabel lblSuccuess = new JLabel("Success");
+		JLabel lblBroke = new JLabel("Insufficient Funds");
+		JPanel panelVerify = new JPanel();
+		CardLayout verify = new CardLayout(0, 0);
+		panelVerify.setLayout(verify);
+		panelVerify.add(lblStart," ");
+		panelVerify.add(lblSuccuess, "Success");
+		panelVerify.add(lblBroke, "Broke");
+		
+		
 		JList<Object> JLShoppingCart = new JList<Object>(cartDisplay);
 		JLShoppingCart.setEnabled(true);
 		JLShoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -234,7 +253,7 @@ public class ShopScreen {
 				if (event.getClickCount() == 2) {
 					int cartCost = totalCost;
 					int itemIndex = listBuyItm.locationToIndex(event.getPoint());
-					if (cartDisplay.contains(items.get(itemIndex))) {
+					if (cartDisplay.contains(items.get(itemIndex).getName())) {
 						int cartIndex = cart.getIndex(items.get(itemIndex).getName());
 						cart.getItem(cartIndex).addFreq(1);
 						cartCost += items.get(itemIndex).getPrice();
@@ -242,6 +261,7 @@ public class ShopScreen {
 						totalCost = cartCost;
 					}
 					else {
+						System.out.println("Both time should come here");
 						cartDisplay.addElement(items.get(itemIndex).getName());
 						cart.addtoBag(items.get(itemIndex), 1);
 						cartCost += items.get(itemIndex).getPrice();
@@ -421,6 +441,7 @@ public class ShopScreen {
 				kennel.clear();
 				cart.clear();
 				current = "SM";
+				
 			}
 		});
 		JButton btnExitShop = new JButton("Exit");
@@ -431,24 +452,7 @@ public class ShopScreen {
 			}
 		});
 		
-		JPanel panelfill1 = new JPanel();
-		JPanel panelfill2 = new JPanel();
-		
-		JLabel lblUserMoney = new JLabel("$"+manager.getPlayer().getMoney());
-		lblUserMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
-		JLabel lblAddItem = new JLabel("Double click on an item/ monster to add it to your cart");
-		
-		JLabel lblStart = new JLabel("");
-		JLabel lblSuccuess = new JLabel("Success");
-		JLabel lblError = new JLabel("Error");
-		JPanel panelVerify = new JPanel();
-		CardLayout verify = new CardLayout(0, 0);
-		panelVerify.setLayout(verify);
-		panelVerify.add(lblStart);
-		panelVerify.add(lblSuccuess);
-		panelVerify.add(lblError);
-		
+
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -461,19 +465,26 @@ public class ShopScreen {
 				}
 				if (manager.getPlayer().getMoney() >= totalCost && current == "BI") {
 					for (int i = 0; i < cart.getSize(); i++) {
-						Item item = (Item) cart.getItem(i);
-						System.out.println(item.getPrice());
-						int frequency = item.getFrequency() - 1;
-						manager.getPlayer().getInventory().buyItem(frequency, item, manager.getPlayer());
-						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
-						lblCostOfCart.setText("$"+0);
-						totalCost = 0;
-						setZero();
-						lblCost.setVisible(true);
-						lblCostOfCart.setVisible(true);
-						cartDisplay.clear();
-						cart.clear();
+						System.out.println(cart);
+						for (int j = 0; j < cart.getItem(i).getFrequency(); j++) {
+							System.out.println(cart);
+							System.out.println(cart.getItem(i).getFrequency());
+							Item item = (Item) cart.getItem(i);
+							int oldFreq = item.getFrequency();
+							item.setFrequency(1);
+							manager.getPlayer().getInventory().buyItem(1, item, manager.getPlayer());
+							item.setFrequency(oldFreq);
+						}
 					}
+					lblUserMoney.setText("$"+manager.getPlayer().getMoney());
+					lblCostOfCart.setText("$"+0);
+					totalCost = 0;
+					setZero();
+					lblCost.setVisible(true);
+					lblCostOfCart.setVisible(true);
+					cartDisplay.clear();
+					cart.clear();
+					verify.show(panelVerify, "Success");
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "BM") {
 					for (int i = 0; i < kennel.getSize(); i++) {
@@ -486,8 +497,12 @@ public class ShopScreen {
 						setZero();
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
+						int remove = monsters.indexOf(monster);
+						monsters.remove(remove);
+						monsterDisplay.remove(remove);
 						cartDisplay.clear();
 						kennel.clear();
+						verify.show(panelVerify, "Success");
 					}
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "SI") {
@@ -495,7 +510,7 @@ public class ShopScreen {
 						Item item = cart.getItem(i);
 						int frequency = item.getFrequency();
 						int index = manager.getPlayer().getInventory().getIndex(item.getName());
-						manager.getPlayer().getInventory().sellItem(frequency, index, user, manager.getPlayer().getInventory());
+						manager.getPlayer().getInventory().sellItem(frequency, index, manager.getPlayer(), manager.getPlayer().getInventory());
 						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
 						lblCostOfCart.setText("$"+0);
 						totalCost = 0;
@@ -504,23 +519,32 @@ public class ShopScreen {
 						lblCostOfCart.setVisible(true);
 						cartDisplay.clear();
 						cart.clear();
+						verify.show(panelVerify, "Success");
 					}
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "SM") {
 					for (int i = 0; i < kennel.getSize(); i++) {
 						Monster monster = kennel.getFriend(i);
 						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
-						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, user);
+						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, manager.getPlayer());
 						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
 						lblCostOfCart.setText("$"+0);
 						totalCost = 0;
 						setZero();
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
+						int remove = monsterUsrDisplay.indexOf(monster);
+						monsterUsrDisplay.remove(remove);
 						cartDisplay.clear();
 						kennel.clear();
+						verify.show(panelVerify, "Success");
+						
 					}
 				}
+				else if (manager.getPlayer().getMoney() < totalCost) {
+					verify.show(panelVerify, "Broke");
+				}
+				
 			}
 		});
 		
