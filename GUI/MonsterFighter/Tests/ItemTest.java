@@ -51,21 +51,49 @@ class ItemTest {
 	    assertEquals(100, (itemUser.getHealth()));
 	}
 	
-//	@Test
-//	public void megaHealHeals50() {
-//	}
+	@Test
+	public void megaHealHeals50() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    itemUser.gainHealth(-90);
+	    Item itemToUse = new MegaHeal();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(60, (itemUser.getHealth()));
+	}
 	
-//	@Test
-//	public void fullHealHealsToMax() {
-//	}
+	@Test
+	public void fullHealHealsToMax() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 98224.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    itemUser.gainHealth(-98223);
+	    Item itemToUse = new FullHeal();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(98224, (itemUser.getHealth()));
+	}
 	
-//	@Test
-//	public void cantHealPastMax() {
-//	}
+	@Test
+	public void cantHealPastMax() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 15.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    itemUser.gainHealth(-14);
+	    Item itemToUse1 = new BasicHeal();
+	    Item itemToUse2 = new MegaHeal();
+	    Item itemToUse3 = new FullHeal();
+	    itemToUse1.useItem(itemUser);
+	    itemToUse2.useItem(itemUser);
+	    itemToUse3.useItem(itemUser);
+	    assertEquals(15, (itemUser.getHealth()));
+	}
 	
-//	@Test
-//	public void cantHealADeadMonster() {
-//	}
+	@Test
+	public void cantHealADeadMonster() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 15.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    itemUser.gainHealth(-15);
+	    Item itemToUse1 = new BasicHeal();
+	    Item itemToUse2 = new MegaHeal();
+	    Item itemToUse3 = new FullHeal();
+	    itemToUse1.useItem(itemUser);
+	    itemToUse2.useItem(itemUser);
+	    itemToUse3.useItem(itemUser);
+	    assertEquals(0, (itemUser.getHealth()));
+	}
 
 	@Test
 	public void useAtkPlusItem() {
@@ -93,14 +121,31 @@ class ItemTest {
 //	public void speedBoostIncreaseGoesAwayAfterBattle() {
 //	}
 	
-//	@Test
-//	public void tierPlusTest() {
+	@Test
+	public void tierPlusTest() {
 //	check both the stats increase and the tier increases
-//	}
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    assertEquals(100, (itemUser.getMaxHealth()));
+	    assertEquals(10, (itemUser.getDamage()));
+	    assertEquals(19, (itemUser.getSpeed()));
+	    assertEquals(1, (itemUser.getTier()));
+	    Item itemToUse = new TierPlus();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(104, (itemUser.getMaxHealth()));
+	    assertEquals(10.8, (itemUser.getDamage()));
+	    assertEquals(19.5, (itemUser.getSpeed()));
+	    assertEquals(2, (itemUser.getTier()));
+	}
 	
-//	@Test
-//	public void reviveTest() {
-//	}
+	@Test
+	public void reviveTest() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    itemUser.gainHealth(-100);
+	    assertEquals(0, (itemUser.getHealth()));
+	    Item itemToUse = new Revive();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(100, (itemUser.getHealth()));
+	}
 	
 //	@Test
 //	public void reviveDontWorkOnLivingMonsterTest() {

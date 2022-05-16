@@ -43,6 +43,8 @@ class InventoryTest {
 	
 	@Test
 	public void addExistingItemToBagTest() {
+//	    System.setOut(savedStandardOut);
+		System.out.println("hiii");
 	    Item testItemToAdd = new BasicHeal();
 	    testBag.addtoBag(testItemToAdd, 3);
 	    testBag.addtoBag(testItemToAdd, 5);
