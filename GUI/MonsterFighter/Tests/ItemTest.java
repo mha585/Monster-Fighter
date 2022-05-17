@@ -81,19 +81,6 @@ class ItemTest {
 	    itemToUse3.useItem(itemUser);
 	    assertEquals(15, (itemUser.getHealth()));
 	}
-	
-	@Test
-	public void cantHealADeadMonster() {
-	    Monster itemUser = new MedicalMonster("UseItemOnMe", 15.0, 5.0, 10, 19.0, 1, 150, 250, "");
-	    itemUser.gainHealth(-15);
-	    Item itemToUse1 = new BasicHeal();
-	    Item itemToUse2 = new MegaHeal();
-	    Item itemToUse3 = new FullHeal();
-	    itemToUse1.useItem(itemUser);
-	    itemToUse2.useItem(itemUser);
-	    itemToUse3.useItem(itemUser);
-	    assertEquals(0, (itemUser.getHealth()));
-	}
 
 	@Test
 	public void useAtkPlusItem() {
