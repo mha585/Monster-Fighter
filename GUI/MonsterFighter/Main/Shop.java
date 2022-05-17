@@ -207,4 +207,10 @@ public class Shop {
 	public List<Item> getItems() {
 		return listItems;
 	}
-}
+	/**
+	 * Removes all monsters from listMonsters
+	 */
+	public void clearMonsters() {
+		listMonsters.clear();
+	}
+}	

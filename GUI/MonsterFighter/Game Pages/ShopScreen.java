@@ -94,6 +94,8 @@ public class ShopScreen {
 		shopFrame.setBounds(100, 100, 960, 540);
 		shopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		items = newShop.getItems();
+		monsters = newShop.getMonsters();
 		
 		JLabel lblPlyrMoney = new JLabel("Money:");
 		lblPlyrMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -194,10 +196,7 @@ public class ShopScreen {
 				}
 			}
 		});
-		
 
-		items = newShop.getItems();
-		monsters = newShop.getMonsters();
 
 		DefaultListModel<Object> itemDisplay = new DefaultListModel<Object>();
 		for (int i = 0; i < newShop.getItems().size(); i++) {
@@ -333,6 +332,8 @@ public class ShopScreen {
 			public void mouseClicked(MouseEvent event) {
 				JList<Object> listSellItm = (JList<Object>) event.getSource();
 				if (event.getClickCount() == 2) {
+					System.out.println(cart);
+					System.out.println(cartDisplay);
 					int itemIndex = listSellItm.locationToIndex(event.getPoint());
 					Item item = manager.getPlayer().getInventory().getItem(itemIndex);
 					if (cartDisplay.contains(item.getName())) {
@@ -340,11 +341,14 @@ public class ShopScreen {
 						if (cart.getItem(cartIndex).getFrequency() < manager.getPlayer().getInventory().getItem(itemIndex).getFrequency()) {
 							cart.getItem(cartIndex).addFreq(1);
 						}
+						else {
+							System.out.println("you've got no more items mate");
+						}
 					}
 					else if (cartDisplay.contains(item.getName()) == false) {
 						cartDisplay.addElement(item.getName());
-						Item bagItem = item;
-						bagItem.setFrequency(1);
+						Item sellItem = item;
+						sellItem.setFrequency(1);
 						cart.addtoBag(item, 1);
 					}
 				}
@@ -448,6 +452,7 @@ public class ShopScreen {
 		btnExitShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
+				newShop.clearMonsters();
 				manager.launchNightScreen(num);
 			}
 		});
@@ -544,7 +549,8 @@ public class ShopScreen {
 				else if (manager.getPlayer().getMoney() < totalCost) {
 					verify.show(panelVerify, "Broke");
 				}
-				
+				closeWindow();
+				manager.launchShopScreen(num);
 			}
 		});
 		

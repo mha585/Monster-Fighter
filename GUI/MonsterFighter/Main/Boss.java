@@ -17,19 +17,19 @@ public class Boss extends Trainers{
 	/**
 	 * Boss' grass type monster.
 	 */
-	private static GrassMonster grassBoss = new GrassMonster("Tane", 90, 5, 40, 9, 3, 500, 750, "God of Forests and Birds");
+	private static GrassMonster grassBoss = new GrassMonster("Tane", 90, 5, 20, 9, 3, 500, 750, "God of Forests and Birds");
 	/**
 	 * Boss' fire type monster.
 	 */
-	private static FireMonster fireBoss = new FireMonster("Ra", 80, 3, 50, 13, 3, 500, 750, "God of the Sun");
+	private static FireMonster fireBoss = new FireMonster("Ra", 80, 3, 25, 13, 3, 500, 750, "God of the Sun");
 	/**
 	 * Boss' water type monster.
 	 */
-	private static WaterMonster waterBoss = new WaterMonster("Leviathan", 100, 3, 50, 10, 3, 500, 750, "Water Serpent");
+	private static WaterMonster waterBoss = new WaterMonster("Leviathan", 80, 3, 25, 10, 3, 500, 750, "Water Serpent");
 	/**
 	 * Boss' demon type monster.
 	 */
-	private static DemonMonster demonBoss = new DemonMonster("Shinigami", 100, 3, 65, 13, 3, 500, 750, "DEATH");
+	private static DemonMonster demonBoss = new DemonMonster("Shinigami", 60, 3, 50, 13, 3, 500, 750, "DEATH");
 	/**
 	 * Boss' party.
 	 */
