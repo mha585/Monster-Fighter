@@ -98,7 +98,7 @@ public class Inventory {
 		while (i < bag.size()) {
 			for (i = 0; i < bag.size(); i++) {
 				if (((Item) bag.get(i)).getName() == ((Item) item).getName()) {
-					((Item) bag.get(i)).addFreq(1);
+					((Item) bag.get(i)).addFreq(freq);
 					System.out.println("Successsssssss");
 					inBag = true;
 				}
