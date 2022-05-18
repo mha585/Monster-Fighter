@@ -1,6 +1,6 @@
 /**
  * This class creates the Item "Attack Boost".
- * 
+ * sayph
  * @author Angelo  Gasmin
  * @version 1.0
  */
@@ -24,15 +24,11 @@ public class AtkBoost extends Item{
 	/**
 	 * The amount a monster's attack will increase by.
 	 */
-	private static int itemEffect = 10;
+	private static int itemEffect = 20;
 	/**
 	 * The stat Attack Boost effects.
 	 */
 	private static String statEffect = "atk";
-	/**
-	 * The situation where you can use Attack Boost.
-	 */
-	private static String whenToUse = "in";
 	/**
 	 * Basic attack boost constructor.
 	 * @param name				The name of attack boost
@@ -44,6 +40,6 @@ public class AtkBoost extends Item{
 	 * @param statEffect		The stat Attack Boost effects
 	 */
 	AtkBoost() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

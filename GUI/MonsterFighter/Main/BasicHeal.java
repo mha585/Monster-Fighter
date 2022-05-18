@@ -30,10 +30,6 @@ public class BasicHeal extends Item {
 	 */
 	private static String statEffect = "hp";
 	/**
-	 * The situation where you can use Basic Heal.
-	 */
-	private static String whenToUse = "both";
-	/**
 	 * Basic Heal constructor
 	 * @param name				The name of BasicHeal
 	 * @param price				The price of Basic Heal
@@ -44,6 +40,6 @@ public class BasicHeal extends Item {
 	 * @param statEffect		The stat that Basic Heal effects
 	 */
 	BasicHeal() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description,  itemEffect, statEffect);
 	}
 }

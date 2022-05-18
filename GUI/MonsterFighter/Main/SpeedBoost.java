@@ -24,15 +24,11 @@ public class SpeedBoost extends Item {
 	/**
 	 * The amount a monster's speed will increase by.
 	 */
-	private static int itemEffect = 10;
+	private static int itemEffect = 20;
 	/**
 	 * The stat that Speed Boost effects.
 	 */
 	private static String statEffect = "spd";
-	/**
-	 * The situation where you can use Speed Boost.
-	 */
-	private static String whenToUse = "in";
 	/**
 	 * Basic speed boost constructor.
 	 * @param name				The name of speed boost
@@ -44,6 +40,6 @@ public class SpeedBoost extends Item {
 	 * @param statEffect		The stat that Speed Boost effects
 	 */
 	SpeedBoost() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

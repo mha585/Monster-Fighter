@@ -29,10 +29,6 @@ public class Revive extends Item{
 	 */
 	private static String statEffect = "fainted";
 	/**
-	 * The situations where you can use Revive.
-	 */
-	private static String whenToUse = "both";
-	/**
 	 * Basic attack plus constructor
 	 * @param name				The name of attack plus
 	 * @param price				The price of attack plus
@@ -43,6 +39,6 @@ public class Revive extends Item{
 	 * @param statEffect		The status that Revive effects
 	 */
 	Revive() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

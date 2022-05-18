@@ -30,10 +30,6 @@ public class TierPlus extends Item{
 	 */
 	private static String statEffect = "tier";
 	/**
-	 * The situation where you can use Tier Plus.
-	 */
-	private static String whenToUse = "out";
-	/**
 	 * The basic constructor for TierPlus.
 	 * @param name				The name of Tier Plus
 	 * @param price				The price of Tier Plus
@@ -44,6 +40,6 @@ public class TierPlus extends Item{
 	 * @param statEffect		The stat Tier Plus effects
 	 */
 	TierPlus() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

@@ -63,7 +63,6 @@ public class Inventory {
 		if(totalCost1 <= player.getMoney()) {
 			player.playerBag.addtoBag(item, amount);
 			player.deductMoney(totalCost1);
-			System.out.println(player.playerBag);
 			System.out.println("Purchase Successful.");
 		}
 		else {
@@ -99,7 +98,6 @@ public class Inventory {
 			for (i = 0; i < bag.size(); i++) {
 				if (((Item) bag.get(i)).getName() == ((Item) item).getName()) {
 					((Item) bag.get(i)).addFreq(freq);
-					System.out.println("Successsssssss");
 					inBag = true;
 				}
 			}
@@ -107,7 +105,6 @@ public class Inventory {
 		if (inBag == false) {
 			bag.add(item);
 			((Item)item).addFreq(freq);
-			System.out.println("faillll");
 		}
 	}
 	/**
@@ -130,9 +127,8 @@ public class Inventory {
 	 */
 	public void clear() {
 		for (int i = 0; i < bag.size(); i++) {
-			((Item) bag.get(i)).setFrequency(0);
+			bag.remove(i);
 		}
-		bag.clear();
 	}
 	/**
 	 * Returns a string representation of the player's inventory

@@ -47,12 +47,11 @@ public class Item implements Purchasable{
 	 * @param effect			Amount an item increases a stat by
 	 * @param stat				The stat an item effects
 	 */
-	Item(String name, int cost, int sell, String description, String use, int effect, String stat) {
+	Item(String name, int cost, int sell, String description, int effect, String stat) {
 		itemName = name;
 		itemCost = cost;
 		itemSell = sell;
 		itemDescription = description;
-		itemUse = use;
 		itemEffect = effect;
 		itemStat = stat;
 	}
@@ -95,6 +94,14 @@ public class Item implements Purchasable{
 	 */
 	public String whenToUse() {
 		return itemUse;
+	}
+	/**
+	 * Returns the amount that the item will effect a given stat by.
+	 * 
+	 * @return Int indicative of the amount the item will effect a given stat by.
+	 */
+	public int getEffect() {
+		return itemEffect;
 	}
 	/**
 	 * Returns the stat that the item affects.
