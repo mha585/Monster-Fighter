@@ -22,9 +22,6 @@ class TrainersTest {
 	public void init() {
 		testPlayer = new Player();
 		num = new RandomGen();
-		testPlayer.setDay(1);
-		testPlayer.setDifficulty(1);
-		testPlayer.setName("tester");
 		
 	    System.setOut(new PrintStream(outputStreamContent));
     }
@@ -36,52 +33,47 @@ class TrainersTest {
 	}
 	
 	@Test
-	public void dayOneTrainerTest() {
-	    Trainers newTrainer = new Trainers(testPlayer, num);
-	    assertEquals(1, (newTrainer.getSize()));
-	}
-	
-	@Test
-	public void dayTwoToThreeTrainerTest() {
-		testPlayer.setDay(2);
-		testPlayer.addDay();
-	    
-	    for (int i = 0; i < 10; i++) {
-	    	Trainers newTrainer = new Trainers(testPlayer, num);
-		    if (newTrainer.getSize() != 2 && newTrainer.getSize() != 1) {
-		    	fail("incorrect enemy team size");
-		    }
-	    }
-	}
-	
-	@Test
-	public void dayFourToFiveTrainerTest() {
+	public void trainerAlwaysHasOneMonsterInitialyTest() {
 		testPlayer.setDay(4);
 		for (int i = 0; i < testPlayer.getPlayerDay(); i++) {
 			testPlayer.addDay();
 		}
 		
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < 20; i++) {
 	    	Trainers newTrainer = new Trainers(testPlayer, num);
-		    if (newTrainer.getSize() > 3 && newTrainer.getSize() <= 1) {
+		    if (newTrainer.getSize() != 1) {
 		    	fail("incorrect enemy team size");
 		    }
 	    }
 	}
 	
 	@Test
-	public void daySixOnwardsTrainerTest() {
-		testPlayer.setDay(6);
-		for (int i = 0; i < testPlayer.getPlayerDay(); i++) {
-			testPlayer.addDay();
-		}
-		
-	    for (int i = 0; i < 10; i++) {
-	    	Trainers newTrainer = new Trainers(testPlayer, num);
-		    if (newTrainer.getSize() > 4 && newTrainer.getSize() <= 1) {
-		    	fail("incorrect enemy team size");
-		    }
-	    }
+	public void canAddAMonsterToTheTrainerTest() {
+		Trainers newTrainer = new Trainers(testPlayer, num);
+		newTrainer.addMonster(new RandomMonster(testPlayer, num));
+		assertEquals(2, newTrainer.getSize());
+	}
+	
+	@Test
+	public void firstMonsterRemainsTheSameAfterAddingMonsterTest() {
+		Trainers newTrainer = new Trainers(testPlayer, num);
+		Monster originalMonster = newTrainer.getFirstEnemy();
+		newTrainer.addMonster(new RandomMonster(testPlayer, num));
+		assertEquals(originalMonster, newTrainer.getEnemies().get(0));
+	}
+	
+	@Test
+	public void removeEnemyTest() {
+		Trainers newTrainer = new Trainers(testPlayer, num);
+		newTrainer.addMonster(new RandomMonster(testPlayer, num));
+		newTrainer.removeEnemy();
+		assertEquals(1, newTrainer.getSize());
+	}
+	
+	@Test
+	public void emptyConstructorTest() {
+		Trainers emptyTrainer = new Trainers();
+		assertEquals(0, emptyTrainer.getSize());
 	}
 
 }

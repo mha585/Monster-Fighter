@@ -12,7 +12,7 @@ public class AtkPlus extends Item{
 	/**
 	 * The description of attack plus
 	 */
-	private static String description = "Use on a monster out of battle to increase your monster's attack stat permanently.";
+	private static String description = "Use on a monster to increase your monster's attack stat permanently.";
 	/**
 	 * The price of attack plus
 	 */
@@ -35,7 +35,6 @@ public class AtkPlus extends Item{
 	 * @param price				The price of attack plus
 	 * @param sell				The selling price of attack plus
 	 * @param description		The description of attack plus
-	 * @param whenToUse			The situation where you can use Attack Plus
 	 * @param itemEffect		The stat that Attack Plus effects
 	 * @param statEffect		The amount a monsters attack will increase by
 	 */

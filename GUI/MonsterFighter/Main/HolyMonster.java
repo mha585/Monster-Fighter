@@ -32,7 +32,8 @@ public class HolyMonster extends Monster{
 	}
 	/**
 	 * The empty constructor for the HolyMonster class
-	 * this gets called when no params are entered.
+	 * this gets called when only the RandomGen is entered
+	 * @param num used by RandomMonster to generate stats
 	 */
 	public HolyMonster(RandomGen num) {
 		super(price, sell, description, num);

@@ -44,7 +44,6 @@ class InventoryTest {
 	@Test
 	public void addExistingItemToBagTest() {
 //	    System.setOut(savedStandardOut);
-		System.out.println("hiii");
 	    Item testItemToAdd = new BasicHeal();
 	    testBag.addtoBag(testItemToAdd, 3);
 	    testBag.addtoBag(testItemToAdd, 5);
@@ -65,6 +64,8 @@ class InventoryTest {
 	
 	@Test
 	public void clearBagTest() {
+	    System.setOut(savedStandardOut);
+
 	    Item testItemToAddOne = new BasicHeal();
 	    Item testItemToAddTwo = new Revive();
 	    Item testItemToAddThree = new FullHeal();
@@ -74,6 +75,7 @@ class InventoryTest {
 	    testBag.addtoBag(testItemToAddThree, 2);
 	    assertEquals(3, (testBag.getSize()));
 	    testBag.clear();
+	    System.out.println(testBag);
 	    assertEquals(0, (testBag.getSize()));
 	}
 	
@@ -102,5 +104,4 @@ class InventoryTest {
 	    testBag.sellItem(1, indexOfItemToSell, testPlayer, testPlayer.getInventory());
 	    assertEquals(40, testPlayer.getMoney());
 	}
-
 }

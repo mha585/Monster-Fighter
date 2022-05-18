@@ -27,7 +27,7 @@ class MonstersTest {
 		testPlayer = new Player();
 		num = new RandomGen();
 		testPlayer.setDay(1);
-		testPlayer.setDifficulty(1);
+		testPlayer.setDifficulty(2);
 		testPlayer.setName("tester");
 		
 	    System.setOut(new PrintStream(outputStreamContent));

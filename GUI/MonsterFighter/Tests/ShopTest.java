@@ -34,6 +34,7 @@ class ShopTest {
 	
 	@AfterEach
 	public void tearDown() {
+		testShop.clearMonsters();
 	    System.setIn(savedStandardInputStream);
 	    System.setOut(savedStandardOut);
 	}
@@ -52,14 +53,16 @@ class ShopTest {
 	@Test
 	public void shopWontGeneratesHolyMonstersTest() {
 
-		for (int i = 1; i < 8; i++) {
+		for (int i = 1; i < 6; i++) {
 			testPlayer.addDay();
 		}
-	    assertEquals(4, testShop.getMonsters().size());
-		assertNotEquals("Holy", testShop.getMonsters().get(0).getType());
-		assertNotEquals("Holy", testShop.getMonsters().get(1).getType());
-		assertNotEquals("Holy", testShop.getMonsters().get(2).getType());
-		assertNotEquals("Holy", testShop.getMonsters().get(3).getType());
+		testShop.clearMonsters();
+		Shop testShop2 = new Shop(testPlayer, num);
+	    assertEquals(4, testShop2.getMonsters().size());
+		assertNotEquals("Holy", testShop2.getMonsters().get(0).getType());
+		assertNotEquals("Holy", testShop2.getMonsters().get(1).getType());
+		assertNotEquals("Holy", testShop2.getMonsters().get(2).getType());
+		assertNotEquals("Holy", testShop2.getMonsters().get(3).getType());
 	}
 	
 	@Test

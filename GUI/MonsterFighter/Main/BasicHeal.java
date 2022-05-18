@@ -35,7 +35,6 @@ public class BasicHeal extends Item {
 	 * @param price				The price of Basic Heal
 	 * @param sell 				The selling price of Basic Heal
 	 * @param description		The description of Basic Heal
-	 * @param whenToUse			The situation where you can use Basic Heal
 	 * @param itemEffect		The amount HP increases by when Basic Heal is used
 	 * @param statEffect		The stat that Basic Heal effects
 	 */

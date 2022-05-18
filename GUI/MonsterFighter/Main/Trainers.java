@@ -39,6 +39,7 @@ public class Trainers {
 	 * Basic constructor for Trainer class.
 	 * 
 	 * @param player		The player
+	 * @param randomNum		The random number used to get randomNumbers
 	 */
 	public Trainers(Player player, RandomGen randomNum) {
 		int randomName = randomNum.randNumInRange(0, trainerName.size());
@@ -49,10 +50,11 @@ public class Trainers {
 		enemyTeam.add(monster);
 	}
 	
-		
 	public Trainers() {}
 	
-	
+	/**
+	 * adds a monster to the trainers team
+	 */
 	public void addMonster(Monster monster) {
 		enemyTeam.add(monster);
 	}
@@ -107,18 +109,4 @@ public class Trainers {
 	public String getFullName() {
 		return type +" "+ name;
 	}
-	/**
-	 * Returns the trainer's party of monsters as a string.
-	 * 
-	 * @return String of trainer's monsters.
-	 */
-	public String printEnemyTeam() {
-	    String friendString = "";
-	    for (int i = 0; i< enemyTeam.size(); i++) {
-		    friendString += "Team member " + (i + 1) +
-				  ":\n\n"+enemyTeam.get(i).toString() + "\n\n" +
-				  "-------------------------------------\n";
-	  }
-	  return friendString;
-	} 
 }

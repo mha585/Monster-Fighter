@@ -14,22 +14,6 @@ public class WelcomeScreen {
 	private JFrame welcomeScreen;
 	private MonsterManager manager;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					WelcomScreen window = new WelcomScreen();
-//					window.welcomeScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 */

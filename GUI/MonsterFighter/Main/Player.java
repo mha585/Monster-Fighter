@@ -163,9 +163,6 @@ public class Player {
 	public void addDay() {
 		currentDay++;
 	}
-	public int getTotalDays() {
-		return playerDays;
-	}
 	/**
 	 * Return the player's bag.
 	 * 
@@ -250,7 +247,9 @@ public class Player {
 	public void abruptEnd() {
 		playerDays = currentDay;
 	}
-	
+	/**
+	 * Gets the current day the player is on
+	 */
 	public int getPlayerDay() {
 		return playerDays;
 	}

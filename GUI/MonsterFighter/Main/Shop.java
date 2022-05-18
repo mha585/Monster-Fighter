@@ -81,7 +81,7 @@ public class Shop {
 	 * Creates an instance of the Shop
 	 */
 	public Shop(Player player, RandomGen num) {
-		if (player.daysLeft() <= 2) {
+		if (player.getCurrentDay() < 5) {
 			shopMonster1 = new RandomMonster(player, num);
 			shopMonster2 = new RandomMonster(player, num);
 			shopMonster3 = new RandomMonster(player, num);

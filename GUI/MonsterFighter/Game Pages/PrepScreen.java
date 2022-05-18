@@ -18,22 +18,6 @@ public class PrepScreen {
 	private RandomGen num;
 	private boolean canPressFight;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					PrepScreen window = new PrepScreen();
-//					window.prepScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 */

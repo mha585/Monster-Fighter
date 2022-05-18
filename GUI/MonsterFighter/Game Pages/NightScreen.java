@@ -17,22 +17,6 @@ public class NightScreen {
 	private MonsterManager manager;
 	private RandomGen num;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					NightScreen window = new NightScreen();
-//					window.nightFrame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 */

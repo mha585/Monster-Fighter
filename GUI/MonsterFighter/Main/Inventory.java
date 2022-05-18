@@ -126,9 +126,7 @@ public class Inventory {
 	 * Removes all items in bag.
 	 */
 	public void clear() {
-		for (int i = 0; i < bag.size(); i++) {
-			bag.remove(i);
-		}
+		bag.clear();
 	}
 	/**
 	 * Returns a string representation of the player's inventory

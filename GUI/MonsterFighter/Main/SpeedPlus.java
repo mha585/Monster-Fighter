@@ -12,7 +12,7 @@ public class SpeedPlus extends Item{
 	/**
 	 * The description of Speed Plus.
 	 */
-	private static String description = "Use on a monster out of battle to increase your monster's speed stat permanently.";	
+	private static String description = "Use on a monster to increase your monster's speed stat permanently.";	
 	/** 
 	 * The price of Speed Plus.
 	 */
@@ -35,7 +35,6 @@ public class SpeedPlus extends Item{
 	 * @param price				The price of speed plus
 	 * @param sell				The selling price of speed plus
 	 * @param description		The description of speed plus
-	 * @param whenToUse			The situation where Speed Plus can be used
 	 * @param itemEffect  		The amount speed is increased by
 	 * @param statEffect		The stat that Speed Plus effects
 	 */

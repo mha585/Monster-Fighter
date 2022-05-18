@@ -9,13 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ItemTest {
-
-	private Team testTeam;
 	private Player testPlayer;
-	private Monster testEnemy;
-	private Shop testShop;
 	private RandomGen num;
-	
 	
 	private ByteArrayOutputStream outputStreamContent = new ByteArrayOutputStream();
 	private InputStream savedStandardInputStream = System.in;
@@ -24,12 +19,10 @@ class ItemTest {
 	
 	@BeforeEach
 	public void init() {
-		testTeam = new Team();
 		testPlayer = new Player();
 		num = new RandomGen();
-		testShop = new Shop(testPlayer, num);
 		testPlayer.setDay(1);
-		testPlayer.setDifficulty(1);
+		testPlayer.setDifficulty(3);
 		testPlayer.setName("tester");
 		
 	    System.setOut(new PrintStream(outputStreamContent));
@@ -83,7 +76,7 @@ class ItemTest {
 	}
 
 	@Test
-	public void useAtkPlusItem() {
+	public void useAtkPlusItemTest() {
 	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
 	    assertEquals(10, (itemUser.getDamage()));
 	    Item itemToUse = new AtkPlus();
@@ -91,9 +84,14 @@ class ItemTest {
 	    assertEquals(20, (itemUser.getDamage()));
 	}
 	
-//	@Test
-//	public void atkBoostIncreaseGoesAwayAfterBattle() {
-//	}
+	@Test
+	public void atkBoostTest() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    assertEquals(10, (itemUser.getDamage()));
+	    Item itemToUse = new AtkBoost();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(30, (itemUser.getDamage()));
+	}
 	
 	@Test
 	public void useSpeedPlusItem() {
@@ -104,9 +102,14 @@ class ItemTest {
 	    assertEquals(29, (itemUser.getSpeed()));
 	}
 	
-//	@Test
-//	public void speedBoostIncreaseGoesAwayAfterBattle() {
-//	}
+	@Test
+	public void speedBoostTest() {
+	    Monster itemUser = new MedicalMonster("UseItemOnMe", 100.0, 5.0, 10, 19.0, 1, 150, 250, "");
+	    assertEquals(19, (itemUser.getSpeed()));
+	    Item itemToUse = new SpeedBoost();
+	    itemToUse.useItem(itemUser);
+	    assertEquals(39, (itemUser.getSpeed()));
+	}
 	
 	@Test
 	public void tierPlusTest() {
@@ -133,12 +136,4 @@ class ItemTest {
 	    itemToUse.useItem(itemUser);
 	    assertEquals(100, (itemUser.getHealth()));
 	}
-	
-//	@Test
-//	public void reviveDontWorkOnLivingMonsterTest() {
-//	}
-	
-//	@Test
-//	public void itemGoesFromInventoryAfterUse() {
-//	}
 }

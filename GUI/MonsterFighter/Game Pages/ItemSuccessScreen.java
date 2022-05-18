@@ -22,22 +22,6 @@ public class ItemSuccessScreen {
 	private String previousPage;
 	private RandomGen num;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ItemSuccessScreen window = new ItemSuccessScreen();
-//					window.ISScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 * @param monsterIndex 

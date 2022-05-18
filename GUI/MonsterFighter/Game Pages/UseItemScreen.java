@@ -25,22 +25,6 @@ public class UseItemScreen {
 	private String previous;
 	private RandomGen num;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					UseItemScreen window = new UseItemScreen();
-//					window.useItemScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 * @param itemIndex 
@@ -77,7 +61,6 @@ public class UseItemScreen {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(previous);
 				closeWindow();
 				manager.launchInventoryScreen(previous, num);
 			}

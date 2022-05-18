@@ -151,34 +151,19 @@ public class Item implements Purchasable{
 	 */
 	public void useItem(Monster monster) {
 		if(itemStat == "atk") {
-			double currentAtk = monster.getDamage();
 			monster.gainDamage(itemEffect);
-			System.out.println("Damage Increased: \n"+currentAtk+" -----> "+monster.getDamage());
-			System.out.println(monster.getName() +" is flexing their muscles!");
 		}
 		else if(itemStat == "hp") {
-			double currentHp = monster.getHealth();
 			monster.gainHealth(itemEffect);
-			System.out.println("HP Restored: \n"+currentHp+" -----> "+monster.getHealth());
-			System.out.println(monster.getName() +" is looking healthy!");
 		}
 		else if(itemStat == "spd") {
-			double currentSpeed = monster.getSpeed();
 			monster.gainSpeed(itemEffect);
-			System.out.println("Speed Increased: \n"+currentSpeed+" -----> "+monster.getSpeed());
-			System.out.println(monster.getName() +" is energised!");
 		}
 		else if(itemStat == "tier") {
-			int currentTier = monster.getTier();
 			monster.levelUp();
-			System.out.println("Tier Increased: \n"+currentTier+" -----> "+monster.getTier());
-			System.out.println(monster.getName() +" looks a lot tougher!");
 		}
 		else if(itemStat == "fainted") {
-			double currentHealth = monster.getHealth();
 			monster.revive();
-			System.out.println("Tier Increased: \n"+currentHealth+" -----> "+monster.getTier());
-			System.out.println(monster.getName() +" looks a lot tougher!");
 		}
 	}
 }

@@ -13,22 +13,6 @@ public class WinScreen {
 	private JFrame winFrame;
 	private MonsterManager manager;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					WinScreen window = new WinScreen();
-//					window.winFrame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 */

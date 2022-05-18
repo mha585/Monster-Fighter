@@ -46,25 +46,10 @@ public class ShopScreen {
 	int totalCost = 0;
 	private String current = "BI";
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ShopScreen window = new ShopScreen();
-//					window.shopFrame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
-	 * @param number 
+	 * @param incomingManager the manager that manages all the data across the pages 
+	 * @param number the randomGen used to generate random numbers
 	 */
 	public ShopScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -269,7 +254,6 @@ public class ShopScreen {
 						totalCost = cartCost;
 					}
 					else {
-						System.out.println("Both time should come here");
 						cartDisplay.addElement(items.get(itemIndex).getName());
 						cart.addtoBag(items.get(itemIndex), 1);
 						cartCost += items.get(itemIndex).getPrice();
@@ -478,7 +462,6 @@ public class ShopScreen {
 				}
 				if (manager.getPlayer().getMoney() >= totalCost && current == "BI") {
 					for (int i = 0; i < cart.getSize(); i++) {
-						System.out.println(cart);
 						for (int j = 0; j < cart.getItem(i).getFrequency(); j++) {
 							Item item = (Item) cart.getItem(i);
 							int oldFreq = item.getFrequency();

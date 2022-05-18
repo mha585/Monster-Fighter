@@ -34,7 +34,8 @@ public class WaterMonster extends Monster{
 	}
 	/**
 	 * The empty constructor for the WaterMonster class
-	 * this gets called when no params are entered.
+	 * this gets called when only the RandomGen is entered
+	 * @param num used by RandomMonster to generate stats
 	 */
 	public WaterMonster(RandomGen num) {
 		super(price, sell, description, num);

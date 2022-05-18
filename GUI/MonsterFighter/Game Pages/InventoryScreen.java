@@ -28,22 +28,6 @@ public class InventoryScreen {
 	private RandomGen number;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					InventoryScreen window = new InventoryScreen();
-//					window.bagScreen.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the application.
 	 */
 	public InventoryScreen(MonsterManager incomingManager, String previous, RandomGen num) {
@@ -83,8 +67,6 @@ public class InventoryScreen {
 				JList<Object> itemJList = (JList<Object>) event.getSource();
 				if (event.getClickCount() >= 2) {
 					int itemIndex = itemJList.locationToIndex(event.getPoint());
-					System.out.println(manager.getPlayer().getInventory().getItem(itemIndex).getName());
-					System.out.println(manager.getPlayer().getInventory().getItem(itemIndex).getFrequency());
 					closeWindow();
 					manager.launchUseItemScreen(previousPage, itemIndex, number);
 				}

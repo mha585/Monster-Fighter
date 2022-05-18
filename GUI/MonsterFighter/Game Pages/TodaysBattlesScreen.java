@@ -22,22 +22,6 @@ public class TodaysBattlesScreen {
 	private RandomGen num;
 	private ArrayList<Trainers> possibleTrainers;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TodaysBattlesScreen window = new TodaysBattlesScreen();
-//					window.newBattleFrames.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 * @param trainerBattles 
@@ -69,7 +53,6 @@ public class TodaysBattlesScreen {
 		String trainer5String = "";
 		for (int i = 0; i < possibleTrainers.get(0).getEnemies().size(); i++) {
 			Monster monster = possibleTrainers.get(0).getEnemies().get(i);
-			System.out.println(monster.getName());
 			trainer1String = trainer1String + '\n' + '\n' + monster.getName() + '\n' + "Type: " + monster.getType() + '\n' +  "Health: "
 			+ monster.getHealth() + " / " + monster.getMaxHealth() + '\n' + "Damage: " + monster.getDamage() + '\n' +
 					"Speed: " + monster.getSpeed() + '\n' + "Tier: " + monster.getTier();
@@ -241,8 +224,6 @@ public class TodaysBattlesScreen {
 					manager.setEnemyTrainer(trainer);
 					manager.setIsAbleToFight(true);
 					closeWindow();
-					System.out.println(possibleTrainers);
-					System.out.println(trainer.getEnemies().toString());
 					manager.launchPrepScreen(num, manager.isAbleToFight());
 				}
 			}

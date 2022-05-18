@@ -38,7 +38,7 @@ class BossTest {
 	    myBoss.printBossFight();
 
 	    String fight = outputStreamContent.toString();
-	    assertEquals(699, fight.length());
+	    assertEquals(695, fight.length());
 	}
 	
 	@Test

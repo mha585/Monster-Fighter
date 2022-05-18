@@ -15,22 +15,6 @@ public class LoseScreen {
 	private JFrame loseFrame;
 	private MonsterManager manager;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoseScreen window = new LoseScreen();
-//					window.loseFrame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 */
