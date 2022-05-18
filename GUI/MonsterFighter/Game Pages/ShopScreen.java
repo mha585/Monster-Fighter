@@ -118,13 +118,11 @@ public class ShopScreen {
 		JLabel lblAddItem = new JLabel("Double click on an item/ monster to add it to your cart");
 		
 		JLabel lblStart = new JLabel("");
-		JLabel lblSuccuess = new JLabel("Success");
 		JLabel lblBroke = new JLabel("Insufficient Funds");
 		JPanel panelVerify = new JPanel();
 		CardLayout verify = new CardLayout(0, 0);
 		panelVerify.setLayout(verify);
 		panelVerify.add(lblStart," ");
-		panelVerify.add(lblSuccuess, "Success");
 		panelVerify.add(lblBroke, "Broke");
 		
 		
@@ -478,7 +476,6 @@ public class ShopScreen {
 					lblCostOfCart.setVisible(true);
 					cartDisplay.clear();
 					cart.clear();
-					verify.show(panelVerify, "Success");
 				}
 				else if (manager.getPlayer().getMoney() >= totalCost && current == "BM") {
 					for (int i = 0; i < kennel.getSize(); i++) {
@@ -493,13 +490,11 @@ public class ShopScreen {
 						lblCostOfCart.setVisible(true);
 						int remove = monsters.indexOf(monster);
 						monsters.remove(remove);
-						monsterDisplay.remove(remove);
 						cartDisplay.clear();
 						kennel.clear();
-						verify.show(panelVerify, "Success");
 					}
 				}
-				else if (manager.getPlayer().getMoney() >= totalCost && current == "SI") {
+				else if (current == "SI") {
 					for (int i = 0; i < cart.getSize(); i++) {
 						Item item = cart.getItem(i);
 						int frequency = item.getFrequency();
@@ -513,10 +508,9 @@ public class ShopScreen {
 						lblCostOfCart.setVisible(true);
 						cartDisplay.clear();
 						cart.clear();
-						verify.show(panelVerify, "Success");
 					}
 				}
-				else if (manager.getPlayer().getMoney() >= totalCost && current == "SM") {
+				else if (current == "SM") {
 					for (int i = 0; i < kennel.getSize(); i++) {
 						Monster monster = kennel.getFriend(i);
 						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
@@ -527,17 +521,15 @@ public class ShopScreen {
 						setZero();
 						lblCost.setVisible(true);
 						lblCostOfCart.setVisible(true);
-						int remove = monsterUsrDisplay.indexOf(monster);
-						monsterUsrDisplay.remove(remove);
 						cartDisplay.clear();
 						kennel.clear();
-						verify.show(panelVerify, "Success");
 						
 					}
 				}
 				else if (manager.getPlayer().getMoney() < totalCost) {
 					verify.show(panelVerify, "Broke");
 				}
+				System.out.println(current);
 				closeWindow();
 				manager.launchShopScreen(num);
 			}
