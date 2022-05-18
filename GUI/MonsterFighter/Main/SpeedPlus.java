@@ -30,10 +30,6 @@ public class SpeedPlus extends Item{
 	 */
 	private static String statEffect = "spd";
 	/**
-	 * The situation where Speed Plus can be used.
-	 */
-	private static String whenToUse = "out";
-	/**
 	 * Basic SpeedPlus Constructor.
 	 * @param name				The name of speed plus
 	 * @param price				The price of speed plus
@@ -44,6 +40,6 @@ public class SpeedPlus extends Item{
 	 * @param statEffect		The stat that Speed Plus effects
 	 */
 	SpeedPlus() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

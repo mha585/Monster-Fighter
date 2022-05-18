@@ -86,6 +86,15 @@ public class ShopScreen {
 		totalCost += num;
 	}
 
+	public Item createItem(Item item) {
+		String itemName = item.getName();
+		int itemCost = item.getPrice();
+		int itemSell = item.sellPrice();
+		String itemDescription = item.getDescription();
+		int itemEffect = item.getEffect();
+		String itemStat = item.getStat();
+		return new Item(itemName, itemCost, itemSell, itemDescription, itemEffect, itemStat);
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -332,12 +341,11 @@ public class ShopScreen {
 			public void mouseClicked(MouseEvent event) {
 				JList<Object> listSellItm = (JList<Object>) event.getSource();
 				if (event.getClickCount() == 2) {
-					System.out.println(cart);
-					System.out.println(cartDisplay);
 					int itemIndex = listSellItm.locationToIndex(event.getPoint());
 					Item item = manager.getPlayer().getInventory().getItem(itemIndex);
 					if (cartDisplay.contains(item.getName())) {
 						int cartIndex = cart.getIndex(item.getName());
+						int bagIndex = manager.getPlayer().getInventory().getIndex(item.getName());
 						if (cart.getItem(cartIndex).getFrequency() < manager.getPlayer().getInventory().getItem(itemIndex).getFrequency()) {
 							cart.getItem(cartIndex).addFreq(1);
 						}
@@ -347,9 +355,9 @@ public class ShopScreen {
 					}
 					else if (cartDisplay.contains(item.getName()) == false) {
 						cartDisplay.addElement(item.getName());
-						Item sellItem = item;
-						sellItem.setFrequency(1);
-						cart.addtoBag(item, 1);
+						Item sellItem = createItem(manager.getPlayer().getInventory().getItem(itemIndex));
+						cart.addtoBag(sellItem, 0);
+						cart.getItem(cart.getSize() - 1).setFrequency(1);
 					}
 				}
 			}
@@ -472,8 +480,6 @@ public class ShopScreen {
 					for (int i = 0; i < cart.getSize(); i++) {
 						System.out.println(cart);
 						for (int j = 0; j < cart.getItem(i).getFrequency(); j++) {
-							System.out.println(cart);
-							System.out.println(cart.getItem(i).getFrequency());
 							Item item = (Item) cart.getItem(i);
 							int oldFreq = item.getFrequency();
 							item.setFrequency(1);

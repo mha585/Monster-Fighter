@@ -30,20 +30,15 @@ public class FullHeal extends Item{
 	 */
 	private static String statEffect = "hp";
 	/**
-	 * The situation where you can use Full Heal.
-	 */
-	private static String whenToUse = "both";
-	/**
 	 * Basic Full Heal constructor.
 	 * @param name            	The name of the HP Restore
 	 * @param price          	The price of the HP Restore
 	 * @param sell           	The selling price of HP Restore
 	 * @param description	 	The description of HP Restore
-	 * @param whenToUse			The situation where you can use Full Heal
 	 * @param itemEffect		The amount of HP Full Heal restores
 	 * @param statEffect		The stat Full Heal restores
 	 */
 	FullHeal() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

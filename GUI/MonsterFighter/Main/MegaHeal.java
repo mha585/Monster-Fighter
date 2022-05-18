@@ -30,20 +30,15 @@ public class MegaHeal extends Item {
 	 */
 	private static String statEffect = "hp";
 	/**
-	 * The situation where you can use Mega Heal.
-	 */
-	private static String whenToUse = "both";
-	/**
 	 * The basic mega heal constructor.
 	 * @param					The name of mega heal
 	 * @param price				The price of mega heal
 	 * @param sell				The selling price of mega heal
 	 * @param description		The description of mega heal
-	 * @param whenToUse			The situation where you can use Mega Heal
 	 * @param itemEffect		The amount a monster's HP will increase by
 	 * @param statEffect		The stat that Mega Heal effect
 	 */
 	MegaHeal() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }

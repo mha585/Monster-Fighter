@@ -30,10 +30,6 @@ public class AtkPlus extends Item{
 	 */
 	private static String statEffect = "atk";
 	/**
-	 * The situation where you can use Attack Plus.
-	 */
-	private static String whenToUse = "out";
-	/**
 	 * Basic attack plus constructor
 	 * @param name				The name of attack plus
 	 * @param price				The price of attack plus
@@ -44,6 +40,6 @@ public class AtkPlus extends Item{
 	 * @param statEffect		The amount a monsters attack will increase by
 	 */
 	AtkPlus() {
-		super(name, price, sell ,description, whenToUse, itemEffect, statEffect);
+		super(name, price, sell ,description, itemEffect, statEffect);
 	}
 }
