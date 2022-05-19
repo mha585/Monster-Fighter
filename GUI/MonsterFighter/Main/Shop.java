@@ -68,7 +68,7 @@ public class Shop {
 	/**
 	 * Holds the selling prices for the monsters dependent on their tier.
 	 */
-	private static List<Integer> sellMonsters = Arrays.asList(0, 50, 100, 150);
+	private static List<Integer> sellMonsters = Arrays.asList(10, 50, 100, 150);
 	/**
 	 * Creates an ArrayList to hold the shopMonsters.
 	 */

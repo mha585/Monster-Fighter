@@ -46,22 +46,6 @@ public class ShopScreen {
 	int totalCost = 0;
 	private String current = "BI";
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ShopScreen window = new ShopScreen();
-//					window.shopFrame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the shop screen.
 	 * @param incomingManager	the manager that manages all the data across the pages
@@ -552,7 +536,7 @@ public class ShopScreen {
 					for (int i = 0; i < kennel.getSize(); i++) {
 						Monster monster = kennel.getFriend(i);
 						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
-						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, manager.getPlayer());
+						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() % 4, newShop, manager.getPlayer());
 					}
 					lblUserMoney.setText("$"+manager.getPlayer().getMoney());
 					lblCostOfCart.setText("$"+0);

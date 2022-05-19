@@ -5,6 +5,7 @@ public class MonsterManager {
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
 	private Trainers newTrainer;
+	private Shop newShop;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
 	private boolean canFight = false;
