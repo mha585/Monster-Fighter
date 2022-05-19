@@ -121,7 +121,7 @@ public class ItemSuccessScreen {
 		GroupLayout groupLayout = new GroupLayout(ISScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblMStat, GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
+				.addComponent(lblMStat, GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -129,16 +129,16 @@ public class ItemSuccessScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblArrow, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewStat, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+					.addComponent(lblNewStat, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+					.addGap(2)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(8)
 					.addComponent(panel_1_1_1, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnOK, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1_1, GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
+					.addComponent(panel_1_1, GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
