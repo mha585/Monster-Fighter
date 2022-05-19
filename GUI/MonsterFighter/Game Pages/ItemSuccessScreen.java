@@ -23,11 +23,12 @@ public class ItemSuccessScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
-	 * @param monsterIndex 
-	 * @param monsterManager 
-	 * @param previousPage 
-	 * @param itemIndex 
+	 * Creates the item success screen
+	 * @param monsterManager 	The manager responsible for creating this screen
+	 * @param previous 			The previous page the player was on
+	 * @param monsterIndex 		The index of the monster that used the item from the players team
+	 * @param itemIndex 		The index of the item that was used on the monster from the players inventory
+	 * @param number 			The RandomGen used to generate random numbers
 	 */
 	public ItemSuccessScreen(MonsterManager monsterManager, String previous, int monsterIndex, int itemIndex, RandomGen number) {
 		manager = monsterManager;
@@ -38,11 +39,12 @@ public class ItemSuccessScreen {
 		initialize();
 		ISScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		ISScreen.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

@@ -28,7 +28,10 @@ public class InventoryScreen {
 	private RandomGen number;
 
 	/**
-	 * Create the application.
+	 * Create the inventory screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param previous 			The previous page the player was on
+	 * @param num		 		The RandomGen used to generate random numbers
 	 */
 	public InventoryScreen(MonsterManager incomingManager, String previous, RandomGen num) {
 		manager = incomingManager;
@@ -37,11 +40,12 @@ public class InventoryScreen {
 		initialize();
 		bagScreen.setVisible(true);
 	}
-	
+	/**
+	 * closes the window
+	 */
 	public void closeWindow() {
 		bagScreen.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

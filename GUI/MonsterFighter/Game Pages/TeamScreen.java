@@ -20,7 +20,10 @@ public class TeamScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
+	 * Create the team screen.
+	 * @param incomingManager	the manager that manages all the data across the pages 
+	 * @param previous 			the previous screen
+	 * @param number 			the randomGen used to generate random numbers
 	 */
 	public TeamScreen(MonsterManager incomingManager, String previous, RandomGen number) {
 		manager = incomingManager;
@@ -29,15 +32,24 @@ public class TeamScreen {
 		initialize();
 		teamScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		teamScreen.dispose();
 	}
-	
-//	public void finishedWindow() {
-//		manager.closeTeamScreen(this);
-//	}
-	
+	/**
+	 * Sets the titles of each stat
+	 * @param lblHealth 	The JLabel for the health title
+	 * @param lblAttack 	The JLabel for the attack title
+	 * @param lblSlash 		The JLabel for the /
+	 * @param lblSpeed 		The JLabel for the speed title
+	 * @param lblHealAmount The JLabel for the heal amount title	
+	 * @param lblType 		The JLabel for the type title
+	 * @param lblMaxExp 	The JLabel for the / 100
+	 * @param lblExp		The JLabel for the exp title
+	 * @param lblTier		The JLabel for the tier title
+	 */
 	public void setTitles(JLabel lblHealth, JLabel lblAttack, JLabel lblSlash, JLabel lblSpeed, 
 			JLabel lblHealAmount, JLabel lblType, JLabel lblMaxExp, JLabel lblExp, JLabel lblTier) {
 		lblHealth.setText("Health:");
@@ -50,7 +62,20 @@ public class TeamScreen {
 		lblExp.setText("Exp:");
 		lblTier.setText("Tier:");
 	}
-	
+	/**
+	 * Sets the specific stats of each monster
+	 * @param playerTeam 			The current players team
+	 * @param friendNum 			The index of the current friend whos stats we are looking at
+	 * @param lblCurrentName 		The JLabel for the current monsters name
+	 * @param lblCurrentHealth 		The JLabel for the current monsters health
+	 * @param lblcurrentAttack 		The JLabel for the current monsters attack
+	 * @param lblMaxHealth 			The JLabel for the current monsters max health
+	 * @param lblCurrentSpeed 		The JLabel for the current monsters speed
+	 * @param lblCurrentHealAmount 	The JLabel for the current monsters heal amount
+	 * @param lblCurrentType 		The JLabel for the current monsters type
+	 * @param lblCurrentExp			The JLabel for the current monsters exp
+	 * @param lblCurrentTier		The JLabel for the current monsters tier
+	 */
 	public void setStats(Team playerTeam, int friendNum, JLabel lblCurrentName, JLabel lblCurrentHealth, 
 			JLabel lblcurrentAttack, JLabel lblMaxHealth, JLabel lblCurrentSpeed, JLabel lblCurrentHealAmount, 
 			JLabel lblCurrentType, JLabel lblCurrentExp, JLabel lblCurrentTier) {
@@ -80,7 +105,6 @@ public class TeamScreen {
 		int currentTier = (playerTeam.getFriend(friendNum).getTier());
 		lblCurrentTier.setText(Integer.toString(currentTier));		
 	}
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */

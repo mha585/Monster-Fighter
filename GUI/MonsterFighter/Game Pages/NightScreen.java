@@ -18,7 +18,9 @@ public class NightScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
+	 * Create the night screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param number 			The RandomGen used to generate random events
 	 */
 	public NightScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -26,11 +28,16 @@ public class NightScreen {
 		initialize();
 		nightFrame.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		nightFrame.dispose();
 	}
-	
+	/**
+	 * generates a random event each night
+	 * @return 		String returns what random event happened
+	 */
 	public String randomEvent() {
 		int whatEventHappend = num.randNumInRange(1, 10);
 		if ((whatEventHappend >= 1 && whatEventHappend <= 3) && (manager.getPlayer().getTeam().getSize() > 1)) {
@@ -52,7 +59,10 @@ public class NightScreen {
 			return leveledUpMonster.getName() + " gained a level";
 		}
 	}
-	
+	/**
+	 * When the player hits next day all monsters in team sleep and gain 20 hp
+	 * @param team 			The current players team
+	 */
 	public void allMonsterGainHealth(Team team) {
 		for (int i = 0; i < team.getSize(); i ++) {
 			team.getFriend(i).gainHealth(20);
@@ -62,7 +72,6 @@ public class NightScreen {
 			}
 		}
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -178,7 +187,7 @@ public class NightScreen {
 		gl_panelMain.setHorizontalGroup(
 			gl_panelMain.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelMain.createSequentialGroup()
-					.addContainerGap(68, Short.MAX_VALUE)
+					.addContainerGap(67, Short.MAX_VALUE)
 					.addGroup(gl_panelMain.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panelMain.createSequentialGroup()
 							.addGroup(gl_panelMain.createParallelGroup(Alignment.LEADING)
@@ -201,11 +210,12 @@ public class NightScreen {
 							.addComponent(lblDaysBeforeBoss, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
 							.addGap(234))
 						.addGroup(gl_panelMain.createSequentialGroup()
-							.addComponent(lblSuddenlyInThe)
-							.addGap(253))
-						.addGroup(gl_panelMain.createSequentialGroup()
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 							.addGap(332))))
+				.addGroup(Alignment.LEADING, gl_panelMain.createSequentialGroup()
+					.addGap(310)
+					.addComponent(lblSuddenlyInThe)
+					.addContainerGap(320, Short.MAX_VALUE))
 		);
 		gl_panelMain.setVerticalGroup(
 			gl_panelMain.createParallelGroup(Alignment.LEADING)
@@ -228,7 +238,7 @@ public class NightScreen {
 					.addComponent(lblYourMonsterGet)
 					.addGap(25)
 					.addComponent(btnNewButton)
-					.addContainerGap(59, Short.MAX_VALUE))
+					.addContainerGap(71, Short.MAX_VALUE))
 		);
 		panelMain.setLayout(gl_panelMain);
 		nightFrame.getContentPane().setLayout(groupLayout);

@@ -4,7 +4,6 @@ public class MonsterManager {
 	private static RandomGen rng;
 	private static Player newPlayer = new Player();
 	private static Battles newbattle = new Battles();
-	private Shop newShop;
 	private Trainers newTrainer;
 	private static ArrayList<Trainers> trainerBattles = new ArrayList<Trainers>();
 	private Monster enemy;
@@ -56,10 +55,6 @@ public class MonsterManager {
 	
 	public void launchTodaysBattlesScreen(RandomGen num) {
 		new TodaysBattlesScreen(this, num, trainerBattles);
-	}
-	
-	public void launchWelcomeScreen() {
-		new WelcomeScreen(this);
 	}
 	
 	public void launchWinScreen() {
@@ -137,7 +132,6 @@ public class MonsterManager {
 	public void gainAmountOfFriendsWhoFaintedToday(int amountGained) {
 		amountOfFriendsWhoFaintedToday += amountGained;
 	}
-
 
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();

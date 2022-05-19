@@ -23,9 +23,10 @@ public class TodaysBattlesScreen {
 	private ArrayList<Trainers> possibleTrainers;
 
 	/**
-	 * Create the application.
-	 * @param trainerBattles 
-	 * @param previousPage 
+	 * Create the todays battles screen.
+	 * @param incomingManager 	The manager that manages all the data across the pages 
+	 * @param number 			The randomGen used to generate random numbers
+	 * @param trainerBattles 	The array list of current days battles
 	 */
 	public TodaysBattlesScreen(MonsterManager incomingManager, RandomGen number, ArrayList<Trainers> trainerBattles) {
 		manager = incomingManager;
@@ -34,11 +35,12 @@ public class TodaysBattlesScreen {
 		initialize();
 		newBattleFrames.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		newBattleFrames.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

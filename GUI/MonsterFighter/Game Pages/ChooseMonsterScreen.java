@@ -21,7 +21,9 @@ public class ChooseMonsterScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
+	 * Create the choose monster screen at the start of the game.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param number 			The RandomGen used to generate random numbers
 	 */
 	public ChooseMonsterScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -29,14 +31,12 @@ public class ChooseMonsterScreen {
 		initialize();
 		chooseMonsterScreen.setVisible(true);
 	}
-	
+	/**
+	 * closes the window
+	 */
 	public void closeWindow() {
 		chooseMonsterScreen.dispose();
 	}
-	
-//	public void finishedWindow() {
-//		manager.closeChooseMonsterScreen(this);
-//	}
 
 	/**
 	 * Initialize the contents of the frame.

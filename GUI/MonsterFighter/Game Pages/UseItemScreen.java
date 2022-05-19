@@ -26,10 +26,11 @@ public class UseItemScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
-	 * @param itemIndex 
-	 * @param monsterManager 
-	 * @param previousPage 
+	 * Create the use item screen.
+	 * @param monsterManager 	The manager that manages all the data across the pages 
+	 * @param previousPage 		The previous page the player was on
+	 * @param itemIndex 		The index of the item being used
+	 * @param number 			The randomGen used to generate random numbers 
 	 */
 	public UseItemScreen(MonsterManager monsterManager, String previousPage, int itemIndex, RandomGen number) {
 		item = itemIndex;
@@ -39,11 +40,12 @@ public class UseItemScreen {
 		initialize();
 		useItemScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		useItemScreen.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

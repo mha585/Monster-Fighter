@@ -31,7 +31,11 @@ public class BattleScreen {
 	private String whoKilledWho;
 
 	/**
-	 * Create the application.
+	 * Create the screen for when a battle is happening.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param myEnemy 			The enemy trainer the player is fighting
+	 * @param randomNumber 		The RandomGen used to generate random numbers
+	 * @param status 			The RandomGen used to generate random numbers
 	 */
 	public BattleScreen(MonsterManager incomingManager, Trainers myEnemy, RandomGen randomNumber, String status) {
 		manager = incomingManager;
@@ -44,11 +48,16 @@ public class BattleScreen {
 		initialize();
 		battleScreen.setVisible(true);
 	}
-	
+	/**
+	 * closes the window
+	 */
 	public void closeWindow() {
 		battleScreen.dispose();
 	}
-	
+	/**
+	 * gives the players prizes when an enemy is defeated
+	 * @param player	The player that recives the prizes
+	 */
 	public void getPrizes(Player player) {
 		if (manager.getPlayer().getDifficulty() == "easy") {
 			manager.getPlayer().addMoney(75);
@@ -63,7 +72,12 @@ public class BattleScreen {
 			manager.getPlayer().addPoints(100);
 		}
 	}
-	
+	/**
+	 * checks if a battle should end if a enemy is dead or the player is out of usable monsters
+	 * @param playerTeam	The players current team
+	 * @param enemy			The current enemy the player is fighting
+	 * @param enemyTrainer	The enemy trainer the player is fighting
+	 */
 	public void checkIfBattleEnds(Team playerTeam, Monster enemy, Trainers enemyTrainer) {
 //		if and only if the final boss's enemy is killed the game ends
 		if (enemy.getName() == "Shinigami" && enemy.getHealth() <= 0) { 
@@ -102,9 +116,9 @@ public class BattleScreen {
 			manager.launchBattleScreen(false, num, status);
 		}
 	}
-	
 	/**
 	 * Initialize the contents of the frame.
+	 * copyright free images sourced from craftpix.net
 	 */
 	private void initialize() {
 		battleScreen = new JFrame();

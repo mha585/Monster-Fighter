@@ -47,9 +47,9 @@ public class ShopScreen {
 	private String current = "BI";
 
 	/**
-	 * Create the application.
-	 * @param incomingManager the manager that manages all the data across the pages 
-	 * @param number the randomGen used to generate random numbers
+	 * Create the shop screen.
+	 * @param incomingManager	the manager that manages all the data across the pages 
+	 * @param number 			the randomGen used to generate random numbers
 	 */
 	public ShopScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -58,19 +58,29 @@ public class ShopScreen {
 		initialize();
 		shopFrame.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		shopFrame.dispose();
 	}
-	
+	/**
+	 * sets the total cost to zero
+	 */
 	public void setZero() {
 		totalCost = 0;
 	}
-	
+	/**
+	 * adds cost to total cost
+	 * @param num 	the amount being added
+	 */
 	public void addCost(int num) {
 		totalCost += num;
 	}
-
+	/**
+	 * creates an item
+	 * @param item	 	The item being created
+	 */
 	public Item createItem(Item item) {
 		String itemName = item.getName();
 		int itemCost = item.getPrice();

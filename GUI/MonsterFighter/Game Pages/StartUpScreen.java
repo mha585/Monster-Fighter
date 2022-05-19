@@ -27,7 +27,9 @@ public class StartUpScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
+	 * Create the start up screen.
+	 * @param incomingManager	the manager that manages all the data across the pages 
+	 * @param number 			the randomGen used to generate random numbers for the rest of the game
 	 */
 	public StartUpScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -35,11 +37,12 @@ public class StartUpScreen {
 		initialize();
 		startupScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		startupScreen.dispose();
 	}
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */

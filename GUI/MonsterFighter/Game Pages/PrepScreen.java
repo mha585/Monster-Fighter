@@ -19,7 +19,10 @@ public class PrepScreen {
 	private boolean canPressFight;
 
 	/**
-	 * Create the application.
+	 * Create the prep screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param number 			The RandomGen used to generate random events
+	 * @param canFight 			Checks if the player can fight yet
 	 */
 	public PrepScreen(MonsterManager incomingManager, RandomGen number, boolean canFight) {
 		manager = incomingManager;
@@ -28,18 +31,22 @@ public class PrepScreen {
 		initialize();
 		prepScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		prepScreen.dispose();
 	}
-	
+	/**
+	 * checks if its the final day
+	 * @return 		boolean of if its the final day
+	 */
 	public boolean isItTheFinalDay() {
 		if (manager.getPlayer().getCurrentDay() >= manager.getPlayer().getPlayerDay()) {
 			return true;
 		}
 		return false;
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
