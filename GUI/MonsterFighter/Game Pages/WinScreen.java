@@ -56,7 +56,6 @@ public class WinScreen {
 		lblMoney.setText("Total Money Earned: " + manager.getPlayer().getMoneyEarned());
 		lblMoney.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMoney.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblMoney.setText("Total Points Earned: " + manager.getPlayer().getPoints());
 		
 		JLabel lblPoints = new JLabel("");
 		lblPoints.setText("Total Points Earned: " + manager.getPlayer().getPoints());

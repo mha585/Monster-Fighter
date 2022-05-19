@@ -153,9 +153,11 @@ public class BattleScreen {
 		lblEnemyName.setText(enemyMonster.getName());
 		
 		JLabel lblNewLabel = new JLabel("");
+//		Copyright free image sourced from craftpix.net
 		lblNewLabel.setIcon(new ImageIcon(BattleScreen.class.getResource("/images/GoodMonster.jpg")));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
+//		Copyright free image sourced from craftpix.net
 		lblNewLabel_1.setIcon(new ImageIcon(BattleScreen.class.getResource("/images/EvilMonster.jpg")));
 		
 		JLabel lblDamageLabel = new JLabel("Damage:");
