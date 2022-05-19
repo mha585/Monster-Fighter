@@ -97,7 +97,9 @@ public class MonsterManager {
 			rng = new RandomGen(seed);
 		}
 	}
-	
+	public Shop getShop() {
+		return newShop;
+	}
 	public boolean isAbleToFight() {
 		return canFight;
 	}
@@ -142,5 +144,10 @@ public class MonsterManager {
 	public static void main(String[] args) {
 		MonsterManager manager = new MonsterManager();
 		manager.launchStartUpScreen(rng);
+	}
+
+	public void createShop() {
+		newShop = new Shop(newPlayer, rng);
+		
 	}
 }

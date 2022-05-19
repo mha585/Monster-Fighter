@@ -162,6 +162,7 @@ public class NightScreen {
 				manager.gainAmountOfFriendsWhoFaintedToday(-1 * manager.getAmountOfFriendsWhoFaintedToday());
 				manager.gainAmountOfMonsterKilledToaday(-1 * manager.getAmountOfMonsterKilledToaday());
 				closeWindow();
+				manager.createShop();
 				manager.launchPrepScreen(num, manager.isAbleToFight());
 			}
 		});

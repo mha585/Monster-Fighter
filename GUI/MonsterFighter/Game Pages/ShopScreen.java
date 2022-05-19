@@ -46,15 +46,30 @@ public class ShopScreen {
 	int totalCost = 0;
 	private String current = "BI";
 
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ShopScreen window = new ShopScreen();
+//					window.shopFrame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
 	/**
 	 * Create the application.
-	 * @param incomingManager the manager that manages all the data across the pages 
-	 * @param number the randomGen used to generate random numbers
+	 * @param number 
 	 */
 	public ShopScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
 		num = number;
-		newShop = new Shop(incomingManager.getPlayer(), num);
+		newShop = manager.getShop();
 		initialize();
 		shopFrame.setVisible(true);
 	}
@@ -119,11 +134,24 @@ public class ShopScreen {
 		
 		JLabel lblStart = new JLabel("");
 		JLabel lblBroke = new JLabel("Insufficient Funds");
+		lblBroke.setForeground(Color.RED);
+		JLabel lblManyMonsters = new JLabel("Too Many Monsters");
+		lblManyMonsters.setForeground(Color.RED);
+		JLabel lblZero = new JLabel("No More Items");
+		lblZero.setForeground(Color.RED);
+		JLabel lblSameMon = new JLabel("Monster already in Cart");
+		lblSameMon.setForeground(Color.RED);
+		JLabel lblLastMon = new JLabel("Cannot Sell Last Monster");
+		lblLastMon.setForeground(Color.RED);
 		JPanel panelVerify = new JPanel();
 		CardLayout verify = new CardLayout(0, 0);
 		panelVerify.setLayout(verify);
 		panelVerify.add(lblStart," ");
 		panelVerify.add(lblBroke, "Broke");
+		panelVerify.add(lblManyMonsters, "TooMany");
+		panelVerify.add(lblZero, "Zero");
+		panelVerify.add(lblSameMon, "Same");
+		panelVerify.add(lblLastMon, "Last");
 		
 		
 		JList<Object> JLShoppingCart = new JList<Object>(cartDisplay);
@@ -280,11 +308,11 @@ public class ShopScreen {
 							totalCost = cartCost;
 						}
 						else {
-							System.out.println("Monster already in cart");
+							verify.show(panelVerify, "Same");
 						}
 					}	
 					else {
-						System.out.println("There are too many monsters");
+						verify.show(panelVerify, "TooMany");
 					}
 				}
 			}
@@ -303,12 +331,11 @@ public class ShopScreen {
 						kennel.addFriend(manager.getPlayer().getTeam().getFriend(mnstrIndex));
 					}
 					else if(((List<Monster>) kennel).contains(manager.getPlayer().getTeam().getFriend(mnstrIndex))) {
-						System.out.println("You cannot sell the same monster twice");
+						verify.show(panelVerify, "Same");
 					}
 					else if(manager.getPlayer().getTeam().getSize() == 1) {
-						System.out.println("You cannot sell your last monster");
+						verify.show(panelVerify, "Last");
 					}
-					
 				}
 			}
 		});
@@ -332,7 +359,7 @@ public class ShopScreen {
 							cart.getItem(cartIndex).addFreq(1);
 						}
 						else {
-							System.out.println("you've got no more items mate");
+							verify.show(panelVerify, "Zero");
 						}
 					}
 					else if (cartDisplay.contains(item.getName()) == false) {
@@ -482,17 +509,17 @@ public class ShopScreen {
 						Monster monster = kennel.getFriend(i);
 						manager.getPlayer().getTeam().addFriend(monster);
 						manager.getPlayer().addMoney(-1 * monster.getPrice());
-						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
-						lblCostOfCart.setText("$"+0);
-						totalCost = 0;
-						setZero();
-						lblCost.setVisible(true);
-						lblCostOfCart.setVisible(true);
 						int remove = monsters.indexOf(monster);
 						monsters.remove(remove);
-						cartDisplay.clear();
-						kennel.clear();
 					}
+					lblUserMoney.setText("$"+manager.getPlayer().getMoney());
+					lblCostOfCart.setText("$"+0);
+					totalCost = 0;
+					setZero();
+					lblCost.setVisible(true);
+					lblCostOfCart.setVisible(true);
+					cartDisplay.clear();
+					kennel.clear();
 				}
 				else if (current == "SI") {
 					for (int i = 0; i < cart.getSize(); i++) {
@@ -515,21 +542,19 @@ public class ShopScreen {
 						Monster monster = kennel.getFriend(i);
 						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
 						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, manager.getPlayer());
-						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
-						lblCostOfCart.setText("$"+0);
-						totalCost = 0;
-						setZero();
-						lblCost.setVisible(true);
-						lblCostOfCart.setVisible(true);
-						cartDisplay.clear();
-						kennel.clear();
-						
 					}
+					lblUserMoney.setText("$"+manager.getPlayer().getMoney());
+					lblCostOfCart.setText("$"+0);
+					totalCost = 0;
+					setZero();
+					lblCost.setVisible(true);
+					lblCostOfCart.setVisible(true);
+					cartDisplay.clear();
+					kennel.clear();
 				}
 				else if (manager.getPlayer().getMoney() < totalCost) {
 					verify.show(panelVerify, "Broke");
 				}
-				System.out.println(current);
 				closeWindow();
 				manager.launchShopScreen(num);
 			}
@@ -549,14 +574,13 @@ public class ShopScreen {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblPlyrMoney, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(lblUserMoney, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-							.addGap(62)
-							.addComponent(lblAddItem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
-							.addGap(246))
+							.addComponent(lblUserMoney, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+							.addGap(146)
+							.addComponent(lblAddItem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(panelfill1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 							.addGap(2)
@@ -587,7 +611,7 @@ public class ShopScreen {
 								.addComponent(btnBuyMnstr, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-					.addGap(10))
+					.addGap(8))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)

@@ -52,8 +52,10 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(grassMonsterToAdd);
 				closeWindow();
+				manager.createShop();
 				manager.setTrainerListD1();
 				manager.launchPrepScreen(num, manager.isAbleToFight());
+				
 				
 			}
 		});
@@ -63,6 +65,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(fireMonsterToAdd);
 				closeWindow();
+				manager.createShop();
 				manager.setTrainerListD1();
 				manager.launchPrepScreen(num, manager.isAbleToFight());
 			}
@@ -73,6 +76,7 @@ public class ChooseMonsterScreen {
 			public void actionPerformed(ActionEvent e) {
 				manager.getPlayer().getTeam().addFriend(waterMonsterToAdd);
 				closeWindow();
+				manager.createShop();
 				manager.setTrainerListD1();
 				manager.launchPrepScreen(num, manager.isAbleToFight());
 			}
