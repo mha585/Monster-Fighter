@@ -19,7 +19,10 @@ public class PrepScreen {
 	private boolean canPressFight;
 
 	/**
-	 * Create the application.
+	 * Create the prep screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param number 			The RandomGen used to generate random events
+	 * @param canFight 			Checks if the player can fight yet
 	 */
 	public PrepScreen(MonsterManager incomingManager, RandomGen number, boolean canFight) {
 		manager = incomingManager;
@@ -28,18 +31,22 @@ public class PrepScreen {
 		initialize();
 		prepScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		prepScreen.dispose();
 	}
-	
+	/**
+	 * checks if its the final day
+	 * @return 		boolean of if its the final day
+	 */
 	public boolean isItTheFinalDay() {
 		if (manager.getPlayer().getCurrentDay() >= manager.getPlayer().getPlayerDay()) {
 			return true;
 		}
 		return false;
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -130,9 +137,9 @@ public class PrepScreen {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(398, Short.MAX_VALUE)
+					.addGap(408)
 					.addComponent(btnFight, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addGap(379))
+					.addContainerGap(379, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(29)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -141,7 +148,7 @@ public class PrepScreen {
 							.addGap(18)
 							.addComponent(lblDayNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnTeam, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+					.addGap(64)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblPoints)
@@ -155,11 +162,11 @@ public class PrepScreen {
 							.addGap(18)
 							.addComponent(lblMoneyNum, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnBattles, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE))
-					.addGap(34))
+					.addContainerGap(34, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(356, Short.MAX_VALUE)
+					.addGap(366)
 					.addComponent(lblViewBattlesInstructions, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-					.addGap(333))
+					.addContainerGap(333, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

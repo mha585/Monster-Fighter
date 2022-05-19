@@ -40,7 +40,7 @@ public class ShopScreen {
 	private MonsterManager manager;
 	private RandomGen num;
 	private Player user;
-	private Shop newShop; 
+	private Shop newShop;
 	List<Item> items = new ArrayList<Item>();
 	List<RandomMonster> monsters = new ArrayList<RandomMonster>();
 	int totalCost = 0;
@@ -63,8 +63,9 @@ public class ShopScreen {
 //	}
 
 	/**
-	 * Create the application.
-	 * @param number 
+	 * Create the shop screen.
+	 * @param incomingManager	the manager that manages all the data across the pages
+	 * @param number 			the randomGen used to generate random numbers
 	 */
 	public ShopScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -73,19 +74,29 @@ public class ShopScreen {
 		initialize();
 		shopFrame.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		shopFrame.dispose();
 	}
-	
+	/**
+	 * sets the total cost to zero
+	 */
 	public void setZero() {
 		totalCost = 0;
 	}
-	
+	/**
+	 * adds cost to total cost
+	 * @param num 	the amount being added
+	 */
 	public void addCost(int num) {
 		totalCost += num;
 	}
-
+	/**
+	 * creates an item
+	 * @param item	 	The item being created
+	 */
 	public Item createItem(Item item) {
 		String itemName = item.getName();
 		int itemCost = item.getPrice();
@@ -105,33 +116,33 @@ public class ShopScreen {
 
 		items = newShop.getItems();
 		monsters = newShop.getMonsters();
-		
+
 		JLabel lblPlyrMoney = new JLabel("Money:");
 		lblPlyrMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
-		
+
+
 		JLabel lblCost = new JLabel("Total Cost:");
 		lblCost.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		JLabel lblCostOfCart = new JLabel("$"+totalCost);
 		lblCostOfCart.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JPanel shopPanel = new JPanel();
 		CardLayout CL = new CardLayout(0,0);
 		shopPanel.setLayout(CL);
-		
+
 		DefaultListModel<Object> cartDisplay = new DefaultListModel<Object>();
 		Inventory cart = new Inventory();
 		Team kennel = new Team();
-		
+
 		JPanel panelfill1 = new JPanel();
 		JPanel panelfill2 = new JPanel();
-		
+
 		JLabel lblUserMoney = new JLabel("$"+manager.getPlayer().getMoney());
 		lblUserMoney.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
+
 		JLabel lblAddItem = new JLabel("Double click on an item/ monster to add it to your cart");
-		
+
 		JLabel lblStart = new JLabel("");
 		JLabel lblBroke = new JLabel("Insufficient Funds");
 		lblBroke.setForeground(Color.RED);
@@ -152,8 +163,8 @@ public class ShopScreen {
 		panelVerify.add(lblZero, "Zero");
 		panelVerify.add(lblSameMon, "Same");
 		panelVerify.add(lblLastMon, "Last");
-		
-		
+
+
 		JList<Object> JLShoppingCart = new JList<Object>(cartDisplay);
 		JLShoppingCart.setEnabled(true);
 		JLShoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -221,12 +232,12 @@ public class ShopScreen {
 		DefaultListModel<Object> itemDisplay = new DefaultListModel<Object>();
 		for (int i = 0; i < newShop.getItems().size(); i++) {
 			Item item = (Item) newShop.getItems().get(i);
-			itemDisplay.addElement("<html>" + item.getName() + ": " + item.getDescription() + 
+			itemDisplay.addElement("<html>" + item.getName() + ": " + item.getDescription() +
 											"<br>Cost: $"+item.getPrice() +
-											"<br> ----------" + 
+											"<br> ----------" +
 											"</span></html>");
 		}
-		
+
 		DefaultListModel<Object> monsterDisplay = new DefaultListModel<Object>();
 		for (int i = 0; i < newShop.getMonsters().size(); i++) {
 			Monster monster = (Monster) newShop.getMonsters().get(i);
@@ -237,19 +248,19 @@ public class ShopScreen {
 										"<br>Speed: " + monster.getSpeed() +
 										"<br>Tier: " + monster.getTier() +
 										"<br>Cost: $" + monster.getPrice() +
-										"<br> ----------" + 
+										"<br> ----------" +
 										"</span></html>");
 		}
 		DefaultListModel<Object> itemUsrDisplay = new DefaultListModel<Object>();
 		for (int i = 0; i < manager.getPlayer().getInventory().getSize(); i++) {
 			Item item = (Item) manager.getPlayer().getInventory().getItem(i);
-			itemUsrDisplay.addElement("<html>" + item.getName() + ": " + item.getDescription() + 
-												"<br>Selling Price: " + item.sellPrice() + 
+			itemUsrDisplay.addElement("<html>" + item.getName() + ": " + item.getDescription() +
+												"<br>Selling Price: " + item.sellPrice() +
 												"<br>Amount in bag: " + item.getFrequency() +
-												"<br> ----------" + 
+												"<br> ----------" +
 												"</span></html>");
 		}
-		
+
 		DefaultListModel<Object> monsterUsrDisplay = new DefaultListModel<Object>();
 		for (int i = 0; i < manager.getPlayer().getTeam().getSize(); i++) {
 			Monster monster = (Monster) manager.getPlayer().getTeam().getFriend(i);
@@ -260,10 +271,10 @@ public class ShopScreen {
 					"<br>Speed: " + monster.getSpeed() +
 					"<br>Tier: " + monster.getTier() +
 					"<br>Selling Price: $" + monster.sellPrice() +
-					"<br> ----------" + 
+					"<br> ----------" +
 					"</span></html>");
 		}
-		
+
 		JList listBuyItm = new JList((ListModel) itemDisplay);
 		listBuyItm.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listBuyItm.addMouseListener(new MouseAdapter() {
@@ -290,7 +301,7 @@ public class ShopScreen {
 			}
 		});
 		shopPanel.add(new JScrollPane(listBuyItm), "BuyItems");
-		
+
 		JList listBuyMnstr = new JList((ListModel) monsterDisplay);
 		listBuyMnstr.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listBuyMnstr.addMouseListener(new MouseAdapter() {
@@ -310,7 +321,7 @@ public class ShopScreen {
 						else {
 							verify.show(panelVerify, "Same");
 						}
-					}	
+					}
 					else {
 						verify.show(panelVerify, "TooMany");
 					}
@@ -318,7 +329,7 @@ public class ShopScreen {
 			}
 		});
 		shopPanel.add(new JScrollPane(listBuyMnstr), "BuyMonsters");
-		
+
 		JList listSellMnstr = new JList(monsterUsrDisplay);
 		listSellMnstr.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listSellMnstr.addMouseListener(new MouseAdapter() {
@@ -339,11 +350,11 @@ public class ShopScreen {
 				}
 			}
 		});
-		
+
 		shopPanel.add(new JScrollPane(listSellMnstr), "SellMonsters");
 
-		
-		
+
+
 		JList listSellItm = new JList(itemUsrDisplay);
 		listSellItm.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listSellItm.addMouseListener(new MouseAdapter() {
@@ -371,15 +382,15 @@ public class ShopScreen {
 				}
 			}
 		});
-		
+
 		shopPanel.add(new JScrollPane(listSellItm), "SellItems");
-		
+
 		JButton btnBuyItm = new JButton("Buy Items");
 		btnBuyItm.setEnabled(false);
 		btnBuyItm.setSelected(true);
 
 		JButton btnSellMnstr = new JButton("Sell Monsters");
-		
+
 		JButton btnSellItm = new JButton("Sell Items");
 
 		JButton btnBuyMnstr = new JButton("Buy Monsters\r\n");
@@ -462,7 +473,7 @@ public class ShopScreen {
 				kennel.clear();
 				cart.clear();
 				current = "SM";
-				
+
 			}
 		});
 		JButton btnExitShop = new JButton("Exit");
@@ -473,7 +484,7 @@ public class ShopScreen {
 				manager.launchNightScreen(num);
 			}
 		});
-		
+
 
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.addActionListener(new ActionListener() {
@@ -559,15 +570,15 @@ public class ShopScreen {
 				manager.launchShopScreen(num);
 			}
 		});
-		
+
 		JLabel lblRemoveItem = new JLabel("Double click on an item/monster to remove it from your cart");
 
-		
-
-		
 
 
-		
+
+
+
+
 
 		GroupLayout groupLayout = new GroupLayout(shopFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -576,49 +587,52 @@ public class ShopScreen {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPlyrMoney, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(lblUserMoney, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-							.addGap(62)
-							.addComponent(lblAddItem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
-							.addGap(246))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panelfill1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addGap(2)
-							.addComponent(shopPanel, GroupLayout.PREFERRED_SIZE, 838, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panelfill2, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblRemoveItem)
-								.addComponent(JLShoppingCart, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(JLShoppingCart, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblCostOfCart, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblCost, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnConfirm)
-									.addPreferredGap(ComponentPlacement.RELATED))
-								.addComponent(panelVerify, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-							.addGap(13)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnBuyItm, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnSellItm, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnSellMnstr, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnBuyMnstr, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-					.addGap(10))
+									.addGap(13)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnBuyItm, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnSellItm, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnBuyMnstr, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnSellMnstr, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblPlyrMoney, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblUserMoney, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblAddItem, GroupLayout.PREFERRED_SIZE, 402, GroupLayout.PREFERRED_SIZE)
+									.addGap(229))
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addGap(8)
+									.addComponent(panelfill1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+									.addGap(2)
+									.addComponent(shopPanel, GroupLayout.PREFERRED_SIZE, 838, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(panelfill2, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)))
+							.addGap(10))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblRemoveItem)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panelVerify, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(358, Short.MAX_VALUE))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblPlyrMoney)
 							.addComponent(lblUserMoney))
@@ -629,32 +643,31 @@ public class ShopScreen {
 						.addComponent(panelfill1, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panelfill2, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblRemoveItem, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panelVerify, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(JLShoppingCart, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(11)
+									.addComponent(lblCost)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblCostOfCart))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
 							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblRemoveItem, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnBuyItm, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnBuyMnstr, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(JLShoppingCart, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(panelVerify, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(11)
-										.addComponent(lblCost)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(lblCostOfCart))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnBuyItm, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnBuyMnstr, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnSellMnstr, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnSellItm, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnSellMnstr, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnSellItm, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap())
 		);
 

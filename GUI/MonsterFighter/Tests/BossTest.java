@@ -38,7 +38,8 @@ class BossTest {
 	    myBoss.printBossFight();
 
 	    String fight = outputStreamContent.toString();
-	    assertEquals(695, fight.length());
+//	    checks the length of the fight (all the monsters stats) are in an expected range
+	    assertTrue(680 <= fight.length() && fight.length() <= 700);
 	}
 	
 	@Test

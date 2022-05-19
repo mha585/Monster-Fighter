@@ -27,7 +27,9 @@ public class StartUpScreen {
 	private RandomGen num;
 
 	/**
-	 * Create the application.
+	 * Create the start up screen.
+	 * @param incomingManager	the manager that manages all the data across the pages 
+	 * @param number 			the randomGen used to generate random numbers for the rest of the game
 	 */
 	public StartUpScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
@@ -35,11 +37,12 @@ public class StartUpScreen {
 		initialize();
 		startupScreen.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		startupScreen.dispose();
 	}
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -174,22 +177,22 @@ public class StartUpScreen {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblDay)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblDiff, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
-									.addGap(33)
+									.addComponent(lblDiff, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(spinnerDiff, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 401, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED, 472, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblName)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
 											.addComponent(lblReqLen)
-											.addPreferredGap(ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
 											.addComponent(lblSuccess, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
-										.addComponent(tfName, GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+										.addComponent(tfName, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
 										.addComponent(lblReqAlpha))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnSubmitButton)
@@ -224,8 +227,8 @@ public class StartUpScreen {
 						.addComponent(spinnerDiff, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 					.addGap(55)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDay))
+						.addComponent(lblDay)
+						.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 					.addGap(41)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)

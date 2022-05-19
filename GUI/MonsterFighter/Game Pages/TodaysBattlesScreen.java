@@ -23,9 +23,10 @@ public class TodaysBattlesScreen {
 	private ArrayList<Trainers> possibleTrainers;
 
 	/**
-	 * Create the application.
-	 * @param trainerBattles 
-	 * @param previousPage 
+	 * Create the todays battles screen.
+	 * @param incomingManager 	The manager that manages all the data across the pages 
+	 * @param number 			The randomGen used to generate random numbers
+	 * @param trainerBattles 	The array list of current days battles
 	 */
 	public TodaysBattlesScreen(MonsterManager incomingManager, RandomGen number, ArrayList<Trainers> trainerBattles) {
 		manager = incomingManager;
@@ -34,11 +35,12 @@ public class TodaysBattlesScreen {
 		initialize();
 		newBattleFrames.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		newBattleFrames.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -237,10 +239,9 @@ public class TodaysBattlesScreen {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblInstrct, GroupLayout.PREFERRED_SIZE, 707, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(5)
 							.addComponent(TADiplayTrainer1, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(TADiplayTrainer2, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
@@ -250,10 +251,10 @@ public class TodaysBattlesScreen {
 							.addComponent(TADiplayTrainer4, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 							.addGap(6)
 							.addComponent(TADiplayTrainer5, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblReq)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(chckbxTrainer1, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -296,7 +297,7 @@ public class TodaysBattlesScreen {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblReq, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		newBattleFrames.getContentPane().setLayout(groupLayout);
 	}

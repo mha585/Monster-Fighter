@@ -14,18 +14,20 @@ public class WinScreen {
 	private MonsterManager manager;
 
 	/**
-	 * Create the application.
+	 * Create the win screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
 	 */
 	public WinScreen(MonsterManager incomingManager) {
 		manager = incomingManager;
 		initialize();
 		winFrame.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		winFrame.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

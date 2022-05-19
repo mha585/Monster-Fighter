@@ -16,18 +16,20 @@ public class LoseScreen {
 	private MonsterManager manager;
 
 	/**
-	 * Create the application.
+	 * Create the lose screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
 	 */
 	public LoseScreen(MonsterManager incomingManager) {
 		manager = incomingManager;
 		initialize();
 		loseFrame.setVisible(true);
 	}
-	
+	/**
+	 * Closes the window
+	 */
 	public void closeWindow() {
 		loseFrame.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */

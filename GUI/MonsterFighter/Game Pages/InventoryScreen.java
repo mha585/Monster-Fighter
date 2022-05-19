@@ -28,7 +28,10 @@ public class InventoryScreen {
 	private RandomGen number;
 
 	/**
-	 * Create the application.
+	 * Create the inventory screen.
+	 * @param incomingManager 	The manager responsible for creating this screen
+	 * @param previous 			The previous page the player was on
+	 * @param num		 		The RandomGen used to generate random numbers
 	 */
 	public InventoryScreen(MonsterManager incomingManager, String previous, RandomGen num) {
 		manager = incomingManager;
@@ -37,11 +40,12 @@ public class InventoryScreen {
 		initialize();
 		bagScreen.setVisible(true);
 	}
-	
+	/**
+	 * closes the window
+	 */
 	public void closeWindow() {
 		bagScreen.dispose();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -99,14 +103,14 @@ public class InventoryScreen {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(42)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(btnNewButton))
 							.addComponent(itemJList, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 862, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(40, Short.MAX_VALUE))
+					.addContainerGap(54, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -119,7 +123,7 @@ public class InventoryScreen {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)
 						.addComponent(btnNewButton))
-					.addContainerGap(39, Short.MAX_VALUE))
+					.addContainerGap(17, Short.MAX_VALUE))
 		);
 		bagScreen.getContentPane().setLayout(groupLayout);
 	}
