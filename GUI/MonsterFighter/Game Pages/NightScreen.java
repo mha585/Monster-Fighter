@@ -170,6 +170,9 @@ public class NightScreen {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setText("Today you defeated " + manager.getAmountOfMonsterKilledToaday() + " monsters");
+		
+		JLabel lblDaysBeforeBoss = new JLabel("");
+		lblDaysBeforeBoss.setText("You have " + (manager.getPlayer().daysLeft() - 1) + " days to go before the boss");
 		GroupLayout gl_panelMain = new GroupLayout(panelMain);
 		gl_panelMain.setHorizontalGroup(
 			gl_panelMain.createParallelGroup(Alignment.TRAILING)
@@ -185,10 +188,10 @@ public class NightScreen {
 									.addGroup(gl_panelMain.createSequentialGroup()
 										.addGap(242)
 										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lbleventDescriptionHere, GroupLayout.PREFERRED_SIZE, 677, GroupLayout.PREFERRED_SIZE)
 									.addGroup(gl_panelMain.createSequentialGroup()
 										.addGap(228)
-										.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
-									.addComponent(lbleventDescriptionHere, GroupLayout.PREFERRED_SIZE, 677, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)))
 								.addGap(65))
 							.addGroup(gl_panelMain.createSequentialGroup()
 								.addComponent(lblSuddenlyInThe, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
@@ -198,10 +201,13 @@ public class NightScreen {
 								.addGap(335))
 							.addGroup(gl_panelMain.createSequentialGroup()
 								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-								.addGap(358)))
+								.addGap(358))
+							.addGroup(gl_panelMain.createSequentialGroup()
+								.addComponent(lblYourMonsterGet, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
+								.addGap(173)))
 						.addGroup(Alignment.TRAILING, gl_panelMain.createSequentialGroup()
-							.addComponent(lblYourMonsterGet, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
-							.addGap(173))))
+							.addComponent(lblDaysBeforeBoss, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
+							.addGap(234))))
 		);
 		gl_panelMain.setVerticalGroup(
 			gl_panelMain.createParallelGroup(Alignment.LEADING)
@@ -212,7 +218,9 @@ public class NightScreen {
 					.addComponent(lblNewLabel_1)
 					.addGap(18)
 					.addComponent(lblNewLabel_1_1)
-					.addGap(59)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblDaysBeforeBoss)
+					.addGap(34)
 					.addComponent(lblRandom)
 					.addGap(32)
 					.addComponent(lblSuddenlyInThe)
@@ -222,7 +230,7 @@ public class NightScreen {
 					.addComponent(lblYourMonsterGet)
 					.addGap(18)
 					.addComponent(btnNewButton)
-					.addContainerGap(69, Short.MAX_VALUE))
+					.addContainerGap(71, Short.MAX_VALUE))
 		);
 		panelMain.setLayout(gl_panelMain);
 		nightFrame.getContentPane().setLayout(groupLayout);
