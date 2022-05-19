@@ -69,7 +69,7 @@ public class ShopScreen {
 	public ShopScreen(MonsterManager incomingManager, RandomGen number) {
 		manager = incomingManager;
 		num = number;
-		newShop = new Shop(incomingManager.getPlayer(), num);
+		newShop = manager.getShop();
 		initialize();
 		shopFrame.setVisible(true);
 	}
@@ -134,11 +134,24 @@ public class ShopScreen {
 		
 		JLabel lblStart = new JLabel("");
 		JLabel lblBroke = new JLabel("Insufficient Funds");
+		lblBroke.setForeground(Color.RED);
+		JLabel lblManyMonsters = new JLabel("Too Many Monsters");
+		lblManyMonsters.setForeground(Color.RED);
+		JLabel lblZero = new JLabel("No More Items");
+		lblZero.setForeground(Color.RED);
+		JLabel lblSameMon = new JLabel("Monster already in Cart");
+		lblSameMon.setForeground(Color.RED);
+		JLabel lblLastMon = new JLabel("Cannot Sell Last Monster");
+		lblLastMon.setForeground(Color.RED);
 		JPanel panelVerify = new JPanel();
 		CardLayout verify = new CardLayout(0, 0);
 		panelVerify.setLayout(verify);
 		panelVerify.add(lblStart," ");
 		panelVerify.add(lblBroke, "Broke");
+		panelVerify.add(lblManyMonsters, "TooMany");
+		panelVerify.add(lblZero, "Zero");
+		panelVerify.add(lblSameMon, "Same");
+		panelVerify.add(lblLastMon, "Last");
 		
 		
 		JList<Object> JLShoppingCart = new JList<Object>(cartDisplay);
@@ -267,7 +280,6 @@ public class ShopScreen {
 						totalCost = cartCost;
 					}
 					else {
-						System.out.println("Both time should come here");
 						cartDisplay.addElement(items.get(itemIndex).getName());
 						cart.addtoBag(items.get(itemIndex), 1);
 						cartCost += items.get(itemIndex).getPrice();
@@ -296,11 +308,11 @@ public class ShopScreen {
 							totalCost = cartCost;
 						}
 						else {
-							System.out.println("Monster already in cart");
+							verify.show(panelVerify, "Same");
 						}
 					}	
 					else {
-						System.out.println("There are too many monsters");
+						verify.show(panelVerify, "TooMany");
 					}
 				}
 			}
@@ -319,12 +331,11 @@ public class ShopScreen {
 						kennel.addFriend(manager.getPlayer().getTeam().getFriend(mnstrIndex));
 					}
 					else if(((List<Monster>) kennel).contains(manager.getPlayer().getTeam().getFriend(mnstrIndex))) {
-						System.out.println("You cannot sell the same monster twice");
+						verify.show(panelVerify, "Same");
 					}
 					else if(manager.getPlayer().getTeam().getSize() == 1) {
-						System.out.println("You cannot sell your last monster");
+						verify.show(panelVerify, "Last");
 					}
-					
 				}
 			}
 		});
@@ -348,7 +359,7 @@ public class ShopScreen {
 							cart.getItem(cartIndex).addFreq(1);
 						}
 						else {
-							System.out.println("you've got no more items mate");
+							verify.show(panelVerify, "Zero");
 						}
 					}
 					else if (cartDisplay.contains(item.getName()) == false) {
@@ -476,7 +487,6 @@ public class ShopScreen {
 				}
 				if (manager.getPlayer().getMoney() >= totalCost && current == "BI") {
 					for (int i = 0; i < cart.getSize(); i++) {
-						System.out.println(cart);
 						for (int j = 0; j < cart.getItem(i).getFrequency(); j++) {
 							Item item = (Item) cart.getItem(i);
 							int oldFreq = item.getFrequency();
@@ -499,17 +509,17 @@ public class ShopScreen {
 						Monster monster = kennel.getFriend(i);
 						manager.getPlayer().getTeam().addFriend(monster);
 						manager.getPlayer().addMoney(-1 * monster.getPrice());
-						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
-						lblCostOfCart.setText("$"+0);
-						totalCost = 0;
-						setZero();
-						lblCost.setVisible(true);
-						lblCostOfCart.setVisible(true);
 						int remove = monsters.indexOf(monster);
 						monsters.remove(remove);
-						cartDisplay.clear();
-						kennel.clear();
 					}
+					lblUserMoney.setText("$"+manager.getPlayer().getMoney());
+					lblCostOfCart.setText("$"+0);
+					totalCost = 0;
+					setZero();
+					lblCost.setVisible(true);
+					lblCostOfCart.setVisible(true);
+					cartDisplay.clear();
+					kennel.clear();
 				}
 				else if (current == "SI") {
 					for (int i = 0; i < cart.getSize(); i++) {
@@ -532,21 +542,19 @@ public class ShopScreen {
 						Monster monster = kennel.getFriend(i);
 						int index = manager.getPlayer().getTeam().getIndex(monster.getName());
 						manager.getPlayer().getTeam().sellMonster(index, monster.getTier() - 1, newShop, manager.getPlayer());
-						lblUserMoney.setText("$"+manager.getPlayer().getMoney());
-						lblCostOfCart.setText("$"+0);
-						totalCost = 0;
-						setZero();
-						lblCost.setVisible(true);
-						lblCostOfCart.setVisible(true);
-						cartDisplay.clear();
-						kennel.clear();
-						
 					}
+					lblUserMoney.setText("$"+manager.getPlayer().getMoney());
+					lblCostOfCart.setText("$"+0);
+					totalCost = 0;
+					setZero();
+					lblCost.setVisible(true);
+					lblCostOfCart.setVisible(true);
+					cartDisplay.clear();
+					kennel.clear();
 				}
 				else if (manager.getPlayer().getMoney() < totalCost) {
 					verify.show(panelVerify, "Broke");
 				}
-				System.out.println(current);
 				closeWindow();
 				manager.launchShopScreen(num);
 			}
@@ -570,8 +578,8 @@ public class ShopScreen {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblPlyrMoney, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(lblUserMoney, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-							.addGap(202)
+							.addComponent(lblUserMoney, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+							.addGap(146)
 							.addComponent(lblAddItem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(panelfill1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
@@ -619,28 +627,25 @@ public class ShopScreen {
 						.addComponent(shopPanel, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panelfill1, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panelfill2, GroupLayout.PREFERRED_SIZE, 345, GroupLayout.PREFERRED_SIZE))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(lblRemoveItem, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(JLShoppingCart, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(panelVerify, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addGap(11)
+										.addComponent(lblCost)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblCostOfCart))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblRemoveItem, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(JLShoppingCart, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(panelVerify, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(11)
-											.addComponent(lblCost)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(lblCostOfCart))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))))
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnBuyItm, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnBuyMnstr, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
@@ -648,8 +653,8 @@ public class ShopScreen {
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnSellMnstr, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnSellItm, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-							.addContainerGap())))
+								.addComponent(btnExitShop, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap())
 		);
 
 		shopFrame.getContentPane().setLayout(groupLayout);;
