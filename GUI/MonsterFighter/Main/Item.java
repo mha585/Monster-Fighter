@@ -26,10 +26,6 @@ public class Item implements Purchasable{
 	 */
 	private int totalFrequency;
 	/**
-	 * The situation where an item can be used.
-	 */
-	private String itemUse;
-	/**
 	 * The amount an item effects a stat by.
 	 */
 	private int itemEffect;
@@ -88,14 +84,6 @@ public class Item implements Purchasable{
 		return itemSell;
 	}
 	/**
-	 * Returns the situations where an item can be used.
-	 * 
-	 * @return the situations where an item can be used
-	 */
-	public String whenToUse() {
-		return itemUse;
-	}
-	/**
 	 * Returns the amount that the item will effect a given stat by.
 	 * 
 	 * @return Int indicative of the amount the item will effect a given stat by.
@@ -135,14 +123,6 @@ public class Item implements Purchasable{
 	 */
 	public void addFreq(int freq) {
 		totalFrequency += freq;
-	}
-	/**
-	 * Returns the item as its frequency and name.
-	 * 
-	 * @return string of an item's frequency and name
-	 */
-	public String toString() {
-		return getFrequency() + "x " + getName();
 	}
 	/**
 	 * Uses an item in the player's inventory.

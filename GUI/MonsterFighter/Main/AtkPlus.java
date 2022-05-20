@@ -24,7 +24,7 @@ public class AtkPlus extends Item{
 	/**
 	 * The amount a monsters attack will increase by.
 	 */
-	private static int itemEffect = 10;
+	private static int itemEffect = 20;
 	/**
 	 * The stat that Attack Plus effects.
 	 */

@@ -1,22 +1,20 @@
-
-
 public class WaterMonster extends Monster{
 	/**
-	 * The description of WaterMonster
+	 * The description of WaterMonster.
 	 */
 	private static String description = "A watery monster, try to use against fire monsters";
 	/**
-	 * The price of WaterMonster
+	 * The price of WaterMonster.
 	 */
 	private static int price = 200;
 	/**
-	 * The selling price of WaterMonster
+	 * The selling price of WaterMonster.
 	 */
 	private static int sell = 150;
 	/**
 	 * The basic constructor for the WaterMonster class
 	 * used when all values but type are given
-	 * manually updates the type to "Water"
+	 * manually updates the type to "Water".
 	 * @param name			The name of the WaterMonster
 	 * @param maxHealth		The maxHealth of the WaterMonster
 	 * @param healAmount	The healAmount of the WaterMonster
@@ -42,7 +40,7 @@ public class WaterMonster extends Monster{
 		super.setType("Water");
 	}
 	/**
-	 * Generates a string representation of the WaterMonster
+	 * Generates a string representation of the WaterMonster.
 	 */
 	public String toString() {
 		return super.toString() + "\nType: " + super.getType();

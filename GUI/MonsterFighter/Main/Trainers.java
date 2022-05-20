@@ -33,13 +33,14 @@ public class Trainers {
 			"Eric", "Ali", "Beatriz", "Charlies", "Gabriel", "Hanna", "Netta", "Grant", "Fidel", "Emmie", "Ally", "Minnie",
 			"Jeanette", "Dre", "Franz", "Izumi", "Naomi", "Xiulan", "Hu Tao", "Miki", "Walter", "Doug", "Shelly", "Jasmine", "Ariel",
 			"Ben", "Ken", "Denzel", "Mary", "Peter", "Jeanette", "Lily", "Ysabel", "Rem", "Mandy", "Billie");
-	
+	/**
+	 * Random number created using RandomGen.
+	 */
 	private RandomGen number;
 	/**
 	 * Basic constructor for Trainer class.
 	 * 
 	 * @param player		The player
-	 * @param randomNum		The random number used to get randomNumbers
 	 */
 	public Trainers(Player player, RandomGen randomNum) {
 		int randomName = randomNum.randNumInRange(0, trainerName.size());
@@ -49,11 +50,13 @@ public class Trainers {
 		RandomMonster monster = new RandomMonster(player, randomNum);
 		enemyTeam.add(monster);
 	}
-	
-	public Trainers() {}
-	
 	/**
-	 * adds a monster to the trainers team
+	 * Constructor for Trainer class without any parameters.
+	 */
+	public Trainers() {}
+	/**
+	 * Add monster to the enemies party.
+	 * @param monster 		The monster to be added.
 	 */
 	public void addMonster(Monster monster) {
 		enemyTeam.add(monster);

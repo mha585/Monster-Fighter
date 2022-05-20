@@ -11,14 +11,6 @@ public class Inventory {
 	 */
 	private ArrayList<Object> bag = new ArrayList <>();
 	/**
-	 * Returns the contents of the bag.
-	 * 
-	 * @return Object of type Inventory
-	 */
-	public ArrayList<Object> getBag() {
-		return bag;
-	}
-	/**
 	 * Returns the size of the bag. The size correlates to number of unique items.
 	 * 
 	 * @return an integer of the size of the bag.
@@ -32,8 +24,8 @@ public class Inventory {
 	 * @param i			Counter to get i-th item in bag
 	 * @return			Object of parent class Item
 	 */
-	public Item getItem(int i) {
-		return (Item) bag.get(i);
+	public Item getItem(int index) {
+		return (Item) bag.get(index);
 	}
 	/**
 	 * returns index of given item in player's bag
@@ -127,22 +119,5 @@ public class Inventory {
 	 */
 	public void clear() {
 		bag.clear();
-	}
-	/**
-	 * Returns a string representation of the player's inventory
-	 * 
-	 * @return a new line
-	 */
-	public String toString() {
-		if (bag.size() == 0) {
-			return "Your bag is empty\n";
-		} else {
-			System.out.println("Inventory: ");
-			for (int i = 0; i < bag.size();i++) {
-				Item item = (Item) bag.get(i);
-				System.out.println("("+(i+1)+")"+item.getFrequency() + "x " + item.getName()+" - - - "+item.getDescription());
-			}
-		}	
-		return "\n";
 	}
 }

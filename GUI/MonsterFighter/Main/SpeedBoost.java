@@ -24,7 +24,7 @@ public class SpeedBoost extends Item {
 	/**
 	 * The amount a monster's speed will increase by.
 	 */
-	private static int itemEffect = 20;
+	private static int itemEffect = 10;
 	/**
 	 * The stat that Speed Boost effects.
 	 */

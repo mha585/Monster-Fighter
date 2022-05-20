@@ -212,56 +212,11 @@ public class Player {
 	public void deductMoney(int moneyLost) {
 		currentMoney -= moneyLost;
 	}
-	/** 
-	 * Returns each monster in the player's party as a string.
-	 * 
-	 * @param currentTeam		The player's team
-	 * @return each monster in the ArrayList "playerParty" in String form
-	 */
-	public String partyToString(Team currentTeam) {
-		return currentTeam.toString();
-	}
 	/**
-	 * Returns each item in the player's bag as a string.
-	 * 
-	 * @param currentBag		The player's bag
-	 * @return each item in the player's bag in String form
-	 */
-	public String bagToString(Inventory currentBag) {
-		return currentBag.toString();
-	}
-	/**
-	 * Returns the names of the monsters in the player's party as a string.
-	 * 
-	 * @return the names of the monsters in the player's party in string form
-	 */
-	public ArrayList<String> getTeamNames() {
-		for(int i = 0; i < playerTeam.getSize(); i++){
-			myTeamNames.add(((Team) playerTeam).getFriend(i).getName());
-		}
-		return myTeamNames;
-	}
-	/**
-	 * Sets the playerDays to equal currentDay to end the game.
-	 */
-	public void abruptEnd() {
-		playerDays = currentDay;
-	}
-	/**
-	 * Gets the current day the player is on
+	 * return the current amount of days the player has completed
+	 * @return the days the player has completed
 	 */
 	public int getPlayerDay() {
 		return playerDays;
-	}
-	/**
-	 * Returns the player, their bag, their money, their party, their team, and the days left as a string.
-	 * 
-	 * @return Player in String form
-	 */
-	public String toString() {
-		System.out.println("\nCurrent Day: " + getCurrentDay() + "\nDays Left: " + daysLeft() + "\nMoney: $" + getMoney() + "\n\nParty:");
-		System.out.println(partyToString(playerTeam) + "\n\nBag:");
-		System.out.println(bagToString(playerBag));
-		return "";
 	}
 }

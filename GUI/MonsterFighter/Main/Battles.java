@@ -1,4 +1,3 @@
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -13,7 +12,6 @@ import java.util.Scanner;
  * @version 1.4, Apr 2022.
  */
 public class Battles {
-	
 	/**
 	 * Generates all the possible battles the player can fight in a day
 	 * @param numBattles			The number of battles the player wants to fight in a day

@@ -23,7 +23,7 @@ public class Revive extends Item{
 	/**
 	 * The amount a monsters attack will increase by.
 	 */
-	private static int itemEffect = 1000000;
+	private static int itemEffect = 0;
 	/**
 	 * The status that Revive effects.
 	 */
