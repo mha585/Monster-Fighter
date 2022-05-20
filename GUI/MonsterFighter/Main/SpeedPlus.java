@@ -24,7 +24,7 @@ public class SpeedPlus extends Item{
 	/**
 	 * The amount speed is increased by.
 	 */
-	private static int itemEffect = 10;
+	private static int itemEffect = 20;
 	/**
 	 * The stat that Speed Plus effects.
 	 */

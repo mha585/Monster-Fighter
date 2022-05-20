@@ -8,7 +8,7 @@ import java.util.List;
  * @author Angelo  Gasmin
  * @version 1.0
  */
-public class Team extends Monster{
+public class Team{
 	/**
 	 * Creates a new instance of an ArrayList that will hold the player's monsters.
 	 */
@@ -108,24 +108,6 @@ public class Team extends Monster{
 		}
 	}
 	/**
-	 * Returns the monsters in the team as a String.
-	 * This includes their name and their stats.
-	 * 
-	 * @return a String of monsters
-	 */
-	public String printFriends() {
-		String friendString = "";
-		if (myTeam.size() == 0) {
-		  return "No monsters in current team";
-		}
-		for (int i = 0; i< myTeam.size(); i++) {
-			friendString += "Team member " + (i + 1) +
-			":\n\n"+myTeam.get(i).toString() + "\n\n" +
-			"-------------------------------------\n";
-		}
-	  return friendString;
-	}
-	/**
 	 * Swaps the position of two monsters in your party.
 	 * 
 	 * @param index1		The first monster to be swapped
@@ -157,14 +139,6 @@ public class Team extends Monster{
 			currentHealthSum += ((Monster) myTeam.get(i)).getHealth();
 		  }
 		return currentHealthSum;
-	}
-	/**
-	 * Returns the team in string form.
-	 * 
-	 * @return an string representation of the team
-	 */
-	public String toString() {
-		return printFriends();
 	}
 	/**
 	 * gets the index of a monster

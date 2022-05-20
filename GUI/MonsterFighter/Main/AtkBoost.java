@@ -24,7 +24,7 @@ public class AtkBoost extends Item{
 	/**
 	 * The amount a monster's attack will increase by.
 	 */
-	private static int itemEffect = 20;
+	private static int itemEffect = 10;
 	/**
 	 * The stat Attack Boost effects.
 	 */

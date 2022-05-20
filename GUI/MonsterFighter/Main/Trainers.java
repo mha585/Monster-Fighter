@@ -33,7 +33,9 @@ public class Trainers {
 			"Eric", "Ali", "Beatriz", "Charlies", "Gabriel", "Hanna", "Netta", "Grant", "Fidel", "Emmie", "Ally", "Minnie",
 			"Jeanette", "Dre", "Franz", "Izumi", "Naomi", "Xiulan", "Hu Tao", "Miki", "Walter", "Doug", "Shelly", "Jasmine", "Ariel",
 			"Ben", "Ken", "Denzel", "Mary", "Peter", "Jeanette", "Lily", "Ysabel", "Rem", "Mandy", "Billie");
-	
+	/**
+	 * Random number created using RandomGen.
+	 */
 	private RandomGen number;
 	/**
 	 * Basic constructor for Trainer class.
@@ -48,11 +50,14 @@ public class Trainers {
 		RandomMonster monster = new RandomMonster(player, randomNum);
 		enemyTeam.add(monster);
 	}
-	
-		
+	/**
+	 * Constructor for Trainer class without any parameters.
+	 */
 	public Trainers() {}
-	
-	
+	/**
+	 * Add monster to the enemies party.
+	 * @param monster 		The monster to be added.
+	 */
 	public void addMonster(Monster monster) {
 		enemyTeam.add(monster);
 	}
@@ -107,18 +112,4 @@ public class Trainers {
 	public String getFullName() {
 		return type +" "+ name;
 	}
-	/**
-	 * Returns the trainer's party of monsters as a string.
-	 * 
-	 * @return String of trainer's monsters.
-	 */
-	public String printEnemyTeam() {
-	    String friendString = "";
-	    for (int i = 0; i< enemyTeam.size(); i++) {
-		    friendString += "Team member " + (i + 1) +
-				  ":\n\n"+enemyTeam.get(i).toString() + "\n\n" +
-				  "-------------------------------------\n";
-	  }
-	  return friendString;
-	} 
 }

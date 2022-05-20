@@ -127,55 +127,6 @@ public class Shop {
 		}
 	}
 	/**
-	 * Returns the string representation of items that can be bought.
-	 * 
-	 * @return String of each Item that can be bought
-	 */
-	public String displayItems() {
-		return"(1)"+ AB.getName() + " - " + AB.getDescription() + " ......................$" + AB.getPrice()+ "\n" +
-				"(2)"+AP.getName() + " - " + AP.getDescription() + " .......$" + AP.getPrice()+"\n" +
-				"(3)"+BH.getName() + " - " + BH.getDescription() + " .........................................$" + BH.getPrice()+ "\n" +
-				"(4)"+FH.getName() + " - " + FH.getDescription() + " .........................................$" + FH.getPrice()+ "\n" +
-				"(5)"+MH.getName() + " - " + MH.getDescription() + " ................................$" + MH.getPrice()+ "\n" +
- 				"(6)"+RV.getName() + " - " + RV.getDescription() + " ......................................................$" + RV.getPrice()+ "\n" +
-				"(7)"+SB.getName() + " - " + SB.getDescription() + " ........................$" + SB.getPrice()+ "\n" +
-				"(8)"+SP.getName() + " - " + SP.getDescription() + " .........$" + SP.getPrice()+ "\n" +
-				"(9)"+TP.getName() + " - " + TP.getDescription() + " .......................$" + TP.getPrice() +
-				"\n(10)Exit";
-	}
-	/**
-	 * Shows the monsters that available to be bought.
-	 * 
-	 * @param player		The player
-	 */
-	public void displayMonsters(Player player) {
-		if(player.getTeamNames().contains(shopMonster1.getName())==false){
-			System.out.println("(1) Costs: $"+shopMonster1.getPrice()+"\n"+shopMonster1+"\n");
-		}
-		else {
-			System.out.println("(1)\nOut of stock\n");
-		}
-		if(player.getTeamNames().contains(shopMonster2.getName())==false){
-			System.out.println("(2) Costs: $"+shopMonster2.getPrice()+"\n"+shopMonster2+"\n");
-		}
-		else {
-			System.out.println("(2)\nOut of stock\n");
-		}
-		if(player.getTeamNames().contains(shopMonster3.getName())==false){
-			System.out.println("(3) Costs: $"+shopMonster3.getPrice()+"\n"+shopMonster3+"\n");
-		}
-		else {
-			System.out.println("(3)\nOut of stock\n");
-		}
-		if(player.getTeamNames().contains(shopMonster4.getName())==false){
-			System.out.println("(4) Costs: $"+shopMonster4.getPrice()+"\n"+shopMonster4+"\n");
-		}
-		else {
-			System.out.println("(4)\nOut of stock\n");
-		}
-	}
-	
-	/**
 	 * Returns the List of monster prices.
 	 * 
 	 * @return		List of integers that contain the prices of the shopMonsters
