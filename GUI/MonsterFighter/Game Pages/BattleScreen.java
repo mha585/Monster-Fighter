@@ -421,15 +421,6 @@ public class BattleScreen {
 				lblCurrentHealth.setText(currentFriendHealth.toString());
 				lblCurrentHealth_1.setText(currentEnemyHealth.toString());
 				
-				
-//				if (enemyMonster.getHealth() == 0) {
-//					getPrizes(manager.getPlayer());
-//					String status = "Congrats you killed " + enemyMonster.getName() + " great job!";
-//					manager.getTrainer().removeEnemy();
-//					closeWindow();
-//					manager.launchBattleScreen(false, num, status);
-//				}
-				
 				Double changeInFriendHealth = intialFriendHealth - currentFriendHealth;
 				Double changeInEnemyHealth = intialEnemyHealth - currentEnemyHealth;
 				
