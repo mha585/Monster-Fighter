@@ -77,7 +77,6 @@ public class UseItemScreen {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(previous);
 				closeWindow();
 				manager.launchInventoryScreen(previous, num);
 			}

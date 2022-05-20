@@ -83,8 +83,6 @@ public class InventoryScreen {
 				JList<Object> itemJList = (JList<Object>) event.getSource();
 				if (event.getClickCount() >= 2) {
 					int itemIndex = itemJList.locationToIndex(event.getPoint());
-					System.out.println(manager.getPlayer().getInventory().getItem(itemIndex).getName());
-					System.out.println(manager.getPlayer().getInventory().getItem(itemIndex).getFrequency());
 					closeWindow();
 					manager.launchUseItemScreen(previousPage, itemIndex, number);
 				}
