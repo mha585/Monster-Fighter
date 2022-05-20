@@ -55,10 +55,6 @@ public class Inventory {
 		if(totalCost1 <= player.getMoney()) {
 			player.playerBag.addtoBag(item, amount);
 			player.deductMoney(totalCost1);
-			System.out.println("Purchase Successful.");
-		}
-		else {
-			System.out.println("Insufficient funds");
 		}
 	}
 	/**
@@ -75,7 +71,6 @@ public class Inventory {
 		int addMoney = ((Item)item).sellPrice() * amount;
 		bag.removeBag(index, amount);
 		player.addMoney(addMoney);
-		System.out.println("New balange: " + player.getMoney());
 	}
 	/**
 	 * Adds x amount of items into the player's inventory.
