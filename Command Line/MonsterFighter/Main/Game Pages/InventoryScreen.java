@@ -61,7 +61,7 @@ public class InventoryScreen {
 		DefaultListModel<Object> itemList = new DefaultListModel<Object>();
 		for (int i = 0; i < manager.getPlayer().getInventory().getSize(); i++) {
 			Item item = (Item) manager.getPlayer().getInventory().getItem(i);
-			itemList.addElement(item.getFrequency() + "x " +  item.getName()+": "+item.getDescription());
+			itemList.addElement(item.getName()+": "+item.getDescription());
 		}
 		
 		JList<Object> itemJList = new JList<Object>(itemList);
