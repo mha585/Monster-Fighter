@@ -25,26 +25,26 @@ public class RandomMonster extends Monster{
 	public Monster generateMonster() {
 		return getPossibleTypes().get(number.randNumInRange(0, getPossibleTypes().size()));
 	}
-	/**
-	 * The basic constructor for the RandomMonster class
-	 * used when all values but type are given
-	 * generates a random type using the type of a randomly generated monster
-	 * @param name			The name of the RandomMonster
-	 * @param maxHealth		The maxHealth of the RandomMonster
-	 * @param healAmount	The healAmount of the RandomMonster
-	 * @param damage		The amount of damage the RandomMonster does
-	 * @param speed			The speed of the RandomMonster
-	 * @param tier			The level of the RandomMonster
-	 * @param sell			Selling price of the RandomMonster
-	 * @param cost			Price of the RandomMonster
-	 * @param description	Description of the RandomMonster
-	 */
-	public RandomMonster(String name, double maxHealth, double healAmount, double damage, double speed, int Tier, 
-			int sell, int cost, String description) {
-		super(name, maxHealth, healAmount, damage, speed, Tier, sell, cost, description);
-		random = generateMonster();
-		super.setType(random.getType());
-	}
+//	/**
+//	 * The basic constructor for the RandomMonster class
+//	 * used when all values but type are given
+//	 * generates a random type using the type of a randomly generated monster
+//	 * @param name			The name of the RandomMonster
+//	 * @param maxHealth		The maxHealth of the RandomMonster
+//	 * @param healAmount	The healAmount of the RandomMonster
+//	 * @param damage		The amount of damage the RandomMonster does
+//	 * @param speed			The speed of the RandomMonster
+//	 * @param tier			The level of the RandomMonster
+//	 * @param sell			Selling price of the RandomMonster
+//	 * @param cost			Price of the RandomMonster
+//	 * @param description	Description of the RandomMonster
+//	 */
+//	public RandomMonster(String name, double maxHealth, double healAmount, double damage, double speed, int Tier, 
+//			int sell, int cost, String description) {
+//		super(name, maxHealth, healAmount, damage, speed, Tier, sell, cost, description);
+//		random = generateMonster();
+//		super.setType(random.getType());
+//	}
 	
 	/**
 	 * The constructor for the RandomMonster class
@@ -107,12 +107,5 @@ public class RandomMonster extends Monster{
 			double toSet = -1 * (super.getSpeed() - (25 * amountToScaleStatsBy));
 			super.gainSpeed((toSet));
 		}
-	}
-	/**
-	 * Generates a string representation of the RandomMonster
-	 * @return String	 a string representation of the RandomMonster
-	 */
-	public String toString() {
-		return super.toString() + "\nType: " + super.getType();
 	}
 }

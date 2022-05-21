@@ -39,11 +39,4 @@ public class HolyMonster extends Monster{
 		super(price, sell, description, num);
 		super.setType("Holy");
 	}
-	/**
-	 * Generates a string representation of the HolyMonster
-	 * @return String	 a string representation of the RandomMonster
-	 */
-	public String toString() {
-		return super.toString() + "\nType: " + super.getType();
-	}
 }

@@ -39,10 +39,4 @@ public class WaterMonster extends Monster{
 		super(price, sell, description, num);
 		super.setType("Water");
 	}
-	/**
-	 * Generates a string representation of the WaterMonster.
-	 */
-	public String toString() {
-		return super.toString() + "\nType: " + super.getType();
-	}
 }

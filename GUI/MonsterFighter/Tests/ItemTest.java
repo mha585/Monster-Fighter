@@ -81,7 +81,7 @@ class ItemTest {
 	    assertEquals(10, (itemUser.getDamage()));
 	    Item itemToUse = new AtkPlus();
 	    itemToUse.useItem(itemUser);
-	    assertEquals(20, (itemUser.getDamage()));
+	    assertEquals(30, (itemUser.getDamage()));
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ class ItemTest {
 	    assertEquals(10, (itemUser.getDamage()));
 	    Item itemToUse = new AtkBoost();
 	    itemToUse.useItem(itemUser);
-	    assertEquals(30, (itemUser.getDamage()));
+	    assertEquals(20, (itemUser.getDamage()));
 	}
 	
 	@Test
@@ -99,7 +99,7 @@ class ItemTest {
 	    assertEquals(19, (itemUser.getSpeed()));
 	    Item itemToUse = new SpeedPlus();
 	    itemToUse.useItem(itemUser);
-	    assertEquals(29, (itemUser.getSpeed()));
+	    assertEquals(39, (itemUser.getSpeed()));
 	}
 	
 	@Test
@@ -108,7 +108,7 @@ class ItemTest {
 	    assertEquals(19, (itemUser.getSpeed()));
 	    Item itemToUse = new SpeedBoost();
 	    itemToUse.useItem(itemUser);
-	    assertEquals(39, (itemUser.getSpeed()));
+	    assertEquals(29, (itemUser.getSpeed()));
 	}
 	
 	@Test

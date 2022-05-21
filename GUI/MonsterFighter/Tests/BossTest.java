@@ -35,11 +35,6 @@ class BossTest {
 	    assertEquals(4, (myBoss.getSize()));
 	    assertEquals("Boss Miguel", myBoss.getFullName());
 	    assertEquals("Leviathan", myBoss.getEnemies().get(2).getName());
-	    myBoss.printBossFight();
-
-	    String fight = outputStreamContent.toString();
-//	    checks the length of the fight (all the monsters stats) are in an expected range
-	    assertTrue(680 <= fight.length() && fight.length() <= 700);
 	}
 	
 	@Test

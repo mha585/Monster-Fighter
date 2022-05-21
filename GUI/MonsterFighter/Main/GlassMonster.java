@@ -46,11 +46,4 @@ public class GlassMonster extends Monster{
 		super.gainHealth((-1 * (super.getHealth())) + super.getMaxHealth());
 		super.gainDamage(super.getDamage() + 10);
 	}
-	/**
-	 * Generates a string representation of the GlassMonster
-	 * @return String	 a string representation of the RandomMonster
-	 */
-	public String toString() {
-		return super.toString() + "\nType: " + super.getType();
-	}
 }

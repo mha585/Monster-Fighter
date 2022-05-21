@@ -82,15 +82,4 @@ public class Boss extends Trainers{
 	public String getFullName() {
 		return bossType + " " + bossName;
 	}
-	/**
-	 * Returns the boss and represents them as a string.
-	 * 
-	 * @return string of boss and boss' monsters
-	 */
-	public void printBossFight() {
-		System.out.println(getFullName());
-		for (int i = 0; i< enemyTeam.size(); i++) {
-		  System.out.println( "Boss Monster " + (i + 1) +":\n\n"+enemyTeam.get(i).toString() + "\n\n" +"-------------------------------------\n");
-		}
-	}
 }

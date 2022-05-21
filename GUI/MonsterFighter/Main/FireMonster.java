@@ -39,11 +39,4 @@ public class FireMonster extends Monster{
 		super(price, sell, description, num);
 		super.setType("Fire");
 	}
-	/**
-	 * Generates a string representation of the FireMonster
-	 * @return String	 a string representation of the RandomMonster
-	 */
-	public String toString() {
-		return super.toString() + "\nType: " + super.getType();
-	}
 }

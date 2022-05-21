@@ -145,23 +145,6 @@ public class Monster implements Purchasable{
 		myTier = number.randNumInRange(1, 3);
 	}
 	/**
-	 * The constructor for the Monster class.
-	 * This gets called when nothing gets entered.
-	 */
-	public Monster() {
-		RandomGen number = new RandomGen();
-		myName = possibleNames.get(number.randNumInRange(0, possibleNames.size()));
-		myMaxHealth = number.randNumInRange(1, 100);
-		myCurrentHealth = myMaxHealth;
-		myHealAmount = number.randNumInRange(0, 5);
-		myDamage = number.randNumInRange(1, 70);
-		mySpeed = number.randNumInRange(1, 15);
-		myExperience = 0;
-		myDeaths = 0;
-		myReward = number.randNumInRange(11, 99);
-		myTier = number.randNumInRange(1, 3);
-	}
-	/**
 	 * Gets the name of the Monster
 	 * @return String	the name of the Monster
 	 */
@@ -383,15 +366,5 @@ public class Monster implements Purchasable{
 	 */
 	public void setSellPrice(int newCost) {
 		myShopCost = newCost;
-	}
-	/**
-	 * Generates a string representation of the Monster
-	 * @return String	the string representation of the monster
-	 */
-	public String toString() {
-		return "Name: " + getName() + "\nCurrent health: " + getHealth() +
-				" / " + getMaxHealth() + "\nDamage: " + getDamage() +
-				"\nCan heal: " + getHealAmount() + "\nSpeed: " + getSpeed() + "\nTier: " + 
-				getTier() + "\nexp: " + (int) getMyExperience() + " / 100";
 	}
 }

@@ -40,11 +40,4 @@ public class DemonMonster extends Monster{
 		super(price, sell, description, num);
 		super.setType("Demon");
 	}
-	/**
-	 * Generates a string representation of the DemonMonster
-	 * @return String	 a string representation of the DemonMonster
-	 */
-	public String toString() {
-		return super.toString() + "\nType: " + super.getType();
-	}
 }
