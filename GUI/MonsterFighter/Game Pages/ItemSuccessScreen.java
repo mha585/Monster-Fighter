@@ -113,19 +113,19 @@ public class ItemSuccessScreen {
 		lblMStat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMStat.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
-		JPanel panel = new JPanel();
+		JPanel paddingLeft = new JPanel();
 		
-		JPanel panel_1 = new JPanel();
+		JPanel paddingRight = new JPanel();
 		
-		JPanel panel_1_1 = new JPanel();
+		JPanel paddingBottomRight = new JPanel();
 		
-		JPanel panel_1_1_1 = new JPanel();
+		JPanel paddingBottomLeft = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(ISScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(lblMStat, GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
+					.addComponent(paddingLeft, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblPrevStat, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -133,14 +133,14 @@ public class ItemSuccessScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewStat, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
 					.addGap(2)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+					.addComponent(paddingRight, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(8)
-					.addComponent(panel_1_1_1, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE)
+					.addComponent(paddingBottomLeft, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnOK, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1_1, GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
+					.addComponent(paddingBottomRight, GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -153,13 +153,13 @@ public class ItemSuccessScreen {
 							.addComponent(lblPrevStat)
 							.addComponent(lblArrow)
 							.addComponent(lblNewStat))
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+						.addComponent(paddingLeft, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(paddingRight, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 					.addGap(114)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_1_1_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(paddingBottomLeft, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnOK, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_1_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+						.addComponent(paddingBottomRight, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 					.addGap(159))
 		);
 		ISScreen.getContentPane().setLayout(groupLayout);

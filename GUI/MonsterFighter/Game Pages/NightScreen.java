@@ -89,21 +89,21 @@ public class NightScreen {
 		
 		JPanel panelMain = new JPanel();
 		
-		JPanel panel = new JPanel();
+		JPanel paddingLeft = new JPanel();
 		
-		JPanel panel_1 = new JPanel();
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+		JPanel paddingRight = new JPanel();
+		GroupLayout gl_paddingRight = new GroupLayout(paddingRight);
+		gl_paddingRight.setHorizontalGroup(
+			gl_paddingRight.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 42, Short.MAX_VALUE)
 				.addGap(0, 42, Short.MAX_VALUE)
 		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+		gl_paddingRight.setVerticalGroup(
+			gl_paddingRight.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 404, Short.MAX_VALUE)
 				.addGap(0, 404, Short.MAX_VALUE)
 		);
-		panel_1.setLayout(gl_panel_1);
+		paddingRight.setLayout(gl_paddingRight);
 		GroupLayout groupLayout = new GroupLayout(nightFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -111,7 +111,7 @@ public class NightScreen {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+							.addComponent(paddingLeft, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
 							.addGap(12)
 							.addComponent(panelMain, GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
 							.addGap(18))
@@ -121,7 +121,7 @@ public class NightScreen {
 								.addComponent(lblPoints, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
 							.addGap(660)))
 					.addGap(18)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+					.addComponent(paddingRight, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -134,27 +134,27 @@ public class NightScreen {
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(panelMain, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-						.addComponent(panel_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(paddingRight, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
+						.addComponent(paddingLeft, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(34, Short.MAX_VALUE))
 		);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+		GroupLayout gl_paddingLeft = new GroupLayout(paddingLeft);
+		gl_paddingLeft.setHorizontalGroup(
+			gl_paddingLeft.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 42, Short.MAX_VALUE)
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_paddingLeft.setVerticalGroup(
+			gl_paddingLeft.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 404, Short.MAX_VALUE)
 		);
-		panel.setLayout(gl_panel);
+		paddingLeft.setLayout(gl_paddingLeft);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Your monsters fainted " + manager.getAmountOfFriendsWhoFaintedToday() + " times today");
+		JLabel lblFainted = new JLabel("Your monsters fainted " + manager.getAmountOfFriendsWhoFaintedToday() + " times today");
 		
 		JLabel lblYourMonsterGet = new JLabel("Your monsters get a good night sleep and will wake up with 20 extra health");
 		lblYourMonsterGet.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblSuddenlyInThe = new JLabel("Suddenly in the middle of the night...");
+		JLabel lblSuddenly = new JLabel("Suddenly in the middle of the night...");
 		
 		JLabel lbleventDescriptionHere = new JLabel("(event description here)");
 		lbleventDescriptionHere.setHorizontalAlignment(SwingConstants.CENTER);
@@ -179,8 +179,8 @@ public class NightScreen {
 		
 		JLabel lblRandom = new JLabel("Random Events:");
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setText("Today you defeated " + manager.getAmountOfMonsterKilledToaday() + " monsters");
+		JLabel lblDefeated = new JLabel("");
+		lblDefeated.setText("Today you defeated " + manager.getAmountOfMonsterKilledToaday() + " monsters");
 		
 		JLabel lblDaysBeforeBoss = new JLabel("");
 		lblDaysBeforeBoss.setText("You have " + (manager.getPlayer().daysLeft() - 1) + " days to go before the boss");
@@ -197,11 +197,11 @@ public class NightScreen {
 									.addComponent(lblSummary, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panelMain.createSequentialGroup()
 									.addGap(242)
-									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblDefeated, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lbleventDescriptionHere, GroupLayout.PREFERRED_SIZE, 677, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panelMain.createSequentialGroup()
 									.addGap(228)
-									.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblFainted, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblYourMonsterGet, GroupLayout.PREFERRED_SIZE, 688, GroupLayout.PREFERRED_SIZE))
 							.addGap(54))
 						.addGroup(gl_panelMain.createSequentialGroup()
@@ -215,7 +215,7 @@ public class NightScreen {
 							.addGap(332))))
 				.addGroup(Alignment.LEADING, gl_panelMain.createSequentialGroup()
 					.addGap(310)
-					.addComponent(lblSuddenlyInThe)
+					.addComponent(lblSuddenly)
 					.addContainerGap(320, Short.MAX_VALUE))
 		);
 		gl_panelMain.setVerticalGroup(
@@ -224,15 +224,15 @@ public class NightScreen {
 					.addGap(40)
 					.addComponent(lblSummary)
 					.addGap(11)
-					.addComponent(lblNewLabel_1)
+					.addComponent(lblDefeated)
 					.addGap(18)
-					.addComponent(lblNewLabel_1_1)
+					.addComponent(lblFainted)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblDaysBeforeBoss)
 					.addGap(34)
 					.addComponent(lblRandom)
 					.addGap(32)
-					.addComponent(lblSuddenlyInThe)
+					.addComponent(lblSuddenly)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lbleventDescriptionHere)
 					.addGap(18)

@@ -776,8 +776,8 @@ public class TeamScreen {
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		
-		JButton btnReturn_1 = new JButton("X");
-		btnReturn_1.addActionListener(new ActionListener() {
+		JButton btnExit = new JButton("X");
+		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				if (previousPage == "Prep") {
@@ -792,14 +792,14 @@ public class TeamScreen {
 			gl_panelExitPadding.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelExitPadding.createSequentialGroup()
 					.addGap(1)
-					.addComponent(btnReturn_1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panelExitPadding.setVerticalGroup(
 			gl_panelExitPadding.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelExitPadding.createSequentialGroup()
 					.addGap(6)
-					.addComponent(btnReturn_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panelExitPadding.setLayout(gl_panelExitPadding);

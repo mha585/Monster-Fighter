@@ -56,9 +56,9 @@ public class StartUpScreen {
 		tfName.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		tfName.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Welcome to Monster Fighter");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("SimSun", Font.BOLD, 30));
+		JLabel lblWelcome = new JLabel("Welcome to Monster Fighter");
+		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcome.setFont(new Font("SimSun", Font.BOLD, 30));
 		
 		JLabel lblName = new JLabel("What is your name?");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -99,9 +99,9 @@ public class StartUpScreen {
 		spinnerDiff.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		spinnerDiff.setModel(new SpinnerListModel(new String[] {"Easy", "Normal", "Hard"}));
 		
-		JLabel lblNewLabel_1 = new JLabel("(Optional) Enter a seed:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_1.setVisible(false);
+		JLabel lblSeed = new JLabel("(Optional) Enter a seed:");
+		lblSeed.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblSeed.setVisible(false);
 		
 		textFieldSeed = new JTextField("");
 		textFieldSeed.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -148,7 +148,7 @@ public class StartUpScreen {
 					lblDiff.setVisible(true);
 					spinnerDiff.setVisible(true);
 					btnFinished.setVisible(true);
-					lblNewLabel_1.setVisible(true);
+					lblSeed.setVisible(true);
 					textFieldSeed.setVisible(true);
 				}
 				else {
@@ -167,7 +167,7 @@ public class StartUpScreen {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(167)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 567, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblWelcome, GroupLayout.PREFERRED_SIZE, 567, GroupLayout.PREFERRED_SIZE)
 							.addGap(255))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(818)
@@ -199,7 +199,7 @@ public class StartUpScreen {
 									.addGap(187)))
 							.addGap(72))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblSeed, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(textFieldSeed, GroupLayout.PREFERRED_SIZE, 389, GroupLayout.PREFERRED_SIZE)
 							.addGap(266))))
@@ -208,7 +208,7 @@ public class StartUpScreen {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(31)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblWelcome, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
 					.addGap(31)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblName)
@@ -231,7 +231,7 @@ public class StartUpScreen {
 						.addComponent(sliderDay, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 					.addGap(41)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblSeed, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldSeed, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
 					.addGap(12)
 					.addComponent(btnFinished, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)

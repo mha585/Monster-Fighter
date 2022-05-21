@@ -166,13 +166,13 @@ public class BattleScreen {
 		lblEnemyName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEnemyName.setText(enemyMonster.getName());
 		
-		JLabel lblNewLabel = new JLabel("");
+		JLabel lblGoodMonsterImage = new JLabel("");
 //		Copyright free image sourced from craftpix.net
-		lblNewLabel.setIcon(new ImageIcon(BattleScreen.class.getResource("/images/GoodMonster.jpg")));
+		lblGoodMonsterImage.setIcon(new ImageIcon(BattleScreen.class.getResource("/images/GoodMonster.jpg")));
 		
-		JLabel lblNewLabel_1 = new JLabel("");
+		JLabel lblBadMonsterImage = new JLabel("");
 //		Copyright free image sourced from craftpix.net
-		lblNewLabel_1.setIcon(new ImageIcon(BattleScreen.class.getResource("/images/EvilMonster.jpg")));
+		lblBadMonsterImage.setIcon(new ImageIcon(BattleScreen.class.getResource("/images/EvilMonster.jpg")));
 		
 		JLabel lblDamageLabel = new JLabel("Damage:");
 		
@@ -243,11 +243,11 @@ public class BattleScreen {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(lblPlayerName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblGoodMonsterImage, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
 					.addGap(10)
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(lblEnemyName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblBadMonsterImage, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
@@ -294,8 +294,8 @@ public class BattleScreen {
 						.addComponent(lblPlayerName))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblGoodMonsterImage, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblBadMonsterImage, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_pannelMonsters.createSequentialGroup()
 							.addGroup(gl_pannelMonsters.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblSlash)

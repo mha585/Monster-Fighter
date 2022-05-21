@@ -55,8 +55,8 @@ public class InventoryScreen {
 		bagScreen.setBounds(100, 100, 960, 540);
 		bagScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("Your Inventory:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		JLabel lblInventory = new JLabel("Your Inventory:");
+		lblInventory.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		DefaultListModel<Object> itemList = new DefaultListModel<Object>();
 		for (int i = 0; i < manager.getPlayer().getInventory().getSize(); i++) {
@@ -80,11 +80,11 @@ public class InventoryScreen {
 		itemJList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		itemJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JLabel lblNewLabel_1 = new JLabel("Click on an item to use it");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		JLabel lblClickAnItem = new JLabel("Click on an item to use it");
+		lblClickAnItem.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		JButton btnNewButton = new JButton("Exit");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeWindow();
 				if (previousPage == "Prep") {
@@ -96,19 +96,19 @@ public class InventoryScreen {
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout groupLayout = new GroupLayout(bagScreen.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(42)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblInventory, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblClickAnItem, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnNewButton))
+								.addComponent(btnExit))
 							.addComponent(itemJList, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 862, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(54, Short.MAX_VALUE))
 		);
@@ -116,13 +116,13 @@ public class InventoryScreen {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(18)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblInventory, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(itemJList, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1)
-						.addComponent(btnNewButton))
+						.addComponent(lblClickAnItem)
+						.addComponent(btnExit))
 					.addContainerGap(17, Short.MAX_VALUE))
 		);
 		bagScreen.getContentPane().setLayout(groupLayout);
