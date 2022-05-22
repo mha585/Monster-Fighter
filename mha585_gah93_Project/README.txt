@@ -1,7 +1,7 @@
 # seng201-project
 
 Before doing any of the following steps ensure that you have extracted all the files by right
-clicking on the parent directory of this README file called MonsterFighter.zip and clicking on
+clicking on the parent directory of this README file called mha585_gah93_Project.zip and clicking on
 extract all.
 
 To open program source code in Eclipse:
